@@ -30,13 +30,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  Map _counter;
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +53,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        onPressed: () async {
+          var test = await locator.get<AppUtils>().getDataFromCountry('FR');
+          setState(() {
+            _counter = test;
+          });
+        },
+        tooltip: 'call API',
+        child: Icon(Icons.call),
       ),
     );
   }
