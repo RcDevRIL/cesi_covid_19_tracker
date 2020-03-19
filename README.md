@@ -1,28 +1,32 @@
 # cesi_covid_19_tracker - README V0.1.0
 __Build status__
-* [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/latest_build)
+* master: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/latest_build)
+* integration: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/latest_build)
 
 
-Welcome on our development repository in which you will find a PoC for a tracker on covid-19 situation
-  
+Bienvenue sur le répertoire de développement pour notre mini-projet en cours de développement web avancé !
+
+Vous trouverez dans ce README les infos utiles sur ce projet.
+
 *Distributed by CESI RIL B2 - 2018-2020*
 
-## Getting Started
+## Présentation
 
-This README will guide you through the setup and deployment of this application on a virtual device (or physical if you have one).
+Ce projet consiste en un service d'information sur l'état de la pandémie liée au COVID-19 qui sévit actuellement dans le monde.
 
+La première version consistera en une liste d'info liée au pays sélectionné par l'utilisateur.
 
-##### Prerequisites
+##### Prérequis
 
-What things you need to install and how to install them
+De quoi avez-vous besoin pour installer ce projet et le lancer en mode "debug"
 
-* First you will need a copy of this repository: either use "Download" feature on [this][Github root] page, or use Git CLI if you have installed it on your computer:
+* D'abord, il vous faudra une copie de ce dépôt Git: utilisez la fonctionnalité "Download" de [cette][Github root] page ou utilisez le CLI de Git si il est installé sur votre ordinateur:
     * `git clone https://github.com/RcDevRIL/cesi_covid_19_tracker.git`
 
-* Now you need to have the Flutter SDK to use CLI and run the app on device. Please refer to [Flutter "get started"] guide.
+* Ensuite il faut installer le SDK de Flutter pour pouvoir utiliser son CLI et lancer l'application en mode debug (ou release). Vous pouvez suivre le [Flutter "get started"] guide.
 
 
-If you went through all the steps on [flutter.dev][Flutter "get started"] you should have your favorite editor with plugins installed to connect to your device easily.
+Si vous êtes passé par toutes les étapes du tutoriel [flutter.dev][Flutter "get started"] vous devriez avoir votre éditeur de code favori  prêt au développement sous Flutter!
 
 ## Run app on device
 
