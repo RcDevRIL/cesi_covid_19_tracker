@@ -28,73 +28,73 @@ De quoi avez-vous besoin pour installer ce projet et le lancer en mode "debug"
 
 Si vous êtes passé par toutes les étapes du tutoriel [flutter.dev][Flutter "get started"] vous devriez avoir votre éditeur de code favori  prêt au développement sous Flutter!
 
-## Run app on device
+## Lancement de l'application
 
-Before wanting to launch the app, make sure to get the packages we chose to [build][Built_With] our app. To do so, you must run these commands:
+Avant de vouloir lancer l'application, assurez-vous d'obtenir les paquets que nous avons choisis pour [construire][Built_With] notre application. Pour ce faire, vous devez exécuter ces commandes :
 
 * `flutter pub upgrade`
 * `flutter pub get`
 
-Now you can consider building and running the app :upside_down_face:
+Vous pouvez maintenant envisager de créer et d'exécuter l'application :upside_down_face :
 
-To start build-install-run process, execute this command:
+Pour lancer le processus de construction, d'installation et d'exécution, exécutez la commande suivante:
 
 `flutter run`
 
-This will install the app on the connected device and run it. 
+Cela permettra d'installer l'application sur le dispositif connecté et de l'exécuter. 
 
-_If you have a real device, just plug it to the computer using your USB cable. The Flutter plugin should notice the device and will automatically add it on the list._
+_Si vous avez un vrai appareil, il suffit de le brancher à l'ordinateur à l'aide de votre câble USB. Le plugin Flutter devrait remarquer le dispositif et l'ajouter automatiquement à la liste._
 
-To start building the release .apk file, consider using this command:
+Pour commencer à construire le fichier release .apk, pensez à utiliser cette commande :
 
 `flutter build apk --split-per-abi`
 
-This command will output several apks in the `/build/app/outputs/apk/release/` folder of your local repository. Choose the one that better fits your device architecture. 
+Cette commande produira plusieurs apks dans le dossier `/build/app/outputs/apk/release/` de votre dépôt local. Choisissez celle qui correspond le mieux à l'architecture de votre appareil. 
 
-To start building the release website, consider using this command:
+Pour commencer à construire le site web de la libération, pensez à utiliser cette commande :
 
 `flutter build web --release`
 
-This command will output several apks in the `/build/web/` folder of your local repository.
+Cette commande produira plusieurs apks dans le dossier `/build/web/` de votre dépôt local.
 
-## Run Unit Tests
+## Lancement des tests unitaires
 
-_This paragraph explain how to trigger tests written in the **[test]** folder of this repository._
+_Ce paragraphe explique comment déclencher les tests écrits dans le dossier **[test]** de ce dépôt._
 
-To start unit tests, execute this command:
+Pour lancer les tests unitaires, il faut exécuter cette commande :
 
 `flutter test`
 
-This will trigger the execution of tests. Results will be printed on your console in the end.
-You may also use your IDE integrated test report tool. Depending on the IDE, you should see the results pretty easily.
+Cela déclenchera l'exécution de tests. Les résultats seront finalement imprimés sur votre console.
+Vous pouvez également utiliser votre outil de rapport de test intégré à l'IDE. Selon l'IDE, vous devriez voir les résultats assez facilement.
 
-## Run Integration Tests
+## Lancement des tests d'intégrations
 
-_This paragraph explain how to trigger tests written in the **[test_driver]** folder of this repository._
+_Ce paragraphe explique comment déclencher les tests écrits dans le dossier **[test_driver]** de ce dépôt._
 
-To start automated integration tests, make sure you have a connected Android device and execute this command:
+Pour lancer des tests d'intégration automatisés, assurez-vous que vous avez un appareil Android connecté et exécutez cette commande :
 
 `flutter drive --target=test_driver/madera_app.dart`
 
-This will trigger the execution of the automated integration tests. It will launch the app on debug mode and execute implemented actions. This tool is great to enable stable integration of new releases :rocket:
+Cela déclenchera l'exécution des tests d'intégration automatisés. Il lancera l'application en mode débogage et exécutera les actions mises en œuvre. Cet outil est idéal pour permettre l'intégration stable des nouvelles versions :rocket:
 
-But right now, the tests implemented are for demonstration purposes.
+Mais pour l'instant, les tests mis en œuvre sont à des fins de démonstration.
 
-## Built With
+## Dépendances
 
-_Direct Dependencies:_
-* [Flutter] - The Google framework based on Dart used to build this app
-* [http] - The package used for making HTTP requests
-* [get_it] - The package used to encrypt passwords
-* [json_serializable] - The packaged used to ease json (de)serialization
+_Dépendances Directes :_
+* [Flutter] - Le framework Google basé sur Dart utilisé pour construire cette application
+* [http] - Le paquet utilisé pour effectuer des requêtes HTTP
+* [get_it] - Le paquet utilisé pour crypter les mots de passe
+* [json_serializable] - Le paquet utilisé pour faciliter la (dé)sérialisation json
 
 _Test Dependencies:_
-* [flutter_test] - The Flutter library used to implement unit tests
-* [flutter_driver] - The Flutter library used to implement automated integration tests
+* [flutter_test] - La bibliothèque Flutter utilisée pour mettre en œuvre les tests unitaires
+* [flutter_driver] - La bibliothèque Flutter utilisée pour mettre en place des tests d'intégration automatisés
 
 ## Contributing
 
-To contribute please email one of the authors...or hit that PR button!! :rocket: :smile:
+Pour contribuer, veuillez envoyer un courriel à l'un des auteurs... ou cliquez sur ce bouton de PR ! :rocket: :smile:
 
 ## Authors
 
@@ -103,11 +103,11 @@ To contribute please email one of the authors...or hit that PR button!! :rocket:
 * **James** - *Main Author* - [FerreiraJames]
 * **Quentin** - *Main Author* - [Reyden]
 
-See also the list of [contributors] who participated in this project.
+Voir aussi la liste des [contributeurs] qui ont participé à ce projet.
 
 ## License
 
-This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the [LICENSE.md] file for details
+Ce projet est sous licence GNU GENERAL PUBLIC LICENSE - voir le fichier [LICENSE.md] pour plus de détails.
 
 
 [Flutter "get started"]: https://flutter.dev/get-started/
@@ -123,5 +123,5 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the [LICENSE
 [flutter_driver]: https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html
 [RcDevRIL]: https://github.com/RcDevRIL
 [BoiteSphinx]: https://github.com/BoiteSphinx
-[contributors]: https://github.com/RcDevRIL/cesi_covid_19_tracker/contributors
+[contributeurs]: https://github.com/RcDevRIL/cesi_covid_19_tracker/contributors
 [LICENSE.md]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/LICENSE
