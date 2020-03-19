@@ -58,6 +58,7 @@ Une fois que le switch s'est effectué, vous pourrez lancer la version web de l'
 
 `flutter run -d [chrome|web-server]`
 
+_L'option chrome sera seulement disponible si vous avez ce navigateur d'installé sur la machine locale. L'option web-server lance donc un serveur web sur lequel n'importe quel navigateur peut tenter la connexion._
 
 Pour commencer à construire le fichier release .apk, pensez à utiliser cette commande :
 
