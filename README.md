@@ -37,13 +37,27 @@ Avant de vouloir lancer l'application, assurez-vous d'obtenir les paquets que no
 
 Vous pouvez maintenant envisager de créer et d'exécuter l'application :upside_down_face:
 
-Pour lancer le processus de construction, d'installation et d'exécution, exécutez la commande suivante:
+Pour lancer le processus de construction, d'installation et d'exécution sur un appareil Android ou iOS, exécutez la commande suivante:
 
 `flutter run`
 
-Cela permettra d'installer l'application sur l'appareil connecté et de l'exécuter. 
+Cela permettra d'installer l'application sur l'appareil connecté et de l'exécuter.
 
 _Si vous avez un vrai appareil, il suffit de le brancher à l'ordinateur à l'aide de votre câble USB. Le plugin Flutter devrait remarquer le dispositif et l'ajouter automatiquement à la liste._
+
+Si vous souhaitez utiliser la version Web, assurez vous de l'avoir activé sur votre environnement Flutter:
+
+* `flutter config --enable-web`
+* `flutter upgrade`
+
+Et préférez le canal beta:
+
+`flutter channel beta`
+
+Une fois que le switch s'est effectué, vous pourrez lancer la version web de l'application grâce à la commande:
+
+`flutter run -d [chrome|web-server]`
+
 
 Pour commencer à construire le fichier release .apk, pensez à utiliser cette commande :
 
