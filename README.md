@@ -1,4 +1,4 @@
-# cesi_covid_19_tracker - README V0.1.0
+# cesi_covid_19_tracker - README V1.0.0
 __Build status__
 * master: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/latest_build)
 * integration: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/latest_build)
@@ -26,7 +26,7 @@ De quoi avez-vous besoin pour installer ce projet et le lancer en mode "debug"
 * Ensuite il faut installer le SDK de Flutter pour pouvoir utiliser son CLI et lancer l'application en mode debug (ou release). Vous pouvez suivre le [Flutter "get started"] guide.
 
 
-Si vous êtes passé par toutes les étapes du tutoriel [flutter.dev][Flutter "get started"] vous devriez avoir votre éditeur de code favori  prêt au développement sous Flutter!
+Si vous êtes passé par toutes les étapes du tutoriel [flutter.dev][Flutter "get started"] vous devriez avoir votre éditeur de code favori prêt au développement sous Flutter!
 
 ## Lancement de l'application
 
@@ -35,13 +35,13 @@ Avant de vouloir lancer l'application, assurez-vous d'obtenir les paquets que no
 * `flutter pub upgrade`
 * `flutter pub get`
 
-Vous pouvez maintenant envisager de créer et d'exécuter l'application :upside_down_face :
+Vous pouvez maintenant envisager de créer et d'exécuter l'application :upside_down_face:
 
 Pour lancer le processus de construction, d'installation et d'exécution, exécutez la commande suivante:
 
 `flutter run`
 
-Cela permettra d'installer l'application sur le dispositif connecté et de l'exécuter. 
+Cela permettra d'installer l'application sur l'appareil connecté et de l'exécuter. 
 
 _Si vous avez un vrai appareil, il suffit de le brancher à l'ordinateur à l'aide de votre câble USB. Le plugin Flutter devrait remarquer le dispositif et l'ajouter automatiquement à la liste._
 
@@ -51,11 +51,11 @@ Pour commencer à construire le fichier release .apk, pensez à utiliser cette c
 
 Cette commande produira plusieurs apks dans le dossier `/build/app/outputs/apk/release/` de votre dépôt local. Choisissez celle qui correspond le mieux à l'architecture de votre appareil. 
 
-Pour commencer à construire le site web de la libération, pensez à utiliser cette commande :
+Pour commencer à construire le site web en mode RELEASE, pensez à utiliser cette commande :
 
 `flutter build web --release`
 
-Cette commande produira plusieurs apks dans le dossier `/build/web/` de votre dépôt local.
+Cette commande produira le site web compilé dans le dossier `/build/web/` de votre dépôt local.
 
 ## Lancement des tests unitaires
 
@@ -112,7 +112,7 @@ Ce projet est sous licence GNU GENERAL PUBLIC LICENSE - voir le fichier [LICENSE
 
 [Flutter "get started"]: https://flutter.dev/get-started/
 [Github root]: https://github.com/RcDevRIL/cesi_covid_19_tracker/
-[Built_With]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master#built-with
+[Built_With]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master#dépendances
 [test]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master/test
 [test_driver]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master/test_driver
 [Flutter]: https://github.com/flutter/flutter/
@@ -123,5 +123,7 @@ Ce projet est sous licence GNU GENERAL PUBLIC LICENSE - voir le fichier [LICENSE
 [flutter_driver]: https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html
 [RcDevRIL]: https://github.com/RcDevRIL
 [BoiteSphinx]: https://github.com/BoiteSphinx
+[FerreiraJames]: https://github.com/FerreiraJames
+[Reyden]: https://github.com/Reyden7
 [contributeurs]: https://github.com/RcDevRIL/cesi_covid_19_tracker/contributors
 [LICENSE.md]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/LICENSE
