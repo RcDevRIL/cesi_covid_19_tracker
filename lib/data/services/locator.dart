@@ -30,16 +30,12 @@ class AppUtilsImplementation implements AppUtils {
       return null;
     }
     if (response?.statusCode == 200) {
-      debugPrint('rerae');
       debugPrint('${response.body}');
       return response.body;
     } else if (response?.statusCode == 401) {
-      debugPrint('rer');
-      debugPrint(response);
-      return response.body;
+      return 'Unauthorized!';
     } else {
-      debugPrint('lol');
-      debugPrint(response);
+      debugPrint('Error when trying to connect to API...');
       return null;
     }
   }

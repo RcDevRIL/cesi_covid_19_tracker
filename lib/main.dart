@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'data/services/locator.dart';
@@ -39,24 +41,29 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          var test = await locator.get<AppUtils>().getDataFromCountry('FR');
+          Map<String, Object> test = jsonDecode(await locator
+              .get<AppUtils>()
+              .getDataFromCountry('FR')); //build Map with given JSON String
           setState(() {
-            _counter = test;
+            _counter = jsonEncode(
+                test.entries.first.value); //Build String with given JSON Map
           });
         },
         tooltip: 'call API',
