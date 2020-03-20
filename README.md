@@ -100,7 +100,7 @@ Mais pour l'instant, les tests mis en œuvre sont à des fins de démonstration.
 _Dépendances Directes :_
 * [Flutter] - Le framework Google basé sur Dart utilisé pour construire cette application
 * [http] - Le paquet utilisé pour effectuer des requêtes HTTP
-* [get_it] - Le paquet utilisé pour crypter les mots de passe
+* [get_it] - Le paquet utilisé par exemple pour enregistrer des services (comme celui d'appel à l'API covid-19)
 * [json_serializable] - Le paquet utilisé pour faciliter la (dé)sérialisation json
 
 _Test Dependencies:_
