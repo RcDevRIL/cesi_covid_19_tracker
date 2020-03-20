@@ -25,6 +25,7 @@ class NavBarItem extends StatelessWidget {
       child: Provider.value(
         value: model,
         child: ScreenTypeLayout(
+          desktop: NavBarItemMobile(),
           tablet: NavBarItemMobile(),
           mobile: NavBarItemMobile(),
         ),

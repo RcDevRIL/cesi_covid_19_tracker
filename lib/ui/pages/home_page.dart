@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/ui/widgets/navigation_drawer/navigation_drawer.dart';
+import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
 class MyHomePage extends StatefulWidget {
   final String title;
 
   MyHomePage({
     Key key,
-    this.title = 'CORONED\t\tA covid-19 info app',
+    this.title = aG.AppConstants.defaultAppTitle,
   }) : super(key: key);
   @override
   _MyHomePageState createState() => _MyHomePageState();

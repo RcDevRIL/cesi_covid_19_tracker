@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
+
 import 'package:cesi_covid_19_tracker/ui/widgets/navbar_item/navbar_item.dart';
 import 'package:cesi_covid_19_tracker/ui/widgets/navigation_drawer/navigation_drawer_header.dart';
-import 'package:flutter/material.dart';
+import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key key}) : super(key: key);
@@ -19,14 +21,14 @@ class NavigationDrawer extends StatelessWidget {
         children: <Widget>[
           NavigationDrawerHeader(),
           NavBarItem(
-            'HOME',
+            aG.AppConstants.navItems.keys.elementAt(0),
             '/',
-            icon: Icons.wb_iridescent,
+            icon: aG.AppConstants.navItems.values.elementAt(0),
           ),
           NavBarItem(
-            'DASHBOARD',
+            aG.AppConstants.navItems.keys.elementAt(1),
             '/dashboard',
-            icon: Icons.assignment,
+            icon: aG.AppConstants.navItems.values.elementAt(1),
           ),
         ],
       ),
