@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cesi_covid_19_tracker/ui/widgets/coroned_card.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/data/services/locator.dart';
@@ -57,38 +58,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
     children.add(
-      Card(
-        margin: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width / 4,
-        ),
-        elevation: 4.0,
-        borderOnForeground: true,
-        color: Colors.white60,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4.0),
-          side: BorderSide(
-            width: 1.0,
-            style: BorderStyle.solid,
-            color: Colors.blue,
+      CoronedCard(
+        children: <Widget>[
+          Text(
+            'Header',
+            style: Theme.of(context).textTheme.headline4,
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'Header',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              Text(
-                'Culpa sit amet velit nostrud sint veniam aliqua eu Lorem culpa nulla excepteur ad quis. Incididunt ipsum consectetur cupidatat adipisicing pariatur eu officia cupidatat incididunt anim tempor consequat. Incididunt ad ad dolor ipsum irure enim quis laboris est eu exercitation sunt cupidatat.',
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              Text('$_counter'),
-            ],
+          Text(
+            'Culpa sit amet velit nostrud sint veniam aliqua eu Lorem culpa nulla excepteur ad quis. Incididunt ipsum consectetur cupidatat adipisicing pariatur eu officia cupidatat incididunt anim tempor consequat. Incididunt ad ad dolor ipsum irure enim quis laboris est eu exercitation sunt cupidatat.',
+            style: Theme.of(context).textTheme.bodyText2,
           ),
-        ),
+          Text('$_counter'),
+        ],
       ),
     );
     children.add(
