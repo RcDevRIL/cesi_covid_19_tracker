@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
