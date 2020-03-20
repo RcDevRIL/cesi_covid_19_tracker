@@ -46,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     children.add(
       Center(
         child: DropdownButton(
+          key: Key('Country List'),
           onChanged: (value) {
             setState(() {
               _dropDownValue = value;
