@@ -9,7 +9,7 @@ void setupLocator() {
 }
 
 abstract class AppUtils {
-  Future<Map<String, Object>> getDataFromCountry(String countryCode);
+  Future<String> getDataFromCountry(String countryCode);
 }
 
 class AppUtilsImplementation implements AppUtils {
@@ -18,7 +18,7 @@ class AppUtilsImplementation implements AppUtils {
   final int timeOut = 10;
 
   @override
-  Future<Map<String, Object>> getDataFromCountry(String countryCode) async {
+  Future<String> getDataFromCountry(String countryCode) async {
     var response;
     try {
       response = await http.get(
@@ -27,19 +27,20 @@ class AppUtilsImplementation implements AppUtils {
       ).timeout(Duration(seconds: timeOut));
     } catch (e) {
       debugPrint('Error when trying to connect to API:\n' + e.toString());
-      return Map();
+      return null;
     }
     if (response?.statusCode == 200) {
       debugPrint('rerae');
-      return response;
+      debugPrint('${response.body}');
+      return response.body;
     } else if (response?.statusCode == 401) {
       debugPrint('rer');
       debugPrint(response);
-      return response;
+      return response.body;
     } else {
       debugPrint('lol');
       debugPrint(response);
-      return Map();
+      return null;
     }
   }
 }
