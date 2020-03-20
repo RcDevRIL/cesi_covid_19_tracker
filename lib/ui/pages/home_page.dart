@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 
+import 'package:cesi_covid_19_tracker/data/services/locator.dart';
 import 'package:cesi_covid_19_tracker/ui/widgets/navigation_drawer/navigation_drawer.dart';
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
@@ -16,6 +18,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _dropDownValue;
+  String _counter;
 
   @override
   void initState() {
@@ -82,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 'Culpa sit amet velit nostrud sint veniam aliqua eu Lorem culpa nulla excepteur ad quis. Incididunt ipsum consectetur cupidatat adipisicing pariatur eu officia cupidatat incididunt anim tempor consequat. Incididunt ad ad dolor ipsum irure enim quis laboris est eu exercitation sunt cupidatat.',
                 style: Theme.of(context).textTheme.bodyText2,
               ),
+              Text('$_counter'),
             ],
           ),
         ),
@@ -110,6 +114,19 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          Map<String, Object> test = jsonDecode(await locator
+              .get<AppUtils>()
+              .getDataFromCountry('FR')); //build Map with given JSON String
+          setState(() {
+            _counter = jsonEncode(
+                test.entries.first.value); //Build String with given JSON Map
+          });
+        },
+        tooltip: 'call API',
+        child: Icon(Icons.call),
       ),
     );
   }

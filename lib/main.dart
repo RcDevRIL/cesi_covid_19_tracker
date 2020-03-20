@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 import 'package:cesi_covid_19_tracker/ui/pages/dashboard.dart';
 import 'package:cesi_covid_19_tracker/ui/pages/home_page.dart';
 
+import 'data/services/locator.dart';
+
 void main() {
+  setupLocator();
   runApp(MyApp());
 }
 
