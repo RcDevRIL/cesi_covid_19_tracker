@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cesi_covid_19_tracker/data/models/covid_latest.dart';
 import 'package:cesi_covid_19_tracker/ui/widgets/coroned_card.dart';
 import 'package:flutter/material.dart';
 
@@ -19,18 +20,45 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _dropDownValue;
-  String _counter;
+  String _apiResponse;
   double _amount = 250;
 
   @override
-  void initState() {
-    super.initState();
-    _dropDownValue = 'FR';
+  Widget build(BuildContext context) {
+    return Scaffold(
+      primary: true,
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.blueGrey,
+      ),
+      drawer: NavigationDrawer(),
+      body: ListView(
+        physics: const BouncingScrollPhysics(),
+        primary: true,
+        shrinkWrap: true,
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Column(
+              children: _buildChildren(),
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          CovidLatest test = CovidLatest.fromJson(jsonDecode(
+              await locator.get<AppUtils>().getWorldLatestSituation()));
+          setState(() {
+            _apiResponse = test.apiResponse['confirmed'].toString();
+          });
+        },
+        tooltip: 'call API',
+        child: Icon(Icons.call),
+      ),
+    );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    List<String> countries = ['FR', 'US', 'UK'];
+  List<Widget> _buildChildren() {
     List<Widget> children = [
       SizedBox(
         height: 24.0,
@@ -49,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
           elevation: 2,
           isExpanded: false,
           value: _dropDownValue,
-          items: countries
+          items: ['FR', 'US', 'UK']
               .map((e) => DropdownMenuItem(
                     child: Text('$e'),
                     value: e,
@@ -70,11 +98,19 @@ class _MyHomePageState extends State<MyHomePage> {
             style: Theme.of(context).textTheme.bodyText2,
           ),
           Container(
-            height: 10.0,
             width: _amount,
             color: Colors.amber,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 4.0),
+              child: Text(
+                '${_apiResponse ?? ' '}', // display ' ' if _apiResponse == null
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .copyWith(fontSize: 12.0),
+              ),
+            ),
           ),
-          Text('$_counter'),
         ],
       ),
     );
@@ -83,38 +119,6 @@ class _MyHomePageState extends State<MyHomePage> {
         height: 24.0,
       ),
     );
-    return Scaffold(
-      primary: true,
-      appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Colors.blueGrey,
-      ),
-      drawer: NavigationDrawer(),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        primary: true,
-        shrinkWrap: true,
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Column(
-              children: children,
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Map<String, Object> test = jsonDecode(await locator
-              .get<AppUtils>()
-              .getDataFromCountry('FR')); //build Map with given JSON String
-          setState(() {
-            _counter = jsonEncode(
-                test.entries.first.value); //Build String with given JSON Map
-          });
-        },
-        tooltip: 'call API',
-        child: Icon(Icons.call),
-      ),
-    );
+    return children;
   }
 }
