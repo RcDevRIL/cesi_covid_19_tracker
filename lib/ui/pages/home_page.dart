@@ -20,6 +20,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String _dropDownValue;
   String _counter;
+  double _amount = 250;
 
   @override
   void initState() {
@@ -61,12 +62,17 @@ class _MyHomePageState extends State<MyHomePage> {
       CoronedCard(
         children: <Widget>[
           Text(
-            'Header',
+            'Statistiques Mondiales',
             style: Theme.of(context).textTheme.headline4,
           ),
           Text(
-            'Culpa sit amet velit nostrud sint veniam aliqua eu Lorem culpa nulla excepteur ad quis. Incididunt ipsum consectetur cupidatat adipisicing pariatur eu officia cupidatat incididunt anim tempor consequat. Incididunt ad ad dolor ipsum irure enim quis laboris est eu exercitation sunt cupidatat.',
+            'CAS CONFIRMES',
             style: Theme.of(context).textTheme.bodyText2,
+          ),
+          Container(
+            height: 10.0,
+            width: _amount,
+            color: Colors.amber,
           ),
           Text('$_counter'),
         ],
@@ -79,19 +85,19 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     return Scaffold(
       primary: true,
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Colors.blueGrey,
+      ),
       drawer: NavigationDrawer(),
-      body: CustomScrollView(
+      body: ListView(
         physics: const BouncingScrollPhysics(),
         primary: true,
         shrinkWrap: true,
-        slivers: <Widget>[
-          SliverAppBar(
-            title: Text(widget.title),
-            backgroundColor: Colors.blueGrey,
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              children,
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Column(
+              children: children,
             ),
           ),
         ],

@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'CORONED',
       theme: aG.AppTheme.defaultAppTheme,
       routes: {
         '/': (context) => MyHomePage(),
