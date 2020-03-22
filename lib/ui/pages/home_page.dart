@@ -21,7 +21,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double _amount = 0;
+  double _confirmedWeight = 0;
+  double _recoveredWeight = 0;
+  double _deathsWeight = 0;
   StreamController _apiResponseController;
 
   @override
@@ -56,89 +58,127 @@ class _MyHomePageState extends State<MyHomePage> {
         primary: true,
         shrinkWrap: true,
         children: <Widget>[
-          SingleChildScrollView(
-            child: Column(
-              children: _buildChildren(),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24.0),
+            child: StreamBuilder(
+              stream: _apiResponseController.stream,
+              builder: (_, s) {
+                print('Has error: ${s.hasError}');
+                print('Has data: ${s.hasData}');
+                print('Snapshot Data ${s.data}');
+
+                if (s.hasData) {
+                  CovidLatest cL = CovidLatest.fromJson(jsonDecode(s.data));
+                  int total = cL.apiResponse['confirmed'] +
+                      cL.apiResponse['deaths'] +
+                      cL.apiResponse['recovered'];
+                  _confirmedWeight = cL.apiResponse['confirmed'] / total;
+                  _recoveredWeight = cL.apiResponse['recovered'] / total;
+                  _deathsWeight = cL.apiResponse['deaths'] / total;
+                  debugPrint('total: $total\n' +
+                      'confirmed: $_confirmedWeight\n' +
+                      'recovered: $_recoveredWeight\n' +
+                      'deaths: $_deathsWeight');
+                  return Column(
+                    children: <Widget>[
+                      CoronedCard(
+                        children: <Widget>[
+                          Text(
+                            'Statistiques Mondiales',
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                          Text(
+                            'CONTAMINÉS : ${cL.apiResponse['confirmed']}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                .apply(color: Colors.black),
+                          ),
+                          Container(
+                            height: 8.0,
+                            width: _confirmedWeight *
+                                MediaQuery.of(context).size.width /
+                                2,
+                            decoration: BoxDecoration(
+                              color: aG.AppTheme.confirmedColorFill,
+                              border: Border.all(
+                                  color: aG.AppTheme.confirmedColorBorder),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                          Text(
+                            'MORTS : ${cL.apiResponse['deaths']}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                .apply(color: Colors.black),
+                          ),
+                          Container(
+                            height: 8.0,
+                            width: _deathsWeight *
+                                MediaQuery.of(context).size.width /
+                                2,
+                            decoration: BoxDecoration(
+                              color: aG.AppTheme.deathsColorFill,
+                              border: Border.all(
+                                  color: aG.AppTheme.deathsColorBorder),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                          Text(
+                            'GUÉRIS : ${cL.apiResponse['recovered']}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                .apply(color: Colors.black),
+                          ),
+                          Container(
+                            height: 8.0,
+                            width: _recoveredWeight *
+                                MediaQuery.of(context).size.width /
+                                2,
+                            decoration: BoxDecoration(
+                              color: aG.AppTheme.recoveredColorFill,
+                              border: Border.all(
+                                  color: aG.AppTheme.recoveredColorBorder),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.0,
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                }
+                if (s.hasError) {
+                  return FailureIcon(fail: s.error);
+                }
+                if (s.connectionState != ConnectionState.done) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (!s.hasData && s.connectionState == ConnectionState.done) {
+                  return FailureIcon(fail: 'No Data');
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
             ),
           ),
         ],
       ),
     );
-  }
-
-  List<Widget> _buildChildren() {
-    List<Widget> children = [
-      SizedBox(
-        height: 24.0,
-      ),
-    ];
-    children.add(
-      CoronedCard(
-        children: <Widget>[
-          Text(
-            'Statistiques Mondiales',
-            style: Theme.of(context).textTheme.headline4,
-          ),
-          Text(
-            'CAS CONFIRMES',
-            style: Theme.of(context)
-                .textTheme
-                .bodyText2
-                .apply(color: Colors.black),
-          ),
-          StreamBuilder(
-            stream: _apiResponseController.stream,
-            builder: (_, s) {
-              print('Has error: ${s.hasError}');
-              print('Has data: ${s.hasData}');
-              print('Snapshot Data ${s.data}');
-
-              if (s.hasData) {
-                CovidLatest cL = CovidLatest.fromJson(jsonDecode(s.data));
-                _amount = cL.apiResponse['confirmed'] / 1000;
-                return AnimatedContainer(
-                  width: _amount,
-                  color: Colors.amber,
-                  duration: Duration(milliseconds: 250),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
-                    child: Text(
-                      '${cL.apiResponse['confirmed']}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2
-                          .copyWith(fontSize: 12.0, color: Colors.white),
-                    ),
-                  ),
-                );
-              }
-              if (s.hasError) {
-                return FailureIcon(fail: s.error);
-              }
-              if (s.connectionState != ConnectionState.done) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (!s.hasData && s.connectionState == ConnectionState.done) {
-                return FailureIcon(fail: 'No Data');
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
-          ),
-        ],
-      ),
-    );
-
-    children.add(
-      SizedBox(
-        height: 24.0,
-      ),
-    );
-    return children;
   }
 
   void callApi() {
