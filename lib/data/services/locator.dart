@@ -27,17 +27,15 @@ class AppUtilsImplementation implements AppUtils {
         headers: {'Content-type': 'application/json'},
       ).timeout(Duration(seconds: timeOut));
     } catch (e) {
-      debugPrint('Error when trying to connect to API:\n' + e.toString());
-      return null;
+      throw 'Error when trying to connect to API:\n${e.toString()}';
     }
     if (response?.statusCode == 200) {
       debugPrint('${response.body}');
       return response.body;
     } else if (response?.statusCode == 401) {
-      return 'Unauthorized!';
+      throw 'Unauthorized!';
     } else {
-      debugPrint('Error when trying to connect to API...');
-      return null;
+      throw 'Error when trying to connect to API...';
     }
   }
 
@@ -50,17 +48,15 @@ class AppUtilsImplementation implements AppUtils {
         headers: {'Content-type': 'application/json'},
       ).timeout(Duration(seconds: timeOut));
     } catch (e) {
-      debugPrint('Error when trying to connect to API:\n' + e.toString());
-      return null;
+      throw 'Error when trying to connect to API:\n${e.toString()}';
     }
     if (response?.statusCode == 200) {
       debugPrint('${response.body}');
       return response.body;
     } else if (response?.statusCode == 401) {
-      return 'Unauthorized!';
+      throw 'Unauthorized!';
     } else {
-      debugPrint('Error when trying to connect to API...');
-      return null;
+      throw 'Error when trying to connect to API...';
     }
   }
 }

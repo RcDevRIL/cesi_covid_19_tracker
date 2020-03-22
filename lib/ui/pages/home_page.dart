@@ -4,7 +4,8 @@ import 'package:cesi_covid_19_tracker/ui/widgets/coroned_card.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/data/services/locator.dart';
-import 'package:cesi_covid_19_tracker/ui/widgets/navigation_drawer/navigation_drawer.dart';
+import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
+    show CoronedCard, FailureIcon, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
 class MyHomePage extends StatefulWidget {
@@ -19,9 +20,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _dropDownValue;
-  String _apiResponse;
-  double _amount = 250;
+  double _amount = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +54,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          CovidLatest test = CovidLatest.fromJson(jsonDecode(
-              await locator.get<AppUtils>().getWorldLatestSituation()));
-          setState(() {
-            _apiResponse = test.apiResponse['confirmed'].toString();
-          });
-        },
-        tooltip: 'call API',
-        child: Icon(Icons.call),
-      ),
     );
   }
 
@@ -75,28 +63,6 @@ class _MyHomePageState extends State<MyHomePage> {
         height: 24.0,
       ),
     ];
-    children.add(
-      Center(
-        child: DropdownButton(
-          key: Key('Country List'),
-          onChanged: (value) {
-            setState(() {
-              _dropDownValue = value;
-            });
-          },
-          hint: Text('Choisissez un pays'),
-          elevation: 2,
-          isExpanded: false,
-          value: _dropDownValue,
-          items: ['FR', 'US', 'UK']
-              .map((e) => DropdownMenuItem(
-                    child: Text('$e'),
-                    value: e,
-                  ))
-              .toList(),
-        ),
-      ),
-    );
     children.add(
       CoronedCard(
         children: <Widget>[
@@ -108,23 +74,53 @@ class _MyHomePageState extends State<MyHomePage> {
             'CAS CONFIRMES',
             style: Theme.of(context).textTheme.bodyText2,
           ),
-          Container(
-            width: _amount,
-            color: Colors.amber,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 4.0),
-              child: Text(
-                '${_apiResponse ?? ' '}', // display ' ' if _apiResponse == null
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .copyWith(fontSize: 12.0),
-              ),
-            ),
+          FutureBuilder(
+            future: locator.get<AppUtils>().getWorldLatestSituation(),
+            builder: (_, s) {
+              print('Has error: ${s.hasError}');
+              print('Has data: ${s.hasData}');
+              print('Snapshot Data ${s.data}');
+
+              if (s.hasData) {
+                CovidLatest cL = CovidLatest.fromJson(jsonDecode(s.data));
+                _amount = cL.apiResponse['confirmed'] / 1000;
+                return AnimatedContainer(
+                  width: _amount,
+                  color: Colors.amber,
+                  duration: Duration(milliseconds: 250),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: Text(
+                      '${cL.apiResponse['confirmed']}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2
+                          .copyWith(fontSize: 12.0),
+                    ),
+                  ),
+                );
+              }
+              if (s.hasError) {
+                return FailureIcon(fail: s.error);
+              }
+              if (s.connectionState != ConnectionState.done) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (!s.hasData && s.connectionState == ConnectionState.done) {
+                return FailureIcon(fail: 'No Data');
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
           ),
         ],
       ),
     );
+
     children.add(
       SizedBox(
         height: 24.0,
