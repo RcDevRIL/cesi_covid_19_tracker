@@ -20,17 +20,11 @@ class NavigationDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           NavigationDrawerHeader(),
-          NavBarItem(
-            aG.AppConstants.navItems.keys.elementAt(0),
-            '/',
-            icon: aG.AppConstants.navItems.values.elementAt(0),
-          ),
-          NavBarItem(
-            aG.AppConstants.navItems.keys.elementAt(1),
-            '/dashboard',
-            icon: aG.AppConstants.navItems.values.elementAt(1),
-          ),
-        ],
+        ]..addAll(aG.AppConstants.navItems.map((e) => NavBarItem(
+              e.title,
+              e.navigationPath,
+              icon: e.iconData,
+            ))),
       ),
     );
   }
