@@ -54,11 +54,12 @@ class _DashBoardState extends State<DashBoard> {
               children: _buildChildren()
                 ..add(
                   StreamBuilder(
+                    initialData: '',
                     stream: _apiResponseController.stream,
                     builder: (_, s) {
                       print('Has error: ${s.hasError}');
                       print('Has data: ${s.hasData}');
-                      print('s Data ${s.data}');
+                      print('Snapshot Data ${s.data}');
                       if (s.hasError) {
                         return FailureIcon(fail: s.error);
                       }
