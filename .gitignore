@@ -29,6 +29,9 @@
 .pub-cache/
 .pub/
 /build/
+# Generated Flutter files
+*.freezed.dart
+*.g.dart
 *.lock
 
 # Web related

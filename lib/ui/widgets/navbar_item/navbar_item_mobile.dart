@@ -17,7 +17,7 @@ class NavBarItemMobile extends ProviderWidget<NavBarItemModel> {
           ),
           Text(
             model.title,
-            style: TextStyle(fontSize: 18),
+            style: Theme.of(context).textTheme.bodyText1,
           )
         ],
       ),
