@@ -27,6 +27,7 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      primary: true,
       appBar: AppBar(
         title: RichText(
           text: TextSpan(

@@ -32,6 +32,12 @@ class AppTheme {
       ),
     ),
   );
+  static const Color confirmedColorFill = Color(0xFFFFE6CC);
+  static const Color confirmedColorBorder = Color(0xFFD79B00);
+  static const Color recoveredColorFill = Color(0xFFD5E8D4);
+  static const Color recoveredColorBorder = Color(0xFF82B366);
+  static const Color deathsColorFill = Color(0xFFF8CECC);
+  static const Color deathsColorBorder = Color(0xFFB85450);
 }
 
 class AppConstants {
