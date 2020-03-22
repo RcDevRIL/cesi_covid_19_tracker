@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:cesi_covid_19_tracker/data/models/covid_latest.dart';
 import 'package:cesi_covid_19_tracker/data/services/locator.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +14,7 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   String _dropDownValue;
   String _apiResponse;
-  StreamController _apiResponseController;
+  StreamController<String> _apiResponseController;
 
   @override
   void initState() {
@@ -53,10 +51,10 @@ class _DashBoardState extends State<DashBoard> {
             child: Column(
               children: _buildChildren()
                 ..add(
-                  StreamBuilder(
+                  StreamBuilder<String>(
                     initialData: '',
                     stream: _apiResponseController.stream,
-                    builder: (_, s) {
+                    builder: (_, AsyncSnapshot<String> s) {
                       print('Has error: ${s.hasError}');
                       print('Has data: ${s.hasData}');
                       print('Snapshot Data ${s.data}');
@@ -93,7 +91,7 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   List<Widget> _buildChildren() {
-    List<Widget> children = [
+    var children = <Widget>[
       SizedBox(
         height: 24.0,
       ),
@@ -102,11 +100,11 @@ class _DashBoardState extends State<DashBoard> {
       Center(
         child: DropdownButton(
           key: Key('Country List'),
-          onChanged: (value) {
+          onChanged: (String countryCode) {
             setState(() {
-              _dropDownValue = value;
+              _dropDownValue = countryCode;
             });
-            call(value);
+            call(countryCode);
           },
           hint: Text('Choisissez un pays'),
           elevation: 2,
@@ -133,7 +131,7 @@ class _DashBoardState extends State<DashBoard> {
     return children;
   }
 
-  void call(String countryCode) async {
+  void call(String countryCode) {
     locator
         .get<AppUtils>()
         .getDataFromCountry(countryCode)

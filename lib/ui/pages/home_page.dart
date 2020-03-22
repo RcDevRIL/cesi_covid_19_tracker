@@ -68,16 +68,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 print('Snapshot Data ${s.data}');
 
                 if (s.hasData) {
-                  CovidLatest cL = CovidLatest.fromJson(jsonDecode(s.data));
-                  int total = cL.apiResponse['confirmed'] +
+                  var cL = CovidLatest.fromJson(jsonDecode(s.data));
+                  var total = cL.apiResponse['confirmed'] +
                       cL.apiResponse['deaths'] +
                       cL.apiResponse['recovered'];
                   _confirmedWeight = cL.apiResponse['confirmed'] / total;
                   _recoveredWeight = cL.apiResponse['recovered'] / total;
                   _deathsWeight = cL.apiResponse['deaths'] / total;
-                  debugPrint('total: $total\n' +
-                      'confirmed: $_confirmedWeight\n' +
-                      'recovered: $_recoveredWeight\n' +
+                  debugPrint('total: $total\n'
+                      'confirmed: $_confirmedWeight\n'
+                      'recovered: $_recoveredWeight\n'
                       'deaths: $_deathsWeight');
                   return Column(
                     children: <Widget>[

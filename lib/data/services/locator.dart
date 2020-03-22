@@ -15,12 +15,12 @@ abstract class AppUtils {
 
 class AppUtilsImplementation implements AppUtils {
   final String baseUrl = 'https://coronavirus-tracker-api.herokuapp.com/v2/';
-  final Client http = new Client();
+  final Client http = Client();
   final int timeOut = 10;
 
   @override
   Future<String> getDataFromCountry(String countryCode) async {
-    var response;
+    Response response;
     try {
       response = await http.get(
         baseUrl + 'locations?country_code=$countryCode',
@@ -41,7 +41,7 @@ class AppUtilsImplementation implements AppUtils {
 
   @override
   Future<String> getWorldLatestSituation() async {
-    var response;
+    Response response;
     try {
       response = await http.get(
         baseUrl + 'latest',
