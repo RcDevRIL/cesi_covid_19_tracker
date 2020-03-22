@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:cesi_covid_19_tracker/data/models/covid_latest.dart';
 import 'package:cesi_covid_19_tracker/ui/widgets/coroned_card.dart';
@@ -21,6 +22,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   double _amount = 0;
+  StreamController _apiResponseController;
+
+  @override
+  void initState() {
+    super.initState();
+    _apiResponseController = StreamController();
+    callApi();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +81,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Text(
             'CAS CONFIRMES',
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context)
+                .textTheme
+                .bodyText2
+                .apply(color: Colors.black),
           ),
-          FutureBuilder(
-            future: locator.get<AppUtils>().getWorldLatestSituation(),
+          StreamBuilder(
+            stream: _apiResponseController.stream,
             builder: (_, s) {
               print('Has error: ${s.hasError}');
               print('Has data: ${s.hasData}');
@@ -95,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2
-                          .copyWith(fontSize: 12.0),
+                          .copyWith(fontSize: 12.0, color: Colors.white),
                     ),
                   ),
                 );
@@ -127,5 +139,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
     return children;
+  }
+
+  void callApi() {
+    locator
+        .get<AppUtils>()
+        .getWorldLatestSituation()
+        .then((value) => _apiResponseController.add(value))
+        .catchError((e) => _apiResponseController.addError(e));
   }
 }
