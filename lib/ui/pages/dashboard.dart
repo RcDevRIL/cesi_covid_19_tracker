@@ -1,5 +1,7 @@
-import 'package:cesi_covid_19_tracker/ui/widgets/navigation_drawer/navigation_drawer.dart';
 import 'package:flutter/material.dart';
+
+import 'package:cesi_covid_19_tracker/ui/widgets/navigation_drawer/navigation_drawer.dart';
+import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
 class DashBoard extends StatelessWidget {
   @override
@@ -7,10 +9,19 @@ class DashBoard extends StatelessWidget {
     return Scaffold(
       drawer: NavigationDrawer(),
       appBar: AppBar(
-        title: Text(
-          'CORONED\t\tA covid-19 info app',
+        title: RichText(
+          text: TextSpan(
+            text: aG.AppConstants.defaultAppTitle.split('\t\t')[0],
+            style: Theme.of(context).textTheme.headline1,
+            children: [
+              TextSpan(
+                text: '\t\t' + aG.AppConstants.defaultAppTitle.split('\t\t')[1],
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            ],
+          ),
+          textAlign: TextAlign.center,
         ),
-        backgroundColor: Colors.blueGrey,
       ),
     );
   }

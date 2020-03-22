@@ -28,8 +28,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       primary: true,
       appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: Colors.blueGrey,
+        title: RichText(
+          text: TextSpan(
+            text: widget.title.split('\t\t')[0],
+            style: Theme.of(context).textTheme.headline1,
+            children: [
+              TextSpan(
+                text: '\t\t' + widget.title.split('\t\t')[1],
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            ],
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
       drawer: NavigationDrawer(),
       body: ListView(
