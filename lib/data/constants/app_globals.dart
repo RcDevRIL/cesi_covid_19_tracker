@@ -18,6 +18,11 @@ class AppTheme {
         fontWeight: FontWeight.w800,
         color: Colors.white70,
       ),
+      headline4: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        color: Colors.black,
+      ),
       bodyText1: TextStyle(
         color: Colors.black,
         fontSize: 18.0,
