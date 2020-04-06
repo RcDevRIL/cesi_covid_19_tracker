@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:cesi_covid_19_tracker/data/models/covid_country_infos.dart';
+import 'package:cesi_covid_19_tracker/ui/widgets/coroned_country_card.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
@@ -67,9 +68,12 @@ class _CountryViewState extends State<CountryView> {
                       if (s.hasData) {
                         var cCL =
                             CovidCountryInfos.fromJson(jsonDecode(s.data));
-                        return Text(
-                          cCL.toString(),
-                          style: TextStyle(color: Colors.black),
+                        return Column(
+                          children: <Widget>[
+                            CoronedCountryCard(
+                              covidCountryInfos: cCL,
+                            ),
+                          ],
                         );
                       }
                       if (s.connectionState != ConnectionState.done) {
