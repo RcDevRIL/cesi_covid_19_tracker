@@ -5,7 +5,7 @@ const RESOURCES = {
 "assets/assets/virus.jpg": "5a890fa31e431d57d18aa604042d44af",
 "assets/FontManifest.json": "580ff1a5d08679ded8fcf5c6848cece7",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
-"assets/LICENSE": "b6e783f5ecca1eb0429e40eb561d1eb6",
+"assets/LICENSE": "3b89287cac80bea82cf6040dfbb8d589",
 "favicon.ico": "cd78fd2732d09d2595ba1b16b9d6a488",
 "icons/android-icon-144x144.png": "fb70f5cda7db961105feb0f09b6f2899",
 "icons/android-icon-192x192.png": "cb618464d5fe4baffb584ad6767490cd",
@@ -24,7 +24,7 @@ const RESOURCES = {
 "icons/apple-icon-76x76.png": "ba2a5646cf8ac70965183973985d0d23",
 "icons/apple-icon-precomposed.png": "12421e5c510883f1452543de682452cc",
 "icons/apple-icon.png": "12421e5c510883f1452543de682452cc",
-"icons/browserconfig.xml": "653d077300a12f09a69caeea7a8947f8",
+"icons/browserconfig.xml": "97775b1fd3b6e6c13fc719c2c7dd0ffe",
 "icons/favicon-16x16.png": "1493a490c5f6f567901b9c0fa025b541",
 "icons/favicon-32x32.png": "6961d0499014897a294a6f5ca44cab3e",
 "icons/favicon-96x96.png": "0b4366d984ea81a65f7622874025b7f5",
@@ -34,7 +34,7 @@ const RESOURCES = {
 "icons/ms-icon-70x70.png": "48f490a64da323b6fe6daa506471699b",
 "index.html": "7c005a087ba16c486930d78d526505a5",
 "/": "7c005a087ba16c486930d78d526505a5",
-"main.dart.js": "0ba35eaafa6d4359de31e9c7be6474f6",
+"main.dart.js": "cbdea46509462aa5a5c432817215c465",
 "manifest.json": "610bcc38a0da86239a4f9d2472cb7d67"
 };
 

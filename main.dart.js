@@ -7140,7 +7140,7 @@ p=J.az(d.a,10,l)
 k=m/2
 o=10+k
 if(p<o)q=10
-else q=p>n-o?l-m:p-k}return new P.p(q,r)}},G={kt:function kt(a){this.b=a},
+else q=p>n-o?l-m:p-k}return new P.p(q,r)}},G={kt:function kt(a){this.c=a},
 cV:function(a,b,c,d,e,f,g){var t=new G.km(c,e,a,C.jY,b,d,C.am,C.u,new R.ai(H.b([],u.l),u.zc),new R.ai(H.b([],u.u),u.A))
 t.r=g.mm(t.guV())
 t.oV(f==null?c:f)
@@ -24587,7 +24587,7 @@ t=q}while(true)switch(t){case 0:j=null
 q=4
 l=u.N
 t=7
-return P.aD(n.b.jN("GET","https://corona.lmao.ninja/"+("countries/"+H.a(a)),P.aS(["Content-type","application/json"],l,l)).Ax(0,P.cY(0,0,10)),$async$kV)
+return P.aD(n.c.jN("GET","https://corona.lmao.ninja/"+("countries/"+H.a(a)),P.aS(["Content-type","application/json"],l,l)).Ax(0,P.cY(0,0,10)),$async$kV)
 case 7:j=c
 q=2
 t=6
@@ -24618,7 +24618,7 @@ t=q}while(true)switch(t){case 0:j=null
 q=4
 l=u.N
 t=7
-return P.aD(n.b.jN("GET","https://corona.lmao.ninja/all",P.aS(["Content-type","application/json"],l,l)).Ax(0,P.cY(0,0,10)),$async$l_)
+return P.aD(n.c.jN("GET","https://corona.lmao.ninja/all",P.aS(["Content-type","application/json"],l,l)).Ax(0,P.cY(0,0,10)),$async$l_)
 case 7:j=b
 q=2
 t=6
@@ -41138,7 +41138,7 @@ t=s.a+=C.c.ue(b,t,new R.KI())
 s.a=t+'"'}else s.a+=H.a(b)},
 $S:166}
 R.KI.prototype={
-$1:function(a){return C.c.O("\\",a.h(0,0))}}
+$1:function(a){return"\\"+H.a(a.h(0,0))}}
 N.UB.prototype={
 $1:function(a){return a.h(0,1)}}
 M.GB.prototype={
