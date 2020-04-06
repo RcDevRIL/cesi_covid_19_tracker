@@ -6,7 +6,7 @@ const RESOURCES = {
 "assets/FontManifest.json": "580ff1a5d08679ded8fcf5c6848cece7",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
 "assets/LICENSE": "b6e783f5ecca1eb0429e40eb561d1eb6",
-"favicon.png": "cd78fd2732d09d2595ba1b16b9d6a488",
+"favicon.ico": "cd78fd2732d09d2595ba1b16b9d6a488",
 "icons/android-icon-144x144.png": "fb70f5cda7db961105feb0f09b6f2899",
 "icons/android-icon-192x192.png": "cb618464d5fe4baffb584ad6767490cd",
 "icons/android-icon-36x36.png": "cfb10bc6c6911e0badcb3bfda53e16bc",
@@ -32,8 +32,8 @@ const RESOURCES = {
 "icons/ms-icon-150x150.png": "d2666d34f8e35bcc030db6abb46537a3",
 "icons/ms-icon-310x310.png": "e713087c3f8267181e040602bda3f87c",
 "icons/ms-icon-70x70.png": "48f490a64da323b6fe6daa506471699b",
-"index.html": "51fd990a3ea00bf078662972f457db77",
-"/": "51fd990a3ea00bf078662972f457db77",
+"index.html": "7c005a087ba16c486930d78d526505a5",
+"/": "7c005a087ba16c486930d78d526505a5",
 "main.dart.js": "0ba35eaafa6d4359de31e9c7be6474f6",
 "manifest.json": "610bcc38a0da86239a4f9d2472cb7d67"
 };
