@@ -35,6 +35,12 @@ Avant de vouloir lancer l'application, assurez-vous d'obtenir les paquets que no
 * `flutter pub upgrade`
 * `flutter pub get`
 
+Nous utilisons le moteur de générateur de code de Flutter ([build_runner]) permettant de réduire le code redondant aux développeurs. À partir de là, vous devriez avoir une centaine d'erreurs sur le repo git. Vous devrez alors exécuter cette commande pour générer le code manquant:
+
+`flutter packages pub run build_runner build`
+
+(Si vous voulez naviguer entre les commits, vous pourriez avoir des fichiers en conflit. Pour réparer ceci, ajouter cet argument à la commande de build: `--delete-conflicting-outputs`)
+
 Vous pouvez maintenant envisager de créer et d'exécuter l'application :upside_down_face:
 
 Pour lancer le processus de construction, d'installation et d'exécution sur un appareil Android ou iOS, exécutez la commande suivante:
@@ -89,7 +95,7 @@ _Ce paragraphe explique comment déclencher les tests écrits dans le dossier **
 
 Pour lancer des tests d'intégration automatisés, assurez-vous que vous avez un appareil Android connecté et exécutez cette commande :
 
-`flutter drive --target=test_driver/madera_app.dart`
+`flutter drive --target=test_driver/coroned_app.dart`
 
 Cela déclenchera l'exécution des tests d'intégration automatisés. Il lancera l'application en mode débogage et exécutera les actions mises en œuvre. Cet outil est idéal pour permettre l'intégration stable des nouvelles versions :rocket:
 

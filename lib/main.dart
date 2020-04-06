@@ -7,10 +7,10 @@ import 'data/services/locator.dart';
 
 void main() {
   setupLocator();
-  runApp(MyApp());
+  runApp(CoronedApp());
 }
 
-class MyApp extends StatelessWidget {
+class CoronedApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
