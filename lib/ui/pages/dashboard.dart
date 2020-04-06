@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:cesi_covid_19_tracker/data/models/covid_country_infos.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
@@ -54,7 +56,6 @@ class _DashBoardState extends State<DashBoard> {
               children: _buildChildren()
                 ..add(
                   StreamBuilder<String>(
-                    initialData: '',
                     stream: _apiResponseController.stream,
                     builder: (_, AsyncSnapshot<String> s) {
                       print('Has error: ${s.hasError}');
@@ -64,23 +65,21 @@ class _DashBoardState extends State<DashBoard> {
                         return FailureIcon(fail: s.error);
                       }
                       if (s.hasData) {
+                        var cCL =
+                            CovidCountryInfos.fromJson(jsonDecode(s.data));
                         return Text(
-                          s.data,
+                          cCL.toString(),
                           style: TextStyle(color: Colors.black),
                         );
                       }
                       if (s.connectionState != ConnectionState.done) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
+                        return Container();
                       }
                       if (!s.hasData &&
                           s.connectionState == ConnectionState.done) {
                         return FailureIcon(fail: 'No Data');
                       } else {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
+                        return Container();
                       }
                     },
                   ),
