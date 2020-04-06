@@ -3,8 +3,8 @@ import 'package:http/http.dart';
 
 class AppUtilsImplementation implements AppUtils {
   final String baseUrl = 'https://corona.lmao.ninja/';
-  final Client http = Client();
   final int timeOut = 10;
+  Client http = Client();
 
   @override
   Future<String> getDataFromCountry(String countryCode) async {
