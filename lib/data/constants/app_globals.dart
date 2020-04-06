@@ -45,14 +45,14 @@ class AppConstants {
 
   static const List<NavBarItemModel> navItems = [
     NavBarItemModel(
-      title: 'HOME',
-      iconData: Icons.wb_iridescent,
-      navigationPath: '/',
+      title: 'DASHBOARD',
+      iconData: Icons.blur_circular,
+      navigationPath: '/dashboard',
     ),
     NavBarItemModel(
-      title: 'DASHBOARD',
-      iconData: Icons.assignment,
-      navigationPath: '/dashboard',
+      title: 'COUNTRIES',
+      iconData: Icons.location_searching,
+      navigationPath: '/country',
     )
   ];
 }

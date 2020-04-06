@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class CoronedCard extends StatelessWidget {
+class CoronedGlobalCard extends StatelessWidget {
   final List<Widget> children;
-  const CoronedCard({
+  const CoronedGlobalCard({
     Key key,
     this.children,
   }) : super(key: key);
