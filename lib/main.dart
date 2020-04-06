@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
-import 'package:cesi_covid_19_tracker/ui/pages/dashboard.dart';
-import 'package:cesi_covid_19_tracker/ui/pages/home_page.dart';
+import 'package:cesi_covid_19_tracker/ui/pages/pages.dart';
 
 import 'data/services/locator.dart';
 
 void main() {
   setupLocator();
-  runApp(MyApp());
+  runApp(CoronedApp());
 }
 
-class MyApp extends StatelessWidget {
+class CoronedApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CORONED',
       theme: aG.AppTheme.defaultAppTheme,
       routes: {
-        '/': (context) => MyHomePage(),
-        '/dashboard': (context) => DashBoard(),
+        '/dashboard': (context) => Dashboard(),
+        '/country': (context) => CountryView(),
       },
+      home: Dashboard(),
     );
   }
 }
