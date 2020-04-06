@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
-import 'package:cesi_covid_19_tracker/ui/pages/dashboard.dart';
-import 'package:cesi_covid_19_tracker/ui/pages/home_page.dart';
+import 'package:cesi_covid_19_tracker/ui/pages/pages.dart';
 
 import 'data/services/locator.dart';
 
@@ -18,9 +17,10 @@ class MyApp extends StatelessWidget {
       title: 'CORONED',
       theme: aG.AppTheme.defaultAppTheme,
       routes: {
-        '/': (context) => MyHomePage(),
-        '/dashboard': (context) => DashBoard(),
+        '/dashboard': (context) => Dashboard(),
+        '/country': (context) => CountryView(),
       },
+      home: Dashboard(),
     );
   }
 }
