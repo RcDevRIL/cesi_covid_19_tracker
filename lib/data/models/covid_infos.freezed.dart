@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
 
-part of 'covid_latest.dart';
+part of 'covid_infos.dart';
 
 // **************************************************************************
 // FreezedGenerator
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-CovidLatest _$CovidLatestFromJson(Map<String, dynamic> json) {
-  return _CovidLatest.fromJson(json);
+CovidInfos _$CovidInfosFromJson(Map<String, dynamic> json) {
+  return _CovidInfos.fromJson(json);
 }
 
-class _$CovidLatestTearOff {
-  const _$CovidLatestTearOff();
+class _$CovidInfosTearOff {
+  const _$CovidInfosTearOff();
 
-  _CovidLatest call(
+  _CovidInfos call(
       @JsonKey(name: 'updated') int update,
       @JsonKey(name: 'cases') int cases,
       @JsonKey(name: 'todayCases') int todayCases,
@@ -29,7 +29,7 @@ class _$CovidLatestTearOff {
       @JsonKey(name: 'tests') int tests,
       @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
       @JsonKey(name: 'affectedCountries') int affectedCountries) {
-    return _CovidLatest(
+    return _CovidInfos(
       update,
       cases,
       todayCases,
@@ -48,9 +48,9 @@ class _$CovidLatestTearOff {
 }
 
 // ignore: unused_element
-const $CovidLatest = _$CovidLatestTearOff();
+const $CovidInfos = _$CovidInfosTearOff();
 
-mixin _$CovidLatest {
+mixin _$CovidInfos {
   @JsonKey(name: 'updated')
   int get update;
   @JsonKey(name: 'cases')
@@ -79,13 +79,13 @@ mixin _$CovidLatest {
   int get affectedCountries;
 
   Map<String, dynamic> toJson();
-  $CovidLatestCopyWith<CovidLatest> get copyWith;
+  $CovidInfosCopyWith<CovidInfos> get copyWith;
 }
 
-abstract class $CovidLatestCopyWith<$Res> {
-  factory $CovidLatestCopyWith(
-          CovidLatest value, $Res Function(CovidLatest) then) =
-      _$CovidLatestCopyWithImpl<$Res>;
+abstract class $CovidInfosCopyWith<$Res> {
+  factory $CovidInfosCopyWith(
+          CovidInfos value, $Res Function(CovidInfos) then) =
+      _$CovidInfosCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'updated') int update,
       @JsonKey(name: 'cases') int cases,
@@ -102,12 +102,12 @@ abstract class $CovidLatestCopyWith<$Res> {
       @JsonKey(name: 'affectedCountries') int affectedCountries});
 }
 
-class _$CovidLatestCopyWithImpl<$Res> implements $CovidLatestCopyWith<$Res> {
-  _$CovidLatestCopyWithImpl(this._value, this._then);
+class _$CovidInfosCopyWithImpl<$Res> implements $CovidInfosCopyWith<$Res> {
+  _$CovidInfosCopyWithImpl(this._value, this._then);
 
-  final CovidLatest _value;
+  final CovidInfos _value;
   // ignore: unused_field
-  final $Res Function(CovidLatest) _then;
+  final $Res Function(CovidInfos) _then;
 
   @override
   $Res call({
@@ -152,11 +152,10 @@ class _$CovidLatestCopyWithImpl<$Res> implements $CovidLatestCopyWith<$Res> {
   }
 }
 
-abstract class _$CovidLatestCopyWith<$Res>
-    implements $CovidLatestCopyWith<$Res> {
-  factory _$CovidLatestCopyWith(
-          _CovidLatest value, $Res Function(_CovidLatest) then) =
-      __$CovidLatestCopyWithImpl<$Res>;
+abstract class _$CovidInfosCopyWith<$Res> implements $CovidInfosCopyWith<$Res> {
+  factory _$CovidInfosCopyWith(
+          _CovidInfos value, $Res Function(_CovidInfos) then) =
+      __$CovidInfosCopyWithImpl<$Res>;
   @override
   $Res call(
       {@JsonKey(name: 'updated') int update,
@@ -174,14 +173,14 @@ abstract class _$CovidLatestCopyWith<$Res>
       @JsonKey(name: 'affectedCountries') int affectedCountries});
 }
 
-class __$CovidLatestCopyWithImpl<$Res> extends _$CovidLatestCopyWithImpl<$Res>
-    implements _$CovidLatestCopyWith<$Res> {
-  __$CovidLatestCopyWithImpl(
-      _CovidLatest _value, $Res Function(_CovidLatest) _then)
-      : super(_value, (v) => _then(v as _CovidLatest));
+class __$CovidInfosCopyWithImpl<$Res> extends _$CovidInfosCopyWithImpl<$Res>
+    implements _$CovidInfosCopyWith<$Res> {
+  __$CovidInfosCopyWithImpl(
+      _CovidInfos _value, $Res Function(_CovidInfos) _then)
+      : super(_value, (v) => _then(v as _CovidInfos));
 
   @override
-  _CovidLatest get _value => super._value as _CovidLatest;
+  _CovidInfos get _value => super._value as _CovidInfos;
 
   @override
   $Res call({
@@ -199,7 +198,7 @@ class __$CovidLatestCopyWithImpl<$Res> extends _$CovidLatestCopyWithImpl<$Res>
     Object testsPerOneMillion = freezed,
     Object affectedCountries = freezed,
   }) {
-    return _then(_CovidLatest(
+    return _then(_CovidInfos(
       update == freezed ? _value.update : update as int,
       cases == freezed ? _value.cases : cases as int,
       todayCases == freezed ? _value.todayCases : todayCases as int,
@@ -226,8 +225,8 @@ class __$CovidLatestCopyWithImpl<$Res> extends _$CovidLatestCopyWithImpl<$Res>
 }
 
 @JsonSerializable(explicitToJson: true)
-class _$_CovidLatest with DiagnosticableTreeMixin implements _CovidLatest {
-  const _$_CovidLatest(
+class _$_CovidInfos implements _CovidInfos {
+  const _$_CovidInfos(
       @JsonKey(name: 'updated') this.update,
       @JsonKey(name: 'cases') this.cases,
       @JsonKey(name: 'todayCases') this.todayCases,
@@ -255,8 +254,8 @@ class _$_CovidLatest with DiagnosticableTreeMixin implements _CovidLatest {
         assert(testsPerOneMillion != null),
         assert(affectedCountries != null);
 
-  factory _$_CovidLatest.fromJson(Map<String, dynamic> json) =>
-      _$_$_CovidLatestFromJson(json);
+  factory _$_CovidInfos.fromJson(Map<String, dynamic> json) =>
+      _$_$_CovidInfosFromJson(json);
 
   @override
   @JsonKey(name: 'updated')
@@ -299,34 +298,14 @@ class _$_CovidLatest with DiagnosticableTreeMixin implements _CovidLatest {
   final int affectedCountries;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CovidLatest(update: $update, cases: $cases, todayCases: $todayCases, deaths: $deaths, todayDeaths: $todayDeaths, recovered: $recovered, active: $active, critical: $critical, casesPerOneMillion: $casesPerOneMillion, deathsPerOneMillion: $deathsPerOneMillion, tests: $tests, testsPerOneMillion: $testsPerOneMillion, affectedCountries: $affectedCountries)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CovidLatest'))
-      ..add(DiagnosticsProperty('update', update))
-      ..add(DiagnosticsProperty('cases', cases))
-      ..add(DiagnosticsProperty('todayCases', todayCases))
-      ..add(DiagnosticsProperty('deaths', deaths))
-      ..add(DiagnosticsProperty('todayDeaths', todayDeaths))
-      ..add(DiagnosticsProperty('recovered', recovered))
-      ..add(DiagnosticsProperty('active', active))
-      ..add(DiagnosticsProperty('critical', critical))
-      ..add(DiagnosticsProperty('casesPerOneMillion', casesPerOneMillion))
-      ..add(DiagnosticsProperty('deathsPerOneMillion', deathsPerOneMillion))
-      ..add(DiagnosticsProperty('tests', tests))
-      ..add(DiagnosticsProperty('testsPerOneMillion', testsPerOneMillion))
-      ..add(DiagnosticsProperty('affectedCountries', affectedCountries));
+  String toString() {
+    return 'CovidInfos(update: $update, cases: $cases, todayCases: $todayCases, deaths: $deaths, todayDeaths: $todayDeaths, recovered: $recovered, active: $active, critical: $critical, casesPerOneMillion: $casesPerOneMillion, deathsPerOneMillion: $deathsPerOneMillion, tests: $tests, testsPerOneMillion: $testsPerOneMillion, affectedCountries: $affectedCountries)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _CovidLatest &&
+        (other is _CovidInfos &&
             (identical(other.update, update) ||
                 const DeepCollectionEquality().equals(other.update, update)) &&
             (identical(other.cases, cases) ||
@@ -381,17 +360,17 @@ class _$_CovidLatest with DiagnosticableTreeMixin implements _CovidLatest {
       const DeepCollectionEquality().hash(affectedCountries);
 
   @override
-  _$CovidLatestCopyWith<_CovidLatest> get copyWith =>
-      __$CovidLatestCopyWithImpl<_CovidLatest>(this, _$identity);
+  _$CovidInfosCopyWith<_CovidInfos> get copyWith =>
+      __$CovidInfosCopyWithImpl<_CovidInfos>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_CovidLatestToJson(this);
+    return _$_$_CovidInfosToJson(this);
   }
 }
 
-abstract class _CovidLatest implements CovidLatest {
-  const factory _CovidLatest(
+abstract class _CovidInfos implements CovidInfos {
+  const factory _CovidInfos(
           @JsonKey(name: 'updated') int update,
           @JsonKey(name: 'cases') int cases,
           @JsonKey(name: 'todayCases') int todayCases,
@@ -405,10 +384,10 @@ abstract class _CovidLatest implements CovidLatest {
           @JsonKey(name: 'tests') int tests,
           @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
           @JsonKey(name: 'affectedCountries') int affectedCountries) =
-      _$_CovidLatest;
+      _$_CovidInfos;
 
-  factory _CovidLatest.fromJson(Map<String, dynamic> json) =
-      _$_CovidLatest.fromJson;
+  factory _CovidInfos.fromJson(Map<String, dynamic> json) =
+      _$_CovidInfos.fromJson;
 
   @override
   @JsonKey(name: 'updated')
@@ -450,5 +429,5 @@ abstract class _CovidLatest implements CovidLatest {
   @JsonKey(name: 'affectedCountries')
   int get affectedCountries;
   @override
-  _$CovidLatestCopyWith<_CovidLatest> get copyWith;
+  _$CovidInfosCopyWith<_CovidInfos> get copyWith;
 }

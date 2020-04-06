@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 
-import 'package:cesi_covid_19_tracker/data/models/covid_latest.dart';
 import 'package:cesi_covid_19_tracker/data/services/locator.dart';
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show AppUtils;
+import 'package:cesi_covid_19_tracker/data/models/covid_infos.dart';
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
     show CoronedCard, FailureIcon, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 print('Snapshot Data ${s.data}');
 
                 if (s.hasData) {
-                  var cL = CovidLatest.fromJson(jsonDecode(s.data));
+                  var cL = CovidInfos.fromJson(jsonDecode(s.data));
                   var total = cL.cases;
                   debugPrint('total: $total\n');
                   return Column(

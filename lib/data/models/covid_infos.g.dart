@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'covid_latest.dart';
+part of 'covid_infos.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
 // ignore_for_file: non_constant_identifier_names
-_$_CovidLatest _$_$_CovidLatestFromJson(Map json) {
-  return _$_CovidLatest(
+_$_CovidInfos _$_$_CovidInfosFromJson(Map json) {
+  return _$_CovidInfos(
     json['updated'] as int,
     json['cases'] as int,
     json['todayCases'] as int,
@@ -25,7 +25,7 @@ _$_CovidLatest _$_$_CovidLatestFromJson(Map json) {
   );
 }
 
-Map<String, dynamic> _$_$_CovidLatestToJson(_$_CovidLatest instance) =>
+Map<String, dynamic> _$_$_CovidInfosToJson(_$_CovidInfos instance) =>
     <String, dynamic>{
       'updated': instance.update,
       'cases': instance.cases,

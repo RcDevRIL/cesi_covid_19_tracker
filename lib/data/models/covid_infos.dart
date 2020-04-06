@@ -1,8 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'covid_latest.freezed.dart';
-part 'covid_latest.g.dart';
+part 'covid_infos.freezed.dart';
+part 'covid_infos.g.dart';
 
 /* 
 /!\ Il faut rajouter le commentaire suivant sur covid_latest.g.dart /!\
@@ -12,9 +11,9 @@ part 'covid_latest.g.dart';
 
 // ignore_for_file: non_constant_identifier_names
 @freezed
-abstract class CovidLatest with _$CovidLatest {
+abstract class CovidInfos with _$CovidInfos {
   @JsonSerializable(explicitToJson: true)
-  const factory CovidLatest(
+  const factory CovidInfos(
     @JsonKey(name: 'updated') int update,
     @JsonKey(name: 'cases') int cases,
     @JsonKey(name: 'todayCases') int todayCases,
@@ -28,8 +27,8 @@ abstract class CovidLatest with _$CovidLatest {
     @JsonKey(name: 'tests') int tests,
     @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
     @JsonKey(name: 'affectedCountries') int affectedCountries,
-  ) = _CovidLatest;
+  ) = _CovidInfos;
 
-  factory CovidLatest.fromJson(Map<String, dynamic> json) =>
-      _$CovidLatestFromJson(json);
+  factory CovidInfos.fromJson(Map<String, dynamic> json) =>
+      _$CovidInfosFromJson(json);
 }
