@@ -17,7 +17,6 @@ void main() {
 
     test('Initialize App', () async {
       final homePage = find.byType('Dashboard');
-      final coronedCard = find.byValueKey('dashboard-card');
 
       await driver.waitFor(homePage);
       await Future.delayed(Duration(seconds: 2));
