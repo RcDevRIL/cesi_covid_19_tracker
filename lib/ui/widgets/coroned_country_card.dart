@@ -35,7 +35,7 @@ class CoronedCountryCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Statistiques Mondiales',
+              '${covidCountryInfos.country}',
               style: Theme.of(context).textTheme.headline4,
             ),
             SizedBox(
