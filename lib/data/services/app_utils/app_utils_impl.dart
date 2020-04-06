@@ -2,7 +2,7 @@ import 'package:cesi_covid_19_tracker/data/services/app_utils/app_utils.dart';
 import 'package:http/http.dart';
 
 class AppUtilsImplementation implements AppUtils {
-  final String baseUrl = 'https://coronavirus-tracker-api.herokuapp.com/v2/';
+  final String baseUrl = 'https://corona.lmao.ninja/';
   final Client http = Client();
   final int timeOut = 10;
 
@@ -11,7 +11,7 @@ class AppUtilsImplementation implements AppUtils {
     Response response;
     try {
       response = await http.get(
-        baseUrl + 'locations?country_code=$countryCode',
+        baseUrl + 'countries/$countryCode',
         headers: {'Content-type': 'application/json'},
       ).timeout(Duration(seconds: timeOut));
     } catch (e) {
@@ -32,7 +32,7 @@ class AppUtilsImplementation implements AppUtils {
     Response response;
     try {
       response = await http.get(
-        baseUrl + 'latest',
+        baseUrl + 'all',
         headers: {'Content-type': 'application/json'},
       ).timeout(Duration(seconds: timeOut));
     } catch (e) {

@@ -15,7 +15,19 @@ part 'covid_latest.g.dart';
 abstract class CovidLatest with _$CovidLatest {
   @JsonSerializable(explicitToJson: true)
   const factory CovidLatest(
-    @JsonKey(name: 'latest') Map<String, int> apiResponse,
+    @JsonKey(name: 'updated') int update,
+    @JsonKey(name: 'cases') int cases,
+    @JsonKey(name: 'todayCases') int todayCases,
+    @JsonKey(name: 'deaths') int deaths,
+    @JsonKey(name: 'todayDeaths') int todayDeaths,
+    @JsonKey(name: 'recovered') int recovered,
+    @JsonKey(name: 'active') int active,
+    @JsonKey(name: 'critical') int critical,
+    @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
+    @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
+    @JsonKey(name: 'tests') int tests,
+    @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
+    @JsonKey(name: 'affectedCountries') int affectedCountries,
   ) = _CovidLatest;
 
   factory CovidLatest.fromJson(Map<String, dynamic> json) =>

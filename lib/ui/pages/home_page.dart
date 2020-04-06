@@ -22,9 +22,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double _confirmedWeight = 0;
-  double _recoveredWeight = 0;
-  double _deathsWeight = 0;
   StreamController _apiResponseController;
 
   @override
@@ -70,16 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 if (s.hasData) {
                   var cL = CovidLatest.fromJson(jsonDecode(s.data));
-                  var total = cL.apiResponse['confirmed'] +
-                      cL.apiResponse['deaths'] +
-                      cL.apiResponse['recovered'];
-                  _confirmedWeight = cL.apiResponse['confirmed'] / total;
-                  _recoveredWeight = cL.apiResponse['recovered'] / total;
-                  _deathsWeight = cL.apiResponse['deaths'] / total;
-                  debugPrint('total: $total\n'
-                      'confirmed: $_confirmedWeight\n'
-                      'recovered: $_recoveredWeight\n'
-                      'deaths: $_deathsWeight');
+                  var total = cL.cases;
+                  debugPrint('total: $total\n');
                   return Column(
                     children: <Widget>[
                       CoronedCard(
@@ -92,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             height: 8.0,
                           ),
                           Text(
-                            'CONTAMINÉS : ${cL.apiResponse['confirmed']}',
+                            'CONTAMINÉS : ${cL.cases}',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
@@ -100,9 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                             height: 8.0,
-                            width: _confirmedWeight *
-                                MediaQuery.of(context).size.width /
-                                2,
+                            width: MediaQuery.of(context).size.width / 2,
                             decoration: BoxDecoration(
                               color: aG.AppTheme.confirmedColorFill,
                               border: Border.all(
@@ -113,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             height: 8.0,
                           ),
                           Text(
-                            'MORTS : ${cL.apiResponse['deaths']}',
+                            'MORTS : ${cL.deaths}',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
@@ -121,9 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                             height: 8.0,
-                            width: _deathsWeight *
-                                MediaQuery.of(context).size.width /
-                                2,
+                            width: MediaQuery.of(context).size.width / 2,
                             decoration: BoxDecoration(
                               color: aG.AppTheme.deathsColorFill,
                               border: Border.all(
@@ -134,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             height: 8.0,
                           ),
                           Text(
-                            'GUÉRIS : ${cL.apiResponse['recovered']}',
+                            'GUÉRIS : ${cL.recovered}',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText2
@@ -142,9 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           Container(
                             height: 8.0,
-                            width: _recoveredWeight *
-                                MediaQuery.of(context).size.width /
-                                2,
+                            width: MediaQuery.of(context).size.width / 2,
                             decoration: BoxDecoration(
                               color: aG.AppTheme.recoveredColorFill,
                               border: Border.all(
