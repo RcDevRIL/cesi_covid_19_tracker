@@ -1,9 +1,11 @@
 import 'dart:async';
-
-import 'package:cesi_covid_19_tracker/data/services/locator.dart';
 import 'package:flutter/material.dart';
 
-import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart';
+import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
+    show FailureIcon, NavigationDrawer;
+import 'package:cesi_covid_19_tracker/data/services/locator.dart';
+import 'package:cesi_covid_19_tracker/data/services/services.dart'
+    show AppUtils;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
 class DashBoard extends StatefulWidget {

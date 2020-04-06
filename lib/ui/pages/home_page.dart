@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:cesi_covid_19_tracker/data/models/covid_latest.dart';
-import 'package:cesi_covid_19_tracker/ui/widgets/coroned_card.dart';
 import 'package:flutter/material.dart';
 
+import 'package:cesi_covid_19_tracker/data/models/covid_latest.dart';
 import 'package:cesi_covid_19_tracker/data/services/locator.dart';
+import 'package:cesi_covid_19_tracker/data/services/services.dart'
+    show AppUtils;
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
     show CoronedCard, FailureIcon, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
