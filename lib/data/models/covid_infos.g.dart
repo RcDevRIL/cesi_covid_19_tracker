@@ -6,7 +6,6 @@ part of 'covid_infos.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names
 _$_CovidInfos _$_$_CovidInfosFromJson(Map json) {
   return _$_CovidInfos(
     json['updated'] as int,
@@ -20,7 +19,7 @@ _$_CovidInfos _$_$_CovidInfosFromJson(Map json) {
     (json['casesPerOneMillion'] as num)?.toDouble(),
     (json['deathsPerOneMillion'] as num)?.toDouble(),
     json['tests'] as int,
-    json['testsPerOneMillion'] as int,
+    (json['testsPerOneMillion'] as num)?.toDouble(),
     json['affectedCountries'] as int,
   );
 }
