@@ -20,7 +20,7 @@ _$_CovidInfos _$_$_CovidInfosFromJson(Map json) {
     (json['casesPerOneMillion'] as num)?.toDouble(),
     (json['deathsPerOneMillion'] as num)?.toDouble(),
     json['tests'] as int,
-    json['testsPerOneMillion'] as int,
+    (json['testsPerOneMillion'] as num)?.toDouble(),
     json['affectedCountries'] as int,
   );
 }
