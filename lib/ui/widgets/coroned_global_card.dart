@@ -26,12 +26,24 @@ class _CoronedGlobalCardState extends State<CoronedGlobalCard> {
   @override
   void initState() {
     super.initState();
+    computeWeights();
+  }
+
+  void computeWeights() {
     total = widget.covidInfos.cases +
         widget.covidInfos.recovered +
         widget.covidInfos.deaths;
     weightContaminated = widget.covidInfos.cases / total;
     weightDeath = widget.covidInfos.deaths / total;
     weightRecovered = widget.covidInfos.recovered / total;
+  }
+
+  @override
+  void didUpdateWidget(CoronedGlobalCard oldWidget) {
+    if (oldWidget != widget) {
+      computeWeights();
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
