@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:cesi_covid_19_tracker/data/models/covid_infos.dart';
-import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 import 'package:responsive_builder/responsive_builder.dart';
+
+import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
+import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
 class CoronedGlobalCard extends StatefulWidget {
   final CovidInfos covidInfos;
@@ -26,12 +27,24 @@ class _CoronedGlobalCardState extends State<CoronedGlobalCard> {
   @override
   void initState() {
     super.initState();
+    computeWeights();
+  }
+
+  void computeWeights() {
     total = widget.covidInfos.cases +
         widget.covidInfos.recovered +
         widget.covidInfos.deaths;
     weightContaminated = widget.covidInfos.cases / total;
     weightDeath = widget.covidInfos.deaths / total;
     weightRecovered = widget.covidInfos.recovered / total;
+  }
+
+  @override
+  void didUpdateWidget(CoronedGlobalCard oldWidget) {
+    if (oldWidget != widget) {
+      computeWeights();
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

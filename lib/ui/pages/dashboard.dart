@@ -2,12 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 
-import 'package:cesi_covid_19_tracker/data/services/locator.dart';
-import 'package:cesi_covid_19_tracker/data/services/services.dart'
-    show AppUtils;
-import 'package:cesi_covid_19_tracker/data/models/covid_infos.dart';
+import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
     show CoronedGlobalCard, FailureIcon, NavigationDrawer;
+import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
 class Dashboard extends StatefulWidget {
@@ -36,18 +34,12 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       primary: true,
       appBar: AppBar(
-        title: RichText(
-          text: TextSpan(
-            text: widget.title.split('\t\t')[0],
-            style: Theme.of(context).textTheme.headline1,
-            children: [
-              TextSpan(
-                text: '\t\t' + widget.title.split('\t\t')[1],
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-            ],
-          ),
-          textAlign: TextAlign.center,
+        actions: [
+          Image.asset('assets/cesilogo.png'),
+        ],
+        title: Text(
+          aG.AppConstants.defaultAppTitle.split('\n')[0],
+          style: Theme.of(context).textTheme.headline1,
         ),
       ),
       drawer: NavigationDrawer(),
