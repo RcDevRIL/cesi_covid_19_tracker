@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/data/models/covid_infos.dart';
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
-import 'package:intl/intl.dart'
-    show NumberFormat;
 import 'package:responsive_builder/responsive_builder.dart';
-
+import 'package:cesi_covid_19_tracker/data/services/services.dart';
 
 class CoronedGlobalCard extends StatelessWidget {
   final CovidInfos covidInfos;
-
 
   const CoronedGlobalCard({
     Key key,
@@ -54,7 +51,7 @@ class CoronedGlobalCard extends StatelessWidget {
                   height: 8.0,
                 ),
                 Text(
-                  'CONTAMINÉS : '  + _format(covidInfos.cases),
+                  'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(covidInfos.cases)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -72,7 +69,7 @@ class CoronedGlobalCard extends StatelessWidget {
                   height: 8.0,
                 ),
                 Text(
-                  'MORTS : ' + _format(covidInfos.deaths),
+                  'MORTS : ${locator.get<AppUtils>().formatLargeNumber(covidInfos.deaths)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -90,7 +87,7 @@ class CoronedGlobalCard extends StatelessWidget {
                   height: 8.0,
                 ),
                 Text(
-                  'GUÉRIS : ' + _format(covidInfos.recovered),
+                  'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(covidInfos.recovered)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -114,9 +111,4 @@ class CoronedGlobalCard extends StatelessWidget {
       },
     );
   }
-}
-
-String _format(int number) {
-    NumberFormat formatter = NumberFormat("###,###,###", 'fr');
-    return formatter.format(number);
 }

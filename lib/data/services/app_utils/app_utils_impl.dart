@@ -1,5 +1,6 @@
 import 'package:cesi_covid_19_tracker/data/services/app_utils/app_utils.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' show Client, Response;
+import 'package:intl/intl.dart' show NumberFormat;
 
 class AppUtilsImplementation implements AppUtils {
   final String baseUrl = 'https://corona.lmao.ninja/';
@@ -47,4 +48,9 @@ class AppUtilsImplementation implements AppUtils {
       throw 'Error when trying to connect to API...';
     }
   }
+
+  @override
+  String formatLargeNumber(int number) => number >= 1000
+      ? NumberFormat("###,###,###", 'fr').format(number)
+      : number;
 }
