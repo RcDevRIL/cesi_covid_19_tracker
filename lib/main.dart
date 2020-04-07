@@ -19,6 +19,7 @@ class CoronedApp extends StatelessWidget {
       routes: {
         '/dashboard': (context) => Dashboard(),
         '/country': (context) => CountryView(),
+        '/faq': (context) => CovidFaq(),
       },
       home: Dashboard(),
     );
