@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart';
+import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
+    show NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
-import 'package:cesi_covid_19_tracker/data/constants/datasource.dart';
 
 class CovidFaq extends StatefulWidget {
   @override
@@ -10,25 +10,16 @@ class CovidFaq extends StatefulWidget {
 }
 
 class _CovidFaqState extends State<CovidFaq> {
-  final items = DataSource.questionReponse;
+  final items = aG.FAQDataSource.questionReponse;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       primary: true,
       appBar: AppBar(
-        title: RichText(
-          text: TextSpan(
-            text: aG.AppConstants.defaultAppTitle.split('\t\t')[0],
-            style: Theme.of(context).textTheme.headline1,
-            children: [
-              TextSpan(
-                text: '\t\t' + aG.AppConstants.defaultAppTitle.split('\t\t')[1],
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-            ],
-          ),
-          textAlign: TextAlign.center,
+        title: Text(
+          aG.AppConstants.defaultAppTitle.split('\n')[0],
+          style: Theme.of(context).textTheme.headline1,
         ),
       ),
       drawer: NavigationDrawer(),
@@ -36,13 +27,7 @@ class _CovidFaqState extends State<CovidFaq> {
         physics: const BouncingScrollPhysics(),
         primary: true,
         shrinkWrap: true,
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Column(
-              children: _buildChildren(),
-            ),
-          ),
-        ],
+        children: _buildChildren(),
       ),
     );
   }

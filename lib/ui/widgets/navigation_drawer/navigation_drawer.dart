@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:cesi_covid_19_tracker/ui/widgets/navbar_item/navbar_item.dart';
-import 'package:cesi_covid_19_tracker/ui/widgets/navigation_drawer/navigation_drawer_header.dart';
+import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart' show NavBarItem;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
+
+import 'navigation_drawer_header.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key key}) : super(key: key);

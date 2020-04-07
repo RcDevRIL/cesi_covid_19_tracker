@@ -1,9 +1,9 @@
-import 'package:cesi_covid_19_tracker/ui/widgets/navbar_item/navbar_item_mobile.dart';
 import 'package:flutter/material.dart';
 
-import 'package:cesi_covid_19_tracker/data/models/navbar_item_model.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+
+import 'package:cesi_covid_19_tracker/data/models/models.dart'
+    show NavBarItemModel;
 
 class NavBarItem extends StatelessWidget {
   final String title;
@@ -24,10 +24,20 @@ class NavBarItem extends StatelessWidget {
       },
       child: Provider.value(
         value: model,
-        child: ScreenTypeLayout(
-          desktop: NavBarItemMobile(),
-          tablet: NavBarItemMobile(),
-          mobile: NavBarItemMobile(),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 30, top: 60),
+          child: Row(
+            children: <Widget>[
+              Icon(model.iconData),
+              SizedBox(
+                width: 30,
+              ),
+              Text(
+                model.title,
+                style: Theme.of(context).textTheme.bodyText1,
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:cesi_covid_19_tracker/data/models/covid_country_infos.dart';
-import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:cesi_covid_19_tracker/data/services/services.dart';
+
+import 'package:cesi_covid_19_tracker/data/models/models.dart'
+    show CovidCountryInfos;
+import 'package:cesi_covid_19_tracker/data/services/services.dart'
+    show AppUtils, locator;
+import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
 class CoronedCountryCard extends StatefulWidget {
   final CovidCountryInfos covidCountryInfos;

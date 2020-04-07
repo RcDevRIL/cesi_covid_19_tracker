@@ -6,6 +6,7 @@ part of 'covid_infos.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore_for_file: non_constant_identifier_names
 _$_CovidInfos _$_$_CovidInfosFromJson(Map json) {
   return _$_CovidInfos(
     json['updated'] as int,

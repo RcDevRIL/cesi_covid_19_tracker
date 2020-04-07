@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:cesi_covid_19_tracker/data/services/services.dart'
+    show setupLocator;
+import 'package:cesi_covid_19_tracker/ui/pages/pages.dart'
+    show CountryView, CovidFaq, Dashboard;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
-import 'package:cesi_covid_19_tracker/ui/pages/pages.dart';
-
-import 'data/services/locator.dart';
 
 void main() {
   setupLocator();

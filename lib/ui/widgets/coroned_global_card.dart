@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:cesi_covid_19_tracker/data/models/covid_infos.dart';
-import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 import 'package:responsive_builder/responsive_builder.dart';
+
+import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
+import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
 class CoronedGlobalCard extends StatefulWidget {
   final CovidInfos covidInfos;
