@@ -17,6 +17,9 @@ class _CovidFaqState extends State<CovidFaq> {
     return Scaffold(
       primary: true,
       appBar: AppBar(
+        actions: [
+          Image.asset('assets/cesilogo.png'),
+        ],
         title: Text(
           aG.AppConstants.defaultAppTitle.split('\n')[0],
           style: Theme.of(context).textTheme.headline1,
