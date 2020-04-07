@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class DataSource{
   
 
-  static List questionReponse = [
+  static  List  questionReponse = [
 
     {
       "question" : "Qu'est-ce qu'un coronavirus ?",
