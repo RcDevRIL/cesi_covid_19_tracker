@@ -64,17 +64,9 @@ class _DashboardState extends State<Dashboard> {
                 print('Has error: ${s.hasError}');
                 print('Has data: ${s.hasData}');
                 print('Snapshot Data ${s.data}');
-
                 if (s.hasData) {
-                  var cL = CovidInfos.fromJson(jsonDecode(s.data));
-                  var total = cL.cases;
-                  debugPrint('total: $total\n');
-                  return Column(
-                    children: <Widget>[
-                      CoronedGlobalCard(
-                        covidInfos: cL,
-                      ),
-                    ],
+                  return CoronedGlobalCard(
+                    covidInfos: CovidInfos.fromJson(jsonDecode(s.data)),
                   );
                 }
                 if (s.hasError) {
