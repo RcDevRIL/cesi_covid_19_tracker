@@ -52,5 +52,5 @@ class AppUtilsImplementation implements AppUtils {
   @override
   String formatLargeNumber(int number) => number >= 1000
       ? NumberFormat("###,###,###", 'fr').format(number)
-      : number;
+      : number.toString();
 }
