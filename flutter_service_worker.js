@@ -1,7 +1,11 @@
 'use strict';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "ef5717f429dc88607f9d27251fc4468e",
+  "assets/AssetManifest.json": "00277b813ccb2fbc11650588e410d1ce",
+"assets/assets/cesilogo.png": "062a079cc98f5100b9d49bebcc00a23c",
+"assets/assets/FR_virus.png": "1c32d968f1162b92b95ba07044d44fd0",
+"assets/assets/UK_virus.png": "2b11c28c92436f699791f01149135a7f",
+"assets/assets/US_virus.png": "da1b0add59a4f6c5f8997bf201245dab",
 "assets/assets/virus.jpg": "5a890fa31e431d57d18aa604042d44af",
 "assets/FontManifest.json": "580ff1a5d08679ded8fcf5c6848cece7",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
@@ -34,7 +38,7 @@ const RESOURCES = {
 "icons/ms-icon-70x70.png": "48f490a64da323b6fe6daa506471699b",
 "index.html": "7c005a087ba16c486930d78d526505a5",
 "/": "7c005a087ba16c486930d78d526505a5",
-"main.dart.js": "6003e73e0deebf568742566f6127e631",
+"main.dart.js": "863d61bbc0a20f2bcada2063d47b221d",
 "manifest.json": "610bcc38a0da86239a4f9d2472cb7d67"
 };
 
