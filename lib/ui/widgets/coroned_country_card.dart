@@ -4,12 +4,33 @@ import 'package:cesi_covid_19_tracker/data/models/covid_country_infos.dart';
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 import 'package:responsive_builder/responsive_builder.dart';
 
-class CoronedCountryCard extends StatelessWidget {
+class CoronedCountryCard extends StatefulWidget {
   final CovidCountryInfos covidCountryInfos;
   const CoronedCountryCard({
     Key key,
     @required this.covidCountryInfos,
   }) : super(key: key);
+
+  @override
+  _CoronedCountryCardState createState() => _CoronedCountryCardState();
+}
+
+class _CoronedCountryCardState extends State<CoronedCountryCard> {
+  int total;
+  double weightContaminated;
+  double weightDeath;
+  double weightRecovered;
+
+  @override
+  void initState() {
+    super.initState();
+    total = widget.covidCountryInfos.cases +
+        widget.covidCountryInfos.recovered +
+        widget.covidCountryInfos.deaths;
+    weightContaminated = widget.covidCountryInfos.cases / total;
+    weightDeath = widget.covidCountryInfos.deaths / total;
+    weightRecovered = widget.covidCountryInfos.recovered / total;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +41,7 @@ class CoronedCountryCard extends StatelessWidget {
       var statsBarWidth = sizingInfos.isDesktop || sizingInfos.isTablet
           ? MediaQuery.of(context).size.width / 2
           : MediaQuery.of(context).size.width - margin - 8.0;
+
       return Card(
         margin: EdgeInsets.symmetric(
           horizontal: margin,
@@ -43,7 +65,7 @@ class CoronedCountryCard extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Image.network(
-                    '${covidCountryInfos.countryInfo['flag']}',
+                    '${widget.covidCountryInfos.countryInfo['flag']}',
                     height: 50.0,
                     width: 50.0,
                     fit: BoxFit.contain,
@@ -52,7 +74,7 @@ class CoronedCountryCard extends StatelessWidget {
                     width: 8.0,
                   ),
                   Text(
-                    '${covidCountryInfos.country}',
+                    '${widget.covidCountryInfos.country}',
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ],
@@ -61,7 +83,7 @@ class CoronedCountryCard extends StatelessWidget {
                 height: 8.0,
               ),
               Text(
-                'CONTAMINÉS : ${covidCountryInfos.cases}',
+                'CONTAMINÉS : ${widget.covidCountryInfos.cases}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
@@ -69,7 +91,7 @@ class CoronedCountryCard extends StatelessWidget {
               ),
               Container(
                 height: 8.0,
-                width: statsBarWidth,
+                width: weightContaminated * statsBarWidth,
                 decoration: BoxDecoration(
                   color: aG.AppTheme.confirmedColorFill,
                   border: Border.all(color: aG.AppTheme.confirmedColorBorder),
@@ -79,7 +101,7 @@ class CoronedCountryCard extends StatelessWidget {
                 height: 8.0,
               ),
               Text(
-                'MORTS : ${covidCountryInfos.deaths}',
+                'MORTS : ${widget.covidCountryInfos.deaths}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
@@ -87,7 +109,7 @@ class CoronedCountryCard extends StatelessWidget {
               ),
               Container(
                 height: 8.0,
-                width: statsBarWidth,
+                width: weightDeath * statsBarWidth,
                 decoration: BoxDecoration(
                   color: aG.AppTheme.deathsColorFill,
                   border: Border.all(color: aG.AppTheme.deathsColorBorder),
@@ -97,7 +119,7 @@ class CoronedCountryCard extends StatelessWidget {
                 height: 8.0,
               ),
               Text(
-                'GUÉRIS : ${covidCountryInfos.recovered}',
+                'GUÉRIS : ${widget.covidCountryInfos.recovered}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
@@ -105,7 +127,7 @@ class CoronedCountryCard extends StatelessWidget {
               ),
               Container(
                 height: 8.0,
-                width: statsBarWidth,
+                width: weightRecovered * statsBarWidth,
                 decoration: BoxDecoration(
                   color: aG.AppTheme.recoveredColorFill,
                   border: Border.all(color: aG.AppTheme.recoveredColorBorder),
