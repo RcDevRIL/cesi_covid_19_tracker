@@ -21,6 +21,11 @@ class CoronedGlobalCard extends StatelessWidget {
         var statsBarWidth = sizingInfos.isDesktop || sizingInfos.isTablet
             ? MediaQuery.of(context).size.width / 2
             : MediaQuery.of(context).size.width - margin - 8.0;
+        var total = covidInfos.cases + covidInfos.recovered + covidInfos.deaths;
+        var weightContaminated = covidInfos.cases / total;
+        var weightDeath = covidInfos.deaths / total;
+        var weightRecovered = covidInfos.recovered / total;
+        
         return Card(
           margin: EdgeInsets.symmetric(
             horizontal: margin,
@@ -57,7 +62,7 @@ class CoronedGlobalCard extends StatelessWidget {
                 ),
                 Container(
                   height: 8.0,
-                  width: statsBarWidth,
+                  width: weightContaminated * statsBarWidth,
                   decoration: BoxDecoration(
                     color: aG.AppTheme.confirmedColorFill,
                     border: Border.all(color: aG.AppTheme.confirmedColorBorder),
@@ -75,7 +80,7 @@ class CoronedGlobalCard extends StatelessWidget {
                 ),
                 Container(
                   height: 8.0,
-                  width: statsBarWidth,
+                  width: weightDeath * statsBarWidth,
                   decoration: BoxDecoration(
                     color: aG.AppTheme.deathsColorFill,
                     border: Border.all(color: aG.AppTheme.deathsColorBorder),
@@ -93,7 +98,7 @@ class CoronedGlobalCard extends StatelessWidget {
                 ),
                 Container(
                   height: 8.0,
-                  width: statsBarWidth,
+                  width: weightRecovered * statsBarWidth,
                   decoration: BoxDecoration(
                     color: aG.AppTheme.recoveredColorFill,
                     border: Border.all(color: aG.AppTheme.recoveredColorBorder),
