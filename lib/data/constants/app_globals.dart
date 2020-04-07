@@ -53,6 +53,11 @@ class AppConstants {
       title: 'COUNTRIES',
       iconData: Icons.location_searching,
       navigationPath: '/country',
+    ),
+    NavBarItemModel(
+      title: 'FAQ',
+      iconData: Icons.question_answer,
+      navigationPath: '/faq',
     )
   ];
 }

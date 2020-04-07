@@ -6,7 +6,6 @@ part of 'covid_country_infos.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names
 _$_CovidCountryInfos _$_$_CovidCountryInfosFromJson(Map json) {
   return _$_CovidCountryInfos(
     json['country'] as String,
