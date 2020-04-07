@@ -27,7 +27,7 @@ class _$CovidInfosTearOff {
       @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
       @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
       @JsonKey(name: 'tests') int tests,
-      @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
+      @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
       @JsonKey(name: 'affectedCountries') int affectedCountries) {
     return _CovidInfos(
       update,
@@ -74,7 +74,7 @@ mixin _$CovidInfos {
   @JsonKey(name: 'tests')
   int get tests;
   @JsonKey(name: 'testsPerOneMillion')
-  int get testsPerOneMillion;
+  double get testsPerOneMillion;
   @JsonKey(name: 'affectedCountries')
   int get affectedCountries;
 
@@ -98,7 +98,7 @@ abstract class $CovidInfosCopyWith<$Res> {
       @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
       @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
       @JsonKey(name: 'tests') int tests,
-      @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
+      @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
       @JsonKey(name: 'affectedCountries') int affectedCountries});
 }
 
@@ -144,7 +144,7 @@ class _$CovidInfosCopyWithImpl<$Res> implements $CovidInfosCopyWith<$Res> {
       tests: tests == freezed ? _value.tests : tests as int,
       testsPerOneMillion: testsPerOneMillion == freezed
           ? _value.testsPerOneMillion
-          : testsPerOneMillion as int,
+          : testsPerOneMillion as double,
       affectedCountries: affectedCountries == freezed
           ? _value.affectedCountries
           : affectedCountries as int,
@@ -169,7 +169,7 @@ abstract class _$CovidInfosCopyWith<$Res> implements $CovidInfosCopyWith<$Res> {
       @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
       @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
       @JsonKey(name: 'tests') int tests,
-      @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
+      @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
       @JsonKey(name: 'affectedCountries') int affectedCountries});
 }
 
@@ -216,7 +216,7 @@ class __$CovidInfosCopyWithImpl<$Res> extends _$CovidInfosCopyWithImpl<$Res>
       tests == freezed ? _value.tests : tests as int,
       testsPerOneMillion == freezed
           ? _value.testsPerOneMillion
-          : testsPerOneMillion as int,
+          : testsPerOneMillion as double,
       affectedCountries == freezed
           ? _value.affectedCountries
           : affectedCountries as int,
@@ -292,7 +292,7 @@ class _$_CovidInfos implements _CovidInfos {
   final int tests;
   @override
   @JsonKey(name: 'testsPerOneMillion')
-  final int testsPerOneMillion;
+  final double testsPerOneMillion;
   @override
   @JsonKey(name: 'affectedCountries')
   final int affectedCountries;
@@ -382,7 +382,7 @@ abstract class _CovidInfos implements CovidInfos {
           @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
           @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
           @JsonKey(name: 'tests') int tests,
-          @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
+          @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
           @JsonKey(name: 'affectedCountries') int affectedCountries) =
       _$_CovidInfos;
 
@@ -424,7 +424,7 @@ abstract class _CovidInfos implements CovidInfos {
   int get tests;
   @override
   @JsonKey(name: 'testsPerOneMillion')
-  int get testsPerOneMillion;
+  double get testsPerOneMillion;
   @override
   @JsonKey(name: 'affectedCountries')
   int get affectedCountries;

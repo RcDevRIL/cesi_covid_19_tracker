@@ -8,8 +8,8 @@ class NavBarItemTabletDesktop extends ProviderWidget<NavBarItemModel> {
   @override
   Widget build(BuildContext context, NavBarItemModel model) {
     return Text(
-      model.title,
-      style: TextStyle(fontSize: 18),
+            model.title,
+            style: Theme.of(context).textTheme.bodyText1,
     );
   }
 }
