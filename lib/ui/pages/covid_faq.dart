@@ -53,11 +53,33 @@ class _CovidFaqState extends State<CovidFaq> {
         height: 24.0,
       ),
     ];
-    for (var i = 0; i < items.length; i++) {
-      children.add(Text(
-        items[i].toString(),
-        style: Theme.of(context).textTheme.bodyText1,
-      ));
+    for (Map<String, String> item in items) {
+      children.addAll(
+        <Widget>[
+          ListTile(
+            title: Text(
+              item.values.elementAt(0),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .apply(color: Colors.black),
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                item.values.elementAt(1),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 12.0,
+          )
+        ],
+      );
     }
     children.add(
       SizedBox(
