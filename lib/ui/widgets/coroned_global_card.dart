@@ -5,13 +5,34 @@ import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 
-class CoronedGlobalCard extends StatelessWidget {
+class CoronedGlobalCard extends StatefulWidget {
   final CovidInfos covidInfos;
 
   const CoronedGlobalCard({
     Key key,
     @required this.covidInfos,
   }) : super(key: key);
+
+  @override
+  _CoronedGlobalCardState createState() => _CoronedGlobalCardState();
+}
+
+class _CoronedGlobalCardState extends State<CoronedGlobalCard> {
+  int total;
+  double weightContaminated;
+  double weightDeath;
+  double weightRecovered;
+
+  @override
+  void initState() {
+    super.initState();
+    total = widget.covidInfos.cases +
+        widget.covidInfos.recovered +
+        widget.covidInfos.deaths;
+    weightContaminated = widget.covidInfos.cases / total;
+    weightDeath = widget.covidInfos.deaths / total;
+    weightRecovered = widget.covidInfos.recovered / total;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +44,7 @@ class CoronedGlobalCard extends StatelessWidget {
         var statsBarWidth = sizingInfos.isDesktop || sizingInfos.isTablet
             ? MediaQuery.of(context).size.width / 2
             : MediaQuery.of(context).size.width - margin - 8.0;
+
         return Card(
           margin: EdgeInsets.symmetric(
             horizontal: margin,
@@ -51,7 +73,7 @@ class CoronedGlobalCard extends StatelessWidget {
                   height: 8.0,
                 ),
                 Text(
-                  'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(covidInfos.cases)}',
+                  'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -59,7 +81,7 @@ class CoronedGlobalCard extends StatelessWidget {
                 ),
                 Container(
                   height: 8.0,
-                  width: statsBarWidth,
+                  width: weightContaminated * statsBarWidth,
                   decoration: BoxDecoration(
                     color: aG.AppTheme.confirmedColorFill,
                     border: Border.all(color: aG.AppTheme.confirmedColorBorder),
@@ -69,7 +91,7 @@ class CoronedGlobalCard extends StatelessWidget {
                   height: 8.0,
                 ),
                 Text(
-                  'MORTS : ${locator.get<AppUtils>().formatLargeNumber(covidInfos.deaths)}',
+                  'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -77,7 +99,7 @@ class CoronedGlobalCard extends StatelessWidget {
                 ),
                 Container(
                   height: 8.0,
-                  width: statsBarWidth,
+                  width: weightDeath * statsBarWidth,
                   decoration: BoxDecoration(
                     color: aG.AppTheme.deathsColorFill,
                     border: Border.all(color: aG.AppTheme.deathsColorBorder),
@@ -87,7 +109,7 @@ class CoronedGlobalCard extends StatelessWidget {
                   height: 8.0,
                 ),
                 Text(
-                  'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(covidInfos.recovered)}',
+                  'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -95,7 +117,7 @@ class CoronedGlobalCard extends StatelessWidget {
                 ),
                 Container(
                   height: 8.0,
-                  width: statsBarWidth,
+                  width: weightRecovered * statsBarWidth,
                   decoration: BoxDecoration(
                     color: aG.AppTheme.recoveredColorFill,
                     border: Border.all(color: aG.AppTheme.recoveredColorBorder),
