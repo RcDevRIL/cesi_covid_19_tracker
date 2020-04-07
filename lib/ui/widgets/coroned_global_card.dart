@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:cesi_covid_19_tracker/data/models/covid_infos.dart';
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:cesi_covid_19_tracker/data/services/services.dart';
 
 class CoronedGlobalCard extends StatefulWidget {
   final CovidInfos covidInfos;
+
   const CoronedGlobalCard({
     Key key,
     @required this.covidInfos,
@@ -71,7 +73,7 @@ class _CoronedGlobalCardState extends State<CoronedGlobalCard> {
                   height: 8.0,
                 ),
                 Text(
-                  'CONTAMINÉS : ${widget.covidInfos.cases}',
+                  'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -89,7 +91,7 @@ class _CoronedGlobalCardState extends State<CoronedGlobalCard> {
                   height: 8.0,
                 ),
                 Text(
-                  'MORTS : ${widget.covidInfos.deaths}',
+                  'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -107,7 +109,7 @@ class _CoronedGlobalCardState extends State<CoronedGlobalCard> {
                   height: 8.0,
                 ),
                 Text(
-                  'GUÉRIS : ${widget.covidInfos.recovered}',
+                  'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2

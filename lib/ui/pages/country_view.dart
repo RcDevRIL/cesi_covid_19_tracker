@@ -113,6 +113,7 @@ class _CountryViewState extends State<CountryView> {
           hint: Text('Choisissez un pays'),
           elevation: 2,
           isExpanded: false,
+          style: Theme.of(context).textTheme.bodyText1,
           value: _dropDownValue,
           items: ['FR', 'US', 'UK', 'ERR']
               .map((e) => DropdownMenuItem(
