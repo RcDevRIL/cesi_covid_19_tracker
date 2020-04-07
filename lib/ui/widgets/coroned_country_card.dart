@@ -32,7 +32,7 @@ class CoronedCountryCard extends StatelessWidget {
           side: BorderSide(
             width: 1.0,
             style: BorderStyle.solid,
-            color: Colors.blue,
+            color: Colors.blueGrey,
           ),
         ),
         child: Padding(
@@ -40,9 +40,22 @@ class CoronedCountryCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                '${covidCountryInfos.country}',
-                style: Theme.of(context).textTheme.headline4,
+              Row(
+                children: <Widget>[
+                  Image.network(
+                    '${covidCountryInfos.countryInfo['flag']}',
+                    height: 50.0,
+                    width: 50.0,
+                    fit: BoxFit.contain,
+                  ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  Text(
+                    '${covidCountryInfos.country}',
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ],
               ),
               SizedBox(
                 height: 8.0,

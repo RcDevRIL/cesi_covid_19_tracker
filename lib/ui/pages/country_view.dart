@@ -56,36 +56,43 @@ class _CountryViewState extends State<CountryView> {
             child: Column(
               children: _buildChildren()
                 ..add(
-                  StreamBuilder<String>(
-                    stream: _apiResponseController.stream,
-                    builder: (_, AsyncSnapshot<String> s) {
-                      print('Has error: ${s.hasError}');
-                      print('Has data: ${s.hasData}');
-                      print('Snapshot Data ${s.data}');
-                      if (s.hasError) {
-                        return FailureIcon(fail: s.error);
-                      }
-                      if (s.hasData) {
-                        var cCL =
-                            CovidCountryInfos.fromJson(jsonDecode(s.data));
-                        return Column(
-                          children: <Widget>[
-                            CoronedCountryCard(
-                              covidCountryInfos: cCL,
-                            ),
-                          ],
-                        );
-                      }
-                      if (s.connectionState != ConnectionState.done) {
-                        return Container();
-                      }
-                      if (!s.hasData &&
-                          s.connectionState == ConnectionState.done) {
-                        return FailureIcon(fail: 'No Data');
-                      } else {
-                        return Container();
-                      }
-                    },
+                  Column(
+                    children: <Widget>[
+                      StreamBuilder<String>(
+                        stream: _apiResponseController.stream,
+                        builder: (_, AsyncSnapshot<String> s) {
+                          print('Has error: ${s.hasError}');
+                          print('Has data: ${s.hasData}');
+                          print('Snapshot Data ${s.data}');
+                          if (s.hasError) {
+                            return FailureIcon(fail: s.error);
+                          }
+                          if (s.hasData) {
+                            var cCL =
+                                CovidCountryInfos.fromJson(jsonDecode(s.data));
+                            return Column(
+                              children: <Widget>[
+                                CoronedCountryCard(
+                                  covidCountryInfos: cCL,
+                                ),
+                              ],
+                            );
+                          }
+                          if (s.connectionState != ConnectionState.done) {
+                            return Container();
+                          }
+                          if (!s.hasData &&
+                              s.connectionState == ConnectionState.done) {
+                            return FailureIcon(fail: 'No Data');
+                          } else {
+                            return Container();
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 24.0,
+                      ),
+                    ],
                   ),
                 ),
             ),

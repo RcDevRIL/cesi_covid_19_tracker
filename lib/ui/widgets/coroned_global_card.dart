@@ -33,7 +33,7 @@ class CoronedGlobalCard extends StatelessWidget {
             side: BorderSide(
               width: 1.0,
               style: BorderStyle.solid,
-              color: Colors.blue,
+              color: Colors.blueGrey,
             ),
           ),
           child: Padding(
