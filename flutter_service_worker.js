@@ -1,15 +1,11 @@
 'use strict';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "00277b813ccb2fbc11650588e410d1ce",
+  "assets/AssetManifest.json": "5bc4f27c8862e93a92f9cb9a461405c3",
 "assets/assets/cesilogo.png": "062a079cc98f5100b9d49bebcc00a23c",
-"assets/assets/FR_virus.png": "1c32d968f1162b92b95ba07044d44fd0",
-"assets/assets/UK_virus.png": "2b11c28c92436f699791f01149135a7f",
-"assets/assets/US_virus.png": "da1b0add59a4f6c5f8997bf201245dab",
-"assets/assets/virus.jpg": "5a890fa31e431d57d18aa604042d44af",
 "assets/FontManifest.json": "580ff1a5d08679ded8fcf5c6848cece7",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
-"assets/LICENSE": "4fd868e70204c8c4e3b3576f5fef2d3d",
+"assets/LICENSE": "a323e59a51f62d9c80e896c299e2211a",
 "favicon.ico": "cd78fd2732d09d2595ba1b16b9d6a488",
 "icons/android-icon-144x144.png": "fb70f5cda7db961105feb0f09b6f2899",
 "icons/android-icon-192x192.png": "cb618464d5fe4baffb584ad6767490cd",
@@ -38,7 +34,7 @@ const RESOURCES = {
 "icons/ms-icon-70x70.png": "48f490a64da323b6fe6daa506471699b",
 "index.html": "7c005a087ba16c486930d78d526505a5",
 "/": "7c005a087ba16c486930d78d526505a5",
-"main.dart.js": "de213e836db3db8bd8312ff2af3ea63a",
+"main.dart.js": "d5ae88c0115c1643dd9f14674327c2d7",
 "manifest.json": "610bcc38a0da86239a4f9d2472cb7d67"
 };
 
