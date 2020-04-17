@@ -68,7 +68,7 @@ class _CountryViewState extends State<CountryView> {
           isExpanded: false,
           style: Theme.of(context).textTheme.bodyText1,
           value: _dropDownValue,
-          items: ['FR', 'US', 'UK', 'ERR']
+          items: ['FR', 'US', 'UK', 'CH']
               .map((e) => DropdownMenuItem(
                     child: Text('$e'),
                     value: e,
@@ -88,18 +88,8 @@ class _CountryViewState extends State<CountryView> {
             return FailureIcon(fail: s.error);
           }
           if (s.hasData) {
-            return Column(
-              children: <Widget>[
-                CoronedCountryCard(
-                  covidCountryInfos:
-                      CovidCountryInfos.fromJson(jsonDecode(s.data)),
-                ),
-                Image.asset(
-                  'assets/${_dropDownValue}_virus.png',
-                  height: 400,
-                  width: 600,
-                ),
-              ],
+            return CoronedCountryCard(
+              covidCountryInfos: CovidCountryInfos.fromJson(jsonDecode(s.data)),
             );
           }
           if (s.connectionState != ConnectionState.done) {

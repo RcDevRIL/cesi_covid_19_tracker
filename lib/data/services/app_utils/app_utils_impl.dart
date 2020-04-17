@@ -3,7 +3,7 @@ import 'package:http/http.dart' show Client, Response;
 import 'package:intl/intl.dart' show NumberFormat;
 
 class AppUtilsImplementation implements AppUtils {
-  final String baseUrl = 'https://corona.lmao.ninja/';
+  final String baseUrl = 'https://corona.lmao.ninja/v2/';
   final int timeOut = 10;
   Client http = Client();
 
