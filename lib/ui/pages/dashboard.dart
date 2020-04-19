@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
-    show CoronedGlobalCard, FailureIcon, NavigationDrawer;
+    show CoronedAppBar, CoronedGlobalCard, FailureIcon, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
@@ -33,14 +33,8 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       primary: true,
-      appBar: AppBar(
-        actions: [
-          Image.asset('assets/cesilogo.png'),
-        ],
-        title: Text(
-          aG.AppConstants.defaultAppTitle.split('\n')[0],
-          style: Theme.of(context).textTheme.headline1,
-        ),
+      appBar: CoronedAppBar(
+        appBar: AppBar(),
       ),
       drawer: NavigationDrawer(),
       body: ListView(
