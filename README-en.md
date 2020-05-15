@@ -1,10 +1,10 @@
-# cesi_covid_19_tracker - README V1.0.0 (English)
+# cesi_covid_19_tracker (English version)
 __Build status__
 * master: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/latest_build)
 * integration: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/latest_build)
 
 
-Welcome to the development directory for our mini-project under advanced web development!
+Welcome to the development directory for our mini-project done during an advanced web development study lesson!
 
 In this README you will find useful information on this project.
 
@@ -15,6 +15,14 @@ In this README you will find useful information on this project.
 This project consists of an information service on the state of the COVID-19 pandemic currently raging around the world.
 
 The first version consists of an info list linked to the country selected by the user.
+
+After what became a successful exam, we want the application to grow and **welcome** contributions! :fire:
+
+_V2 coming soon !_ :rocket:
+
+### Changelog
+
+See [Release] section
 
 ##### Prerequisites
 
@@ -35,12 +43,6 @@ Before you want to launch the application, make sure you get the packages we hav
 * `flutter pub upgrade`
 * `flutter pub get`
 
-We use the Flutter code generator engine ([build_runner]) to reduce redundant code to developers. From there, you should have a hundred errors on the git repo. You will then have to execute this command to generate the missing code:
-
-`flutter packages pub run build_runner build`
-
-(If you want to navigate between commits, you could have conflicting files. To fix this, add this argument to the build command: `--delete-conflicting-outputs`)
-
 You can now consider creating and running the application :upside_down_face:
 
 To start the build, install, and run process on an Android or iOS device, run the following command:
@@ -59,6 +61,8 @@ If you want to use the Web version, make sure you have it activated on your Flut
 And prefer the beta channel:
 
 `flutter channel beta`
+
+*(although Flutter __v1.17.1__ should be enough!!)*
 
 Once the switch has been made, you can launch the web version of the application using the command:
 
@@ -108,6 +112,11 @@ _Direct dependencies: _
 * [http] - The package used to make HTTP requests
 * [get_it] - The package used for example to register services (like the call to the covid-19 API)
 * [json_serializable] - The package used to facilitate json serialization
+* [provider] - The package used to facilitate "State Management" on the application
+* [responsive_builder] - The package used to facilitate building of screen responsive UIs
+* [freezed] - The package used to generate objects used as DTOs for instance
+* [intl] - The package used in this project to format large numbers. It can be used for a lot of other interestings things...
+
 
 _Test Dependencies:_
 * [flutter_test] - The Flutter library used to implement unit tests
@@ -115,7 +124,12 @@ _Test Dependencies:_
 
 ## Contributing
 
-To contribute, please send an email to one of the authors ... or click on this PR button! :rocket: :smile:
+To contribute, please send an email to one of the authors ... or check out the [Issues] list and click on this PR button! :rocket: :smile:
+
+## Contributors
+
+Thanks a lot for your contributions !! :smile: :rocket:
+* **Atharva Patwardhan** - *__First__ Contributor* - [CodeSadhu]
 
 ## Authors
 
@@ -140,11 +154,17 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the file [LI
 [http]: https://pub.dev/packages/http
 [get_it]: https://pub.dev/packages/get_it
 [json_serializable]: https://pub.dev/packages/json_serializable
+[provider]: https://pub.dev/packages/provider
+[responsive_builder]: https://pub.dev/packages/responsive_builder
+[freezed]: https://pub.dev/packages/freezed
+[intl]: https://pub.dev/packages/intl
 [flutter_test]: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
 [flutter_driver]: https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html
 [RcDevRIL]: https://github.com/RcDevRIL
 [BoiteSphinx]: https://github.com/BoiteSphinx
 [FerreiraJames]: https://github.com/FerreiraJames
 [Reyden]: https://github.com/Reyden7
-[contributeurs]: https://github.com/RcDevRIL/cesi_covid_19_tracker/contributors
+[contributors]: https://github.com/RcDevRIL/cesi_covid_19_tracker/contributors
 [LICENSE.md]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/LICENSE
+[Issues]: https://github.com/RcDevRIL/cesi_covid_19_tracker/issues
+[Release]: https://github.com/RcDevRIL/cesi_covid_19_tracker/releases
