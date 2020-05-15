@@ -1,4 +1,4 @@
-# cesi_covid_19_tracker - README V1.0.0
+# cesi_covid_19_tracker
 __Build status__
 * master: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/latest_build)
 * integration: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/latest_build)
@@ -16,11 +16,19 @@ Ce projet consiste en un service d'information sur l'état de la pandémie liée
 
 La première version consistera en une liste d'info liée au pays sélectionné par l'utilisateur.
 
+Après un examen couronné de succès, l'application continue de grandir et nous accueillons avec **plaisir** les contributions! :fire:
+
+_À bientôt la V2 !_ :rocket:
+
+### Changelog
+
+Voir section [Release]
+
 ##### Prérequis
 
 De quoi avez-vous besoin pour installer ce projet et le lancer en mode "debug"
 
-* D'abord, il vous faudra une copie de ce dépôt Git: utilisez la fonctionnalité "Download" de [cette][Github root] page ou utilisez le CLI de Git si il est installé sur votre ordinateur:
+* D'abord, il vous faudra une copie de ce dépôt Git: utilisez la fonctionnalité "Download" de [cette][Github root] page ou utilisez le CLI de Git si il est installé sur votre ordinateur :
     * `git clone https://github.com/RcDevRIL/cesi_covid_19_tracker.git`
 
 * Ensuite il faut installer le SDK de Flutter pour pouvoir utiliser son CLI et lancer l'application en mode debug (ou release). Vous pouvez suivre le [Flutter "get started"] guide.
@@ -30,16 +38,10 @@ Si vous êtes passé par toutes les étapes du tutoriel [flutter.dev][Flutter "g
 
 ## Lancement de l'application
 
-Avant de vouloir lancer l'application, assurez-vous d'obtenir les paquets que nous avons choisis pour [construire][Built_With] notre application. Pour ce faire, vous devez exécuter ces commandes :
+Avant de vouloir lancer l'application, assurez-vous d'obtenir les paquets que nous avons choisis pour [construire][Built_With] notre application. Pour ce faire, vous devez exécuter ces commandess:
 
 * `flutter pub upgrade`
 * `flutter pub get`
-
-Nous utilisons le moteur de générateur de code de Flutter ([build_runner]) permettant de réduire le code redondant aux développeurs. À partir de là, vous devriez avoir une centaine d'erreurs sur le repo git. Vous devrez alors exécuter cette commande pour générer le code manquant:
-
-`flutter packages pub run build_runner build`
-
-(Si vous voulez naviguer entre les commits, vous pourriez avoir des fichiers en conflit. Pour réparer ceci, ajouter cet argument à la commande de build: `--delete-conflicting-outputs`)
 
 Vous pouvez maintenant envisager de créer et d'exécuter l'application :upside_down_face:
 
@@ -59,6 +61,8 @@ Si vous souhaitez utiliser la version Web, assurez vous de l'avoir activé sur v
 Et préférez le canal beta:
 
 `flutter channel beta`
+
+*(bien que Flutter __v1.17.1__ devrait suffire!!)*
 
 Une fois que le switch s'est effectué, vous pourrez lancer la version web de l'application grâce à la commande:
 
@@ -108,6 +112,10 @@ _Dépendances Directes :_
 * [http] - Le paquet utilisé pour effectuer des requêtes HTTP
 * [get_it] - Le paquet utilisé par exemple pour enregistrer des services (comme celui d'appel à l'API covid-19)
 * [json_serializable] - Le paquet utilisé pour faciliter la (dé)sérialisation json
+* [provider] - Le paquet utilisé pour facilité le "State Management" de l'application
+* [responsive_builder] - Le paquet utilisé pour facilité la construction d'UI suivant la taille de l'écran
+* [freezed] - Le paquet utilisé pour générer des objets par exemple utilisé en tant que DTO
+* [intl] - Le paquet utilisé dans ce projet pour espacer les chiffres des grands nombres. Ce paquet permet de faire bien d'autres choses intéressantes...
 
 _Test Dependencies:_
 * [flutter_test] - La bibliothèque Flutter utilisée pour mettre en œuvre les tests unitaires
@@ -115,7 +123,7 @@ _Test Dependencies:_
 
 ## Contributing
 
-Pour contribuer, veuillez envoyer un courriel à l'un des auteurs... ou cliquez sur ce bouton de PR ! :rocket: :smile:
+Pour contribuer, veuillez envoyer un courriel à l'un des auteurs... ou regardez la liste des [Issues] cliquez sur ce bouton de PR ! :rocket: :smile:
 
 ## Authors
 
@@ -140,6 +148,10 @@ Ce projet est sous licence GNU GENERAL PUBLIC LICENSE - voir le fichier [LICENSE
 [http]: https://pub.dev/packages/http
 [get_it]: https://pub.dev/packages/get_it
 [json_serializable]: https://pub.dev/packages/json_serializable
+[provider]: https://pub.dev/packages/provider
+[responsive_builder]: https://pub.dev/packages/responsive_builder
+[freezed]: https://pub.dev/packages/freezed
+[intl]: https://pub.dev/packages/intl
 [flutter_test]: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
 [flutter_driver]: https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html
 [RcDevRIL]: https://github.com/RcDevRIL
@@ -148,3 +160,5 @@ Ce projet est sous licence GNU GENERAL PUBLIC LICENSE - voir le fichier [LICENSE
 [Reyden]: https://github.com/Reyden7
 [contributeurs]: https://github.com/RcDevRIL/cesi_covid_19_tracker/contributors
 [LICENSE.md]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/LICENSE
+[Issues]: https://github.com/RcDevRIL/cesi_covid_19_tracker/issues
+[Release]: https://github.com/RcDevRIL/cesi_covid_19_tracker/releases

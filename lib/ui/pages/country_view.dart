@@ -68,7 +68,7 @@ class _CountryViewState extends State<CountryView> {
           isExpanded: false,
           style: Theme.of(context).textTheme.bodyText1,
           value: _dropDownValue,
-          items: ['FR', 'US', 'UK', 'CH']
+          items: ['FR', 'US', 'UK', 'CH', 'IN']
               .map((e) => DropdownMenuItem(
                     child: Text('$e'),
                     value: e,
