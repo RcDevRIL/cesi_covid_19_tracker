@@ -55,26 +55,49 @@ class _CountryViewState extends State<CountryView> {
     ];
     children.add(
       Center(
-        child: DropdownButton(
-          key: Key('Country List'),
-          onChanged: (String countryCode) {
-            setState(() {
-              _dropDownValue = countryCode;
-            });
-            call(countryCode);
-          },
-          hint: Text('Choisissez un pays'),
-          elevation: 2,
-          isExpanded: false,
-          style: Theme.of(context).textTheme.bodyText1,
-          value: _dropDownValue,
-          items: ['FR', 'US', 'UK', 'CH', 'IN']
-              .map((e) => DropdownMenuItem(
-                    child: Text('$e'),
-                    value: e,
-                  ))
-              .toList(),
-        ),
+        child: FutureBuilder(
+            initialData: ['FR', 'US', 'UK', 'CH', 'IN'],
+            future: locator.get<AppUtils>().getCountryList(),
+            builder: (c, AsyncSnapshot<List<String>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting ||
+                  snapshot.connectionState == ConnectionState.active)
+                return CircularProgressIndicator();
+              if (snapshot.connectionState == ConnectionState.none)
+                return FailureIcon();
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData) {
+                  return DropdownButton(
+                    key: Key('Country List'),
+                    onChanged: (String country) {
+                      setState(() {
+                        _dropDownValue = country;
+                      });
+                      call(country.substring(country.lastIndexOf(',') + 1));
+                    },
+                    hint: Text('Choisissez un pays'),
+                    elevation: 2,
+                    isExpanded: false,
+                    style: Theme.of(c).textTheme.bodyText1,
+                    value: _dropDownValue,
+                    items: snapshot.data.map((e) {
+                      debugPrint('e = $e');
+                      return DropdownMenuItem(
+                        child: Text('${e.substring(0, e.length - 3)}'),
+                        value: e,
+                      );
+                    }).toList(),
+                  );
+                }
+                if (snapshot.hasError) {
+                  return FailureIcon(
+                    fail: snapshot.error.toString(),
+                  );
+                } else {
+                  return CircularProgressIndicator();
+                }
+              } else
+                return FailureIcon();
+            }),
       ),
     );
     children.add(
