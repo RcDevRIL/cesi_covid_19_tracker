@@ -112,9 +112,9 @@ _Dépendances Directes :_
 * [http] - Le paquet utilisé pour effectuer des requêtes HTTP
 * [get_it] - Le paquet utilisé par exemple pour enregistrer des services (comme celui d'appel à l'API covid-19)
 * [json_serializable] - Le paquet utilisé pour faciliter la (dé)sérialisation json
-* [provider] - Le paquet utilisé pour facilité le "State Management" de l'application
-* [responsive_builder] - Le paquet utilisé pour facilité la construction d'UI suivant la taille de l'écran
-* [freezed] - Le paquet utilisé pour générer des objets par exemple utilisé en tant que DTO
+* [provider] - Le paquet utilisé pour faciliter le "State Management" de l'application
+* [responsive_builder] - Le paquet utilisé pour faciliter la construction d'UI suivant la taille de l'écran
+* [freezed] - Le paquet utilisé pour générer des objets par exemple utilisés en tant que DTO
 * [intl] - Le paquet utilisé dans ce projet pour espacer les chiffres des grands nombres. Ce paquet permet de faire bien d'autres choses intéressantes...
 
 _Test Dependencies:_
@@ -123,7 +123,12 @@ _Test Dependencies:_
 
 ## Contributing
 
-Pour contribuer, veuillez envoyer un courriel à l'un des auteurs... ou regardez la liste des [Issues] cliquez sur ce bouton de PR ! :rocket: :smile:
+Pour contribuer, veuillez envoyer un courriel à l'un des auteurs... ou regardez la liste des [Issues] et cliquez sur ce bouton de PR ! :rocket: :smile:
+
+## Contributors
+
+Merci beaucoup pour vos contributions !! :smile: :rocket:
+* **Atharva Patwardhan** - *__First__ Contributor* - [CodeSadhu]
 
 ## Authors
 
@@ -158,6 +163,7 @@ Ce projet est sous licence GNU GENERAL PUBLIC LICENSE - voir le fichier [LICENSE
 [BoiteSphinx]: https://github.com/BoiteSphinx
 [FerreiraJames]: https://github.com/FerreiraJames
 [Reyden]: https://github.com/Reyden7
+[CodeSadhu]: https://github.com/CodeSadhu
 [contributeurs]: https://github.com/RcDevRIL/cesi_covid_19_tracker/contributors
 [LICENSE.md]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/LICENSE
 [Issues]: https://github.com/RcDevRIL/cesi_covid_19_tracker/issues
