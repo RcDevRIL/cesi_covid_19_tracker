@@ -38,7 +38,7 @@ Si vous êtes passé par toutes les étapes du tutoriel [flutter.dev][Flutter "g
 
 ## Lancement de l'application
 
-Avant de vouloir lancer l'application, assurez-vous d'obtenir les paquets que nous avons choisis pour [construire][Built_With] notre application. Pour ce faire, vous devez exécuter ces commandess:
+Avant de vouloir lancer l'application, assurez-vous d'obtenir les paquets que nous avons choisis pour [construire][Built_With] notre application. Pour ce faire, vous devez exécuter ces commandes:
 
 * `flutter pub upgrade`
 * `flutter pub get`
