@@ -55,8 +55,8 @@ class _DashboardState extends State<Dashboard> {
               builder: (_, s) {
                 print('Has error: ${s.hasError}');
                 print('Has data: ${s.hasData}');
-                print('Snapshot Data ${s.data}');
                 if (s.hasData) {
+                  print('Snapshot Data ${s.data}');
                   return CoronedGlobalCard(
                     covidInfos: CovidInfos.fromJson(jsonDecode(s.data)),
                   );

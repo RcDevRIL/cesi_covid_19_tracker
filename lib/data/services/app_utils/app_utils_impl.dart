@@ -58,7 +58,7 @@ class AppUtilsImplementation implements AppUtils {
   @override
   Future<List<String>> getCountryList() async {
     List<String> countryList = [];
-    String csvData = await rootBundle.loadString('assets/data/data_csv.csv');
+    String csvData = await rootBundle.loadString('assets/data/data_csv.txt');
     for (String line in csvData.split('\r\n')) {
       if (line.isNotEmpty && !line.contains('Name,Code')) {
         countryList.add(line);

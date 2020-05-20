@@ -108,11 +108,11 @@ class _CountryViewState extends State<CountryView> {
               builder: (_, AsyncSnapshot<String> s) {
                 print('Has error: ${s.hasError}');
                 print('Has data: ${s.hasData}');
-                print('Snapshot Data ${s.data}');
                 if (s.hasError) {
                   return FailureIcon(fail: s.error);
                 }
                 if (s.hasData) {
+                  print('Snapshot Data ${s.data}');
                   return CoronedCountryCard(
                     covidCountryInfos:
                         CovidCountryInfos.fromJson(jsonDecode(s.data)),
