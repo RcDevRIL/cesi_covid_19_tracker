@@ -17,11 +17,13 @@ class CountryView extends StatefulWidget {
 class _CountryViewState extends State<CountryView> {
   String _dropDownValue;
   StreamController<String> _apiResponseController;
+  Future<Map<String, dynamic>> countryData;
 
   @override
   void initState() {
     super.initState();
     _apiResponseController = StreamController();
+    countryData = locator.get<AppUtils>().getAllCountriesData();
   }
 
   @override
@@ -55,81 +57,82 @@ class _CountryViewState extends State<CountryView> {
     ];
     children.add(
       Center(
-        child: FutureBuilder(
-            future: locator.get<AppUtils>().getAllCountriesData(),
-            builder: (c, AsyncSnapshot<Map<String, dynamic>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting ||
-                  snapshot.connectionState == ConnectionState.active)
-                return CircularProgressIndicator();
-              if (snapshot.connectionState == ConnectionState.none)
-                return FailureIcon();
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  List<String> countryList = snapshot.data.entries
-                      .firstWhere((e) => e.key == 'csvList')
-                      .value;
-                  return DropdownButton(
-                    key: Key('Country List'),
-                    onChanged: (String country) {
-                      setState(() {
-                        _dropDownValue = country;
-                      });
-                      call(country.substring(country.length - 2));
-                    },
-                    hint: Text('Choisissez un pays'),
-                    elevation: 2,
-                    isExpanded: false,
-                    style: Theme.of(c).textTheme.bodyText1,
-                    value: _dropDownValue,
-                    items: countryList.map((e) {
-                      return DropdownMenuItem(
-                        child: Text('${e.substring(0, e.length - 3)}'),
-                        value: e,
+        child: Column(
+          children: [
+            FutureBuilder(
+                future: countryData,
+                builder: (c, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting ||
+                      snapshot.connectionState == ConnectionState.active)
+                    return CircularProgressIndicator();
+                  if (snapshot.connectionState == ConnectionState.none)
+                    return FailureIcon();
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasData) {
+                      List<String> countryList = snapshot.data.entries
+                          .firstWhere((e) => e.key == 'csvList')
+                          .value;
+                      return DropdownButton(
+                        key: Key('Country List'),
+                        onChanged: (String country) {
+                          setState(() {
+                            _dropDownValue = country;
+                          });
+                          call(country.substring(country.length - 2));
+                        },
+                        hint: Text('Choisissez un pays'),
+                        elevation: 2,
+                        isExpanded: false,
+                        style: Theme.of(c).textTheme.bodyText1,
+                        value: _dropDownValue,
+                        items: countryList.map((e) {
+                          return DropdownMenuItem(
+                            child: Text('${e.substring(0, e.length - 3)}'),
+                            value: e,
+                          );
+                        }).toList(),
                       );
-                    }).toList(),
+                    }
+                    if (snapshot.hasError) {
+                      return FailureIcon(
+                        fail: snapshot.error.toString(),
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  } else
+                    return FailureIcon();
+                }),
+            StreamBuilder<String>(
+              stream: _apiResponseController.stream,
+              builder: (_, AsyncSnapshot<String> s) {
+                print('Has error: ${s.hasError}');
+                print('Has data: ${s.hasData}');
+                print('Snapshot Data ${s.data}');
+                if (s.hasError) {
+                  return FailureIcon(fail: s.error);
+                }
+                if (s.hasData) {
+                  return CoronedCountryCard(
+                    covidCountryInfos:
+                        CovidCountryInfos.fromJson(jsonDecode(s.data)),
                   );
                 }
-                if (snapshot.hasError) {
-                  return FailureIcon(
-                    fail: snapshot.error.toString(),
-                  );
+                if (s.connectionState != ConnectionState.done) {
+                  return Container();
+                }
+                if (!s.hasData && s.connectionState == ConnectionState.done) {
+                  return FailureIcon(fail: 'No Data');
                 } else {
-                  return CircularProgressIndicator();
+                  return Container();
                 }
-              } else
-                return FailureIcon();
-            }),
-      ),
-    );
-    children.add(
-      StreamBuilder<String>(
-        stream: _apiResponseController.stream,
-        builder: (_, AsyncSnapshot<String> s) {
-          print('Has error: ${s.hasError}');
-          print('Has data: ${s.hasData}');
-          print('Snapshot Data ${s.data}');
-          if (s.hasError) {
-            return FailureIcon(fail: s.error);
-          }
-          if (s.hasData) {
-            return CoronedCountryCard(
-              covidCountryInfos: CovidCountryInfos.fromJson(jsonDecode(s.data)),
-            );
-          }
-          if (s.connectionState != ConnectionState.done) {
-            return Container();
-          }
-          if (!s.hasData && s.connectionState == ConnectionState.done) {
-            return FailureIcon(fail: 'No Data');
-          } else {
-            return Container();
-          }
-        },
-      ),
-    );
-    children.add(
-      SizedBox(
-        height: 24.0,
+              },
+            ),
+            SizedBox(
+              height: 24.0,
+            ),
+          ],
+        ),
       ),
     );
     return children;
