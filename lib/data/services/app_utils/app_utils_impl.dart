@@ -22,6 +22,8 @@ class AppUtilsImplementation implements AppUtils {
     if (response?.statusCode == 200) {
       print('${response.body}');
       return response.body;
+    } else if (response?.statusCode == 401) {
+      throw 'Unauthorized!';
     } else {
       throw 'Error when trying to connect to API...(HTTP Code: ${response.statusCode})';
     }
@@ -41,6 +43,8 @@ class AppUtilsImplementation implements AppUtils {
     if (response?.statusCode == 200) {
       print('${response.body}');
       return response.body;
+    } else if (response?.statusCode == 401) {
+      throw 'Unauthorized!';
     } else {
       throw 'Error when trying to connect to API...(HTTP Code: ${response.statusCode})';
     }

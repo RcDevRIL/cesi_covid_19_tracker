@@ -2,19 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
-import 'package:cesi_covid_19_tracker/ui/pages/country_view.dart';
 
 import 'unit_tests_constants.dart';
 
 void main() {
   group('Widgets unit tests', () {
-    testWidgets('DashBoard dummy test', (WidgetTester tester) async {
-      final testWidget = buildTestableWidget(CountryView());
-      // Build our CountryView page and trigger a frame.
-      await tester.pumpWidget(testWidget);
-      // Expect to find the Dropdown list that let user choose a country code
-      expect(dropdownWidgetFinder, findsOneWidget);
-    });
+    //TODO
   });
   group('API calls unit tests', () {
     test('getWorldLatestSituation API test', () async {
@@ -26,7 +19,7 @@ void main() {
       apiService = AppUtilsImplementation()..http = koClient;
       // Expect that the service will throw an error with msg 'Error when trying to connect to API...'
       expect(apiService.getWorldLatestSituation(),
-          throwsA('Error when trying to connect to API...'));
+          throwsA('Error when trying to connect to API...(HTTP Code: 400)'));
       // Replace the http MockClient with one that return a 401 Unauthorized http error code
       apiService = AppUtilsImplementation()..http = unauthorizedClient;
       // Expect that the service will throw an error with msg 'Unauthorized!'
@@ -43,7 +36,7 @@ void main() {
       apiService = AppUtilsImplementation()..http = koClient;
       // Expect that the service will throw an error with msg 'Error when trying to connect to API...'
       expect(apiService.getDataFromCountry('FR'),
-          throwsA('Error when trying to connect to API...'));
+          throwsA('Error when trying to connect to API...(HTTP Code: 400)'));
       // Replace the http MockClient with one that return a 401 Unauthorized http error code
       apiService = AppUtilsImplementation()..http = unauthorizedClient;
       // Expect that the service will throw an error with msg 'Unauthorized!'
