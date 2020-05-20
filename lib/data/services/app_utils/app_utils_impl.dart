@@ -57,6 +57,7 @@ class AppUtilsImplementation implements AppUtils {
 
   @override
   Future<List<String>> getCountryList() async {
+    print('loading csv...');
     List<String> countryList = [];
     String csvData = await rootBundle.loadString('assets/data/data_csv.txt');
     for (String line in csvData.split('\r\n')) {
@@ -64,6 +65,7 @@ class AppUtilsImplementation implements AppUtils {
         countryList.add(line);
       }
     }
+    print('csv loaded!');
     return countryList;
   }
 

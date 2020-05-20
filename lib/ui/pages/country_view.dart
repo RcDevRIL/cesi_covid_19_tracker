@@ -17,7 +17,7 @@ class CountryView extends StatefulWidget {
 class _CountryViewState extends State<CountryView> {
   String _dropDownValue;
   StreamController<String> _apiResponseController;
-  Future<Map<String, dynamic>> countryData;
+  static Future<Map<String, dynamic>> countryData;
 
   @override
   void initState() {
