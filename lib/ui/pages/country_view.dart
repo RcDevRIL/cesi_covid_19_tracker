@@ -56,9 +56,8 @@ class _CountryViewState extends State<CountryView> {
     children.add(
       Center(
         child: FutureBuilder(
-            initialData: ['FR', 'US', 'UK', 'CH', 'IN'],
-            future: locator.get<AppUtils>().getCountryList(),
-            builder: (c, AsyncSnapshot<List<String>> snapshot) {
+            future: locator.get<AppUtils>().getAllCountriesData(),
+            builder: (c, AsyncSnapshot<Map<String, dynamic>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting ||
                   snapshot.connectionState == ConnectionState.active)
                 return CircularProgressIndicator();
@@ -66,21 +65,23 @@ class _CountryViewState extends State<CountryView> {
                 return FailureIcon();
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasData) {
+                  List<String> countryList = snapshot.data.entries
+                      .firstWhere((e) => e.key == 'csvList')
+                      .value;
                   return DropdownButton(
                     key: Key('Country List'),
                     onChanged: (String country) {
                       setState(() {
                         _dropDownValue = country;
                       });
-                      call(country.substring(country.lastIndexOf(',') + 1));
+                      call(country.substring(country.length - 2));
                     },
                     hint: Text('Choisissez un pays'),
                     elevation: 2,
                     isExpanded: false,
                     style: Theme.of(c).textTheme.bodyText1,
                     value: _dropDownValue,
-                    items: snapshot.data.map((e) {
-                      debugPrint('e = $e');
+                    items: countryList.map((e) {
                       return DropdownMenuItem(
                         child: Text('${e.substring(0, e.length - 3)}'),
                         value: e,

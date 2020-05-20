@@ -22,10 +22,8 @@ class AppUtilsImplementation implements AppUtils {
     if (response?.statusCode == 200) {
       print('${response.body}');
       return response.body;
-    } else if (response?.statusCode == 401) {
-      throw 'Unauthorized!';
     } else {
-      throw 'Error when trying to connect to API...';
+      throw 'Error when trying to connect to API...(HTTP Code: ${response.statusCode})';
     }
   }
 
@@ -43,10 +41,8 @@ class AppUtilsImplementation implements AppUtils {
     if (response?.statusCode == 200) {
       print('${response.body}');
       return response.body;
-    } else if (response?.statusCode == 401) {
-      throw 'Unauthorized!';
     } else {
-      throw 'Error when trying to connect to API...';
+      throw 'Error when trying to connect to API...(HTTP Code: ${response.statusCode})';
     }
   }
 
@@ -65,5 +61,13 @@ class AppUtilsImplementation implements AppUtils {
       }
     }
     return countryList;
+  }
+
+  @override
+  Future<Map<String, dynamic>> getAllCountriesData() async {
+    List<String> countryList = await getCountryList();
+    Map<String, dynamic> result = {};
+    result.putIfAbsent('csvList', () => countryList);
+    return result;
   }
 }
