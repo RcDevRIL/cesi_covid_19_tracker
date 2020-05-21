@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show CovidCountryInfos;
@@ -17,13 +19,11 @@ class CountryView extends StatefulWidget {
 class _CountryViewState extends State<CountryView> {
   String _dropDownValue;
   StreamController<String> _apiResponseController;
-  static Future<Map<String, dynamic>> countryData;
 
   @override
   void initState() {
     super.initState();
     _apiResponseController = StreamController();
-    countryData = locator.get<AppUtils>().getAllCountriesData();
   }
 
   @override
@@ -59,50 +59,39 @@ class _CountryViewState extends State<CountryView> {
       Center(
         child: Column(
           children: [
-            FutureBuilder(
-                future: countryData,
-                builder: (c, AsyncSnapshot<Map<String, dynamic>> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting ||
-                      snapshot.connectionState == ConnectionState.active)
-                    return CircularProgressIndicator();
-                  if (snapshot.connectionState == ConnectionState.none)
-                    return FailureIcon();
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasData) {
-                      List<String> countryList = snapshot.data.entries
-                          .firstWhere((e) => e.key == 'csvList')
-                          .value;
-                      return DropdownButton(
-                        key: Key('Country List'),
-                        onChanged: (String country) {
-                          setState(() {
-                            _dropDownValue = country;
-                          });
-                          call(country.substring(country.length - 2));
-                        },
-                        hint: Text('Choisissez un pays'),
-                        elevation: 2,
-                        isExpanded: false,
-                        style: Theme.of(c).textTheme.bodyText1,
-                        value: _dropDownValue,
-                        items: countryList.map((e) {
-                          return DropdownMenuItem(
-                            child: Text('${e.substring(0, e.length - 3)}'),
-                            value: e,
-                          );
-                        }).toList(),
-                      );
-                    }
-                    if (snapshot.hasError) {
-                      return FailureIcon(
-                        fail: snapshot.error.toString(),
-                      );
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  } else
-                    return FailureIcon();
-                }),
+            Selector<CoronedData, List<String>>(
+              selector: (_, cD) => cD.getCountryList,
+              builder: (_, countryList, __) {
+                if (countryList != null) {
+                  return countryList.isNotEmpty
+                      ? DropdownButton(
+                          key: Key('Country List'),
+                          onChanged: (String country) {
+                            setState(() {
+                              _dropDownValue = country;
+                            });
+                            call(country.substring(country.length - 2));
+                          },
+                          hint: Text('Choisissez un pays'),
+                          elevation: 2,
+                          isExpanded: false,
+                          style: Theme.of(_).textTheme.bodyText1,
+                          value: _dropDownValue,
+                          items: countryList.map((e) {
+                            return DropdownMenuItem(
+                              child: Text('${e.substring(0, e.length - 3)}'),
+                              value: e,
+                            );
+                          }).toList(),
+                        )
+                      : FailureIcon(
+                          fail: 'Failed to load country list',
+                        );
+                } else {
+                  return CircularProgressIndicator();
+                }
+              },
+            ),
             StreamBuilder<String>(
               stream: _apiResponseController.stream,
               builder: (_, AsyncSnapshot<String> s) {

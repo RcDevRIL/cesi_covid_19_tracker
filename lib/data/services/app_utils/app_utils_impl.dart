@@ -1,5 +1,5 @@
-import 'package:cesi_covid_19_tracker/data/services/app_utils/app_utils.dart';
-import 'package:flutter/services.dart';
+import 'app_utils.dart';
+
 import 'package:http/http.dart' show Client, Response;
 import 'package:intl/intl.dart' show NumberFormat;
 
@@ -54,26 +54,4 @@ class AppUtilsImplementation implements AppUtils {
   String formatLargeNumber(int number) => number >= 1000
       ? NumberFormat("###,###,###", 'fr').format(number)
       : number.toString();
-
-  @override
-  Future<List<String>> getCountryList() async {
-    print('loading csv...');
-    List<String> countryList = [];
-    String csvData = await rootBundle.loadString('assets/data/data_csv.txt');
-    for (String line in csvData.split('\r\n')) {
-      if (line.isNotEmpty && !line.contains('Name,Code')) {
-        countryList.add(line);
-      }
-    }
-    print('csv loaded!');
-    return countryList;
-  }
-
-  @override
-  Future<Map<String, dynamic>> getAllCountriesData() async {
-    List<String> countryList = await getCountryList();
-    Map<String, dynamic> result = {};
-    result.putIfAbsent('csvList', () => countryList);
-    return result;
-  }
 }
