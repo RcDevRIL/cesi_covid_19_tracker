@@ -55,61 +55,65 @@ class _CountryViewState extends State<CountryView> {
       ),
     ];
     children.add(
-      Center(
-        child: Column(
-          children: [
-            coronedData.getCountryList != null
-                ? coronedData.getCountryList.isNotEmpty
-                    ? DropdownButton(
-                        key: Key('Country List'),
-                        onChanged: (Country country) {
-                          coronedData.setSelectedCountry(country);
-                          getCountryData(country.alpha2Code);
-                        },
-                        hint: Text('Choisissez un pays'),
-                        elevation: 2,
-                        isExpanded: false,
-                        style: Theme.of(context).textTheme.bodyText1,
-                        value: coronedData.getSelectedCountry,
-                        items: coronedData.getCountryList.map((e) {
-                          return DropdownMenuItem(
-                            child: Text('${e.name}'),
-                            value: e,
-                          );
-                        }).toList(),
-                      )
-                    : CircularProgressIndicator()
-                : FailureIcon(fail: 'How is this even possible?'),
-            StreamBuilder<String>(
-              stream: _covidApiResponseController.stream,
-              builder: (_, AsyncSnapshot<String> s) {
-                print('Has error: ${s.hasError}');
-                print('Has data: ${s.hasData}');
-                if (s.hasError) {
-                  return FailureIcon(fail: s.error);
-                }
-                if (s.hasData) {
-                  print('Snapshot Data ${s.data}');
-                  return CoronedCountryCard(
-                    covidCountryInfos:
-                        CovidCountryInfos.fromJson(jsonDecode(s.data)),
-                  );
-                }
-                if (s.connectionState != ConnectionState.done) {
-                  return Container();
-                }
-                if (!s.hasData && s.connectionState == ConnectionState.done) {
-                  return FailureIcon(fail: 'No Data');
-                } else {
-                  return Container();
-                }
-              },
-            ),
-            SizedBox(
-              height: 24.0,
-            ),
-          ],
-        ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          coronedData.getCountryList != null
+              ? coronedData.getCountryList.isNotEmpty
+                  ? DropdownButton<Country>(
+                      key: Key('Country List'),
+                      onChanged: (Country country) {
+                        coronedData.setSelectedCountry(country);
+                        getCountryData(country.alpha2Code);
+                      },
+                      hint: Text('Choisissez un pays'),
+                      elevation: 2,
+                      isExpanded: false,
+                      style: Theme.of(context).textTheme.bodyText1,
+                      value: coronedData.getSelectedCountry,
+                      items: coronedData.getCountryList.map((e) {
+                        return DropdownMenuItem(
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            child: Text(
+                              '${e.name}',
+                            ),
+                          ),
+                          value: e,
+                        );
+                      }).toList(),
+                    )
+                  : CircularProgressIndicator()
+              : FailureIcon(fail: 'How is this even possible?'),
+          StreamBuilder<String>(
+            stream: _covidApiResponseController.stream,
+            builder: (_, AsyncSnapshot<String> s) {
+              print('Has error: ${s.hasError}');
+              print('Has data: ${s.hasData}');
+              if (s.hasError) {
+                return FailureIcon(fail: s.error);
+              }
+              if (s.hasData) {
+                print('Snapshot Data ${s.data}');
+                return CoronedCountryCard(
+                  covidCountryInfos:
+                      CovidCountryInfos.fromJson(jsonDecode(s.data)),
+                );
+              }
+              if (s.connectionState != ConnectionState.done) {
+                return Container();
+              }
+              if (!s.hasData && s.connectionState == ConnectionState.done) {
+                return FailureIcon(fail: 'No Data');
+              } else {
+                return Container();
+              }
+            },
+          ),
+          SizedBox(
+            height: 24.0,
+          ),
+        ],
       ),
     );
     return children;
