@@ -32,8 +32,7 @@ class NavigationDrawer extends StatelessWidget {
                     height: sizingInformation.screenSize.height * 0.3,
                   ),
                   Container(
-                    color: Colors.grey[200],
-                    height: sizingInformation.screenSize.height * 0.5,
+                    height: sizingInformation.screenSize.height * 0.7,
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: aG.AppConstants.navItems.length,

@@ -32,6 +32,7 @@ class CoronedData with ChangeNotifier {
     for (var e in jsonDecode(apiResponse)) {
       this.addCountry(Country.fromJson(e));
     }
+    notifyListeners();
   }
 
   void addCountry(Country c) {

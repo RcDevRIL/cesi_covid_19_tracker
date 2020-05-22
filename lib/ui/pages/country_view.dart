@@ -58,26 +58,28 @@ class _CountryViewState extends State<CountryView> {
       Center(
         child: Column(
           children: [
-            coronedData.getCountryList.isNotEmpty
-                ? DropdownButton(
-                    key: Key('Country List'),
-                    onChanged: (Country country) {
-                      coronedData.setSelectedCountry(country);
-                      getCountryData(country.alpha2Code);
-                    },
-                    hint: Text('Choisissez un pays'),
-                    elevation: 2,
-                    isExpanded: false,
-                    style: Theme.of(context).textTheme.bodyText1,
-                    value: coronedData.getSelectedCountry,
-                    items: coronedData.getCountryList.map((e) {
-                      return DropdownMenuItem(
-                        child: Text('${e.name}'),
-                        value: e,
-                      );
-                    }).toList(),
-                  )
-                : FailureIcon(fail: 'Failed to load country list'),
+            coronedData.getCountryList != null
+                ? coronedData.getCountryList.isNotEmpty
+                    ? DropdownButton(
+                        key: Key('Country List'),
+                        onChanged: (Country country) {
+                          coronedData.setSelectedCountry(country);
+                          getCountryData(country.alpha2Code);
+                        },
+                        hint: Text('Choisissez un pays'),
+                        elevation: 2,
+                        isExpanded: false,
+                        style: Theme.of(context).textTheme.bodyText1,
+                        value: coronedData.getSelectedCountry,
+                        items: coronedData.getCountryList.map((e) {
+                          return DropdownMenuItem(
+                            child: Text('${e.name}'),
+                            value: e,
+                          );
+                        }).toList(),
+                      )
+                    : CircularProgressIndicator()
+                : FailureIcon(fail: 'How is this even possible?'),
             StreamBuilder<String>(
               stream: _covidApiResponseController.stream,
               builder: (_, AsyncSnapshot<String> s) {
