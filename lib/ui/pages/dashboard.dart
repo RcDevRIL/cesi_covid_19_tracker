@@ -86,7 +86,7 @@ class _DashboardState extends State<Dashboard> {
 
   void callApi() {
     locator
-        .get<AppUtils>()
+        .get<ApiService>()
         .getWorldLatestSituation()
         .then((value) => _apiResponseController.add(value))
         .catchError((e) => _apiResponseController.addError(e));

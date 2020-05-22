@@ -129,7 +129,7 @@ class _CountryViewState extends State<CountryView> {
 
   void call(String countryCode) {
     locator
-        .get<AppUtils>()
+        .get<ApiService>()
         .getDataFromCountry(countryCode)
         .then((value) => _apiResponseController.add(value))
         .catchError((e) => _apiResponseController.addError(e));
