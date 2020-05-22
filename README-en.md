@@ -43,6 +43,11 @@ Before you want to launch the application, make sure you get the packages we hav
 * `flutter pub upgrade`
 * `flutter pub get`
 
+We use the Flutter code generator engine ([build_runner]) to reduce redundant code for developers. If you want to browse between commits, you might have conflicting files.
+To fix this, you need to run this command:
+
+`flutter packages pub run build_runner build --delete-conflicting-outputs`
+
 You can now consider creating and running the application :upside_down_face:
 
 To start the build, install, and run process on an Android or iOS device, run the following command:
@@ -159,6 +164,7 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the file [LI
 [freezed]: https://pub.dev/packages/freezed
 [intl]: https://pub.dev/packages/intl
 [flutter_test]: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
+[build_runner]: https://pub.dev/packages/build_runner
 [flutter_driver]: https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html
 [RcDevRIL]: https://github.com/RcDevRIL
 [BoiteSphinx]: https://github.com/BoiteSphinx
