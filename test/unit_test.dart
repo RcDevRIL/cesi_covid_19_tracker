@@ -20,10 +20,6 @@ void main() {
       // Expect that the service will throw an error with msg 'Error when trying to connect to API...'
       expect(apiService.getWorldLatestSituation(),
           throwsA('Error when trying to connect to API...(HTTP Code: 400)'));
-      // Replace the http MockClient with one that return a 401 Unauthorized http error code
-      apiService = ApiServiceImpl()..http = unauthorizedClient;
-      // Expect that the service will throw an error with msg 'Unauthorized!'
-      expect(apiService.getWorldLatestSituation(), throwsA('Unauthorized!'));
     });
     test('getDataFromCountry API test', () async {
       // Create an instance of our AppUtils service used to call API and replace the http Client with a MockClient from http test package
@@ -37,10 +33,6 @@ void main() {
       // Expect that the service will throw an error with msg 'Error when trying to connect to API...'
       expect(apiService.getDataFromCountry('FR'),
           throwsA('Error when trying to connect to API...(HTTP Code: 400)'));
-      // Replace the http MockClient with one that return a 401 Unauthorized http error code
-      apiService = ApiServiceImpl()..http = unauthorizedClient;
-      // Expect that the service will throw an error with msg 'Unauthorized!'
-      expect(apiService.getDataFromCountry('FR'), throwsA('Unauthorized!'));
     });
   });
 }
