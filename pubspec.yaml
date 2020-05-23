@@ -36,4 +36,3 @@ flutter:
 
   assets:
     - assets/cesilogo.png
-    - assets/data/data_csv.txt
