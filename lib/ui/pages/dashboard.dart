@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
-    show CoronedGlobalCard, FailureIcon, NavigationDrawer;
+    show GlobalCard, FailureIcon, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
@@ -53,11 +52,8 @@ class _DashboardState extends State<Dashboard> {
             child: StreamBuilder(
               stream: _apiResponseController.stream,
               builder: (_, s) {
-                print('Has error: ${s.hasError}');
-                print('Has data: ${s.hasData}');
-                print('Snapshot Data ${s.data}');
                 if (s.hasData) {
-                  return CoronedGlobalCard(
+                  return GlobalCard(
                     covidInfos: CovidInfos.fromJson(jsonDecode(s.data)),
                   );
                 }
@@ -86,7 +82,7 @@ class _DashboardState extends State<Dashboard> {
 
   void callApi() {
     locator
-        .get<AppUtils>()
+        .get<ApiService>()
         .getWorldLatestSituation()
         .then((value) => _apiResponseController.add(value))
         .catchError((e) => _apiResponseController.addError(e));

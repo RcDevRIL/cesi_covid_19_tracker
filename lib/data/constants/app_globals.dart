@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:cesi_covid_19_tracker/data/models/navbar_item_model.dart';
 
 class AppTheme {
   static ThemeData defaultAppTheme = ThemeData.light().copyWith(
-    primaryColor: Colors.blue,
+    primaryColor: Colors.blueGrey,
     appBarTheme: AppBarTheme(
       color: Colors.blueGrey,
       iconTheme: IconThemeData(color: Colors.white),
