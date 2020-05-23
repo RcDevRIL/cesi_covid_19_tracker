@@ -1,69 +1,20 @@
-import 'package:cesi_covid_19_tracker/data/services/app_utils/app_utils.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart' show Client, Response;
+import 'app_utils.dart';
+import 'dart:collection';
 import 'package:intl/intl.dart' show NumberFormat;
 
-class AppUtilsImplementation implements AppUtils {
-  final String baseUrl = 'https://corona.lmao.ninja/v2/';
-  final int timeOut = 10;
-  Client http = Client();
-
-  @override
-  Future<String> getDataFromCountry(String countryCode) async {
-    Response response;
-    try {
-      response = await http.get(
-        baseUrl + 'countries/$countryCode',
-        headers: {'Content-type': 'application/json'},
-      ).timeout(Duration(seconds: timeOut));
-    } catch (e) {
-      throw 'Error when trying to connect to API:\n${e.toString()}';
-    }
-    if (response?.statusCode == 200) {
-      print('${response.body}');
-      return response.body;
-    } else if (response?.statusCode == 401) {
-      throw 'Unauthorized!';
-    } else {
-      throw 'Error when trying to connect to API...';
-    }
-  }
-
-  @override
-  Future<String> getWorldLatestSituation() async {
-    Response response;
-    try {
-      response = await http.get(
-        baseUrl + 'all',
-        headers: {'Content-type': 'application/json'},
-      ).timeout(Duration(seconds: timeOut));
-    } catch (e) {
-      throw 'Error when trying to connect to API:\n${e.toString()}';
-    }
-    if (response?.statusCode == 200) {
-      print('${response.body}');
-      return response.body;
-    } else if (response?.statusCode == 401) {
-      throw 'Unauthorized!';
-    } else {
-      throw 'Error when trying to connect to API...';
-    }
-  }
-
+class AppUtilsImpl implements AppUtils {
   @override
   String formatLargeNumber(int number) => number >= 1000
       ? NumberFormat("###,###,###", 'fr').format(number)
       : number.toString();
 
   @override
-  Future<List<String>> getCountryList() async {
-    List<String> countryList = [];
-    String csvData = await rootBundle.loadString('assets/data/data_csv.csv');
-    for (String line in csvData.split('\r\n')) {
-      if (line.isNotEmpty && !line.contains('Name,Code')) {
-        countryList.add(line);
-      }
-    }
-    return countryList;
+  Map<String, num> computeWeights(int c, int d, int r) {
+    HashMap<String, num> result = HashMap<String, num>();
+    result.putIfAbsent('total', () => c + r + d);
+    result.putIfAbsent('weightContaminated', () => c / result['total']);
+    result.putIfAbsent('weightDeath', () => d / result['total']);
+    result.putIfAbsent('weightRecovered', () => d / result['total']);
+    return result;
   }
 }

@@ -43,6 +43,11 @@ Avant de vouloir lancer l'application, assurez-vous d'obtenir les paquets que no
 * `flutter pub upgrade`
 * `flutter pub get`
 
+Nous utilisons le moteur de générateur de code de Flutter ([build_runner]) permettant de réduire le code redondant aux développeurs. Si vous voulez naviguer entre les commits, vous pourriez avoir des fichiers en conflit.
+Pour réparer ceci, vous devez exécuter cette commande:
+
+`flutter packages pub run build_runner build --delete-conflicting-outputs`
+
 Vous pouvez maintenant envisager de créer et d'exécuter l'application :upside_down_face:
 
 Pour lancer le processus de construction, d'installation et d'exécution sur un appareil Android ou iOS, exécutez la commande suivante:
@@ -158,6 +163,7 @@ Ce projet est sous licence GNU GENERAL PUBLIC LICENSE - voir le fichier [LICENSE
 [freezed]: https://pub.dev/packages/freezed
 [intl]: https://pub.dev/packages/intl
 [flutter_test]: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
+[build_runner]: https://pub.dev/packages/build_runner
 [flutter_driver]: https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html
 [RcDevRIL]: https://github.com/RcDevRIL
 [BoiteSphinx]: https://github.com/BoiteSphinx

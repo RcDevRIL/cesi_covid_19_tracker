@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class NavigationDrawerHeader extends StatelessWidget {
-  const NavigationDrawerHeader({Key key}) : super(key: key);
+  final height;
+
+  const NavigationDrawerHeader({Key key, this.height = 150}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: height,
       color: Colors.blueGrey,
       alignment: Alignment.center,
       child: RichText(
