@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show CoronedData, setupLocator;
 import 'package:cesi_covid_19_tracker/ui/pages/pages.dart'
-    show CountryView, CovidFaq, Dashboard;
+    show CountryView, CovidFaq, Dashboard, DetailsPage;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
 void main() {
@@ -23,6 +23,7 @@ class CoronedApp extends StatelessWidget {
           '/dashboard': (context) => Dashboard(),
           '/country': (context) => CountryView(),
           '/faq': (context) => CovidFaq(),
+          '/details': (context) => DetailsPage(),
         },
         home: Dashboard(),
       ),

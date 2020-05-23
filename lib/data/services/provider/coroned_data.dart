@@ -12,7 +12,7 @@ class CoronedData with ChangeNotifier {
     init();
   }
 
-  List<Country> get getFilteredCountries => _filteredCountries;
+  List<Country> get getFilteredCountries => _filteredCountries ?? _countryList;
 
   List<Country> get getCountryList => _countryList;
 
@@ -38,8 +38,10 @@ class CoronedData with ChangeNotifier {
   }
 
   void filter(String filter) {
-    _filteredCountries =
-        _countryList.where((e) => e.name.contains(filter)).toList();
+    print('filtering list with \'$filter\'');
+    _filteredCountries = _countryList
+        .where((e) => e.name.toLowerCase().contains(filter.toLowerCase()))
+        .toList();
     notifyListeners();
   }
 }
