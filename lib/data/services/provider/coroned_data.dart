@@ -38,10 +38,11 @@ class CoronedData with ChangeNotifier {
   }
 
   void filter(String filter) {
-    print('filtering list with \'$filter\'');
     _filteredCountries = _countryList
         .where((e) => e.name.toLowerCase().contains(filter.toLowerCase()))
         .toList();
     notifyListeners();
   }
+
+  void resetFilter() => _filteredCountries = null;
 }

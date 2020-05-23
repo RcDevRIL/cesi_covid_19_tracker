@@ -18,7 +18,6 @@ class ApiServiceImpl implements ApiService {
       throw 'Error when trying to connect to API:\n${e.toString()}';
     }
     if (response?.statusCode == 200) {
-      print('${response.body}');
       return response.body;
     } else {
       throw 'Error when trying to connect to API...(HTTP Code: ${response.statusCode})';
@@ -37,7 +36,6 @@ class ApiServiceImpl implements ApiService {
       throw 'Error when trying to connect to API:\n${e.toString()}';
     }
     if (response?.statusCode == 200) {
-      print('${response.body}');
       return response.body;
     } else {
       throw 'Error when trying to connect to API...(HTTP Code: ${response.statusCode})';

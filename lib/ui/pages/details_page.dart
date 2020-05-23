@@ -47,13 +47,10 @@ class _DetailsPageState extends State<DetailsPage> {
               .get<ApiService>()
               .getDataFromCountry(widget.country.alpha2Code),
           builder: (_, AsyncSnapshot<String> s) {
-            print('Has error: ${s.hasError}');
-            print('Has data: ${s.hasData}');
             if (s.hasError) {
               return FailureIcon(fail: s.error);
             }
             if (s.hasData) {
-              print('Snapshot Data ${s.data}');
               return CountryCard(
                 covidCountryInfos:
                     CovidCountryInfos.fromJson(jsonDecode(s.data)),

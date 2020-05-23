@@ -17,10 +17,12 @@ class CountryView extends StatefulWidget {
 class _CountryViewState extends State<CountryView> {
   StreamController<String> _covidApiResponseController;
   TextEditingController _countryFilter;
+  bool resetFilter;
 
   @override
   void initState() {
     super.initState();
+    resetFilter = true;
     _covidApiResponseController = StreamController();
     _countryFilter = TextEditingController(text: 'Choisissez un pays');
   }
@@ -35,6 +37,8 @@ class _CountryViewState extends State<CountryView> {
   @override
   Widget build(BuildContext context) {
     final coronedData = Provider.of<CoronedData>(context);
+    if (resetFilter) coronedData.resetFilter();
+    resetFilter = false;
     return Scaffold(
       primary: true,
       appBar: AppBar(
@@ -53,8 +57,6 @@ class _CountryViewState extends State<CountryView> {
                   physics: const BouncingScrollPhysics(),
                   primary: true,
                   shrinkWrap: true,
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
                   children: _buildChildren(coronedData),
                 )
               : Center(child: CircularProgressIndicator())
@@ -80,10 +82,14 @@ class _CountryViewState extends State<CountryView> {
                     ? _countryFilter.text = ''
                     : null,
             onChanged: (value) {
-              _countryFilter.text;
               coronedData.filter(_countryFilter.text);
             },
-            onEditingComplete: () => coronedData.filter(_countryFilter.text),
+            onEditingComplete: () {
+              coronedData.filter(_countryFilter.text);
+              FocusScope.of(context).unfocus();
+              if (_countryFilter.text == null || _countryFilter.text.isEmpty)
+                _countryFilter.text = 'Choisissez un pays';
+            },
             controller: _countryFilter,
             maxLines: 1,
             autocorrect: false,
@@ -151,27 +157,3 @@ class _CountryViewState extends State<CountryView> {
         .catchError((e) => _covidApiResponseController.addError(e));
   }
 }
-
-/*       
-StreamBuilder<String>(
-  stream: _covidApiResponseController.stream, 
-  builder: (_, AsyncSnapshot<String> s) {
-    print('Has error: ${s.hasError}');
-    print('Has data: ${s.hasData}');
-    if (s.hasError) {
-      return FailureIcon(fail: s.error);
-    }
-    if (s.hasData) {
-      print('Snapshot Data ${s.data}');
-      return CountryCard(
-        covidCountryInfos: CovidCountryInfos.fromJson(jsonDecode(s.data)),
-        );
-    }
-    if (!s.hasData && s.connectionState == ConnectionState.done) {
-      return FailureIcon(fail: 'No Data');
-    } else {
-      return Container();
-    }
-  },
-),
-*/
