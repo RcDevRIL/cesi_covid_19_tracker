@@ -1,13 +1,12 @@
-import 'package:cesi_covid_19_tracker/ui/widgets/cards/coroned_card.dart';
 import 'package:flutter/material.dart';
-
 import 'package:responsive_builder/responsive_builder.dart';
-
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show CovidCountryInfos;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show AppUtils, locator;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
+import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
+    show CoronedCard;
 
 class CountryCard extends StatefulWidget {
   final CovidCountryInfos covidCountryInfos;
@@ -21,43 +20,37 @@ class CountryCard extends StatefulWidget {
 }
 
 class _CountryCardState extends State<CountryCard> {
-  int total;
-  double weightContaminated;
-  double weightDeath;
-  double weightRecovered;
+  Map<String, num> numbers;
 
   @override
   void initState() {
     super.initState();
-    computeWeights();
-  }
-
-  void computeWeights() {
-    total = widget.covidCountryInfos.cases +
-        widget.covidCountryInfos.recovered +
-        widget.covidCountryInfos.deaths;
-    weightContaminated = widget.covidCountryInfos.cases / total;
-    weightDeath = widget.covidCountryInfos.deaths / total;
-    weightRecovered = widget.covidCountryInfos.recovered / total;
+    numbers = locator.get<AppUtils>().computeWeights(
+        widget.covidCountryInfos.cases,
+        widget.covidCountryInfos.recovered,
+        widget.covidCountryInfos.deaths);
   }
 
   @override
   void didUpdateWidget(CountryCard oldWidget) {
     if (oldWidget != widget) {
-      computeWeights();
+      numbers = locator.get<AppUtils>().computeWeights(
+          widget.covidCountryInfos.cases,
+          widget.covidCountryInfos.recovered,
+          widget.covidCountryInfos.deaths);
     }
     super.didUpdateWidget(oldWidget);
   }
 
+  double _resolveStatsWidth(bool isLarge) => isLarge
+      ? MediaQuery.of(context).size.width / 2
+      : MediaQuery.of(context).size.width - 20;
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(builder: (context, sizingInfos) {
-      var margin = sizingInfos.isDesktop || sizingInfos.isTablet
-          ? MediaQuery.of(context).size.width / 4
-          : 12.0;
-      var statsBarWidth = sizingInfos.isDesktop || sizingInfos.isTablet
-          ? MediaQuery.of(context).size.width / 2
-          : MediaQuery.of(context).size.width - margin - 8.0;
+      var statsBarWidth =
+          _resolveStatsWidth(sizingInfos.isDesktop || sizingInfos.isTablet);
 
       return CoronedCard(children: <Widget>[
         Row(
@@ -87,7 +80,7 @@ class _CountryCardState extends State<CountryCard> {
         ),
         Container(
           height: 8.0,
-          width: weightContaminated * statsBarWidth,
+          width: numbers['weightContaminated'] * statsBarWidth,
           decoration: BoxDecoration(
             color: aG.AppTheme.confirmedColorFill,
             border: Border.all(color: aG.AppTheme.confirmedColorBorder),
@@ -103,7 +96,7 @@ class _CountryCardState extends State<CountryCard> {
         ),
         Container(
           height: 8.0,
-          width: weightDeath * statsBarWidth,
+          width: numbers['weightDeath'] * statsBarWidth,
           decoration: BoxDecoration(
             color: aG.AppTheme.deathsColorFill,
             border: Border.all(color: aG.AppTheme.deathsColorBorder),
@@ -119,7 +112,7 @@ class _CountryCardState extends State<CountryCard> {
         ),
         Container(
           height: 8.0,
-          width: weightRecovered * statsBarWidth,
+          width: numbers['weightRecovered'] * statsBarWidth,
           decoration: BoxDecoration(
             color: aG.AppTheme.recoveredColorFill,
             border: Border.all(color: aG.AppTheme.recoveredColorBorder),

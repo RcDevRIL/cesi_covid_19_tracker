@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:cesi_covid_19_tracker/data/models/navbar_item_model.dart';
 
 class AppTheme {

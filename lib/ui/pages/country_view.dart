@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show Country, CovidCountryInfos;
@@ -74,7 +73,9 @@ class _CountryViewState extends State<CountryView> {
                       items: coronedData.getCountryList.map((e) {
                         return DropdownMenuItem(
                           child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: MediaQuery.of(context).size.width > 600
+                                ? MediaQuery.of(context).size.width * 0.4
+                                : MediaQuery.of(context).size.width * 0.8,
                             child: Text(
                               '${e.name}',
                             ),

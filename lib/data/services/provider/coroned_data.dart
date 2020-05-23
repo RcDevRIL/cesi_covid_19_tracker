@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:flutter/material.dart';
-
 import 'package:cesi_covid_19_tracker/data/models/country.dart';
 
 class CoronedData with ChangeNotifier {
