@@ -6,7 +6,7 @@ import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show Country, CovidCountryInfos;
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
-    show CoronedCountryCard, FailureIcon, NavigationDrawer;
+    show CountryCard, FailureIcon, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 import 'package:provider/provider.dart';
 
@@ -95,7 +95,7 @@ class _CountryViewState extends State<CountryView> {
               }
               if (s.hasData) {
                 print('Snapshot Data ${s.data}');
-                return CoronedCountryCard(
+                return CountryCard(
                   covidCountryInfos:
                       CovidCountryInfos.fromJson(jsonDecode(s.data)),
                 );

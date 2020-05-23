@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
-    show CoronedGlobalCard, FailureIcon, NavigationDrawer;
+    show GlobalCard, FailureIcon, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
@@ -57,7 +57,7 @@ class _DashboardState extends State<Dashboard> {
                 print('Has data: ${s.hasData}');
                 if (s.hasData) {
                   print('Snapshot Data ${s.data}');
-                  return CoronedGlobalCard(
+                  return GlobalCard(
                     covidInfos: CovidInfos.fromJson(jsonDecode(s.data)),
                   );
                 }
