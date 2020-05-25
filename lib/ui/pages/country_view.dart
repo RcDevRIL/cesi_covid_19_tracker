@@ -6,8 +6,7 @@ import 'package:cesi_covid_19_tracker/ui/pages/pages.dart' show DetailsPage;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, CoronedData, locator;
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
-    show CoronedCard, FailureIcon, NavigationDrawer;
-import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
+    show CoronedAppBar, CoronedCard, FailureIcon, NavigationDrawer;
 import 'package:provider/provider.dart';
 
 class CountryView extends StatefulWidget {
@@ -41,15 +40,7 @@ class _CountryViewState extends State<CountryView> {
     if (resetFilter) coronedData.resetFilter();
     resetFilter = false;
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Image.asset('assets/cesilogo.png'),
-        ],
-        title: Text(
-          aG.AppConstants.defaultAppTitle.split('\n')[0],
-          style: Theme.of(context).textTheme.headline1,
-        ),
-      ),
+      appBar: CoronedAppBar(appBar: AppBar()),
       drawer: NavigationDrawer(),
       body: coronedData.getCountryList != null
           ? coronedData.getCountryList.isNotEmpty
