@@ -28,6 +28,7 @@ class FailureIcon extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.red,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ],
             ),

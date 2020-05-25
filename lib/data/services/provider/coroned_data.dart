@@ -12,20 +12,8 @@ class CoronedData with ChangeNotifier {
     init();
   }
 
-  List<Country> get getFilteredCountries => _filteredCountries ?? _countryList;
-
-  List<Country> get getCountryList => _countryList;
-
-  Country get getSelectedCountry => _selectedCountry;
-
-  void setSelectedCountry(Country c) {
-    _selectedCountry = c;
-    notifyListeners();
-  }
-
   void init() async {
     _countryList = [];
-    _selectedCountry = null;
     String apiResponse = await locator.get<ApiService>().getCountries();
     for (var e in jsonDecode(apiResponse)) {
       this.addCountry(Country.fromJson(e));
@@ -45,4 +33,15 @@ class CoronedData with ChangeNotifier {
   }
 
   void resetFilter() => _filteredCountries = null;
+
+  List<Country> get getFilteredCountries => _filteredCountries ?? _countryList;
+
+  List<Country> get getCountryList => _countryList;
+
+  Country get getSelectedCountry => _selectedCountry;
+
+  void setSelectedCountry(Country c) {
+    _selectedCountry = c;
+    notifyListeners();
+  }
 }
