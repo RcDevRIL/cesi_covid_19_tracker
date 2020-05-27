@@ -21,7 +21,6 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      primary: true,
       appBar: AppBar(
         actions: [
           Image.asset('assets/cesilogo.png'),
@@ -33,35 +32,31 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
       body: ListView(
         physics: const BouncingScrollPhysics(),
-        primary: true,
-        shrinkWrap: true,
-        children: _buildChildren(),
+        children: <Widget>[
+          SizedBox(height: 24.0),
+          FutureBuilder(
+            future: locator
+                .get<ApiService>()
+                .getDataFromCountry(widget.country.alpha2Code),
+            builder: (_, AsyncSnapshot<String> s) {
+              if (s.hasError) {
+                return FailureIcon(fail: s.error);
+              }
+              if (s.hasData) {
+                return CountryCard(
+                  covidCountryInfos:
+                      CovidCountryInfos.fromJson(jsonDecode(s.data)),
+                );
+              }
+              if (!s.hasData && s.connectionState == ConnectionState.done) {
+                return FailureIcon(fail: 'No Data');
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+        ],
       ),
     );
   }
-
-  List<Widget> _buildChildren() => <Widget>[
-        SizedBox(height: 24.0),
-        FutureBuilder(
-          future: locator
-              .get<ApiService>()
-              .getDataFromCountry(widget.country.alpha2Code),
-          builder: (_, AsyncSnapshot<String> s) {
-            if (s.hasError) {
-              return FailureIcon(fail: s.error);
-            }
-            if (s.hasData) {
-              return CountryCard(
-                covidCountryInfos:
-                    CovidCountryInfos.fromJson(jsonDecode(s.data)),
-              );
-            }
-            if (!s.hasData && s.connectionState == ConnectionState.done) {
-              return FailureIcon(fail: 'No Data');
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          },
-        )
-      ];
 }

@@ -31,15 +31,12 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      primary: true,
       appBar: CoronedAppBar(
         appBar: AppBar(),
       ),
       drawer: NavigationDrawer(),
       body: ListView(
         physics: const BouncingScrollPhysics(),
-        primary: true,
-        shrinkWrap: true,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 24.0),

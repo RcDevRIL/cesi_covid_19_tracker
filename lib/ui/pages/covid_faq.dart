@@ -14,57 +14,41 @@ class _CovidFaqState extends State<CovidFaq> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      primary: true,
       appBar: CoronedAppBar(appBar: AppBar()),
       drawer: NavigationDrawer(),
       body: ListView(
         physics: const BouncingScrollPhysics(),
-        primary: true,
-        shrinkWrap: true,
-        children: _buildChildren(),
-      ),
-    );
-  }
-
-  List<Widget> _buildChildren() {
-    var children = <Widget>[
-      SizedBox(
-        height: 24.0,
-      ),
-    ];
-    for (Map<String, String> item in items) {
-      children.addAll(
-        <Widget>[
-          ListTile(
-            title: Text(
-              item.values.elementAt(0),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .apply(color: Colors.black),
-            ),
-            subtitle: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                item.values.elementAt(1),
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .apply(color: Colors.black),
-              ),
-            ),
-          ),
+        children: <Widget>[
           SizedBox(
-            width: 12.0,
-          )
+            height: 24.0,
+          ),
+          ...items.map((e) => Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: ListTile(
+                  title: Text(
+                    e.values.elementAt(0),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .apply(color: Colors.black),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                      e.values.elementAt(1),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2
+                          .apply(color: Colors.black),
+                    ),
+                  ),
+                ),
+              )),
+          SizedBox(
+            height: 24.0,
+          ),
         ],
-      );
-    }
-    children.add(
-      SizedBox(
-        height: 24.0,
       ),
     );
-    return children;
   }
 }

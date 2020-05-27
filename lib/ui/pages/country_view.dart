@@ -46,7 +46,6 @@ class _CountryViewState extends State<CountryView> {
           ? coronedData.getCountryList.isNotEmpty
               ? ListView.builder(
                   physics: const BouncingScrollPhysics(),
-                  primary: true,
                   itemCount: coronedData.getFilteredCountries.length + 1,
                   itemBuilder: (_, i) => i == 0
                       ? Padding(
