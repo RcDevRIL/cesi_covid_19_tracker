@@ -58,9 +58,8 @@ class AppConstants {
       '\n\nNous avions le choix sur la technologie, alors nous avons formé un groupe pour\ntenter d\'utiliser la version web de Flutter...'
       '\n\nAprès un examen couronné de succès,\nl\'application évolue ! 🚀 Nous acceptons avec plaisir les contributions !! 🔥'
       '\n\nRendez-vous sur github.com/rcdevril/cesi_covid_19_tracker !\n\nVous trouverez ci-jointes les licences associées aux softwares utilisés pour la réalisation de ce projet Flutter.';
-
   static const String defaultAppTitle = '$applicationName\nA covid-19 info app';
-
+  static const String cesiDijonUrl = 'https://dijon.cesi.fr/';
   static const List<NavBarItemModel> navItems = [
     NavBarItemModel(
       title: 'DASHBOARD',

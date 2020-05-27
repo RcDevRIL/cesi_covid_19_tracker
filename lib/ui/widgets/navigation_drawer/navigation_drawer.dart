@@ -32,7 +32,7 @@ class NavigationDrawer extends StatelessWidget {
                   Container(
                     height: sizingInformation.screenSize.height * 0.7,
                     child: ListView.builder(
-                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
                       itemCount: aG.AppConstants.navItems.length,
                       itemBuilder: (_, i) => NavBarItem(
                         aG.AppConstants.navItems.elementAt(i).title,

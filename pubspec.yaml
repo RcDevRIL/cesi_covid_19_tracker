@@ -18,6 +18,7 @@ dependencies:
   responsive_builder: ^0.1.4
   freezed_annotation:
   intl: ^0.16.1
+  url_launcher: ^5.4.10
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
@@ -14,11 +15,16 @@ class CoronedAppBar extends StatelessWidget implements PreferredSizeWidget {
       builder: (_, sizes) => sizes.isMobile || sizes.isWatch
           ? AppBar(
               actions: [
-                Image.asset(
-                  'assets/cesilogo.png',
-                  fit: BoxFit.contain,
-                  height: 150,
-                  width: 150,
+                GestureDetector(
+                  onTap: () => locator
+                      .get<AppUtils>()
+                      .openLink(aG.AppConstants.cesiDijonUrl),
+                  child: Image.asset(
+                    'assets/cesilogo.png',
+                    fit: BoxFit.contain,
+                    height: 150,
+                    width: 150,
+                  ),
                 ),
               ],
               title: Text(
@@ -34,9 +40,14 @@ class CoronedAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : AppBar(
               actions: [
-                Image.asset(
-                  'assets/cesilogo.png',
-                  fit: BoxFit.contain,
+                GestureDetector(
+                  onTap: () => locator
+                      .get<AppUtils>()
+                      .openLink(aG.AppConstants.cesiDijonUrl),
+                  child: Image.asset(
+                    'assets/cesilogo.png',
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ],
               title: Text(
