@@ -36,7 +36,7 @@ const RESOURCES = {
 "icons/ms-icon-70x70.png": "48f490a64da323b6fe6daa506471699b",
 "index.html": "7c005a087ba16c486930d78d526505a5",
 "/": "7c005a087ba16c486930d78d526505a5",
-"main.dart.js": "9c7d8846aad9a010eceb3dc7ffba316b",
+"main.dart.js": "c332bd785c8e11b537fa965a4dcf21c5",
 "manifest.json": "610bcc38a0da86239a4f9d2472cb7d67"
 };
 
