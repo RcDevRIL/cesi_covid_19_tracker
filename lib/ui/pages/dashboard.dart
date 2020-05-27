@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
-    show CoronedAppBar, FailureIcon, GlobalCard, NavigationDrawer;
+    show CoronedAppBar, FailureCard, GlobalCard, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
@@ -49,7 +49,7 @@ class _DashboardState extends State<Dashboard> {
                   );
                 }
                 if (s.hasError) {
-                  return FailureIcon(fail: s.error);
+                  return FailureCard(fail: s.error);
                 }
                 if (s.connectionState != ConnectionState.done) {
                   return Center(
@@ -57,7 +57,7 @@ class _DashboardState extends State<Dashboard> {
                   );
                 }
                 if (!s.hasData && s.connectionState == ConnectionState.done) {
-                  return FailureIcon(fail: 'No Data');
+                  return FailureCard(fail: 'No Data');
                 } else {
                   return Center(
                     child: CircularProgressIndicator(),

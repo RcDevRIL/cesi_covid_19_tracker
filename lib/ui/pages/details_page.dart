@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
+    show CovidNotFoundException;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, locator;
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
-    show CountryCard, FailureIcon;
+    show CountryCard, FailureCard;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show Country, CovidCountryInfos;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
@@ -40,7 +42,11 @@ class _DetailsPageState extends State<DetailsPage> {
                 .getDataFromCountry(widget.country.alpha2Code),
             builder: (_, AsyncSnapshot<String> s) {
               if (s.hasError) {
-                return FailureIcon(fail: s.error);
+                return s.error.runtimeType == CovidNotFoundException
+                    ? FailureCard(
+                        fail: 'Country not found or doesn\'t have any cases.',
+                        iconAndTextColor: Theme.of(context).primaryColor)
+                    : FailureCard(fail: s.error);
               }
               if (s.hasData) {
                 return CountryCard(
@@ -49,7 +55,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 );
               }
               if (!s.hasData && s.connectionState == ConnectionState.done) {
-                return FailureIcon(fail: 'No Data');
+                return FailureCard(fail: 'No Data');
               } else {
                 return Center(child: CircularProgressIndicator());
               }
