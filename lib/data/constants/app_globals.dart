@@ -22,12 +22,22 @@ class AppTheme {
         fontWeight: FontWeight.w600,
         color: Colors.black,
       ),
+      headline5: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        color: Colors.black,
+      ),
       bodyText1: TextStyle(
         color: Colors.black,
         fontSize: 18.0,
       ),
       bodyText2: TextStyle(
-        color: Colors.white70,
+        color: Colors.black,
+      ),
+      caption: TextStyle(
+        color: Colors.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
       ),
     ),
   );
@@ -40,7 +50,16 @@ class AppTheme {
 }
 
 class AppConstants {
-  static const String defaultAppTitle = 'CORONED\nA covid-19 info app';
+  static const String applicationName = 'CORONED\n';
+  static const String applicationVersion = '\nv1.4';
+  static const String applicationIcon = 'assets/virus-logo.png';
+  static const String applicationLegalese =
+      'CORONED est à la base un projet scolaire réalisé pour répondre à un sujet de\ntravaux pratiques dans un cours de développement web dispensé par le CESI Dijon-Quetigny.'
+      '\n\nNous avions le choix sur la technologie, alors nous avons formé un groupe pour\ntenter d\'utiliser la version web de Flutter...'
+      '\n\nAprès un examen couronné de succès,\nl\'application évolue ! 🚀 Nous acceptons avec plaisir les contributions !! 🔥'
+      '\n\nRendez-vous sur github.com/rcdevril/cesi_covid_19_tracker !\n\nVous trouverez ci-jointes les licences associées aux softwares utilisés pour la réalisation de ce projet Flutter.';
+
+  static const String defaultAppTitle = '$applicationName\nA covid-19 info app';
 
   static const List<NavBarItemModel> navItems = [
     NavBarItemModel(
@@ -57,6 +76,11 @@ class AppConstants {
       title: 'FAQ',
       iconData: Icons.question_answer,
       navigationPath: '/faq',
+    ),
+    NavBarItemModel(
+      title: 'ABOUT',
+      iconData: Icons.info_outline,
+      navigationPath: '/about',
     )
   ];
 }
