@@ -2,23 +2,30 @@ import 'package:flutter/material.dart';
 
 class FailureIcon extends StatelessWidget {
   final String fail;
+  final Color backgroundColor;
+  final Color iconAndTextColor;
+  final double iconSize;
+
   const FailureIcon({
     Key key,
     this.fail = '',
+    this.backgroundColor = Colors.black87,
+    this.iconAndTextColor = Colors.red,
+    this.iconSize = 50.0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return fail.isNotEmpty
         ? Container(
-            color: Colors.black87,
+            color: backgroundColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Icon(
                   Icons.cancel,
-                  color: Colors.red,
-                  size: 50.0,
+                  color: iconAndTextColor,
+                  size: iconSize,
                 ),
                 SizedBox(
                   width: 12.0,
@@ -26,21 +33,21 @@ class FailureIcon extends StatelessWidget {
                 Text(
                   fail,
                   style: TextStyle(
-                    color: Colors.red,
+                    color: iconAndTextColor,
                   ),
                 ),
               ],
             ),
           )
         : Container(
-            height: 50.0,
-            width: 50.0,
-            color: Colors.black87,
+            height: iconSize,
+            width: iconSize,
+            color: backgroundColor,
             child: Center(
               child: Icon(
                 Icons.cancel,
-                color: Colors.red,
-                size: 50.0,
+                color: iconAndTextColor,
+                size: iconSize,
               ),
             ),
           );

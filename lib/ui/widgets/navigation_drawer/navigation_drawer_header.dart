@@ -18,7 +18,10 @@ class NavigationDrawerHeader extends StatelessWidget {
           children: [
             TextSpan(
               text: 'A covid-19 info App',
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  .copyWith(color: Colors.white70),
             ),
           ],
         ),

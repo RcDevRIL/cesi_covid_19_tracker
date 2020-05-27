@@ -1,3 +1,5 @@
+import 'package:url_launcher/url_launcher.dart';
+
 import 'app_utils.dart';
 import 'dart:collection';
 import 'package:intl/intl.dart' show NumberFormat;
@@ -16,5 +18,14 @@ class AppUtilsImpl implements AppUtils {
     result.putIfAbsent('weightDeath', () => d / result['total']);
     result.putIfAbsent('weightRecovered', () => d / result['total']);
     return result;
+  }
+
+  @override
+  void openLink(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
