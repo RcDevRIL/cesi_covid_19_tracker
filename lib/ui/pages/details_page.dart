@@ -5,10 +5,9 @@ import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, locator;
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
-    show CountryCard, FailureCard;
+    show CoronedAppBar, CountryCard, FailureCard;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show Country, CovidCountryInfos;
-import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 
 class DetailsPage extends StatefulWidget {
   final Country country;
@@ -23,15 +22,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Image.asset('assets/cesilogo.png'),
-        ],
-        title: Text(
-          aG.AppConstants.defaultAppTitle.split('\n')[0],
-          style: Theme.of(context).textTheme.headline1,
-        ),
-      ),
+      appBar: CoronedAppBar(appBar: AppBar()),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
@@ -44,7 +35,8 @@ class _DetailsPageState extends State<DetailsPage> {
               if (s.hasError) {
                 return s.error.runtimeType == CovidNotFoundException
                     ? FailureCard(
-                        fail: 'Country not found or doesn\'t have any cases.',
+                        fail:
+                            'Country not found or doesn\'t have any COVID-19 related cases.',
                         iconAndTextColor: Theme.of(context).primaryColor)
                     : FailureCard(fail: s.error);
               }

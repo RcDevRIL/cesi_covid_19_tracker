@@ -22,11 +22,12 @@ class CoronedAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: Image.asset(
                     'assets/cesilogo.png',
                     fit: BoxFit.contain,
-                    height: 150,
-                    width: 150,
+                    height: sizes.isWatch ? 100 : 150,
+                    width: sizes.isWatch ? 100 : 150,
                   ),
                 ),
               ],
+              titleSpacing: 0.0,
               title: Text(
                 aG.AppConstants.defaultAppTitle.split('\n')[0],
                 style: sizes.isWatch
@@ -50,9 +51,11 @@ class CoronedAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
               ],
+              titleSpacing: 0.0,
               title: Text(
                 aG.AppConstants.defaultAppTitle.split('\n')[0],
                 style: Theme.of(context).textTheme.headline1,
+                overflow: TextOverflow.visible,
               ),
             ),
     );

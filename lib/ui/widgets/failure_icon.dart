@@ -30,10 +30,12 @@ class FailureIcon extends StatelessWidget {
                 SizedBox(
                   width: 12.0,
                 ),
-                Text(
-                  fail,
-                  style: TextStyle(
-                    color: iconAndTextColor,
+                Flexible(
+                  child: Text(
+                    fail,
+                    style: TextStyle(
+                      color: iconAndTextColor,
+                    ),
                   ),
                 ),
               ],
