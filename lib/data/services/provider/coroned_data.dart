@@ -16,13 +16,17 @@ class CoronedData with ChangeNotifier {
     _countryList = [];
     String apiResponse = await locator.get<ApiService>().getCountries();
     for (var e in jsonDecode(apiResponse)) {
-      this.addCountry(Country.fromJson(e));
+      this.addIfAbsent(Country.fromJson(e));
     }
     notifyListeners();
   }
 
-  void addCountry(Country c) {
-    _countryList.add(c);
+  void addIfAbsent(Country countryToAdd) {
+    bool absent = true;
+    for (Country c in _countryList) {
+      if (c == countryToAdd) absent = false;
+  }
+    if (absent) _countryList.add(countryToAdd);
   }
 
   void filter(String filter) {
