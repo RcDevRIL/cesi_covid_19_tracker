@@ -1,12 +1,13 @@
 'use strict';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "850302cbd233e5b44d651b1a2cef779d",
+  "assets/AssetManifest.json": "0ea3f4ad8310e65f26972bb47c63957a",
 "assets/assets/cesilogo.png": "062a079cc98f5100b9d49bebcc00a23c",
 "assets/assets/missing_flag.png": "6171962998cf5a1657ce5e7408ad93f3",
+"assets/assets/virus-logo.png": "4290a5bb9e8ab4ca1b60ece1feaac645",
 "assets/FontManifest.json": "580ff1a5d08679ded8fcf5c6848cece7",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
-"assets/LICENSE": "cce07e27c86174b3a474714028da5fcc",
+"assets/LICENSE": "f2568d9aed72a2eab0c765488560ea09",
 "favicon.ico": "cd78fd2732d09d2595ba1b16b9d6a488",
 "icons/android-icon-144x144.png": "fb70f5cda7db961105feb0f09b6f2899",
 "icons/android-icon-192x192.png": "cb618464d5fe4baffb584ad6767490cd",
@@ -35,7 +36,7 @@ const RESOURCES = {
 "icons/ms-icon-70x70.png": "48f490a64da323b6fe6daa506471699b",
 "index.html": "7c005a087ba16c486930d78d526505a5",
 "/": "7c005a087ba16c486930d78d526505a5",
-"main.dart.js": "c23ef0212011f4ab438770539234d235",
+"main.dart.js": "9c7d8846aad9a010eceb3dc7ffba316b",
 "manifest.json": "610bcc38a0da86239a4f9d2472cb7d67"
 };
 
