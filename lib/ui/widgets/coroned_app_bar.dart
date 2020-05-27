@@ -16,9 +16,9 @@ class CoronedAppBar extends StatelessWidget implements PreferredSizeWidget {
               actions: [
                 Image.asset(
                   'assets/cesilogo.png',
-                  fit: BoxFit.scaleDown,
-                  height: 100,
-                  width: 100,
+                  fit: BoxFit.contain,
+                  height: 150,
+                  width: 150,
                 ),
               ],
               title: Text(
@@ -29,6 +29,7 @@ class CoronedAppBar extends StatelessWidget implements PreferredSizeWidget {
                         .headline1
                         .apply(fontSizeDelta: -4)
                     : Theme.of(context).textTheme.headline1,
+                overflow: TextOverflow.visible,
               ),
             )
           : AppBar(
