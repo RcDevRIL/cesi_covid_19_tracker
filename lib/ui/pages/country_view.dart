@@ -49,14 +49,14 @@ class _CountryViewState extends State<CountryView> {
                   itemCount: coronedData.getFilteredCountries.length + 1,
                   itemBuilder: (_, i) => i == 0
                       ? Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.of(context).size.width <= 600
-                                ? MediaQuery.of(context).size.width * 0.1
-                                : MediaQuery.of(context).size.width * 0.3,
-                          ),
+                          padding: _resolveInputTextPadding(),
                           child: TextField(
-                            decoration:
-                                InputDecoration(fillColor: Colors.black),
+                            decoration: InputDecoration(
+                              fillColor: Colors.black,
+                              icon: Icon(Icons.search),
+                              isDense: true,
+                              alignLabelWithHint: true,
+                            ),
                             onTap: () => _countryFilter.text
                                         .compareTo('Choisissez un pays') ==
                                     0
@@ -77,14 +77,7 @@ class _CountryViewState extends State<CountryView> {
                             maxLines: 1,
                             autocorrect: false,
                             dragStartBehavior: DragStartBehavior.down,
-                            style: _countryFilter.text
-                                        .compareTo('Choisissez un pays') ==
-                                    0
-                                ? Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    .copyWith(color: Colors.grey[400])
-                                : Theme.of(context).textTheme.bodyText1,
+                            style: _resolveInputTextStyle(),
                             cursorColor: (_countryFilter.text
                                             .compareTo('Choisissez un pays') ==
                                         0 ||
@@ -109,8 +102,9 @@ class _CountryViewState extends State<CountryView> {
                                       country: coronedData.getFilteredCountries
                                           .elementAt(i - 1))));
                             },
-                            children: [
+                            children: <Widget>[
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   Image.network(
                                     '${coronedData.getFilteredCountries.elementAt(i - 1).flag}',
@@ -139,12 +133,11 @@ class _CountryViewState extends State<CountryView> {
                                   SizedBox(
                                     width: 8.0,
                                   ),
-                                  Expanded(
+                                  Flexible(
+                                    fit: FlexFit.loose,
                                     child: Text(
                                       '${coronedData.getFilteredCountries.elementAt(i - 1).name}',
-                                      style:
-                                          Theme.of(context).textTheme.headline4,
-                                      maxLines: 1,
+                                      style: _resolveCountryTextStyle(),
                                     ),
                                   ),
                                 ],
@@ -159,6 +152,37 @@ class _CountryViewState extends State<CountryView> {
               fail: 'Oups ! Something went wrong.\nPlease, reload the app.'),
     );
   }
+
+  EdgeInsets _resolveInputTextPadding() => EdgeInsets.only(
+        left: MediaQuery.of(context).size.width <= 600
+            ? MediaQuery.of(context).size.width * 0.1
+            : MediaQuery.of(context).size.width * 0.3,
+        right: MediaQuery.of(context).size.width <= 600
+            ? MediaQuery.of(context).size.width * 0.1
+            : MediaQuery.of(context).size.width * 0.3,
+        top: MediaQuery.of(context).size.width <= 600 ? 8.0 : 18.0,
+      );
+
+  TextStyle _resolveInputTextStyle() {
+    return MediaQuery.of(context).size.width >= 300
+        ? _countryFilter.text.compareTo('Choisissez un pays') == 0
+            ? Theme.of(context)
+                .textTheme
+                .bodyText1
+                .copyWith(color: Colors.grey[400])
+            : Theme.of(context).textTheme.bodyText1
+        : _countryFilter.text.compareTo('Choisissez un pays') == 0
+            ? Theme.of(context)
+                .textTheme
+                .bodyText1
+                .apply(color: Colors.grey[400], fontSizeFactor: -4)
+            : Theme.of(context).textTheme.bodyText1.apply(fontSizeFactor: -4);
+  }
+
+  TextStyle _resolveCountryTextStyle() =>
+      MediaQuery.of(context).size.width >= 300
+          ? Theme.of(context).textTheme.headline4
+          : Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4);
 
   void getCountryData(String countryCode) {
     locator

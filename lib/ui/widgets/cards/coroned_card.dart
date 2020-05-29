@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
+typedef OnTapCallback = void Function();
+
 class CoronedCard extends StatefulWidget {
   final List<Widget> children;
-  final void Function() onTap;
+  final OnTapCallback onTap;
   const CoronedCard({Key key, this.children = const [], this.onTap})
       : super(key: key);
   @override

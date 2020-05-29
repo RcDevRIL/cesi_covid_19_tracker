@@ -18,6 +18,7 @@ class CoronedData with ChangeNotifier {
     for (var e in jsonDecode(apiResponse)) {
       this.addIfAbsent(Country.fromJson(e));
     }
+    _sortCountryList();
     notifyListeners();
   }
 
@@ -27,6 +28,10 @@ class CoronedData with ChangeNotifier {
       if (c == countryToAdd) absent = false;
   }
     if (absent) _countryList.add(countryToAdd);
+  }
+
+  void _sortCountryList() {
+    _countryList.sort((c1, c2) => c1.name.compareTo(c2.name));
   }
 
   void filter(String filter) {
