@@ -1,12 +1,20 @@
-import 'api_service.dart';
-import 'package:http/http.dart' show Client, Response;
+import 'package:http/http.dart' show Response;
+import 'package:http/testing.dart' show MockClient;
+import 'package:cesi_covid_19_tracker/data/services/services.dart'
+    show ApiService;
 import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
     show CovidNotFoundException;
 
-class ApiServiceImpl implements ApiService {
+///
+///Basically a copy of actual implementation but I made timeOut and http variables mutable in
+/// this class so I can change them during the tests.
+///
+class ApiServiceMock implements ApiService {
   final String covidBaseUrl = 'https://corona.lmao.ninja/v2/';
-  final int timeOut = 10;
-  final Client http = Client();
+  int timeOut = 10;
+  MockClient http = MockClient((request) async {
+    return Response('', 200);
+  });
 
   @override
   Future<String> getDataFromCountry(String countryCode) async {
