@@ -23,7 +23,7 @@ jobs:
           git config --global user.email romain.chevallier.cesi@gmail.com
           git config --global user.name RcDevRIL
           git status
-          git remote add origin https://${{secrets.commit_secret}}@github.com/RcDevRIL/cesi_covid_19_tracker.git
+          git remote add origin https://${{secrets.covid_website_deploy}}@github.com/RcDevRIL/cesi_covid_19_tracker.git
           git checkout -b gh-pages
           git add --all
           git commit -m "Website update (version based on commit ${{github.sha}})"
