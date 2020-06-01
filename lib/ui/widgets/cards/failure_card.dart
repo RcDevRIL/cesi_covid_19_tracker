@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
     show CoronedCard, FailureIcon;
 import 'coroned_card.dart';

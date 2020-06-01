@@ -1,13 +1,13 @@
-import 'dart:async';
+import 'dart:async' show StreamController;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart' show TextCapitalization, TextInputAction;
+import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:cesi_covid_19_tracker/ui/pages/pages.dart' show DetailsPage;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, CoronedData, locator;
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
     show CoronedAppBar, CoronedCard, FailureIcon, NavigationDrawer;
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' show Provider;
 
 class CountryView extends StatefulWidget {
   @override

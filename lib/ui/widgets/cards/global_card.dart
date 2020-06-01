@@ -3,7 +3,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
-import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart' show CoronedCard;
+import 'coroned_card.dart';
 
 class GlobalCard extends StatefulWidget {
   final CovidInfos covidInfos;
@@ -23,15 +23,21 @@ class _GlobalCardState extends State<GlobalCard> {
   @override
   void initState() {
     super.initState();
-    numbers = locator.get<AppUtils>().computeWeights(widget.covidInfos.cases,
-        widget.covidInfos.recovered, widget.covidInfos.deaths);
+    numbers = locator.get<AppUtils>().computeWeights(
+          widget.covidInfos.cases,
+          widget.covidInfos.deaths,
+          widget.covidInfos.recovered,
+        );
   }
 
   @override
   void didUpdateWidget(GlobalCard oldWidget) {
     if (oldWidget != widget) {
-      numbers = locator.get<AppUtils>().computeWeights(widget.covidInfos.cases,
-          widget.covidInfos.recovered, widget.covidInfos.deaths);
+      numbers = locator.get<AppUtils>().computeWeights(
+            widget.covidInfos.cases,
+            widget.covidInfos.deaths,
+            widget.covidInfos.recovered,
+          );
     }
     super.didUpdateWidget(oldWidget);
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' show Provider;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show NavBarItemModel;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;

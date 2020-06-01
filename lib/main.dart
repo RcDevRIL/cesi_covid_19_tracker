@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' show ChangeNotifierProvider;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show CoronedData, setupLocator;
 import 'package:cesi_covid_19_tracker/ui/pages/pages.dart'

@@ -1,24 +1,22 @@
 import 'api_service.dart';
-import 'package:http/http.dart' show Client, Response;
+import 'package:http/http.dart' show Response;
 import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
     show CovidNotFoundException;
+import 'package:cesi_covid_19_tracker/data/services/http_client/http_client.dart'
+    show HttpClient;
 
 class ApiServiceImpl implements ApiService {
   final String covidBaseUrl = 'https://corona.lmao.ninja/v2/';
-  final int timeOut = 10;
-  final Client http = Client();
+  final HttpClient http;
+
+  ApiServiceImpl({this.http});
 
   @override
   Future<String> getDataFromCountry(String countryCode) async {
-    Response response;
-    try {
-      response = await http.get(
-        covidBaseUrl + 'countries/$countryCode',
-        headers: {'Content-type': 'application/json'},
-      ).timeout(Duration(seconds: timeOut));
-    } catch (e) {
-      throw 'Error when trying to connect to API:\n${e.toString()}';
-    }
+    Response response = await http.get(
+      covidBaseUrl + 'countries/$countryCode',
+      headers: {'Content-type': 'application/json'},
+    );
     switch (response?.statusCode) {
       case 200:
         return response.body;
@@ -37,15 +35,10 @@ class ApiServiceImpl implements ApiService {
 
   @override
   Future<String> getWorldLatestSituation() async {
-    Response response;
-    try {
-      response = await http.get(
-        covidBaseUrl + 'all',
-        headers: {'Content-type': 'application/json'},
-      ).timeout(Duration(seconds: timeOut));
-    } catch (e) {
-      throw 'Error when trying to connect to API:\n${e.toString()}';
-    }
+    Response response = await http.get(
+      covidBaseUrl + 'all',
+      headers: {'Content-type': 'application/json'},
+    );
     if (response?.statusCode == 200) {
       return response.body;
     } else {
@@ -57,14 +50,8 @@ class ApiServiceImpl implements ApiService {
 
   @override
   Future<String> getCountries() async {
-    Response response;
-    try {
-      response = await http
-          .get('$countriesBaseUrl/all?fields=name;alpha2Code;population;flag')
-          .timeout(Duration(seconds: timeOut));
-    } catch (e) {
-      throw 'Error when trying to connect to API:\n${e.toString()}';
-    }
+    Response response = await http
+        .get('$countriesBaseUrl/all?fields=name;alpha2Code;population;flag');
     if (response?.statusCode == 200) {
       return response.body;
     } else {

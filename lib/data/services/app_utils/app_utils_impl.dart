@@ -1,8 +1,7 @@
-import 'package:url_launcher/url_launcher.dart';
-
 import 'app_utils.dart';
-import 'dart:collection';
+import 'dart:collection' show HashMap;
 import 'package:intl/intl.dart' show NumberFormat;
+import 'package:url_launcher/url_launcher.dart' show canLaunch, launch;
 
 class AppUtilsImpl implements AppUtils {
   @override
@@ -16,7 +15,7 @@ class AppUtilsImpl implements AppUtils {
     result.putIfAbsent('total', () => c + r + d);
     result.putIfAbsent('weightContaminated', () => c / result['total']);
     result.putIfAbsent('weightDeath', () => d / result['total']);
-    result.putIfAbsent('weightRecovered', () => d / result['total']);
+    result.putIfAbsent('weightRecovered', () => r / result['total']);
     return result;
   }
 

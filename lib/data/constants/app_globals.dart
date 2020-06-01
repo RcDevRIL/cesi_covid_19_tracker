@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cesi_covid_19_tracker/data/models/navbar_item_model.dart';
+import 'package:cesi_covid_19_tracker/data/models/navbar_item_model.dart'
+    show NavBarItemModel;
 
 class AppTheme {
   static ThemeData defaultAppTheme = ThemeData.light().copyWith(

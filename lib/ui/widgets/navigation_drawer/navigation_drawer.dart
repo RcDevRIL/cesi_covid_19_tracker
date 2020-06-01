@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart' show NavBarItem;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
-import 'package:responsive_builder/responsive_builder.dart';
+import 'package:responsive_builder/responsive_builder.dart'
+    show DeviceScreenType, ResponsiveBuilder;
 import 'navigation_drawer_header.dart';
 
 class NavigationDrawer extends StatelessWidget {

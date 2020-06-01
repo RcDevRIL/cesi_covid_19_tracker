@@ -1,7 +1,8 @@
-import 'dart:convert';
-import 'package:cesi_covid_19_tracker/data/services/services.dart';
-import 'package:flutter/material.dart';
-import 'package:cesi_covid_19_tracker/data/models/country.dart';
+import 'dart:convert' show jsonDecode;
+import 'package:flutter/material.dart' show ChangeNotifier;
+import 'package:cesi_covid_19_tracker/data/services/services.dart'
+    show ApiService, locator;
+import 'package:cesi_covid_19_tracker/data/models/country.dart' show Country;
 
 class CoronedData with ChangeNotifier {
   List<Country> _filteredCountries;
