@@ -67,6 +67,29 @@ class _CountryCardState extends State<CountryCard> {
                     height: 50.0,
                     width: 50.0,
                     fit: BoxFit.contain,
+                    errorBuilder: (_, e, stacktrace) => Image.asset(
+                      'assets/missing_flag.png',
+                      height: 50.0,
+                      width: 50.0,
+                      fit: BoxFit.contain,
+                      semanticLabel: 'Unknown flag',
+                    ),
+                    frameBuilder: (context, child, frame, wasLoaded) {
+                      if (wasLoaded) {
+                        return child;
+                      }
+                      return frame == null
+                          ? Image.asset(
+                              'assets/missing_flag.png',
+                              height: 50.0,
+                              width: 50.0,
+                              fit: BoxFit.contain,
+                              semanticLabel: 'Unknown flag',
+                            )
+                          : child;
+                    },
+                    filterQuality: FilterQuality.low,
+                    semanticLabel: '${widget.covidCountryInfos.country} flag',
                   ),
                   SizedBox(
                     width: 8.0,

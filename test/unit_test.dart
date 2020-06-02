@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl;
@@ -9,22 +8,15 @@ import 'unit_tests_constants.dart' show koClient, notFoundClient, slowOkClient;
 
 void main() {
   HttpClientMock baseMock;
-  DateTime startTime;
-  Duration totalTime;
   ApiService apiService;
   AppUtils appUtils;
   setUpAll(() {
-    print('###### TEST START ######');
     // Create an instance of HttpClientMock
     baseMock = HttpClientMock();
     // Create an instance of ApiService using HttpClientMock implementation as http
     apiService = ApiServiceImpl(http: baseMock);
     // Create an instance of our AppUtils using HttpClientMock implementation as http
     appUtils = AppUtilsImpl();
-    totalTime = Duration(seconds: 0);
-  });
-  setUp(() {
-    startTime = DateTime.now();
   });
   group('API calls unit tests:', () {
     test('OK test', () async {
@@ -32,10 +24,6 @@ void main() {
       expect(apiService.getWorldLatestSituation(), completion(''));
       expect(apiService.getDataFromCountry('FR'), completion(''));
       expect(apiService.getCountries(), completion(''));
-      Duration innerTime = DateTime.now().difference(startTime);
-      totalTime += innerTime;
-      print(
-          '(took ${DateTime.now().difference(startTime).toString().substring(5)} sec)');
     });
     test('Timeout test', () async {
       // Replace the timeout value of the http Client for our ApiService
@@ -57,10 +45,6 @@ void main() {
           apiService.getCountries(),
           throwsA(
               'Error when executing GET request:\nTimeoutException after 0:00:0$newTimeOut.000000: Future not completed'));
-      Duration innerTime = DateTime.now().difference(startTime);
-      totalTime += innerTime;
-      print(
-          '(took ${DateTime.now().difference(startTime).toString().substring(5)} sec)');
     });
     test('404 test', () async {
       // Replace the http MockClient with one that return a 404 Not Found http error code
@@ -68,10 +52,6 @@ void main() {
       // Expect that the service will throw a CovidNotFoundException
       expect(apiService.getDataFromCountry('FR'),
           throwsA(isInstanceOf<CovidNotFoundException>()));
-      Duration innerTime = DateTime.now().difference(startTime);
-      totalTime += innerTime;
-      print(
-          '(took ${DateTime.now().difference(startTime).toString().substring(5)} sec)');
     });
     test('KO test', () async {
       // Replace the http MockClient with one that return a 400 http error code
@@ -83,10 +63,6 @@ void main() {
           throwsA('Error when trying to connect to API...(HTTP Code: 400)'));
       expect(apiService.getDataFromCountry('FR'),
           throwsA('Error when trying to connect to API...(HTTP Code: 400)'));
-      Duration innerTime = DateTime.now().difference(startTime);
-      totalTime += innerTime;
-      print(
-          '(took ${DateTime.now().difference(startTime).toString().substring(5)} sec)');
     });
   });
   group('App Utils unit tests:', () {
@@ -96,10 +72,6 @@ void main() {
       // Expect that the method return plain ${number.toString()} otherwise
       expect(appUtils.formatLargeNumber(900), 900.toString());
       expect(appUtils.formatLargeNumber(-1000), (-1000).toString());
-      Duration innerTime = DateTime.now().difference(startTime);
-      totalTime += innerTime;
-      print(
-          '(took ${DateTime.now().difference(startTime).toString().substring(5)} sec)');
     });
     test('computeWeights test', () async {
       var testCandidate = appUtils.computeWeights(1, 1, 1);
@@ -119,31 +91,6 @@ void main() {
       } catch (e) {
         assert(e == 'Invalid value');
       }
-      Duration innerTime = DateTime.now().difference(startTime);
-      totalTime += innerTime;
-      print(
-          '(took ${DateTime.now().difference(startTime).toString().substring(5)} sec)');
-      print('###### TEST END ######');
-      print('(took ${totalTime.toString().substring(5)} sec)');
     });
   });
 }
-
-Widget buildTestableWidget(Widget widget) {
-  return MediaQuery(
-    data: MediaQueryData(),
-    child: MaterialApp(
-      home: widget,
-      initialRoute: '/',
-    ),
-  );
-}
-
-/*import 'package:cesi_covid_19_tracker/ui/pages/country_view.dart'; 
-  group('Widgets unit tests:', () {
-    testWidgets('Search bar test', (tester) async {
-      //TODO
-      final testWidget = buildTestableWidget(CountryView());
-      await tester.pumpWidget(testWidget);
-    });
-  }); */

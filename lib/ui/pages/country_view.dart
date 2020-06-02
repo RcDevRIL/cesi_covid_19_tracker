@@ -51,6 +51,7 @@ class _CountryViewState extends State<CountryView> {
                       ? Padding(
                           padding: _resolveInputTextPadding(),
                           child: TextField(
+                            key: Key('select_country_text_field'),
                             decoration: InputDecoration(
                               fillColor: Colors.black,
                               icon: Icon(Icons.search),
@@ -114,7 +115,17 @@ class _CountryViewState extends State<CountryView> {
                                         '${coronedData.getFilteredCountries.elementAt(i - 1).flag}',
                                         height: 50.0,
                                         width: 50.0,
+                                        scale: 1.0,
+                                        repeat: ImageRepeat.noRepeat,
                                         fit: BoxFit.contain,
+                                        errorBuilder: (_, e, stacktrace) =>
+                                            Image.asset(
+                                          'assets/missing_flag.png',
+                                          height: 50.0,
+                                          width: 50.0,
+                                          fit: BoxFit.contain,
+                                          semanticLabel: 'Unknown flag',
+                                        ),
                                         frameBuilder:
                                             (context, child, frame, wasLoaded) {
                                           if (wasLoaded) {
