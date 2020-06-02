@@ -102,47 +102,53 @@ class _CountryViewState extends State<CountryView> {
                                       country: coronedData.getFilteredCountries
                                           .elementAt(i - 1))));
                             },
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Image.network(
-                                    '${coronedData.getFilteredCountries.elementAt(i - 1).flag}',
-                                    height: 50.0,
-                                    width: 50.0,
-                                    fit: BoxFit.contain,
-                                    frameBuilder:
-                                        (context, child, frame, wasLoaded) {
-                                      if (wasLoaded) {
-                                        return child;
-                                      }
-                                      return frame == null
-                                          ? Image.asset(
-                                              'assets/missing_flag.png',
-                                              height: 50.0,
-                                              width: 50.0,
-                                              fit: BoxFit.contain,
-                                              semanticLabel: 'Unknown flag',
-                                            )
-                                          : child;
-                                    },
-                                    filterQuality: FilterQuality.low,
-                                    semanticLabel:
-                                        '${coronedData.getFilteredCountries.elementAt(i - 1).name} flag',
-                                  ),
-                                  SizedBox(
-                                    width: 8.0,
-                                  ),
-                                  Flexible(
-                                    fit: FlexFit.loose,
-                                    child: Text(
-                                      '${coronedData.getFilteredCountries.elementAt(i - 1).name}',
-                                      style: _resolveCountryTextStyle(),
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: <Widget>[
+                                      Image.network(
+                                        '${coronedData.getFilteredCountries.elementAt(i - 1).flag}',
+                                        height: 50.0,
+                                        width: 50.0,
+                                        fit: BoxFit.contain,
+                                        frameBuilder:
+                                            (context, child, frame, wasLoaded) {
+                                          if (wasLoaded) {
+                                            return child;
+                                          }
+                                          return frame == null
+                                              ? Image.asset(
+                                                  'assets/missing_flag.png',
+                                                  height: 50.0,
+                                                  width: 50.0,
+                                                  fit: BoxFit.contain,
+                                                  semanticLabel: 'Unknown flag',
+                                                )
+                                              : child;
+                                        },
+                                        filterQuality: FilterQuality.low,
+                                        semanticLabel:
+                                            '${coronedData.getFilteredCountries.elementAt(i - 1).name} flag',
+                                      ),
+                                      SizedBox(
+                                        width: 8.0,
+                                      ),
+                                      Flexible(
+                                        fit: FlexFit.loose,
+                                        child: Text(
+                                          '${coronedData.getFilteredCountries.elementAt(i - 1).name}',
+                                          style: _resolveCountryTextStyle(),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                   cacheExtent: 150.0,

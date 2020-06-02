@@ -5,10 +5,9 @@ import 'package:responsive_builder/responsive_builder.dart'
 typedef OnTapCallback = void Function();
 
 class CoronedCard extends StatefulWidget {
-  final List<Widget> children;
+  final Widget child;
   final OnTapCallback onTap;
-  const CoronedCard({Key key, this.children = const [], this.onTap})
-      : super(key: key);
+  const CoronedCard({Key key, this.child, this.onTap}) : super(key: key);
   @override
   _CoronedCardState createState() => _CoronedCardState();
 }
@@ -39,13 +38,7 @@ class _CoronedCardState extends State<CoronedCard> {
                     color: Colors.blueGrey,
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: widget.children,
-                  ),
-                ),
+                child: widget.child,
               ),
             )
           : Card(
@@ -64,13 +57,7 @@ class _CoronedCardState extends State<CoronedCard> {
                   color: Colors.blueGrey,
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: widget.children,
-                ),
-              ),
+              child: widget.child,
             ),
     );
   }

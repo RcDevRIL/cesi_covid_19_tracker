@@ -15,8 +15,8 @@ class NavBarItem extends StatelessWidget {
     this.title,
     this.navigationPath,
     this.icon,
-    this.verticalSpacing = 60.0,
-    this.horizontalSpacing = 30.0,
+    this.verticalSpacing = 50.0,
+    this.horizontalSpacing = 25.0,
   });
 
   @override

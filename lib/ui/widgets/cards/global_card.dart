@@ -24,9 +24,9 @@ class _GlobalCardState extends State<GlobalCard> {
   void initState() {
     super.initState();
     numbers = locator.get<AppUtils>().computeWeights(
-          widget.covidInfos.cases,
-          widget.covidInfos.deaths,
-          widget.covidInfos.recovered,
+          widget.covidInfos.cases ?? 0,
+          widget.covidInfos.deaths ?? 0,
+          widget.covidInfos.recovered ?? 0,
         );
   }
 
@@ -34,9 +34,9 @@ class _GlobalCardState extends State<GlobalCard> {
   void didUpdateWidget(GlobalCard oldWidget) {
     if (oldWidget != widget) {
       numbers = locator.get<AppUtils>().computeWeights(
-            widget.covidInfos.cases,
-            widget.covidInfos.deaths,
-            widget.covidInfos.recovered,
+            widget.covidInfos.cases ?? 0,
+            widget.covidInfos.deaths ?? 0,
+            widget.covidInfos.recovered ?? 0,
           );
     }
     super.didUpdateWidget(oldWidget);
@@ -52,63 +52,77 @@ class _GlobalCardState extends State<GlobalCard> {
       var statsBarWidth =
           _resolveStatsWidth(sizingInfos.isDesktop || sizingInfos.isTablet);
 
-      return CoronedCard(children: <Widget>[
-        Text(
-          'Statistiques Mondiales',
-          style: Theme.of(context).textTheme.headline4,
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightContaminated'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.confirmedColorFill,
-            border: Border.all(color: aG.AppTheme.confirmedColorBorder),
+      return CoronedCard(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Statistiques Mondiales',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightContaminated'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.confirmedColorFill,
+                  border: Border.all(color: aG.AppTheme.confirmedColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightDeath'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.deathsColorFill,
+                  border: Border.all(color: aG.AppTheme.deathsColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightRecovered'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.recoveredColorFill,
+                  border: Border.all(color: aG.AppTheme.recoveredColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+            ],
           ),
         ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightDeath'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.deathsColorFill,
-            border: Border.all(color: aG.AppTheme.deathsColorBorder),
-          ),
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightRecovered'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.recoveredColorFill,
-            border: Border.all(color: aG.AppTheme.recoveredColorBorder),
-          ),
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-      ]);
+      );
     });
   }
 }

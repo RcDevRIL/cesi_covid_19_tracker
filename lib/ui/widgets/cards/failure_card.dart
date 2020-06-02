@@ -16,13 +16,19 @@ class FailureCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: CoronedCard(
-        children: [
-          FailureIcon(
-            fail: fail,
-            backgroundColor: Colors.transparent,
-            iconAndTextColor: iconAndTextColor,
-          )
-        ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              FailureIcon(
+                fail: fail,
+                backgroundColor: Colors.transparent,
+                iconAndTextColor: iconAndTextColor,
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

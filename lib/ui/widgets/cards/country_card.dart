@@ -26,9 +26,9 @@ class _CountryCardState extends State<CountryCard> {
   void initState() {
     super.initState();
     numbers = locator.get<AppUtils>().computeWeights(
-          widget.covidCountryInfos.cases,
-          widget.covidCountryInfos.deaths,
-          widget.covidCountryInfos.recovered,
+          widget.covidCountryInfos.cases ?? 0,
+          widget.covidCountryInfos.deaths ?? 0,
+          widget.covidCountryInfos.recovered ?? 0,
         );
   }
 
@@ -36,9 +36,9 @@ class _CountryCardState extends State<CountryCard> {
   void didUpdateWidget(CountryCard oldWidget) {
     if (oldWidget != widget) {
       numbers = locator.get<AppUtils>().computeWeights(
-            widget.covidCountryInfos.cases,
-            widget.covidCountryInfos.deaths,
-            widget.covidCountryInfos.recovered,
+            widget.covidCountryInfos.cases ?? 0,
+            widget.covidCountryInfos.deaths ?? 0,
+            widget.covidCountryInfos.recovered ?? 0,
           );
     }
     super.didUpdateWidget(oldWidget);
@@ -54,76 +54,90 @@ class _CountryCardState extends State<CountryCard> {
       var statsBarWidth =
           _resolveStatsWidth(sizingInfos.isDesktop || sizingInfos.isTablet);
 
-      return CoronedCard(children: <Widget>[
-        Row(
-          children: <Widget>[
-            Image.network(
-              '${widget.covidCountryInfos.countryInfo['flag']}',
-              height: 50.0,
-              width: 50.0,
-              fit: BoxFit.contain,
-            ),
-            SizedBox(
-              width: 8.0,
-            ),
-            Text(
-              '${widget.covidCountryInfos.country}',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.cases)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightContaminated'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.confirmedColorFill,
-            border: Border.all(color: aG.AppTheme.confirmedColorBorder),
+      return CoronedCard(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Image.network(
+                    '${widget.covidCountryInfos.countryInfo['flag']}',
+                    height: 50.0,
+                    width: 50.0,
+                    fit: BoxFit.contain,
+                  ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  Text(
+                    '${widget.covidCountryInfos.country}',
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.cases)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightContaminated'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.confirmedColorFill,
+                  border: Border.all(color: aG.AppTheme.confirmedColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.deaths)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightDeath'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.deathsColorFill,
+                  border: Border.all(color: aG.AppTheme.deathsColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.recovered)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightRecovered'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.recoveredColorFill,
+                  border: Border.all(color: aG.AppTheme.recoveredColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+            ],
           ),
         ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.deaths)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightDeath'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.deathsColorFill,
-            border: Border.all(color: aG.AppTheme.deathsColorBorder),
-          ),
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.recovered)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightRecovered'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.recoveredColorFill,
-            border: Border.all(color: aG.AppTheme.recoveredColorBorder),
-          ),
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-      ]);
+      );
     });
   }
 }
