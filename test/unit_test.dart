@@ -1,13 +1,10 @@
-import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl;
 import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
     show CovidNotFoundException;
 import 'mockers/mockers.dart' show HttpClientMock;
-import 'unit_tests_constants.dart'
-    show koClient, notFoundClient, slowOkClient, testGlobalStats;
+import 'unit_tests_constants.dart' show koClient, notFoundClient, slowOkClient;
 
 void main() {
   HttpClientMock baseMock;
@@ -20,26 +17,6 @@ void main() {
     apiService = ApiServiceImpl(http: baseMock);
     // Create an instance of our AppUtils using HttpClientMock implementation as http
     appUtils = AppUtilsImpl();
-  });
-  group('other random tests:', () {
-    test('json test', () async {
-      assert(testGlobalStats ==
-          CovidInfos.fromJson(jsonDecode('{'
-              '"updated": 1591205254910,'
-              '"cases": 6513890,'
-              '"todayCases": 72608,'
-              '"deaths": 384642,'
-              '"todayDeaths": 2783,'
-              '"recovered": 3100971,'
-              '"active": 3028277,'
-              '"critical": 54283,'
-              '"casesPerOneMillion": 836,'
-              '"deathsPerOneMillion": 49.3,'
-              '"tests": 88791112,'
-              '"testsPerOneMillion": 11453.22,'
-              '"affectedCountries": 215'
-              '}')));
-    });
   });
   group('API calls unit tests:', () {
     test('OK test', () async {

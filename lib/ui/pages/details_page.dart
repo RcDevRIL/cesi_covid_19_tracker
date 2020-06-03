@@ -12,7 +12,7 @@ import 'package:cesi_covid_19_tracker/data/models/models.dart'
 class DetailsPage extends StatefulWidget {
   final String countryCode;
 
-  const DetailsPage({Key key, this.countryCode}) : super(key: key);
+  const DetailsPage({Key key, @required this.countryCode}) : super(key: key);
 
   @override
   _DetailsPageState createState() => _DetailsPageState();

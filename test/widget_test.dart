@@ -1,13 +1,24 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/material.dart'
+    show ListTile, MaterialApp, MediaQuery, MediaQueryData, Widget;
+import 'package:get_it/get_it.dart' show GetIt;
+import 'package:provider/provider.dart' show ChangeNotifierProvider;
+import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart' show CountryCard;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl, CoronedData;
 import 'package:cesi_covid_19_tracker/ui/pages/pages.dart'
     show CountryView, CovidFaq, Dashboard, DetailsPage;
 import 'mockers/mockers.dart' show HttpClientMock;
-import 'unit_tests_constants.dart';
+import 'unit_tests_constants.dart'
+    show
+        circularProgressWidgetFinder,
+        countryFlagWidgetFinder,
+        globalCardWidgetFinder,
+        okCountriesClient,
+        okCountryClient,
+        okCountryStatsClient,
+        okGlobalStatsClient,
+        searchBarWidgetFinder;
 
 /// [GetIt] instance, declared as global variable so we can use it in other methods than main
 GetIt locator;
@@ -70,21 +81,25 @@ void main() {
       // Expect to find several ListTiles displaying questions and associated answers about COVID-19
       expect(find.byType(ListTile), findsWidgets);
     });
-    /* 
+
     testWidgets('Details test', (tester) async {
-      // Reinitialize coronedData as dispose() method has been called,
-      // and do it before reassigning GetIt Singletons so http mocker is still
-      // the one that gives the good data format for a coroned data instance
+      locator.registerLazySingleton<ApiService>(
+          () => ApiServiceImpl(http: HttpClientMock()..http = okCountryClient));
       coronedData = CoronedData();
       // Replace HttpClientMock instance with one that gives mocked world stats
       locator.registerLazySingleton<ApiService>(() =>
-          ApiServiceImpl(http: HttpClientMock()..http = okGlobalStatsClient));
+          ApiServiceImpl(http: HttpClientMock()..http = okCountryStatsClient));
       // Build a FAQ
-      final testWidget = buildTestableApp(DetailsPage(), null);
+      final testWidget = buildTestableApp(DetailsPage(countryCode: 'FR'), null);
       await tester.pumpWidget(testWidget);
-      // Expect to find several ListTiles displaying questions and associated answers about COVID-19
-      expect(find.byType(ListTile), findsWidgets);
-    }); */
+      // Expect the UI to show a CircularProgressIndicator and not the card yet
+      expect(find.byType(CountryCard), findsNothing);
+      expect(circularProgressWidgetFinder, findsOneWidget);
+      // Trigger a frame so mocked infos are loaded
+      await tester.pump();
+      // Expect that there is now a CountryCard displayed
+      expect(find.byType(CountryCard), findsOneWidget);
+    });
   });
 }
 
