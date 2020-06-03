@@ -1,138 +1,139 @@
-# cesi_covid_19_tracker
+# cesi_covid_19_tracker (English version)
 __Build status__
 * master: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/latest_build)
 * integration: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/latest_build)
 
 
-Bienvenue sur le répertoire de développement pour notre mini-projet en cours de développement web avancé !
+Welcome to the development directory for our mini-project done during an advanced web development study lesson!
 
-Vous trouverez dans ce README les infos utiles sur ce projet.
+In this README you will find useful information on this project.
 
 *Distributed by CESI RIL B2 - 2018-2020*
 
-## Présentation
+## Presentation
 
-Ce projet consiste en un service d'information sur l'état de la pandémie liée au COVID-19 qui sévit actuellement dans le monde.
+This project consists of an information service on the state of the COVID-19 pandemic currently raging around the world.
 
-La première version consistera en une liste d'info liée au pays sélectionné par l'utilisateur.
+The first version consists of an info list linked to the country selected by the user.
 
-Après un examen couronné de succès, l'application continue de grandir et nous accueillons avec **plaisir** les contributions! :fire:
+After what became a successful exam, we want the application to grow and **welcome** contributions! :fire:
 
-_À bientôt la V2 !_ :rocket:
+_V2 coming soon !_ :rocket:
 
 ### Changelog
 
-Voir section [Release]
+See [Release] section
 
-##### Prérequis
+##### Prerequisites
 
-De quoi avez-vous besoin pour installer ce projet et le lancer en mode "debug"
+What do you need to install this project and launch it in "debug" mode
 
-* D'abord, il vous faudra une copie de ce dépôt Git: utilisez la fonctionnalité "Download" de [cette][Github root] page ou utilisez le CLI de Git si il est installé sur votre ordinateur :
+* First, you will need a copy of this Git repository: use the "Download" functionality on [this][Github root] page or use the Git CLI if it is installed on your computer:
     * `git clone https://github.com/RcDevRIL/cesi_covid_19_tracker.git`
 
-* Ensuite il faut installer le SDK de Flutter pour pouvoir utiliser son CLI et lancer l'application en mode debug (ou release). Vous pouvez suivre le [Flutter "get started"] guide.
+* Then you have to install the Flutter SDK to be able to use its CLI and launch the application in debug (or release) mode. You can follow the [Flutter "get started"] guide.
 
 
-Si vous êtes passé par toutes les étapes du tutoriel [flutter.dev][Flutter "get started"] vous devriez avoir votre éditeur de code favori prêt au développement sous Flutter!
+If you have gone through all the steps of the tutorial [flutter.dev][Flutter "get started"] you should have your favorite code editor ready for development under Flutter!
 
-## Lancement de l'application
+## Launching the Application
 
-Avant de vouloir lancer l'application, assurez-vous d'obtenir les paquets que nous avons choisis pour [construire][Built_With] notre application. Pour ce faire, vous devez exécuter ces commandes:
+Before you want to launch the application, make sure you get the packages we have chosen to [build][Built_With] our application. To do this, you need to run these commands:
 
 * `flutter pub upgrade`
 * `flutter pub get`
 
-Nous utilisons le moteur de générateur de code de Flutter ([build_runner]) permettant de réduire le code redondant aux développeurs. Si vous voulez naviguer entre les commits, vous pourriez avoir des fichiers en conflit.
-Pour réparer ceci, vous devez exécuter cette commande:
+We use the Flutter code generator engine ([build_runner]) to reduce redundant code for developers. If you want to browse between commits, you might have conflicting files.
+To fix this, you need to run this command:
 
 `flutter packages pub run build_runner build --delete-conflicting-outputs`
 
-Vous pouvez maintenant envisager de créer et d'exécuter l'application :upside_down_face:
+You can now consider creating and running the application :upside_down_face:
 
-Pour lancer le processus de construction, d'installation et d'exécution sur un appareil Android ou iOS, exécutez la commande suivante:
+To start the build, install, and run process on an Android or iOS device, run the following command:
 
 `flutter run`
 
-Cela permettra d'installer l'application sur l'appareil connecté et de l'exécuter.
+This will install and run the app on the connected device.
 
-_Si vous avez un vrai appareil, il suffit de le brancher à l'ordinateur à l'aide de votre câble USB. Le plugin Flutter devrait remarquer le dispositif et l'ajouter automatiquement à la liste._
+_If you have a real device, just connect it to the computer using your USB cable. The Flutter plugin should notice the device and automatically add it to the list._
 
-Si vous souhaitez utiliser la version Web, assurez vous de l'avoir activé sur votre environnement Flutter:
+If you want to use the Web version, make sure you have it activated on your Flutter environment:
 
 * `flutter config --enable-web`
 * `flutter upgrade`
 
-Et préférez le canal beta:
+And prefer the beta channel:
 
 `flutter channel beta`
 
-*(bien que Flutter __v1.17.1__ devrait suffire!!)*
+*(although Flutter __v1.17.1__ should be enough!!)*
 
-Une fois que le switch s'est effectué, vous pourrez lancer la version web de l'application grâce à la commande:
+Once the switch has been made, you can launch the web version of the application using the command:
 
 `flutter run -d [chrome|web-server]`
 
-_L'option chrome sera seulement disponible si vous avez ce navigateur d'installé sur la machine locale. L'option web-server lance donc un serveur web sur lequel n'importe quel navigateur peut tenter la connexion._
+_The chrome option will only be available if you have this browser installed on the local machine. The web-server option therefore launches a web server on which any browser can attempt to connect._
 
-Pour commencer à construire le fichier release .apk, pensez à utiliser cette commande :
+To start building the release .apk file, consider using this command:
 
 `flutter build apk --split-per-abi`
 
-Cette commande produira plusieurs apks dans le dossier `/build/app/outputs/apk/release/` de votre dépôt local. Choisissez celle qui correspond le mieux à l'architecture de votre appareil. 
+This command will produce multiple apks in the `/ build / app / outputs / apk / release /` folder in your local repository. Choose the one that best matches the architecture of your device.
 
-Pour commencer à construire le site web en mode RELEASE, pensez à utiliser cette commande :
+To start building the website in RELEASE mode, consider using this command:
 
 `flutter build web --release`
 
-Cette commande produira le site web compilé dans le dossier `/build/web/` de votre dépôt local.
+This command will produce the compiled website in the `/ build / web /` folder of your local repository.
 
-## Lancement des tests unitaires
+## Launch of unit tests
 
-_Ce paragraphe explique comment déclencher les tests écrits dans le dossier **[test]** de ce dépôt._
+_This paragraph explains how to trigger the tests written in the **[test]** folder of this repository._
 
-Pour lancer les tests unitaires, il faut exécuter cette commande :
+To launch unit tests, you must execute this command:
 
 `flutter test`
 
-Cela déclenchera l'exécution de tests. Les résultats seront finalement imprimés sur votre console.
-Vous pouvez également utiliser votre outil de rapport de test intégré à l'IDE. Selon l'IDE, vous devriez voir les résultats assez facilement.
+This will trigger the execution of tests. The results will finally be printed on your console.
+You can also use your IDE test report tool. According to the IDE, you should see the results quite easily.
 
-## Lancement des tests d'intégrations
+## Launch of integration tests
 
-_Ce paragraphe explique comment déclencher les tests écrits dans le dossier **[test_driver]** de ce dépôt._
+*This paragraph explains how to trigger the tests written in the **[test_driver]** folder of this repository.*
 
-Pour lancer des tests d'intégration automatisés, assurez-vous que vous avez un appareil Android connecté et exécutez cette commande :
+To run automated integration tests, make sure you have a connected Android device and run this command:
 
 `flutter drive --target=test_driver/coroned_app.dart`
 
-Cela déclenchera l'exécution des tests d'intégration automatisés. Il lancera l'application en mode débogage et exécutera les actions mises en œuvre. Cet outil est idéal pour permettre l'intégration stable des nouvelles versions :rocket:
+This will trigger the execution of the automated integration tests. It will launch the application in debug mode and execute the actions implemented. This tool is ideal for allowing the stable integration of new versions :rocket:
 
-Mais pour l'instant, les tests mis en œuvre sont à des fins de démonstration.
+But for now, the tests implemented are for demonstration purposes.
 
-## Dépendances
+## Dependencies
 
-_Dépendances Directes :_
-* [Flutter] - Le framework Google basé sur Dart utilisé pour construire cette application
-* [http] - Le paquet utilisé pour effectuer des requêtes HTTP
-* [get_it] - Le paquet utilisé par exemple pour enregistrer des services (comme celui d'appel à l'API covid-19)
-* [json_serializable] - Le paquet utilisé pour faciliter la (dé)sérialisation json
-* [provider] - Le paquet utilisé pour faciliter le "State Management" de l'application
-* [responsive_builder] - Le paquet utilisé pour faciliter la construction d'UI suivant la taille de l'écran
-* [freezed] - Le paquet utilisé pour générer des objets par exemple utilisés en tant que DTO
-* [intl] - Le paquet utilisé dans ce projet pour espacer les chiffres des grands nombres. Ce paquet permet de faire bien d'autres choses intéressantes...
+_Direct dependencies: _
+* [Flutter] - The Google framework based on Dart used to build this application
+* [http] - The package used to make HTTP requests
+* [get_it] - The package used for example to register services (like the call to the covid-19 API)
+* [json_serializable] - The package used to facilitate json serialization
+* [provider] - The package used to facilitate "State Management" on the application
+* [responsive_builder] - The package used to facilitate building of screen responsive UIs
+* [freezed] - The package used to generate objects used as DTOs for instance
+* [intl] - The package used in this project to format large numbers. It can be used for a lot of other interestings things...
+
 
 _Test Dependencies:_
-* [flutter_test] - La bibliothèque Flutter utilisée pour mettre en œuvre les tests unitaires
-* [flutter_driver] - La bibliothèque Flutter utilisée pour mettre en place des tests d'intégration automatisés
+* [flutter_test] - The Flutter library used to implement unit tests
+* [flutter_driver] - The Flutter library used to set up automated integration tests
 
 ## Contributing
 
-Pour contribuer, veuillez envoyer un courriel à l'un des auteurs... ou regardez la liste des [Issues] et cliquez sur ce bouton de PR ! :rocket: :smile:
+To contribute, please send an email to one of the authors ... or check out the [Issues] list and click on this PR button! :rocket: :smile:
 
 ## Contributors
 
-Merci beaucoup pour vos contributions !! :smile: :rocket:
+Thanks a lot for your contributions !! :smile: :rocket:
 * **Atharva Patwardhan** - *__First__ Contributor* - [CodeSadhu]
 
 ## Authors
@@ -142,11 +143,11 @@ Merci beaucoup pour vos contributions !! :smile: :rocket:
 * **James** - *Main Author* - [FerreiraJames]
 * **Quentin** - *Main Author* - [Reyden]
 
-Voir aussi la liste des [contributeurs] qui ont participé à ce projet.
+See also the list of [contributors] who participated in this project.
 
 ## License
 
-Ce projet est sous licence GNU GENERAL PUBLIC LICENSE - voir le fichier [LICENSE.md] pour plus de détails.
+This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the file [LICENSE.md] for more details.
 
 
 [Flutter "get started"]: https://flutter.dev/get-started/
@@ -169,8 +170,7 @@ Ce projet est sous licence GNU GENERAL PUBLIC LICENSE - voir le fichier [LICENSE
 [BoiteSphinx]: https://github.com/BoiteSphinx
 [FerreiraJames]: https://github.com/FerreiraJames
 [Reyden]: https://github.com/Reyden7
-[CodeSadhu]: https://github.com/CodeSadhu
-[contributeurs]: https://github.com/RcDevRIL/cesi_covid_19_tracker/contributors
+[contributors]: https://github.com/RcDevRIL/cesi_covid_19_tracker/contributors
 [LICENSE.md]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/LICENSE
 [Issues]: https://github.com/RcDevRIL/cesi_covid_19_tracker/issues
 [Release]: https://github.com/RcDevRIL/cesi_covid_19_tracker/releases
