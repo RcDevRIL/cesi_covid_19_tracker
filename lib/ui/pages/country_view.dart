@@ -100,8 +100,10 @@ class _CountryViewState extends State<CountryView> {
                                   .elementAt(i - 1));
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (_) => DetailsPage(
-                                      country: coronedData.getFilteredCountries
-                                          .elementAt(i - 1))));
+                                      countryCode: coronedData
+                                          .getFilteredCountries
+                                          .elementAt(i - 1)
+                                          .alpha2Code)));
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

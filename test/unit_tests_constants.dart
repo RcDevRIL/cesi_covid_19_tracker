@@ -1,12 +1,16 @@
 import 'dart:convert' show jsonEncode;
-import 'package:flutter/material.dart' show Key;
+import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart' show GlobalCard;
+import 'package:flutter/material.dart' show CircularProgressIndicator, Key;
 import 'package:flutter_test/flutter_test.dart' show Future, find;
 import 'package:http/http.dart' show Response;
 import 'package:http/testing.dart' show MockClient;
-import 'package:cesi_covid_19_tracker/data/models/models.dart' show Country;
+import 'package:cesi_covid_19_tracker/data/models/models.dart'
+    show Country, CovidInfos;
 
 final searchBarWidgetFinder = find.byKey(Key('select_country_text_field'));
 final countryFlagWidgetFinder = find.bySemanticsLabel('Unknown flag');
+final globalCardWidgetFinder = find.byType(GlobalCard);
+final circularProgressWidgetFinder = find.byType(CircularProgressIndicator);
 final koClient = MockClient((request) async {
   return Response('', 400);
 });
@@ -25,10 +29,15 @@ final okCountryClient = MockClient((request) async {
   return Response('[${jsonEncode(testCountry)}]', 200);
 });
 final testCountries = [
-  Country('test', 'test', 'test', 1),
+  testCountry,
   Country('test2', 'test2', 'test2', 1),
 ];
 final okCountriesClient = MockClient((request) async {
   return Response(
       '[${jsonEncode(testCountries[0])},${jsonEncode(testCountries[1])}]', 200);
+});
+final testGlobalStats = CovidInfos(1591205254910, 6513890, 72608, 384642, 2783,
+    3100971, 3028277, 54283, 836, 49.3, 88791112, 11453.22, 215);
+final okGlobalStatsClient = MockClient((request) async {
+  return Response(jsonEncode(testGlobalStats.toJson()), 200);
 });

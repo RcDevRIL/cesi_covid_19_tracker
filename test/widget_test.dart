@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:cesi_covid_19_tracker/data/services/services.dart'
-    show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl, CoronedData;
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import 'package:cesi_covid_19_tracker/data/services/services.dart'
+    show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl, CoronedData;
+import 'package:cesi_covid_19_tracker/ui/pages/pages.dart'
+    show CountryView, CovidFaq, Dashboard, DetailsPage;
 import 'mockers/mockers.dart' show HttpClientMock;
-import 'package:cesi_covid_19_tracker/ui/pages/country_view.dart';
-
 import 'unit_tests_constants.dart';
 
 /// [GetIt] instance, declared as global variable so we can use it in other methods than main
@@ -44,6 +44,47 @@ void main() {
       // expect that CoronedData.filteredCountries.length == 1 now so only 1 card displayed
       expect(countryFlagWidgetFinder, findsOneWidget);
     });
+    testWidgets('DashBoard test', (tester) async {
+      // Reinitialize coronedData as dispose() method has been called,
+      // and do it before reassigning GetIt Singletons so http mocker is still
+      // the one that gives the good data format for a coroned data instance
+      coronedData = CoronedData();
+      // Replace HttpClientMock instance with one that gives mocked world stats
+      locator.registerLazySingleton<ApiService>(() =>
+          ApiServiceImpl(http: HttpClientMock()..http = okGlobalStatsClient));
+      // Build a DashBoard with previously initiated CoronedData Provider class
+      final testWidget = buildTestableApp(Dashboard(), coronedData);
+      await tester.pumpWidget(testWidget);
+      // Expect the UI to show a CircularProgressIndicator and the card yet
+      expect(globalCardWidgetFinder, findsNothing);
+      expect(circularProgressWidgetFinder, findsOneWidget);
+      // Trigger a frame so mocked infos are loaded
+      await tester.pump();
+      // Expect that there is now a GlobalCard displayed
+      expect(globalCardWidgetFinder, findsOneWidget);
+    });
+    testWidgets('FAQ test', (tester) async {
+      // Build a FAQ
+      final testWidget = buildTestableApp(CovidFaq(), null);
+      await tester.pumpWidget(testWidget);
+      // Expect to find several ListTiles displaying questions and associated answers about COVID-19
+      expect(find.byType(ListTile), findsWidgets);
+    });
+    /* 
+    testWidgets('Details test', (tester) async {
+      // Reinitialize coronedData as dispose() method has been called,
+      // and do it before reassigning GetIt Singletons so http mocker is still
+      // the one that gives the good data format for a coroned data instance
+      coronedData = CoronedData();
+      // Replace HttpClientMock instance with one that gives mocked world stats
+      locator.registerLazySingleton<ApiService>(() =>
+          ApiServiceImpl(http: HttpClientMock()..http = okGlobalStatsClient));
+      // Build a FAQ
+      final testWidget = buildTestableApp(DetailsPage(), null);
+      await tester.pumpWidget(testWidget);
+      // Expect to find several ListTiles displaying questions and associated answers about COVID-19
+      expect(find.byType(ListTile), findsWidgets);
+    }); */
   });
 }
 
@@ -52,13 +93,18 @@ void main() {
 Widget buildTestableApp(Widget widget, CoronedData coronedData) {
   return MediaQuery(
     data: MediaQueryData(),
-    child: ChangeNotifierProvider(
-      create: (_) => coronedData,
-      child: MaterialApp(
-        home: widget,
-        initialRoute: '/',
-      ),
-    ),
+    child: coronedData != null
+        ? ChangeNotifierProvider(
+            create: (_) => coronedData,
+            child: MaterialApp(
+              home: widget,
+              initialRoute: '/',
+            ),
+          )
+        : MaterialApp(
+            home: widget,
+            initialRoute: '/',
+          ),
   );
 }
 

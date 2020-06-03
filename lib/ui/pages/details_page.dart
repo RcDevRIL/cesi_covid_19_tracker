@@ -7,12 +7,12 @@ import 'package:cesi_covid_19_tracker/data/services/services.dart'
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
     show CoronedAppBar, CountryCard, FailureCard;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
-    show Country, CovidCountryInfos;
+    show CovidCountryInfos;
 
 class DetailsPage extends StatefulWidget {
-  final Country country;
+  final String countryCode;
 
-  const DetailsPage({Key key, this.country}) : super(key: key);
+  const DetailsPage({Key key, this.countryCode}) : super(key: key);
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -30,7 +30,7 @@ class _DetailsPageState extends State<DetailsPage> {
           FutureBuilder(
             future: locator
                 .get<ApiService>()
-                .getDataFromCountry(widget.country.alpha2Code),
+                .getDataFromCountry(widget.countryCode),
             builder: (_, AsyncSnapshot<String> s) {
               if (s.hasError) {
                 return s.error.runtimeType == CovidNotFoundException
@@ -41,6 +41,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     : FailureCard(fail: s.error);
               }
               if (s.hasData) {
+                print('DETAILS DATA:\n${s.data}');
                 return CountryCard(
                   covidCountryInfos:
                       CovidCountryInfos.fromJson(jsonDecode(s.data)),
