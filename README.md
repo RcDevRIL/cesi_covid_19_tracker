@@ -1,31 +1,59 @@
-# cesi_covid_19_tracker (English version)
-__Build status__
-* master: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/latest_build)
-* integration: [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/latest_build)
+# cesi_covid_19_tracker - [![version_badge](https://img.shields.io/badge/version-1.5-informational)](https://github.com/RcDevRIL/cesi_covid_19_tracker/releases)
+(**EN**|[FR])
 
+_Project health:_
 
-Welcome to the development directory for our mini-project done during an advanced web development study lesson!
+- **release** build [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/latest_build)
+- **dev** build [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/latest_build)
+- **Unit tests** ![coverage](https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/coverage/covbadge.svg)
 
-In this README you will find useful information on this project.
+_(The **release** build only indicates the success or failure of a ```flutter build web --release``` command on the latest [Release], while the **dev** build triggers execution of the whole test suite)_
 
-*Distributed by CESI RIL B2 - 2018-2020*
+**Welcome** on the repository for the *CORONED* app !:smile::fire:
+# Presentation
+### What is this repo for exactly ?? :raised_eyebrow:
+You'll find here the source code for a simple app written in **[Flutter]** whose humble purpose is to provide **informations** on the **COVID-19** world situation along with a short **FAQ** about this virus.
 
-## Presentation
+This application has first been created by a group of 4 students in software engineering during a course on Web development !:rocket:
+We had 2 school days to think about a simple website to build, subject and technologies free of choice !! The notation was about project management not coding so.. We could have fun with the app !:+1: We chose Flutter Web so we can get a first glimpse on this technology and we chose to make a simple **COVID-19** dashboard relying on some free API.
 
-This project consists of an information service on the state of the COVID-19 pandemic currently raging around the world.
+After what became a sucessful exam, I chose to continue the development for training purposes! And also to see the state of Flutte for Web...:thinking:
 
-The first version consists of an info list linked to the country selected by the user.
+Let's dive in!! :rocket:
+### Features :monocle_face:
+- Home page with world stats ([Dashboard])
+- Countries page with list of all available countries ([CountryView])
+  * A text input enables instant filtering on the list
+  * Clicking on one entry will open a new page with the country detailed stats
+- Country details page with **COVID-19** related statistics ([DetailsPage])
+- About page with licences used in this project (thanks Flutter team for [LicencePage] :rocket:)
+### Data sources :nerd_face:
+This app relies on **3** data sources:
+- Static FAQ hardcoded in ```FAQDataSource``` class ([lib/data/constants/app_globals.dart])
+- List of countries and their infos via [restcountries.eu] API
+- **COVID-19** stats by country and for the world via [NOVELCovid] API which in turns rely on these [sources]
 
-After what became a successful exam, we want the application to grow and **welcome** contributions! :fire:
-
-_V2 coming soon !_ :rocket:
-
-### Changelog
-
+# What I have learned :exploding_head:
+Since this is a repo created for studies, I will explain in this section what I've learned or trained during the development of this Flutter website:
+- _**TODO**_
+# Changelog :clipboard:
 See [Release] section
+# Built with :hammer_and_wrench:
+_Direct dependencies:_
+* [Flutter] - The Google framework based on Dart used to build this application
+* [http] - The package used to make HTTP requests
+* [get_it] - The package used for example to register services (like the call to the covid-19 API)
+* [json_serializable] - The package used to facilitate json serialization
+* [provider] - The package used to facilitate "State Management" on the application
+* [responsive_builder] - The package used to facilitate building of screen responsive UIs
+* [freezed] - The package used to generate objects used as DTOs for instance
+* [intl] - The package used in this project to format large numbers. It can be used for a lot of other interestings things...
 
+_Test Dependencies:_
+* [flutter_test] - The Flutter library used to implement unit tests
+* [flutter_driver] - The Flutter library used to set up automated integration tests
+# Run it on localhost 
 ##### Prerequisites
-
 What do you need to install this project and launch it in "debug" mode
 
 * First, you will need a copy of this Git repository: use the "Download" functionality on [this][Github root] page or use the Git CLI if it is installed on your computer:
@@ -110,23 +138,6 @@ This will trigger the execution of the automated integration tests. It will laun
 
 But for now, the tests implemented are for demonstration purposes.
 
-## Dependencies
-
-_Direct dependencies: _
-* [Flutter] - The Google framework based on Dart used to build this application
-* [http] - The package used to make HTTP requests
-* [get_it] - The package used for example to register services (like the call to the covid-19 API)
-* [json_serializable] - The package used to facilitate json serialization
-* [provider] - The package used to facilitate "State Management" on the application
-* [responsive_builder] - The package used to facilitate building of screen responsive UIs
-* [freezed] - The package used to generate objects used as DTOs for instance
-* [intl] - The package used in this project to format large numbers. It can be used for a lot of other interestings things...
-
-
-_Test Dependencies:_
-* [flutter_test] - The Flutter library used to implement unit tests
-* [flutter_driver] - The Flutter library used to set up automated integration tests
-
 ## Contributing
 
 To contribute, please send an email to one of the authors ... or check out the [Issues] list and click on this PR button! :rocket: :smile:
@@ -174,3 +185,13 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the file [LI
 [LICENSE.md]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/LICENSE
 [Issues]: https://github.com/RcDevRIL/cesi_covid_19_tracker/issues
 [Release]: https://github.com/RcDevRIL/cesi_covid_19_tracker/releases
+[EN]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README.md
+[FR]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README-fr.md
+[lib/data/constants/app_globals.dart]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/dev-readme/lib/data/constants/app_globals.dart#L88
+[LicencePage]: https://api.flutter.dev/flutter/material/LicensePage-class.html
+[restcountries.eu]: http://restcountries.eu/
+[NOVELCovid]: https://corona.lmao.ninja/docs/#/
+[sources]: https://github.com/NovelCOVID/API#sources
+[CountryView]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/pages/country_view.dart
+[Dashboard]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/pages/dashboard.dart
+[DetailsPage]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/pages/details_page.dart
