@@ -1,11 +1,13 @@
-# cesi_covid_19_tracker - [![version_badge](https://img.shields.io/badge/version-1.5-informational)](https://github.com/RcDevRIL/cesi_covid_19_tracker/releases)
 (**EN**|[FR])
+# cesi_covid_19_tracker - [![version_badge](https://img.shields.io/badge/version-1.5-informational)](https://github.com/RcDevRIL/cesi_covid_19_tracker/releases)
 
 _Project health:_
 
-- **release** build [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/latest_build)
-- **dev** build [![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/latest_build)
-- **Unit tests** ![coverage](https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/coverage/covbadge.svg)
+||status|
+|:---:|:---:|
+| **release** build |[![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7368db767d62001922585d/latest_build)|
+| **dev** build |[![Codemagic build status](https://api.codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/status_badge.svg)](https://codemagic.io/apps/5e7368db767d62001922585e/5e7371412ab6bb0019392b67/latest_build)|
+| Unit tests |[![coverage](https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/coverage/covbadge.svg)](https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master/coverage)|
 
 _(The **release** build only indicates the success or failure of a ```flutter build web --release``` command on the latest [Release], while the **dev** build triggers execution of the whole test suite)_
 
@@ -15,7 +17,7 @@ _(The **release** build only indicates the success or failure of a ```flutter bu
 You'll find here the source code for a simple app written in **[Flutter]** whose humble purpose is to provide **informations** on the **COVID-19** world situation along with a short **FAQ** about this virus.
 
 This application has first been created by a group of 4 students in software engineering during a course on Web development !:rocket:
-We had 2 school days to think about a simple website to build, subject and technologies free of choice !! The notation was about project management not coding so.. We could have fun with the app !:+1: We chose Flutter Web so we can get a first glimpse on this technology and we chose to make a simple **COVID-19** dashboard relying on some free API.
+We had 2 school days to think about a simple website to build...subject and technologies free of choice !! The notation was about project management not coding so.. We could have fun with the app !:+1: We chose Flutter Web so we can get a first glimpse on this technology and we chose to make a simple **COVID-19** dashboard relying on some free API.
 
 After what became a sucessful exam, I chose to continue the development for training purposes! And also to see the state of Flutte for Web...:thinking:
 
@@ -35,7 +37,30 @@ This app relies on **3** data sources:
 
 # What I have learned :exploding_head:
 Since this is a repo created for studies, I will explain in this section what I've learned or trained during the development of this Flutter website:
-- _**TODO**_
+- Responsivity (Layout **had** to react to screen size on a platform like web)
+- Network request handling using [http]
+- Error handling (if a 404 occurs on [NOVELCovid] API, that means the country hasn't reported any cases or the API has not any infos available, so I had to create a custom Exception class to handle this case and adapt softly the UI and improve UX. I also handle unknown errors and display an ugly red on black msg so user knows something rly bad happened :smile:)
+- JSON<->Object manipulations (made a lot easier thanks to [freezed] :rocket:]
+- Unit testing (see **[test]** folder for source code)
+- Performance optimization (Flutter for web is capricious sometimes :sweat_smile:)
+# Screenshots:
+_// **TODO**: Put screenshots here when V2 is done_
+- Mobile:
+
+| Page  | UI    |
+| :---: | :---: |
+| Dashboard | **TODO** |
+| CountryView | **TODO** |
+| DetailsPage | **TODO** |
+| FAQ | **TODO** |
+- Desktop:
+
+| Page  | UI    |
+| :---: | :---: |
+| Dashboard | **TODO** |
+| CountryView | **TODO** |
+| DetailsPage | **TODO** |
+| FAQ | **TODO** |
 # Changelog :clipboard:
 See [Release] section
 # Built with :hammer_and_wrench:
@@ -49,116 +74,85 @@ _Direct dependencies:_
 * [freezed] - The package used to generate objects used as DTOs for instance
 * [intl] - The package used in this project to format large numbers. It can be used for a lot of other interestings things...
 
-_Test Dependencies:_
+_Test & Dev Dependencies:_
 * [flutter_test] - The Flutter library used to implement unit tests
 * [flutter_driver] - The Flutter library used to set up automated integration tests
-# Run it on localhost 
-##### Prerequisites
-What do you need to install this project and launch it in "debug" mode
+* [build_runner] - The Flutter tool used to generate code and reduce developers charge
+# Run it on localhost
+If checking it [online](https://rcdevril.github.io/cesi_covid_19_tracker/) is not your cup of tea, you can also try launching the app on your local device. The app is compiled on every release and you can find archives of website and apks on the [Release] page. You can also build it yourself using [Flutter] CLI.
 
-* First, you will need a copy of this Git repository: use the "Download" functionality on [this][Github root] page or use the Git CLI if it is installed on your computer:
-    * `git clone https://github.com/RcDevRIL/cesi_covid_19_tracker.git`
+_/!\ This app was developed on Web platform using [Flutter]'s  `beta` channel so make sure you have a compatible version before trying to compile and run it /!\\_
 
-* Then you have to install the Flutter SDK to be able to use its CLI and launch the application in debug (or release) mode. You can follow the [Flutter "get started"] guide.
+In order to switch to beta channel, you have to execute these 2 commands:
 
+- `flutter channel beta`
+- `flutter upgrade`
 
-If you have gone through all the steps of the tutorial [flutter.dev][Flutter "get started"] you should have your favorite code editor ready for development under Flutter!
-
-## Launching the Application
-
-Before you want to launch the application, make sure you get the packages we have chosen to [build][Built_With] our application. To do this, you need to run these commands:
-
-* `flutter pub upgrade`
-* `flutter pub get`
-
-We use the Flutter code generator engine ([build_runner]) to reduce redundant code for developers. If you want to browse between commits, you might have conflicting files.
-To fix this, you need to run this command:
-
-`flutter packages pub run build_runner build --delete-conflicting-outputs`
-
-You can now consider creating and running the application :upside_down_face:
-
-To start the build, install, and run process on an Android or iOS device, run the following command:
-
-`flutter run`
-
-This will install and run the app on the connected device.
-
-_If you have a real device, just connect it to the computer using your USB cable. The Flutter plugin should notice the device and automatically add it to the list._
-
-If you want to use the Web version, make sure you have it activated on your Flutter environment:
+Enabling web beta is done by these:
 
 * `flutter config --enable-web`
 * `flutter upgrade`
-
-And prefer the beta channel:
-
-`flutter channel beta`
-
-*(although Flutter __v1.17.1__ should be enough!!)*
-
-Once the switch has been made, you can launch the web version of the application using the command:
+## Launching the Application
+If you want to launch the Web version, you can do it using the command:
 
 `flutter run -d [chrome|web-server]`
 
 _The chrome option will only be available if you have this browser installed on the local machine. The web-server option therefore launches a web server on which any browser can attempt to connect._
 
-To start building the release .apk file, consider using this command:
+To start the build, install, and run process on an Android or iOS device, run the following command:
 
-`flutter build apk --split-per-abi`
+`flutter run`
 
-This command will produce multiple apks in the `/ build / app / outputs / apk / release /` folder in your local repository. Choose the one that best matches the architecture of your device.
+This will install and run the app on the connected device. Although, be aware that we almost never test releases by actually running them. If build is passing, it's enough for me. Anyway the app is really simple, so there shouldn't be any problems !
 
-To start building the website in RELEASE mode, consider using this command:
+_If you have a real device, just connect it to the computer using your USB cable. The Flutter plugin should notice the device and automatically add it to the list._
+## Building the Application
+These steps are done on each [Release] and artifacts are shared in `.zip` files.
+To start building the release `.apk` files found in the [Release] page, consider using this command:
+
+`flutter build apk --release --split-per-abi`
+
+This command will produce multiple apks in the `/build/app/outputs/apk/release/` folder in your local repository. Choose the one that best matches the architecture of your device.
+
+To start building the release version of the website, consider using this command:
 
 `flutter build web --release`
 
-This command will produce the compiled website in the `/ build / web /` folder of your local repository.
-
+This command will produce the compiled website in the `/build/web/` folder of your local repository.
 ## Launch of unit tests
-
 _This paragraph explains how to trigger the tests written in the **[test]** folder of this repository._
 
 To launch unit tests, you must execute this command:
 
 `flutter test`
 
-This will trigger the execution of tests. The results will finally be printed on your console.
-You can also use your IDE test report tool. According to the IDE, you should see the results quite easily.
+This will trigger the execution of unit tests. The results will finally be printed on your console.
+You can also use your IDE integrated test report tool. According to the IDE, you should see the results quite easily.
 
-## Launch of integration tests
+# Contributing
 
-*This paragraph explains how to trigger the tests written in the **[test_driver]** folder of this repository.*
+To contribute, please check out the [Issues] list, ask how you can help and click on this PR button! :rocket: :+1:
 
-To run automated integration tests, make sure you have a connected Android device and run this command:
-
-`flutter drive --target=test_driver/coroned_app.dart`
-
-This will trigger the execution of the automated integration tests. It will launch the application in debug mode and execute the actions implemented. This tool is ideal for allowing the stable integration of new versions :rocket:
-
-But for now, the tests implemented are for demonstration purposes.
-
-## Contributing
-
-To contribute, please send an email to one of the authors ... or check out the [Issues] list and click on this PR button! :rocket: :smile:
-
-## Contributors
+# Contributors
 
 Thanks a lot for your contributions !! :smile: :rocket:
-* **Atharva Patwardhan** - *__First__ Contributor* - [CodeSadhu]
+|[CodeSadhu]|
+|:---:|
+|![CodeSadhu's profile pic](https://avatars1.githubusercontent.com/u/11538660?s=400&u=a8d9eadb52920602c56cf388899eeb842ccb2f67&v=4)|
+|*__First__ Contributor* with PR [#56] fixing issue [#52]|
 
-## Authors
-
-* **Romain** - *Main Author* - [RcDevRIL]
-* **David** - *Main Author* - [BoiteSphinx]
-* **James** - *Main Author* - [FerreiraJames]
-* **Quentin** - *Main Author* - [Reyden]
-
-See also the list of [contributors] who participated in this project.
-
-## License
-
+See also the [contributors] page.
+# Authors
+|[RcDevRIL]|[BoiteSphinx]|[FerreiraJames]|[Reyden]|
+|:---:|:---:|:---:|:---:|
+|![RcDevRIL's profile pic](https://avatars0.githubusercontent.com/u/40863686?s=460&u=61529927de8d90b909315f93e45f93623a16a474&v=4)|![BoiteSphinx's profile pic](https://avatars3.githubusercontent.com/u/51713003?s=400&u=b11b748cfe7857fea4862ec828f5681606b6d6d4&v=4)|![FerreiraJames's profile pic](https://avatars3.githubusercontent.com/u/45099726?s=400&v=4)|![Reyden's profile pic](https://avatars3.githubusercontent.com/u/44286667?s=400&v=4)|
+# License
 This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the file [LICENSE.md] for more details.
+# Disclaimer
+This Flutter app was developed on Web platform for training purposes as I'm learning through application development with the Flutter Framework. Do not expect high quality UI & code :smile:
+I tried to keep the code acceptable but I'm pretty sure there are loads of things that could be done better! That's why we accept kind contributions :rocket:
+The web platform has still improvements to be made but the result is far from bad and with some tweaks you are able to adjust performance on scroll, image loading via network etc.
+I tried to not use too much packages so I can learn to fix issues myself and develop things !
 
 
 [Flutter "get started"]: https://flutter.dev/get-started/
@@ -182,6 +176,9 @@ This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the file [LI
 [FerreiraJames]: https://github.com/FerreiraJames
 [Reyden]: https://github.com/Reyden7
 [contributors]: https://github.com/RcDevRIL/cesi_covid_19_tracker/contributors
+[CodeSadhu]: https://github.com/CodeSadhu
+[#52]: https://github.com/RcDevRIL/cesi_covid_19_tracker/issues/52
+[#56]: https://github.com/RcDevRIL/cesi_covid_19_tracker/pull/56
 [LICENSE.md]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/LICENSE
 [Issues]: https://github.com/RcDevRIL/cesi_covid_19_tracker/issues
 [Release]: https://github.com/RcDevRIL/cesi_covid_19_tracker/releases
