@@ -1,8 +1,7 @@
-import 'package:url_launcher/url_launcher.dart';
-
 import 'app_utils.dart';
-import 'dart:collection';
+import 'dart:collection' show HashMap;
 import 'package:intl/intl.dart' show NumberFormat;
+import 'package:url_launcher/url_launcher.dart' show canLaunch, launch;
 
 class AppUtilsImpl implements AppUtils {
   @override
@@ -12,11 +11,12 @@ class AppUtilsImpl implements AppUtils {
 
   @override
   Map<String, num> computeWeights(int c, int d, int r) {
+    if (c < 0 || d < 0 || r < 0) throw 'Invalid value';
     HashMap<String, num> result = HashMap<String, num>();
     result.putIfAbsent('total', () => c + r + d);
     result.putIfAbsent('weightContaminated', () => c / result['total']);
     result.putIfAbsent('weightDeath', () => d / result['total']);
-    result.putIfAbsent('weightRecovered', () => d / result['total']);
+    result.putIfAbsent('weightRecovered', () => r / result['total']);
     return result;
   }
 

@@ -108,9 +108,6 @@ lib/generated_plugin_registrant.dart
 # Obfuscated related
 app.*.map.json
 
-# Coverage
-coverage/
-
 # Symbols
 app.*.symbols
 

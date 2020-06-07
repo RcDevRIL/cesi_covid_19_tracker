@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
+import 'dart:convert' show jsonDecode;
 import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
     show CovidNotFoundException;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, locator;
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
-    show CountryCard, FailureCard;
+    show CoronedAppBar, CountryCard, FailureCard;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
-    show Country, CovidCountryInfos;
-import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
+    show CovidCountryInfos;
 
 class DetailsPage extends StatefulWidget {
-  final Country country;
+  final String countryCode;
 
-  const DetailsPage({Key key, this.country}) : super(key: key);
+  const DetailsPage({Key key, @required this.countryCode}) : super(key: key);
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -23,15 +22,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Image.asset('assets/cesilogo.png'),
-        ],
-        title: Text(
-          aG.AppConstants.defaultAppTitle.split('\n')[0],
-          style: Theme.of(context).textTheme.headline1,
-        ),
-      ),
+      appBar: CoronedAppBar(appBar: AppBar()),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: <Widget>[
@@ -39,16 +30,18 @@ class _DetailsPageState extends State<DetailsPage> {
           FutureBuilder(
             future: locator
                 .get<ApiService>()
-                .getDataFromCountry(widget.country.alpha2Code),
+                .getDataFromCountry(widget.countryCode),
             builder: (_, AsyncSnapshot<String> s) {
               if (s.hasError) {
                 return s.error.runtimeType == CovidNotFoundException
                     ? FailureCard(
-                        fail: 'Country not found or doesn\'t have any cases.',
+                        fail:
+                            'Country not found or doesn\'t have any COVID-19 related cases.',
                         iconAndTextColor: Theme.of(context).primaryColor)
                     : FailureCard(fail: s.error);
               }
               if (s.hasData) {
+                print('DETAILS DATA:\n${s.data}');
                 return CountryCard(
                   covidCountryInfos:
                       CovidCountryInfos.fromJson(jsonDecode(s.data)),

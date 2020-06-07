@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+import 'package:responsive_builder/responsive_builder.dart'
+    show ResponsiveBuilder;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show CovidCountryInfos;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show AppUtils, locator;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
-import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart' show CoronedCard;
+import 'coroned_card.dart';
 
 class CountryCard extends StatefulWidget {
   final CovidCountryInfos covidCountryInfos;
@@ -25,18 +26,20 @@ class _CountryCardState extends State<CountryCard> {
   void initState() {
     super.initState();
     numbers = locator.get<AppUtils>().computeWeights(
-        widget.covidCountryInfos.cases,
-        widget.covidCountryInfos.recovered,
-        widget.covidCountryInfos.deaths);
+          widget.covidCountryInfos.cases ?? 0,
+          widget.covidCountryInfos.deaths ?? 0,
+          widget.covidCountryInfos.recovered ?? 0,
+        );
   }
 
   @override
   void didUpdateWidget(CountryCard oldWidget) {
     if (oldWidget != widget) {
       numbers = locator.get<AppUtils>().computeWeights(
-          widget.covidCountryInfos.cases,
-          widget.covidCountryInfos.recovered,
-          widget.covidCountryInfos.deaths);
+            widget.covidCountryInfos.cases ?? 0,
+            widget.covidCountryInfos.deaths ?? 0,
+            widget.covidCountryInfos.recovered ?? 0,
+          );
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -51,76 +54,113 @@ class _CountryCardState extends State<CountryCard> {
       var statsBarWidth =
           _resolveStatsWidth(sizingInfos.isDesktop || sizingInfos.isTablet);
 
-      return CoronedCard(children: <Widget>[
-        Row(
-          children: <Widget>[
-            Image.network(
-              '${widget.covidCountryInfos.countryInfo['flag']}',
-              height: 50.0,
-              width: 50.0,
-              fit: BoxFit.contain,
-            ),
-            SizedBox(
-              width: 8.0,
-            ),
-            Text(
-              '${widget.covidCountryInfos.country}',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.cases)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightContaminated'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.confirmedColorFill,
-            border: Border.all(color: aG.AppTheme.confirmedColorBorder),
+      return CoronedCard(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Image.network(
+                    '${widget.covidCountryInfos.countryInfo['flag']}',
+                    height: 50.0,
+                    width: 50.0,
+                    fit: BoxFit.contain,
+                    errorBuilder: (_, e, stacktrace) => Image.asset(
+                      'assets/missing_flag.png',
+                      height: 50.0,
+                      width: 50.0,
+                      fit: BoxFit.contain,
+                      semanticLabel: 'Unknown flag',
+                    ),
+                    frameBuilder: (context, child, frame, wasLoaded) {
+                      if (wasLoaded) {
+                        return child;
+                      }
+                      return frame == null
+                          ? Image.asset(
+                              'assets/missing_flag.png',
+                              height: 50.0,
+                              width: 50.0,
+                              fit: BoxFit.contain,
+                              semanticLabel: 'Unknown flag',
+                            )
+                          : child;
+                    },
+                    filterQuality: FilterQuality.low,
+                    semanticLabel: '${widget.covidCountryInfos.country} flag',
+                  ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  Text(
+                    '${widget.covidCountryInfos.country}',
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.cases)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightContaminated'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.confirmedColorFill,
+                  border: Border.all(color: aG.AppTheme.confirmedColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.deaths)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightDeath'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.deathsColorFill,
+                  border: Border.all(color: aG.AppTheme.deathsColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.recovered)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightRecovered'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.recoveredColorFill,
+                  border: Border.all(color: aG.AppTheme.recoveredColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+            ],
           ),
         ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.deaths)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightDeath'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.deathsColorFill,
-            border: Border.all(color: aG.AppTheme.deathsColorBorder),
-          ),
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.recovered)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightRecovered'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.recoveredColorFill,
-            border: Border.all(color: aG.AppTheme.recoveredColorBorder),
-          ),
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-      ]);
+      );
     });
   }
 }

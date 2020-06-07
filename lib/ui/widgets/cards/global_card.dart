@@ -3,7 +3,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
-import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart' show CoronedCard;
+import 'coroned_card.dart';
 
 class GlobalCard extends StatefulWidget {
   final CovidInfos covidInfos;
@@ -23,15 +23,21 @@ class _GlobalCardState extends State<GlobalCard> {
   @override
   void initState() {
     super.initState();
-    numbers = locator.get<AppUtils>().computeWeights(widget.covidInfos.cases,
-        widget.covidInfos.recovered, widget.covidInfos.deaths);
+    numbers = locator.get<AppUtils>().computeWeights(
+          widget.covidInfos.cases ?? 0,
+          widget.covidInfos.deaths ?? 0,
+          widget.covidInfos.recovered ?? 0,
+        );
   }
 
   @override
   void didUpdateWidget(GlobalCard oldWidget) {
     if (oldWidget != widget) {
-      numbers = locator.get<AppUtils>().computeWeights(widget.covidInfos.cases,
-          widget.covidInfos.recovered, widget.covidInfos.deaths);
+      numbers = locator.get<AppUtils>().computeWeights(
+            widget.covidInfos.cases ?? 0,
+            widget.covidInfos.deaths ?? 0,
+            widget.covidInfos.recovered ?? 0,
+          );
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -46,63 +52,77 @@ class _GlobalCardState extends State<GlobalCard> {
       var statsBarWidth =
           _resolveStatsWidth(sizingInfos.isDesktop || sizingInfos.isTablet);
 
-      return CoronedCard(children: <Widget>[
-        Text(
-          'Statistiques Mondiales',
-          style: Theme.of(context).textTheme.headline4,
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightContaminated'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.confirmedColorFill,
-            border: Border.all(color: aG.AppTheme.confirmedColorBorder),
+      return CoronedCard(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Statistiques Mondiales',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightContaminated'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.confirmedColorFill,
+                  border: Border.all(color: aG.AppTheme.confirmedColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightDeath'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.deathsColorFill,
+                  border: Border.all(color: aG.AppTheme.deathsColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Text(
+                'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .apply(color: Colors.black),
+              ),
+              Container(
+                height: 8.0,
+                width: numbers['weightRecovered'] * statsBarWidth,
+                decoration: BoxDecoration(
+                  color: aG.AppTheme.recoveredColorFill,
+                  border: Border.all(color: aG.AppTheme.recoveredColorBorder),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+            ],
           ),
         ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightDeath'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.deathsColorFill,
-            border: Border.all(color: aG.AppTheme.deathsColorBorder),
-          ),
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        Text(
-          'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
-          style:
-              Theme.of(context).textTheme.bodyText2.apply(color: Colors.black),
-        ),
-        Container(
-          height: 8.0,
-          width: numbers['weightRecovered'] * statsBarWidth,
-          decoration: BoxDecoration(
-            color: aG.AppTheme.recoveredColorFill,
-            border: Border.all(color: aG.AppTheme.recoveredColorBorder),
-          ),
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-      ]);
+      );
     });
   }
 }

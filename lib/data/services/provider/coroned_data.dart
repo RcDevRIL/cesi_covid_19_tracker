@@ -1,7 +1,8 @@
-import 'dart:convert';
-import 'package:cesi_covid_19_tracker/data/services/services.dart';
-import 'package:flutter/material.dart';
-import 'package:cesi_covid_19_tracker/data/models/country.dart';
+import 'dart:convert' show jsonDecode;
+import 'package:flutter/material.dart' show ChangeNotifier;
+import 'package:cesi_covid_19_tracker/data/services/services.dart'
+    show ApiService, locator;
+import 'package:cesi_covid_19_tracker/data/models/country.dart' show Country;
 
 class CoronedData with ChangeNotifier {
   List<Country> _filteredCountries;
@@ -18,6 +19,7 @@ class CoronedData with ChangeNotifier {
     for (var e in jsonDecode(apiResponse)) {
       this.addIfAbsent(Country.fromJson(e));
     }
+    _sortCountryList();
     notifyListeners();
   }
 
@@ -27,6 +29,10 @@ class CoronedData with ChangeNotifier {
       if (c == countryToAdd) absent = false;
   }
     if (absent) _countryList.add(countryToAdd);
+  }
+
+  void _sortCountryList() {
+    _countryList.sort((c1, c2) => c1.name.compareTo(c2.name));
   }
 
   void filter(String filter) {

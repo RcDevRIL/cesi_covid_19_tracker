@@ -1,7 +1,8 @@
-import 'dart:async';
-import 'dart:convert';
+import 'dart:async' show StreamController;
+import 'dart:convert' show jsonDecode;
 import 'package:flutter/material.dart';
-import 'package:cesi_covid_19_tracker/data/services/services.dart';
+import 'package:cesi_covid_19_tracker/data/services/services.dart'
+    show ApiService, locator;
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
     show CoronedAppBar, FailureCard, GlobalCard, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' show Provider;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show NavBarItemModel;
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
@@ -8,7 +8,16 @@ class NavBarItem extends StatelessWidget {
   final String title;
   final String navigationPath;
   final IconData icon;
-  const NavBarItem(this.title, this.navigationPath, {this.icon});
+  final double verticalSpacing;
+  final double horizontalSpacing;
+
+  const NavBarItem({
+    this.title,
+    this.navigationPath,
+    this.icon,
+    this.verticalSpacing = 50.0,
+    this.horizontalSpacing = 25.0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +48,13 @@ class NavBarItem extends StatelessWidget {
       child: Provider.value(
         value: model,
         child: Padding(
-          padding: const EdgeInsets.only(left: 30, top: 60),
+          padding:
+              EdgeInsets.only(left: horizontalSpacing, top: verticalSpacing),
           child: Row(
             children: <Widget>[
               Icon(model.iconData),
               SizedBox(
-                width: 30,
+                width: horizontalSpacing,
               ),
               Text(
                 model.title,

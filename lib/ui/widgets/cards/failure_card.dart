@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
     show CoronedCard, FailureIcon;
 import 'coroned_card.dart';
@@ -17,13 +16,19 @@ class FailureCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: CoronedCard(
-        children: [
-          FailureIcon(
-            fail: fail,
-            backgroundColor: Colors.transparent,
-            iconAndTextColor: iconAndTextColor,
-          )
-        ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              FailureIcon(
+                fail: fail,
+                backgroundColor: Colors.transparent,
+                iconAndTextColor: iconAndTextColor,
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
