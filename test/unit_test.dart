@@ -15,7 +15,7 @@ void main() {
     baseMock = HttpClientMock();
     // Create an instance of ApiService using HttpClientMock implementation as http
     apiService = ApiServiceImpl(http: baseMock);
-    // Create an instance of our AppUtils using HttpClientMock implementation as http
+    // Create an instance of our AppUtils
     appUtils = AppUtilsImpl();
   });
   group('API calls unit tests:', () {
@@ -45,6 +45,10 @@ void main() {
           apiService.getCountries(),
           throwsA(
               'Error when executing GET request:\nTimeoutException after 0:00:0$newTimeOut.000000: Future not completed'));
+      //TODO change handling of timeout case (basically change error message displayed)
+      // Expect that the service will throw a APIUnreachedException
+      /* expect(apiService.getCountries(),
+          throwsA(isInstanceOf<APIUnreachedException>())); */
     });
     test('404 test', () async {
       // Replace the http MockClient with one that return a 404 Not Found http error code

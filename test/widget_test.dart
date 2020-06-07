@@ -51,20 +51,17 @@ void main() {
       expect(countryFlagWidgetFinder, findsNWidgets(2));
       // Filter country list with the name given on the 2nd test country
       await tester.enterText(searchBarWidgetFinder, 'test2');
+      // provider's magic
       await tester.pump();
       // expect that CoronedData.filteredCountries.length == 1 now so only 1 card displayed
       expect(countryFlagWidgetFinder, findsOneWidget);
     });
     testWidgets('DashBoard test', (tester) async {
-      // Reinitialize coronedData as dispose() method has been called,
-      // and do it before reassigning GetIt Singletons so http mocker is still
-      // the one that gives the good data format for a coroned data instance
-      coronedData = CoronedData();
       // Replace HttpClientMock instance with one that gives mocked world stats
       locator.registerLazySingleton<ApiService>(() =>
           ApiServiceImpl(http: HttpClientMock()..http = okGlobalStatsClient));
-      // Build a DashBoard with previously initiated CoronedData Provider class
-      final testWidget = buildTestableApp(Dashboard(), coronedData);
+      // Build a DashBoard
+      final testWidget = buildTestableApp(Dashboard(), null);
       await tester.pumpWidget(testWidget);
       // Expect the UI to show a CircularProgressIndicator and the card yet
       expect(globalCardWidgetFinder, findsNothing);
@@ -86,10 +83,10 @@ void main() {
       locator.registerLazySingleton<ApiService>(
           () => ApiServiceImpl(http: HttpClientMock()..http = okCountryClient));
       coronedData = CoronedData();
-      // Replace HttpClientMock instance with one that gives mocked world stats
+      // Replace HttpClientMock instance with one that gives mocked country stats
       locator.registerLazySingleton<ApiService>(() =>
           ApiServiceImpl(http: HttpClientMock()..http = okCountryStatsClient));
-      // Build a FAQ
+      // Build a DetailsPage
       final testWidget = buildTestableApp(DetailsPage(countryCode: 'FR'), null);
       await tester.pumpWidget(testWidget);
       // Expect the UI to show a CircularProgressIndicator and not the card yet
