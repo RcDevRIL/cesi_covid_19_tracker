@@ -1,7 +1,6 @@
 (**EN**|[FR])
-# cesi_covid_19_tracker - [![version_badge](https://img.shields.io/badge/version-1.5-informational)](https://github.com/RcDevRIL/cesi_covid_19_tracker/releases)
-
-_Project health:_
+# cesi_covid_19_tracker
+[![version_badge](https://img.shields.io/badge/version-1.5-informational)][Release]
 
 ||status|
 |:---:|:---:|
@@ -19,10 +18,10 @@ You'll find here the source code for a simple app written in **[Flutter]** whose
 This application has first been created by a group of 4 students in software engineering during a course on Web development !:rocket:
 We had 2 school days to think about a simple website to build...subject and technologies free of choice !! The notation was about project management not coding so.. We could have fun with the app !:+1: We chose Flutter Web so we can get a first glimpse on this technology and we chose to make a simple **COVID-19** dashboard relying on some free API.
 
-After what became a sucessful exam, I chose to continue the development for training purposes! And also to see the state of Flutte for Web...:thinking:
+After what became a sucessful exam, I chose to continue the development for training purposes! And also to see the state of Flutter for Web...:thinking:
 
-Let's dive in!! :rocket:
-### Features :monocle_face:
+_Let's dive in !!_:monocle_face:
+### Features :rocket:
 - Home page with world stats ([Dashboard])
 - Countries page with list of all available countries ([CountryView])
   * A text input enables instant filtering on the list
@@ -35,7 +34,7 @@ This app relies on **3** data sources:
 - List of countries and their infos via [restcountries.eu] API
 - **COVID-19** stats by country and for the world via [NOVELCovid] API which in turns rely on these [sources]
 
-# What I have learned :exploding_head:
+### What I have learned :exploding_head:
 Since this is a repo created for studies, I will explain in this section what I've learned or trained during the development of this Flutter website:
 - Responsivity (Layout **had** to react to screen size on a platform like web)
 - Network request handling using [http]
@@ -43,7 +42,8 @@ Since this is a repo created for studies, I will explain in this section what I'
 - JSON<->Object manipulations (made a lot easier thanks to [freezed] :rocket:]
 - Unit testing (see **[test]** folder for source code)
 - Performance optimization (Flutter for web is capricious sometimes :sweat_smile:)
-# Screenshots:
+- Github project management tools (in the begining we were 4 students, and chose to go with Automated Kanban boards from Github ! Issues and PR were our way to handle the development of the website, and I continue on to better learn about all Github features :rocket:)
+### Screenshots: :mag:
 _// **TODO**: Put screenshots here when V2 is done_
 - Mobile:
 
@@ -53,6 +53,7 @@ _// **TODO**: Put screenshots here when V2 is done_
 | CountryView | **TODO** |
 | DetailsPage | **TODO** |
 | FAQ | **TODO** |
+
 - Desktop:
 
 | Page  | UI    |
@@ -61,13 +62,13 @@ _// **TODO**: Put screenshots here when V2 is done_
 | CountryView | **TODO** |
 | DetailsPage | **TODO** |
 | FAQ | **TODO** |
-# Changelog :clipboard:
+### Changelog :clipboard:
 See [Release] section
-# Built with :hammer_and_wrench:
+### Built with :hammer_and_wrench:
 _Direct dependencies:_
 * [Flutter] - The Google framework based on Dart used to build this application
 * [http] - The package used to make HTTP requests
-* [get_it] - The package used for example to register services (like the call to the covid-19 API)
+* [get_it] - The package used for example to register singletons (like the classes that enable calling the covid-19 API)
 * [json_serializable] - The package used to facilitate json serialization
 * [provider] - The package used to facilitate "State Management" on the application
 * [responsive_builder] - The package used to facilitate building of screen responsive UIs
@@ -92,7 +93,7 @@ Enabling web beta is done by these:
 
 * `flutter config --enable-web`
 * `flutter upgrade`
-## Launching the Application
+### Launching the Application :rocket:
 If you want to launch the Web version, you can do it using the command:
 
 `flutter run -d [chrome|web-server]`
@@ -103,10 +104,10 @@ To start the build, install, and run process on an Android or iOS device, run th
 
 `flutter run`
 
-This will install and run the app on the connected device. Although, be aware that we almost never test releases by actually running them. If build is passing, it's enough for me. Anyway the app is really simple, so there shouldn't be any problems !
+This will install and run the app on the connected device. Although, be aware that we almost never test Android/iOS releases by actually running them. If build is passing, it's enough for us. Anyway the app is really simple, so there shouldn't be any problems !
 
 _If you have a real device, just connect it to the computer using your USB cable. The Flutter plugin should notice the device and automatically add it to the list._
-## Building the Application
+### Building the Application :building_construction:
 These steps are done on each [Release] and artifacts are shared in `.zip` files.
 To start building the release `.apk` files found in the [Release] page, consider using this command:
 
@@ -119,7 +120,7 @@ To start building the release version of the website, consider using this comman
 `flutter build web --release`
 
 This command will produce the compiled website in the `/build/web/` folder of your local repository.
-## Launch of unit tests
+### Launch of unit tests :heavy_check_mark:
 _This paragraph explains how to trigger the tests written in the **[test]** folder of this repository._
 
 To launch unit tests, you must execute this command:
@@ -131,11 +132,11 @@ You can also use your IDE integrated test report tool. According to the IDE, you
 
 # Contributing
 
-To contribute, please check out the [Issues] list, ask how you can help and click on this PR button! :rocket: :+1:
+To contribute, please check out the [Issues] list, ask how you can help and click on this PR button!:rocket::+1:
 
-# Contributors
+### Contributors :blue_heart:
 
-Thanks a lot for your contributions !! :smile: :rocket:
+Thanks a lot for your contributions !!:smile::rocket:
 |[CodeSadhu]|
 |:---:|
 |![CodeSadhu's profile pic](https://avatars1.githubusercontent.com/u/11538660?s=400&u=a8d9eadb52920602c56cf388899eeb842ccb2f67&v=4)|
@@ -149,11 +150,20 @@ See also the [contributors] page.
 # License
 This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the file [LICENSE.md] for more details.
 # Disclaimer
-This Flutter app was developed on Web platform for training purposes as I'm learning through application development with the Flutter Framework. Do not expect high quality UI & code :smile:
-I tried to keep the code acceptable but I'm pretty sure there are loads of things that could be done better! That's why we accept kind contributions :rocket:
-The web platform has still improvements to be made but the result is far from bad and with some tweaks you are able to adjust performance on scroll, image loading via network etc.
-I tried to not use too much packages so I can learn to fix issues myself and develop things !
+This Flutter app was developed on Web platform for training purposes as I'm learning through application development with the Flutter Framework. Do not expect high quality UI & code:smile:
 
+I tried to keep the code acceptable but I'm pretty sure there are loads of things that could be done better! That's why we accept kind contributions:rocket:
+
+The web platform has still improvements to be made but the result is far from bad and with some tweaks you are able to adjust performance on scroll, image loading via network etc.:white_check_mark:
+
+I tried to not use too much packages so I can learn to fix issues myself and develop things !:muscle:
+
+
+Flutter for the win:blue_heart::rocket:
+
+Thanks for reading all the way through!:grin:
+
+Have fun coding !!:rocket::computer:
 
 [Flutter "get started"]: https://flutter.dev/get-started/
 [Github root]: https://github.com/RcDevRIL/cesi_covid_19_tracker/
