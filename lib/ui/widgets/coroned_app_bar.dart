@@ -4,6 +4,8 @@ import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show AppUtils, locator;
 import 'package:responsive_builder/responsive_builder.dart'
     show ResponsiveBuilder;
+import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
+    show HoverExtensions;
 
 class CoronedAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar appBar;
@@ -26,7 +28,7 @@ class CoronedAppBar extends StatelessWidget implements PreferredSizeWidget {
                     height: sizes.isWatch ? 100 : 150,
                     width: sizes.isWatch ? 100 : 150,
                   ),
-                ),
+                ).showCursorOnHover,
               ],
               titleSpacing: 0.0,
               title: Text(

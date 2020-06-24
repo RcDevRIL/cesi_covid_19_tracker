@@ -8,6 +8,8 @@ import 'package:cesi_covid_19_tracker/data/services/services.dart'
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
     show CoronedAppBar, CoronedCard, FailureIcon, NavigationDrawer;
 import 'package:provider/provider.dart' show Provider;
+import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
+    show HoverExtensions;
 
 class CountryView extends StatefulWidget {
   @override
@@ -169,7 +171,7 @@ class _CountryViewState extends State<CountryView> {
                                   ],
                                 ),
                               ),
-                            ),
+                            ).showCursorOnHover,
                           ),
                     cacheExtent: 150.0,
                   ),

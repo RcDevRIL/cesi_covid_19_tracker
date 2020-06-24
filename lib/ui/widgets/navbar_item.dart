@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' show Provider;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show NavBarItemModel;
+import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
+    show HoverExtensions;
 
 class NavBarItem extends StatelessWidget {
   final String title;
@@ -43,7 +45,7 @@ class NavBarItem extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText1,
               )
             ],
-          ),
+          ).showCursorOnHover,
         ),
       ),
     );
