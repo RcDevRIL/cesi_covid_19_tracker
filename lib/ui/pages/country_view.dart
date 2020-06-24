@@ -44,127 +44,131 @@ class _CountryViewState extends State<CountryView> {
       drawer: NavigationDrawer(),
       body: coronedData.getCountryList != null
           ? coronedData.getCountryList.isNotEmpty
-              ? ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: coronedData.getFilteredCountries.length + 1,
-                  itemBuilder: (_, i) => i == 0
-                      ? Padding(
-                          padding: _resolveInputTextPadding(),
-                          child: TextField(
-                            key: Key('select_country_text_field'),
-                            decoration: InputDecoration(
-                              fillColor: Colors.black,
-                              icon: Icon(Icons.search),
-                              isDense: true,
-                              alignLabelWithHint: true,
-                            ),
-                            onTap: () => _countryFilter.text
-                                        .compareTo('Choisissez un pays') ==
-                                    0
-                                ? _countryFilter.text = ''
-                                : null,
-                            onChanged: (value) {
-                              coronedData.filter(_countryFilter.text);
-                            },
-                            onEditingComplete: () {
-                              coronedData.filter(_countryFilter.text);
-                              FocusScope.of(context)
-                                  .unfocus(); // Try to enforce TextInput unfocus
-                              if (_countryFilter.text == null ||
-                                  _countryFilter.text.isEmpty)
-                                _countryFilter.text = 'Choisissez un pays';
-                            },
-                            controller: _countryFilter,
-                            maxLines: 1,
-                            autocorrect: false,
-                            dragStartBehavior: DragStartBehavior.down,
-                            style: _resolveInputTextStyle(),
-                            cursorColor: (_countryFilter.text
-                                            .compareTo('Choisissez un pays') ==
-                                        0 ||
+              ? Scrollbar(
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: coronedData.getFilteredCountries.length + 1,
+                    itemBuilder: (_, i) => i == 0
+                        ? Padding(
+                            padding: _resolveInputTextPadding(),
+                            child: TextField(
+                              key: Key('select_country_text_field'),
+                              decoration: InputDecoration(
+                                fillColor: Colors.black,
+                                icon: Icon(Icons.search),
+                                isDense: true,
+                                alignLabelWithHint: true,
+                              ),
+                              onTap: () => _countryFilter.text
+                                          .compareTo('Choisissez un pays') ==
+                                      0
+                                  ? _countryFilter.text = ''
+                                  : null,
+                              onChanged: (value) {
+                                coronedData.filter(_countryFilter.text);
+                              },
+                              onEditingComplete: () {
+                                coronedData.filter(_countryFilter.text);
+                                FocusScope.of(context)
+                                    .unfocus(); // Try to enforce TextInput unfocus
+                                if (_countryFilter.text == null ||
                                     _countryFilter.text.isEmpty)
-                                ? Colors.grey[400]
-                                : Colors.blueGrey,
-                            textAlignVertical: TextAlignVertical.bottom,
-                            textInputAction: TextInputAction.search,
-                            textCapitalization: TextCapitalization.sentences,
-                            textDirection: Directionality.of(context),
-                          ),
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: CoronedCard(
-                            onTap: () {
-                              coronedData.setSelectedCountry(coronedData
-                                  .getFilteredCountries
-                                  .elementAt(i - 1));
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => DetailsPage(
-                                      countryCode: coronedData
-                                          .getFilteredCountries
-                                          .elementAt(i - 1)
-                                          .alpha2Code)));
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      Image.network(
-                                        '${coronedData.getFilteredCountries.elementAt(i - 1).flag}',
-                                        height: 50.0,
-                                        width: 50.0,
-                                        scale: 1.0,
-                                        repeat: ImageRepeat.noRepeat,
-                                        fit: BoxFit.contain,
-                                        errorBuilder: (_, e, stacktrace) =>
-                                            Image.asset(
-                                          'assets/missing_flag.png',
+                                  _countryFilter.text = 'Choisissez un pays';
+                              },
+                              controller: _countryFilter,
+                              maxLines: 1,
+                              autocorrect: false,
+                              dragStartBehavior: DragStartBehavior.down,
+                              style: _resolveInputTextStyle(),
+                              cursorColor: (_countryFilter.text.compareTo(
+                                              'Choisissez un pays') ==
+                                          0 ||
+                                      _countryFilter.text.isEmpty)
+                                  ? Colors.grey[400]
+                                  : Colors.blueGrey,
+                              textAlignVertical: TextAlignVertical.bottom,
+                              textInputAction: TextInputAction.search,
+                              textCapitalization: TextCapitalization.sentences,
+                              textDirection: Directionality.of(context),
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: CoronedCard(
+                              onTap: () {
+                                coronedData.setSelectedCountry(coronedData
+                                    .getFilteredCountries
+                                    .elementAt(i - 1));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => DetailsPage(
+                                        countryCode: coronedData
+                                            .getFilteredCountries
+                                            .elementAt(i - 1)
+                                            .alpha2Code)));
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Image.network(
+                                          '${coronedData.getFilteredCountries.elementAt(i - 1).flag}',
                                           height: 50.0,
                                           width: 50.0,
+                                          scale: 1.0,
+                                          repeat: ImageRepeat.noRepeat,
                                           fit: BoxFit.contain,
-                                          semanticLabel: 'Unknown flag',
+                                          errorBuilder: (_, e, stacktrace) =>
+                                              Image.asset(
+                                            'assets/missing_flag.png',
+                                            height: 50.0,
+                                            width: 50.0,
+                                            fit: BoxFit.contain,
+                                            semanticLabel: 'Unknown flag',
+                                          ),
+                                          frameBuilder: (context, child, frame,
+                                              wasLoaded) {
+                                            if (wasLoaded) {
+                                              return child;
+                                            }
+                                            return frame == null
+                                                ? Image.asset(
+                                                    'assets/missing_flag.png',
+                                                    height: 50.0,
+                                                    width: 50.0,
+                                                    fit: BoxFit.contain,
+                                                    semanticLabel:
+                                                        'Unknown flag',
+                                                  )
+                                                : child;
+                                          },
+                                          filterQuality: FilterQuality.low,
+                                          semanticLabel:
+                                              '${coronedData.getFilteredCountries.elementAt(i - 1).name} flag',
                                         ),
-                                        frameBuilder:
-                                            (context, child, frame, wasLoaded) {
-                                          if (wasLoaded) {
-                                            return child;
-                                          }
-                                          return frame == null
-                                              ? Image.asset(
-                                                  'assets/missing_flag.png',
-                                                  height: 50.0,
-                                                  width: 50.0,
-                                                  fit: BoxFit.contain,
-                                                  semanticLabel: 'Unknown flag',
-                                                )
-                                              : child;
-                                        },
-                                        filterQuality: FilterQuality.low,
-                                        semanticLabel:
-                                            '${coronedData.getFilteredCountries.elementAt(i - 1).name} flag',
-                                      ),
-                                      SizedBox(
-                                        width: 8.0,
-                                      ),
-                                      Flexible(
-                                        fit: FlexFit.loose,
-                                        child: Text(
-                                          '${coronedData.getFilteredCountries.elementAt(i - 1).name}',
-                                          style: _resolveCountryTextStyle(),
+                                        SizedBox(
+                                          width: 8.0,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                        Flexible(
+                                          fit: FlexFit.loose,
+                                          child: Text(
+                                            '${coronedData.getFilteredCountries.elementAt(i - 1).name}',
+                                            style: _resolveCountryTextStyle(),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                  cacheExtent: 150.0,
+                    cacheExtent: 150.0,
+                  ),
                 )
               : Center(child: CircularProgressIndicator())
           : FailureIcon(

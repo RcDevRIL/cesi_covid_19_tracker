@@ -16,38 +16,40 @@ class _CovidFaqState extends State<CovidFaq> {
     return Scaffold(
       appBar: CoronedAppBar(appBar: AppBar()),
       drawer: NavigationDrawer(),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: <Widget>[
-          SizedBox(
-            height: 24.0,
-          ),
-          ...items.map((e) => Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: ListTile(
-                  title: Text(
-                    e.values.elementAt(0),
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .apply(color: Colors.black),
-                  ),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      e.values.elementAt(1),
+      body: Scrollbar(
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          children: <Widget>[
+            SizedBox(
+              height: 24.0,
+            ),
+            ...items.map((e) => Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: ListTile(
+                    title: Text(
+                      e.values.elementAt(0),
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText2
+                          .bodyText1
                           .apply(color: Colors.black),
                     ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        e.values.elementAt(1),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2
+                            .apply(color: Colors.black),
+                      ),
+                    ),
                   ),
-                ),
-              )),
-          SizedBox(
-            height: 24.0,
-          ),
-        ],
+                )),
+            SizedBox(
+              height: 24.0,
+            ),
+          ],
+        ),
       ),
     );
   }
