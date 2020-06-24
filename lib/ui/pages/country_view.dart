@@ -101,6 +101,10 @@ class _CountryViewState extends State<CountryView> {
                                     .elementAt(i - 1));
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (_) => DetailsPage(
+                                        countryName: coronedData
+                                            .getFilteredCountries
+                                            .elementAt(i - 1)
+                                            .translations['fr'],
                                         countryCode: coronedData
                                             .getFilteredCountries
                                             .elementAt(i - 1)
@@ -156,7 +160,7 @@ class _CountryViewState extends State<CountryView> {
                                         Flexible(
                                           fit: FlexFit.loose,
                                           child: Text(
-                                            '${coronedData.getFilteredCountries.elementAt(i - 1).name}',
+                                            '${coronedData.getFilteredCountries.elementAt(i - 1).translations['fr']}',
                                             style: _resolveCountryTextStyle(),
                                           ),
                                         ),

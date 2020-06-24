@@ -17,38 +17,32 @@ class _CovidFaqState extends State<CovidFaq> {
       appBar: CoronedAppBar(appBar: AppBar()),
       drawer: NavigationDrawer(),
       body: Scrollbar(
-        child: ListView(
+        child: ListView.builder(
           physics: const BouncingScrollPhysics(),
-          children: <Widget>[
-            SizedBox(
-              height: 24.0,
+          itemCount: items.length,
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          itemBuilder: (c, i) => Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: ListTile(
+              title: Text(
+                items.elementAt(i).values.elementAt(0),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .apply(color: Colors.black),
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  items.elementAt(i).values.elementAt(1),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      .apply(color: Colors.black),
+                ),
+              ),
             ),
-            ...items.map((e) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: ListTile(
-                    title: Text(
-                      e.values.elementAt(0),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .apply(color: Colors.black),
-                    ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        e.values.elementAt(1),
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2
-                            .apply(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                )),
-            SizedBox(
-              height: 24.0,
-            ),
-          ],
+          ),
         ),
       ),
     );

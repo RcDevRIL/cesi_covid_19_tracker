@@ -10,9 +10,11 @@ import 'coroned_card.dart';
 
 class CountryCard extends StatefulWidget {
   final CovidCountryInfos covidCountryInfos;
+  final String countryName;
   const CountryCard({
     Key key,
     @required this.covidCountryInfos,
+    @required this.countryName,
   }) : super(key: key);
 
   @override
@@ -89,13 +91,13 @@ class _CountryCardState extends State<CountryCard> {
                           : child;
                     },
                     filterQuality: FilterQuality.low,
-                    semanticLabel: '${widget.covidCountryInfos.country} flag',
+                    semanticLabel: '${widget.countryName} flag',
                   ),
                   SizedBox(
                     width: 8.0,
                   ),
                   Text(
-                    '${widget.covidCountryInfos.country}',
+                    '${widget.countryName}',
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ],

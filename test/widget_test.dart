@@ -87,7 +87,8 @@ void main() {
       locator.registerLazySingleton<ApiService>(() =>
           ApiServiceImpl(http: HttpClientMock()..http = okCountryStatsClient));
       // Build a DetailsPage
-      final testWidget = buildTestableApp(DetailsPage(countryCode: 'FR'), null);
+      final testWidget = buildTestableApp(
+          DetailsPage(countryName: 'France', countryCode: 'FR'), null);
       await tester.pumpWidget(testWidget);
       // Expect the UI to show a CircularProgressIndicator and not the card yet
       expect(find.byType(CountryCard), findsNothing);

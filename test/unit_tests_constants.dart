@@ -24,13 +24,13 @@ final slowOkClient = MockClient((request) async {
   await Future.delayed(Duration(seconds: 3));
   return Response('', 200);
 });
-final testCountry = Country('test', 'test', 'test', 1);
+final testCountry = Country({'fr': 'test'}, 'test', 'test', 'test', 1);
 final okCountryClient = MockClient((request) async {
   return Response('[${jsonEncode(testCountry)}]', 200);
 });
 final testCountries = [
   testCountry,
-  Country('test2', 'test2', 'test2', 1),
+  Country({'fr': 'test'}, 'test2', 'test2', 'test2', 1),
 ];
 final okCountriesClient = MockClient((request) async {
   return Response(

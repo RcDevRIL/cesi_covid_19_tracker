@@ -11,8 +11,11 @@ import 'package:cesi_covid_19_tracker/data/models/models.dart'
 
 class DetailsPage extends StatefulWidget {
   final String countryCode;
+  final String countryName;
 
-  const DetailsPage({Key key, @required this.countryCode}) : super(key: key);
+  const DetailsPage(
+      {Key key, @required this.countryCode, @required this.countryName})
+      : super(key: key);
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -46,6 +49,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   return CountryCard(
                     covidCountryInfos:
                         CovidCountryInfos.fromJson(jsonDecode(s.data)),
+                    countryName: widget.countryName,
                   );
                 }
                 if (!s.hasData && s.connectionState == ConnectionState.done) {
