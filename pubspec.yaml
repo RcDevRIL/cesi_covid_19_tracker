@@ -1,7 +1,7 @@
 name: cesi_covid_19_tracker
-description: A PoC for a covid-19 tracker
+description: A covid-19 info app
 
-version: 1.5.0+1
+version: 1.5.1+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

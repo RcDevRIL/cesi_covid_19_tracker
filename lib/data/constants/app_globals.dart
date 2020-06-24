@@ -52,7 +52,7 @@ class AppTheme {
 
 class AppConstants {
   static const String applicationName = 'CORONED\n';
-  static const String applicationVersion = '\nv1.4';
+  static const String applicationVersion = '\nv1.5.1';
   static const String applicationIcon = 'assets/virus-logo.png';
   static const String applicationLegalese =
       'CORONED est à la base un projet scolaire réalisé pour répondre à un sujet de\ntravaux pratiques dans un cours de développement web dispensé par le CESI Dijon-Quetigny.'
