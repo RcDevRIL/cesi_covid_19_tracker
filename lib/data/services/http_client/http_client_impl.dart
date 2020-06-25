@@ -16,7 +16,7 @@ class HttpClientImpl implements HttpClient {
           )
           .timeout(Duration(seconds: timeOut));
     } catch (e) {
-      throw 'Error when executing GET request:\n${e.toString()}';
+      throw 'Error when executing GET request:\n$e';
     }
     return response;
   }
