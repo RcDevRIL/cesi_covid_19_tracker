@@ -14,7 +14,7 @@ class CountryCard extends StatefulWidget {
   const CountryCard({
     Key key,
     @required this.covidCountryInfos,
-    @required this.countryName,
+    this.countryName,
   }) : super(key: key);
 
   @override
@@ -91,13 +91,14 @@ class _CountryCardState extends State<CountryCard> {
                           : child;
                     },
                     filterQuality: FilterQuality.low,
-                    semanticLabel: '${widget.countryName} flag',
+                    semanticLabel:
+                        '${widget.countryName ?? widget.covidCountryInfos.country} flag',
                   ),
                   SizedBox(
                     width: 8.0,
                   ),
                   Text(
-                    '${widget.countryName}',
+                    '${widget.countryName ?? widget.covidCountryInfos.country}',
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ],

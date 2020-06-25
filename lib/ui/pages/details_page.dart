@@ -3,19 +3,17 @@ import 'dart:convert' show jsonDecode;
 import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
     show CovidNotFoundException;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
-    show ApiService, locator;
+    show ApiService, CoronedData, locator;
 import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
     show CoronedAppBar, CountryCard, FailureCard;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show CovidCountryInfos;
+import 'package:flutter_modular/flutter_modular.dart';
 
 class DetailsPage extends StatefulWidget {
   final String countryCode;
-  final String countryName;
 
-  const DetailsPage(
-      {Key key, @required this.countryCode, @required this.countryName})
-      : super(key: key);
+  const DetailsPage({Key key, @required this.countryCode}) : super(key: key);
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -49,7 +47,9 @@ class _DetailsPageState extends State<DetailsPage> {
                   return CountryCard(
                     covidCountryInfos:
                         CovidCountryInfos.fromJson(jsonDecode(s.data)),
-                    countryName: widget.countryName,
+                    countryName: Modular.get<CoronedData>()
+                        .getSelectedCountry
+                        .translations['fr'],
                   );
                 }
                 if (!s.hasData && s.connectionState == ConnectionState.done) {
