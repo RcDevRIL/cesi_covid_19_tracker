@@ -9,7 +9,7 @@ const RESOURCES = {
 "assets/assets/virus-logo.png": "4290a5bb9e8ab4ca1b60ece1feaac645",
 "assets/FontManifest.json": "580ff1a5d08679ded8fcf5c6848cece7",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
-"assets/NOTICES": "d69d8995e1fd97651ac1cd637889a4b6",
+"assets/NOTICES": "d90852077e05bec7b153933fd0f4d752",
 "favicon.ico": "cd78fd2732d09d2595ba1b16b9d6a488",
 "icons/android-icon-144x144.png": "fb70f5cda7db961105feb0f09b6f2899",
 "icons/android-icon-192x192.png": "cb618464d5fe4baffb584ad6767490cd",
@@ -38,7 +38,7 @@ const RESOURCES = {
 "icons/ms-icon-70x70.png": "48f490a64da323b6fe6daa506471699b",
 "index.html": "7c005a087ba16c486930d78d526505a5",
 "/": "7c005a087ba16c486930d78d526505a5",
-"main.dart.js": "00abf248041e4cc2c8ece6d6cdfe98c5",
+"main.dart.js": "cdf3ccb468d08da82bf1941c81fbc6fd",
 "manifest.json": "610bcc38a0da86239a4f9d2472cb7d67"
 };
 
