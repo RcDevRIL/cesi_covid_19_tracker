@@ -62,7 +62,12 @@ class _DetailsPageState extends State<DetailsPage> {
                                 .translations['fr'];
                         return CountryCard(
                           covidCountryInfos: covidCountryInfos,
-                          countryName: displayName,
+                          countryName: displayName ??
+                              coronedData.getCountryList
+                                  .firstWhere((c) =>
+                                      c.alpha2Code ==
+                                      covidCountryInfos.countryInfo['iso2'])
+                                  .name,
                         );
                       }
                       if (!s.hasData &&

@@ -151,7 +151,7 @@ class _CountryViewState extends State<CountryView> {
                                           Flexible(
                                             fit: FlexFit.loose,
                                             child: Text(
-                                              '${cD.getFilteredCountries.elementAt(i - 1).translations['fr']}',
+                                              '${cD.getFilteredCountries.elementAt(i - 1).translations['fr'] ?? cD.getFilteredCountries.elementAt(i - 1).name}',
                                               style: _resolveCountryTextStyle(),
                                             ),
                                           ),

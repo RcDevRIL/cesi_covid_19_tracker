@@ -17,7 +17,7 @@ class CoronedData with ChangeNotifier {
     _countryList = [];
     String apiResponse = await locator.get<ApiService>().getCountries();
     for (var e in jsonDecode(apiResponse)) {
-      this.addIfAbsent(Country.fromJson(e));
+      _countryList.add(Country.fromJson(e));
     }
     _sortCountryList();
     notifyListeners();
@@ -32,13 +32,25 @@ class CoronedData with ChangeNotifier {
   }
 
   void _sortCountryList() {
-    _countryList.sort((c1, c2) => c1.name.compareTo(c2.name));
+    _countryList.sort((c1, c2) => (c1.translations['fr'] != null &&
+            c2.translations['fr'] != null)
+        ? c1.translations['fr'].compareTo(c2.translations['fr'])
+        : c1.name.compareTo(c2
+            .name)); // Fallback comparator, hopefully API will always have a name for an entry
   }
 
   void filter(String filter) {
     _filteredCountries = _countryList
-        .where((e) => e.name.toLowerCase().contains(filter.toLowerCase()))
+        .where((e) => e.translations['fr'] != null
+            ? e.translations['fr'].toLowerCase().contains(filter.toLowerCase())
+            : e.name.toLowerCase().contains(filter
+                .toLowerCase())) // Fallback filter, hopefully API will always have a name for an entry
         .toList();
+    _filteredCountries.sort((c1, c2) => (c1.translations['fr'] != null &&
+            c2.translations['fr'] != null)
+        ? c1.translations['fr'].compareTo(c2.translations['fr'])
+        : c1.name.compareTo(c2
+            .name)); // Fallback comparator, hopefully API will always have a name for an entry
     notifyListeners();
   }
 
