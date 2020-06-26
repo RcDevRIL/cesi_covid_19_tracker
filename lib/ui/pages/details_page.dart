@@ -51,23 +51,25 @@ class _DetailsPageState extends State<DetailsPage> {
                         print('DETAILS DATA:\n${s.data}');
                         final CovidCountryInfos covidCountryInfos =
                             CovidCountryInfos.fromJson(jsonDecode(s.data));
-                        final String displayName = coronedData
-                                    .getSelectedCountry !=
+                        final String countryName = coronedData.getCountryList
+                                    .firstWhere((c) =>
+                                        c.alpha2Code ==
+                                        covidCountryInfos.countryInfo['iso2'])
+                                    .translations !=
                                 null
-                            ? coronedData.getSelectedCountry.translations['fr']
+                            ? coronedData.getCountryList
+                                .firstWhere((c) =>
+                                    c.alpha2Code ==
+                                    covidCountryInfos.countryInfo['iso2'])
+                                .translations['fr']
                             : coronedData.getCountryList
                                 .firstWhere((c) =>
                                     c.alpha2Code ==
                                     covidCountryInfos.countryInfo['iso2'])
-                                .translations['fr'];
+                                .name;
                         return CountryCard(
                           covidCountryInfos: covidCountryInfos,
-                          countryName: displayName ??
-                              coronedData.getCountryList
-                                  .firstWhere((c) =>
-                                      c.alpha2Code ==
-                                      covidCountryInfos.countryInfo['iso2'])
-                                  .name,
+                          countryName: countryName,
                         );
                       }
                       if (!s.hasData &&
