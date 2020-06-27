@@ -16,26 +16,69 @@ class CountryView extends StatefulWidget {
 
 class _CountryViewState extends State<CountryView> {
   TextEditingController _countryFilter;
-  bool resetFilter;
+  ScrollController _scrollController;
+  bool _resetFilter;
+  bool _isScrollToTopShown;
+  num _maxScrollToTopDuration;
+  OverlayEntry _scrollToTop;
 
   @override
   void initState() {
     super.initState();
-    resetFilter = true;
+    _resetFilter = true;
+    _isScrollToTopShown = false;
+    _maxScrollToTopDuration = 2500;
     _countryFilter = TextEditingController(text: 'Choisissez un pays');
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      debugPrint('offset = ${_scrollController.offset}');
+      if (!_isScrollToTopShown && _scrollController.offset > 25.0)
+        _showOverlay(context);
+      if (_isScrollToTopShown && _scrollController.offset < 25.0)
+        _hideOverlay(context);
+    });
+    _scrollToTop = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 24.0,
+        right: 24.0,
+        child: Material(
+          type: MaterialType.button,
+          color: Theme.of(context).primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: IconButton(
+            onPressed: () => _scrollController.animateTo(
+              0.0,
+              duration: Duration(
+                  milliseconds:
+                      _scrollController.offset / 3 > _maxScrollToTopDuration
+                          ? _maxScrollToTopDuration
+                          : (_scrollController.offset / 3).floor()),
+              curve: Curves.ease,
+            ),
+            icon: Icon(
+              Icons.keyboard_arrow_up,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   void dispose() {
     _countryFilter?.dispose();
+    _scrollController?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<CoronedData>(builder: (_, cD) {
-      if (resetFilter) cD.resetFilter();
-      resetFilter = false;
+      if (_resetFilter) cD.resetFilter();
+      _resetFilter = false;
       return Scaffold(
         appBar: CoronedAppBar(appBar: AppBar()),
         drawer: NavigationDrawer(),
@@ -43,6 +86,7 @@ class _CountryViewState extends State<CountryView> {
             ? cD.getCountryList.isNotEmpty
                 ? Scrollbar(
                     child: ListView.builder(
+                      controller: _scrollController,
                       physics: const BouncingScrollPhysics(),
                       itemCount: cD.getFilteredCountries.length + 1,
                       itemBuilder: (_, i) => i == 0
@@ -202,4 +246,14 @@ class _CountryViewState extends State<CountryView> {
       MediaQuery.of(context).size.width >= 300
           ? Theme.of(context).textTheme.headline4
           : Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4);
+
+  _showOverlay(BuildContext context) {
+    Overlay.of(context).insert(_scrollToTop);
+    _isScrollToTopShown = true;
+  }
+
+  _hideOverlay(BuildContext context) {
+    _scrollToTop.remove();
+    _isScrollToTopShown = false;
+  }
 }
