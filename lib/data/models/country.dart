@@ -7,6 +7,7 @@ part 'country.g.dart';
 abstract class Country with _$Country {
   @JsonSerializable(explicitToJson: true)
   const factory Country(
+    @JsonKey(name: 'translations') Map<String, String> translations,
     @JsonKey(name: 'flag') String flag,
     @JsonKey(name: 'name') String name,
     @JsonKey(name: 'alpha2Code') String alpha2Code,

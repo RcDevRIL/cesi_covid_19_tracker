@@ -1,5 +1,6 @@
 import 'dart:convert' show jsonEncode;
-import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart' show GlobalCard;
+import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
+    show GlobalCard;
 import 'package:flutter/material.dart' show CircularProgressIndicator, Key;
 import 'package:flutter_test/flutter_test.dart' show Future, find;
 import 'package:http/http.dart' show Response;
@@ -24,13 +25,13 @@ final slowOkClient = MockClient((request) async {
   await Future.delayed(Duration(seconds: 3));
   return Response('', 200);
 });
-final testCountry = Country('test', 'test', 'test', 1);
+final testCountry = Country({'fr': 'test'}, 'test', 'test', 'FR', 1);
 final okCountryClient = MockClient((request) async {
   return Response('[${jsonEncode(testCountry)}]', 200);
 });
 final testCountries = [
   testCountry,
-  Country('test2', 'test2', 'test2', 1),
+  Country({'fr': 'test2'}, 'test2', 'test2', 'FR', 1),
 ];
 final okCountriesClient = MockClient((request) async {
   return Response(

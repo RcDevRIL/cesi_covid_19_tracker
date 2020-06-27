@@ -16,11 +16,13 @@ class _$CountryTearOff {
   const _$CountryTearOff();
 
   _Country call(
+      @JsonKey(name: 'translations') Map<String, String> translations,
       @JsonKey(name: 'flag') String flag,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'alpha2Code') String alpha2Code,
       @JsonKey(name: 'population') int population) {
     return _Country(
+      translations,
       flag,
       name,
       alpha2Code,
@@ -33,6 +35,8 @@ class _$CountryTearOff {
 const $Country = _$CountryTearOff();
 
 mixin _$Country {
+  @JsonKey(name: 'translations')
+  Map<String, String> get translations;
   @JsonKey(name: 'flag')
   String get flag;
   @JsonKey(name: 'name')
@@ -50,7 +54,8 @@ abstract class $CountryCopyWith<$Res> {
   factory $CountryCopyWith(Country value, $Res Function(Country) then) =
       _$CountryCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'flag') String flag,
+      {@JsonKey(name: 'translations') Map<String, String> translations,
+      @JsonKey(name: 'flag') String flag,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'alpha2Code') String alpha2Code,
       @JsonKey(name: 'population') int population});
@@ -65,12 +70,16 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
 
   @override
   $Res call({
+    Object translations = freezed,
     Object flag = freezed,
     Object name = freezed,
     Object alpha2Code = freezed,
     Object population = freezed,
   }) {
     return _then(_value.copyWith(
+      translations: translations == freezed
+          ? _value.translations
+          : translations as Map<String, String>,
       flag: flag == freezed ? _value.flag : flag as String,
       name: name == freezed ? _value.name : name as String,
       alpha2Code:
@@ -85,7 +94,8 @@ abstract class _$CountryCopyWith<$Res> implements $CountryCopyWith<$Res> {
       __$CountryCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'flag') String flag,
+      {@JsonKey(name: 'translations') Map<String, String> translations,
+      @JsonKey(name: 'flag') String flag,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'alpha2Code') String alpha2Code,
       @JsonKey(name: 'population') int population});
@@ -101,12 +111,16 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object translations = freezed,
     Object flag = freezed,
     Object name = freezed,
     Object alpha2Code = freezed,
     Object population = freezed,
   }) {
     return _then(_Country(
+      translations == freezed
+          ? _value.translations
+          : translations as Map<String, String>,
       flag == freezed ? _value.flag : flag as String,
       name == freezed ? _value.name : name as String,
       alpha2Code == freezed ? _value.alpha2Code : alpha2Code as String,
@@ -118,11 +132,13 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_Country implements _Country {
   const _$_Country(
+      @JsonKey(name: 'translations') this.translations,
       @JsonKey(name: 'flag') this.flag,
       @JsonKey(name: 'name') this.name,
       @JsonKey(name: 'alpha2Code') this.alpha2Code,
       @JsonKey(name: 'population') this.population)
-      : assert(flag != null),
+      : assert(translations != null),
+        assert(flag != null),
         assert(name != null),
         assert(alpha2Code != null),
         assert(population != null);
@@ -130,6 +146,9 @@ class _$_Country implements _Country {
   factory _$_Country.fromJson(Map<String, dynamic> json) =>
       _$_$_CountryFromJson(json);
 
+  @override
+  @JsonKey(name: 'translations')
+  final Map<String, String> translations;
   @override
   @JsonKey(name: 'flag')
   final String flag;
@@ -145,13 +164,16 @@ class _$_Country implements _Country {
 
   @override
   String toString() {
-    return 'Country(flag: $flag, name: $name, alpha2Code: $alpha2Code, population: $population)';
+    return 'Country(translations: $translations, flag: $flag, name: $name, alpha2Code: $alpha2Code, population: $population)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Country &&
+            (identical(other.translations, translations) ||
+                const DeepCollectionEquality()
+                    .equals(other.translations, translations)) &&
             (identical(other.flag, flag) ||
                 const DeepCollectionEquality().equals(other.flag, flag)) &&
             (identical(other.name, name) ||
@@ -167,6 +189,7 @@ class _$_Country implements _Country {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(translations) ^
       const DeepCollectionEquality().hash(flag) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(alpha2Code) ^
@@ -184,6 +207,7 @@ class _$_Country implements _Country {
 
 abstract class _Country implements Country {
   const factory _Country(
+      @JsonKey(name: 'translations') Map<String, String> translations,
       @JsonKey(name: 'flag') String flag,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'alpha2Code') String alpha2Code,
@@ -191,6 +215,9 @@ abstract class _Country implements Country {
 
   factory _Country.fromJson(Map<String, dynamic> json) = _$_Country.fromJson;
 
+  @override
+  @JsonKey(name: 'translations')
+  Map<String, String> get translations;
   @override
   @JsonKey(name: 'flag')
   String get flag;

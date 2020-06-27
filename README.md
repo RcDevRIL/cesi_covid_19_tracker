@@ -1,6 +1,6 @@
 (**EN**|[FR])
 # cesi_covid_19_tracker
-[![version_badge](https://img.shields.io/badge/version-1.5-informational)][Release]
+[![version_badge](https://img.shields.io/badge/version-1.6-informational)][Release]
 
 ||status|
 |:---:|:---:|
@@ -30,7 +30,7 @@ _Let's dive in !!_:monocle_face:
 - About page with licences used in this project (thanks Flutter team for [LicencePage] :rocket:)
 ### Data sources :nerd_face:
 This app relies on **3** data sources:
-- Static FAQ hardcoded in ```FAQDataSource``` class ([lib/data/constants/app_globals.dart])
+- Static FAQ hardcoded in ```FAQDataSource``` class ([lib/shared/constants/app_globals.dart])
 - List of countries and their infos via [restcountries.eu] API
 - **COVID-19** stats by country and for the world via [NOVELCovid] API which in turns rely on these [sources]
 
@@ -39,7 +39,7 @@ Since this is a repo created for studies, I will explain in this section what I'
 - Responsivity (Layout **had** to react to screen size on a platform like web)
 - Network request handling using [http]
 - Error handling (if a 404 occurs on [NOVELCovid] API, that means the country hasn't reported any cases or the API has not any infos available, so I had to create a custom Exception class to handle this case and adapt softly the UI and improve UX. I also handle unknown errors and display an ugly red on black msg so user knows something rly bad happened :smile:)
-- JSON<->Object manipulations (made a lot easier thanks to [freezed] :rocket:]
+- JSON<->Object manipulations (made a lot easier thanks to [freezed] :rocket:)
 - Unit testing (see **[test]** folder for source code)
 - Performance optimization (Flutter for web is capricious sometimes :sweat_smile:)
 - Github project management tools (in the begining we were 4 students, and chose to go with Automated Kanban boards from Github ! Issues and PR were our way to handle the development of the website, and I continue on to better learn about all Github features :rocket:)
@@ -74,6 +74,7 @@ _Direct dependencies:_
 * [responsive_builder] - The package used to facilitate building of screen responsive UIs
 * [freezed] - The package used to generate objects used as DTOs for instance
 * [intl] - The package used in this project to format large numbers. It can be used for a lot of other interestings things...
+* [flutter_modular] - The package to help structure a flutter project and that gives awesome features such as dynamic route linking (deep linking) :rocket:
 
 _Test & Dev Dependencies:_
 * [flutter_test] - The Flutter library used to implement unit tests
@@ -167,7 +168,7 @@ Have fun coding !!:rocket::computer:
 
 [Flutter "get started"]: https://flutter.dev/get-started/
 [Github root]: https://github.com/RcDevRIL/cesi_covid_19_tracker/
-[Built_With]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master#dépendances
+[Built_With]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master#built-with
 [test]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master/test
 [test_driver]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master/test_driver
 [Flutter]: https://github.com/flutter/flutter/
@@ -178,6 +179,7 @@ Have fun coding !!:rocket::computer:
 [responsive_builder]: https://pub.dev/packages/responsive_builder
 [freezed]: https://pub.dev/packages/freezed
 [intl]: https://pub.dev/packages/intl
+[flutter_modular]: https://pub.dev/packages/flutter_modular
 [flutter_test]: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
 [build_runner]: https://pub.dev/packages/build_runner
 [flutter_driver]: https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html
@@ -194,11 +196,12 @@ Have fun coding !!:rocket::computer:
 [Release]: https://github.com/RcDevRIL/cesi_covid_19_tracker/releases
 [EN]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README.md
 [FR]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README-fr.md
-[lib/data/constants/app_globals.dart]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/dev-readme/lib/data/constants/app_globals.dart#L88
+[lib/data/constants/app_globals.dart]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/dev-readme/lib/shared/constants/app_globals.dart#L88
 [LicencePage]: https://api.flutter.dev/flutter/material/LicensePage-class.html
 [restcountries.eu]: http://restcountries.eu/
 [NOVELCovid]: https://corona.lmao.ninja/docs/#/
 [sources]: https://github.com/NovelCOVID/API#sources
-[CountryView]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/pages/country_view.dart
-[Dashboard]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/pages/dashboard.dart
-[DetailsPage]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/pages/details_page.dart
+[CountryView]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/modules/country_module/pages/country_view.dart
+[Dashboard]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/modules/main_module/pages/dashboard.dart
+[DetailsPage]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/modules/country_module/pages/details_page.dart
+[FAQ]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/modules/main_module/pages/covid_faq.dart

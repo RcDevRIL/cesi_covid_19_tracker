@@ -1,7 +1,7 @@
 name: cesi_covid_19_tracker
-description: A PoC for a covid-19 tracker
+description: A covid-19 info app
 
-version: 1.5.0+1
+version: 1.6.0+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -19,6 +19,7 @@ dependencies:
   freezed_annotation:
   intl: ^0.16.1
   url_launcher: ^5.4.10
+  flutter_modular: ^1.2.6+1
 
 dev_dependencies:
   flutter_test:

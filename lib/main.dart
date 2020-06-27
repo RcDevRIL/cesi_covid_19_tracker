@@ -1,31 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart' show ChangeNotifierProvider;
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
-    show CoronedData, setupLocator;
-import 'package:cesi_covid_19_tracker/ui/pages/pages.dart'
-    show CountryView, CovidFaq, Dashboard;
-import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
+    show setupLocator;
+
+import 'modules/modules.dart';
 
 void main() {
   setupLocator();
-  runApp(CoronedApp());
-}
-
-class CoronedApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => CoronedData(),
-      child: MaterialApp(
-        title: 'CORONED',
-        theme: aG.AppTheme.defaultAppTheme,
-        routes: {
-          '/dashboard': (context) => Dashboard(),
-          '/country': (context) => CountryView(),
-          '/faq': (context) => CovidFaq(),
-        },
-        home: Dashboard(),
-      ),
-    );
-  }
+  runApp(ModularApp(module: CoronedMainModule()));
 }

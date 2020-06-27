@@ -5,14 +5,16 @@ import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show CovidCountryInfos;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show AppUtils, locator;
-import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
+import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
 import 'coroned_card.dart';
 
 class CountryCard extends StatefulWidget {
   final CovidCountryInfos covidCountryInfos;
+  final String countryName;
   const CountryCard({
     Key key,
     @required this.covidCountryInfos,
+    this.countryName,
   }) : super(key: key);
 
   @override
@@ -89,13 +91,14 @@ class _CountryCardState extends State<CountryCard> {
                           : child;
                     },
                     filterQuality: FilterQuality.low,
-                    semanticLabel: '${widget.covidCountryInfos.country} flag',
+                    semanticLabel:
+                        '${widget.countryName ?? widget.covidCountryInfos.country} flag',
                   ),
                   SizedBox(
                     width: 8.0,
                   ),
                   Text(
-                    '${widget.covidCountryInfos.country}',
+                    '${widget.countryName ?? widget.covidCountryInfos.country}',
                     style: Theme.of(context).textTheme.headline4,
                   ),
                 ],

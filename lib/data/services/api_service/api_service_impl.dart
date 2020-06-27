@@ -50,8 +50,8 @@ class ApiServiceImpl implements ApiService {
 
   @override
   Future<String> getCountries() async {
-    Response response = await http
-        .get('$countriesBaseUrl/all?fields=name;alpha2Code;population;flag');
+    Response response = await http.get(
+        '$countriesBaseUrl/all?fields=name;alpha2Code;population;flag;translations');
     if (response?.statusCode == 200) {
       return response.body;
     } else {

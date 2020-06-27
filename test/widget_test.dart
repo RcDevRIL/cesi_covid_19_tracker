@@ -1,13 +1,16 @@
+import 'package:cesi_covid_19_tracker/modules/country_module/country_module.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart'
     show ListTile, MaterialApp, MediaQuery, MediaQueryData, Widget;
 import 'package:get_it/get_it.dart' show GetIt;
-import 'package:provider/provider.dart' show ChangeNotifierProvider;
-import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart' show CountryCard;
+import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
+    show CountryCard;
+import 'package:cesi_covid_19_tracker/modules/pages.dart'
+    show CountryView, CovidFaq, Dashboard, DetailsPage;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl, CoronedData;
-import 'package:cesi_covid_19_tracker/ui/pages/pages.dart'
-    show CountryView, CovidFaq, Dashboard, DetailsPage;
 import 'mockers/mockers.dart' show HttpClientMock;
 import 'unit_tests_constants.dart'
     show
@@ -29,11 +32,13 @@ void main() {
     setupLocator();
     // Create an instance of CoronedData
     coronedData = CoronedData();
+    initModule(CountryModule(),
+        changeBinds: [Bind((_) => coronedData, singleton: false)]);
   });
   group('Widgets unit tests:', () {
     testWidgets('CountryView test', (tester) async {
       // Build a CountryView with previously initiated CoronedData Provider class
-      final testWidget = buildTestableApp(CountryView(), coronedData);
+      final testWidget = buildTestableApp(CountryView());
       await tester.pumpWidget(testWidget);
       // Expect no error and find the following two widgets
       expect(searchBarWidgetFinder, findsOneWidget);
@@ -61,7 +66,7 @@ void main() {
       locator.registerLazySingleton<ApiService>(() =>
           ApiServiceImpl(http: HttpClientMock()..http = okGlobalStatsClient));
       // Build a DashBoard
-      final testWidget = buildTestableApp(Dashboard(), null);
+      final testWidget = buildTestableApp(Dashboard());
       await tester.pumpWidget(testWidget);
       // Expect the UI to show a CircularProgressIndicator and the card yet
       expect(globalCardWidgetFinder, findsNothing);
@@ -73,21 +78,18 @@ void main() {
     });
     testWidgets('FAQ test', (tester) async {
       // Build a FAQ
-      final testWidget = buildTestableApp(CovidFaq(), null);
+      final testWidget = buildTestableApp(CovidFaq());
       await tester.pumpWidget(testWidget);
       // Expect to find several ListTiles displaying questions and associated answers about COVID-19
       expect(find.byType(ListTile), findsWidgets);
     });
 
     testWidgets('Details test', (tester) async {
-      locator.registerLazySingleton<ApiService>(
-          () => ApiServiceImpl(http: HttpClientMock()..http = okCountryClient));
-      coronedData = CoronedData();
       // Replace HttpClientMock instance with one that gives mocked country stats
       locator.registerLazySingleton<ApiService>(() =>
           ApiServiceImpl(http: HttpClientMock()..http = okCountryStatsClient));
       // Build a DetailsPage
-      final testWidget = buildTestableApp(DetailsPage(countryCode: 'FR'), null);
+      final testWidget = buildTestableApp(DetailsPage(countryCode: 'FR'));
       await tester.pumpWidget(testWidget);
       // Expect the UI to show a CircularProgressIndicator and not the card yet
       expect(find.byType(CountryCard), findsNothing);
@@ -100,23 +102,17 @@ void main() {
   });
 }
 
-/// Wrap the page we want to unit test with necessary [MediaQueryData] (default one here),
-///  needed [Providers], and default [MaterialApp]
-Widget buildTestableApp(Widget widget, CoronedData coronedData) {
+/// Wrap the page we want to unit test with necessary [MediaQueryData] (default one here)
+/// and default [MaterialApp]
+Widget buildTestableApp(Widget widget) {
   return MediaQuery(
     data: MediaQueryData(),
-    child: coronedData != null
-        ? ChangeNotifierProvider(
-            create: (_) => coronedData,
-            child: MaterialApp(
-              home: widget,
-              initialRoute: '/',
-            ),
-          )
-        : MaterialApp(
-            home: widget,
-            initialRoute: '/',
-          ),
+    child: MaterialApp(
+      home: widget,
+      initialRoute: Modular.initialRoute,
+      navigatorKey: Modular.navigatorKey,
+      onGenerateRoute: Modular.generateRoute,
+    ),
   );
 }
 
