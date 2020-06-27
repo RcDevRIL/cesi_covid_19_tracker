@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
+import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show AppUtils, locator;
 import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'

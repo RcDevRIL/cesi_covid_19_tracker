@@ -3,11 +3,12 @@ import 'package:flutter/material.dart'
     show ListTile, MaterialApp, MediaQuery, MediaQueryData, Widget;
 import 'package:get_it/get_it.dart' show GetIt;
 import 'package:provider/provider.dart' show ChangeNotifierProvider;
-import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart' show CountryCard;
+import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
+    show CountryCard;
+import 'package:cesi_covid_19_tracker/modules/pages.dart'
+    show CountryView, CovidFaq, Dashboard, DetailsPage;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl, CoronedData;
-import 'package:cesi_covid_19_tracker/ui/pages/pages.dart'
-    show CountryView, CovidFaq, Dashboard, DetailsPage;
 import 'mockers/mockers.dart' show HttpClientMock;
 import 'unit_tests_constants.dart'
     show

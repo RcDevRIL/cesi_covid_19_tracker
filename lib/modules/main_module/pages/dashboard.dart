@@ -3,10 +3,10 @@ import 'dart:convert' show jsonDecode;
 import 'package:flutter/material.dart';
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, locator;
-import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
+import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
     show CoronedAppBar, FailureCard, GlobalCard, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
-import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
+import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
 
 class Dashboard extends StatefulWidget {
   final String title;

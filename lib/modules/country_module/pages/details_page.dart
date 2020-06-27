@@ -4,7 +4,7 @@ import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
     show CovidNotFoundException;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, CoronedData, locator;
-import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
+import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
     show CoronedAppBar, CountryCard, FailureCard;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show CovidCountryInfos;

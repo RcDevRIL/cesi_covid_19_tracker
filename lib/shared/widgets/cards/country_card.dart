@@ -5,7 +5,7 @@ import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show CovidCountryInfos;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show AppUtils, locator;
-import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
+import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
 import 'coroned_card.dart';
 
 class CountryCard extends StatefulWidget {

@@ -3,7 +3,7 @@ import 'package:flutter/services.dart' show TextCapitalization, TextInputAction;
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show CoronedData;
-import 'package:cesi_covid_19_tracker/ui/widgets/widgets.dart'
+import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
     show CoronedAppBar, CoronedCard, FailureIcon, NavigationDrawer;
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
