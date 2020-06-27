@@ -1,6 +1,6 @@
 ([EN]|**FR**)
 # cesi_covid_19_tracker
-[![version_badge](https://img.shields.io/badge/version-1.5-informational)][Release]
+[![version_badge](https://img.shields.io/badge/version-1.6-informational)][Release]
 
 ||Statut
 |:---:|:---:|
@@ -30,7 +30,7 @@ _Let's dive in !!_:monocle_face:
 - Page _About_ avec les licences utilisées dans ce projet (merci à l'équipe Flutter pour [LicencePage]:rocket:)
 ### Sources de données :nerd_face:
 Cette application s'appuie sur **3** sources de données:
-- FAQ statique codée en dur dans la classe ```FAQDataSource``` ([lib/data/constants/app_globals.dart])
+- FAQ statique codée en dur dans la classe ```FAQDataSource``` ([lib/shared/constants/app_globals.dart])
 - Liste des pays et leurs informations via l'API [restcountries.eu].
 - Statistiques **COVID-19** par pays et pour le monde entier via l'API [NOVELCovid] qui s'appuie à son tour sur ces [sources].
 
@@ -73,6 +73,7 @@ _Dépendances directes :_
 * [responsive_builder] - Le paquet utilisé pour faciliter le développement d'interfaces utilisateur sensibles à la taille de l'écran
 * [freezed] - Le paquet utilisé pour générer des objets utilisés comme DTO par exemple
 * [intl] - Le paquet utilisé dans ce projet pour formater les grands nombres. Il peut être utilisé pour beaucoup d'autres choses intéressantes...
+* [flutter_modular] - Le paquet utilisé pour aider à structurer un projet flutter et donnant accès aux routes dynamiques (deep linking) :rocket:
 
 _Dépendances de test et de développement :_
 * [flutter_test] - La bibliothèque Flutter utilisée pour implémenter les tests unitaires
@@ -161,7 +162,7 @@ Amusez-vous bien à coder !!:rocket::computer:
 
 [Flutter "get started"]: https://flutter.dev/get-started/
 [Github root]: https://github.com/RcDevRIL/cesi_covid_19_tracker/
-[Built_With]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master#dépendances
+[Built_With]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master#built-with
 [test]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master/test
 [test_driver]: https://github.com/RcDevRIL/cesi_covid_19_tracker/tree/master/test_driver
 [Flutter]: https://github.com/flutter/flutter/
@@ -172,6 +173,7 @@ Amusez-vous bien à coder !!:rocket::computer:
 [responsive_builder]: https://pub.dev/packages/responsive_builder
 [freezed]: https://pub.dev/packages/freezed
 [intl]: https://pub.dev/packages/intl
+[flutter_modular]: https://pub.dev/packages/flutter_modular
 [flutter_test]: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
 [build_runner]: https://pub.dev/packages/build_runner
 [flutter_driver]: https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html
@@ -188,12 +190,12 @@ Amusez-vous bien à coder !!:rocket::computer:
 [Release]: https://github.com/RcDevRIL/cesi_covid_19_tracker/releases
 [EN]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README.md
 [FR]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README-fr.md
-[lib/data/constants/app_globals.dart]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/dev-readme/lib/data/constants/app_globals.dart#L88
+[lib/data/constants/app_globals.dart]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/shared/constants/app_globals.dart#L88
 [LicencePage]: https://api.flutter.dev/flutter/material/LicensePage-class.html
 [restcountries.eu]: http://restcountries.eu/
 [NOVELCovid]: https://corona.lmao.ninja/docs/#/
 [sources]: https://github.com/NovelCOVID/API#sources
-[CountryView]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/pages/country_view.dart
-[Dashboard]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/pages/dashboard.dart
-[DetailsPage]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/pages/details_page.dart
-[FAQ]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/pages/covid_faq.dart
+[CountryView]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/modules/country_module/pages/country_view.dart
+[Dashboard]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/modules/main_module/pages/dashboard.dart
+[DetailsPage]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/modules/country_module/pages/details_page.dart
+[FAQ]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/modules/main_module/pages/covid_faq.dart
