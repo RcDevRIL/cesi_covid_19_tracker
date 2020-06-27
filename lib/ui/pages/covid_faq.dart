@@ -14,7 +14,11 @@ class _CovidFaqState extends State<CovidFaq> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CoronedAppBar(appBar: AppBar()),
+      appBar: CoronedAppBar(
+        isMobile: MediaQuery.of(context).size.width < 600.0,
+        isWatch: MediaQuery.of(context).size.width < 350.0,
+        textStyle: Theme.of(context).textTheme.headline1,
+      ),
       drawer: NavigationDrawer(),
       body: Scrollbar(
         child: ListView.builder(

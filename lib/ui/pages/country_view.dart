@@ -19,7 +19,8 @@ class _CountryViewState extends State<CountryView> {
   ScrollController _scrollController;
   bool _resetFilter;
   bool _isScrollToTopShown;
-  num _maxScrollToTopDuration;
+  int _maxScrollToTopDuration;
+  int _scrollToTopThreshold = 300;
   OverlayEntry _scrollToTop;
 
   @override
@@ -31,10 +32,11 @@ class _CountryViewState extends State<CountryView> {
     _countryFilter = TextEditingController(text: 'Choisissez un pays');
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      debugPrint('offset = ${_scrollController.offset}');
-      if (!_isScrollToTopShown && _scrollController.offset > 25.0)
+      if (!_isScrollToTopShown &&
+          _scrollController.offset > _scrollToTopThreshold)
         _showOverlay(context);
-      if (_isScrollToTopShown && _scrollController.offset < 25.0)
+      if (_isScrollToTopShown &&
+          _scrollController.offset < _scrollToTopThreshold)
         _hideOverlay(context);
     });
     _scrollToTop = OverlayEntry(
@@ -43,10 +45,11 @@ class _CountryViewState extends State<CountryView> {
         right: 24.0,
         child: Material(
           type: MaterialType.button,
+          elevation: 2.0,
+          shadowColor: Colors.grey[800],
           color: Theme.of(context).primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
           child: IconButton(
             onPressed: () => _scrollController.animateTo(
               0.0,
@@ -80,7 +83,11 @@ class _CountryViewState extends State<CountryView> {
       if (_resetFilter) cD.resetFilter();
       _resetFilter = false;
       return Scaffold(
-        appBar: CoronedAppBar(appBar: AppBar()),
+        appBar: CoronedAppBar(
+          isMobile: MediaQuery.of(context).size.width < 600.0,
+          isWatch: MediaQuery.of(context).size.width < 350.0,
+          textStyle: Theme.of(context).textTheme.headline1,
+        ),
         drawer: NavigationDrawer(),
         body: cD.getCountryList != null
             ? cD.getCountryList.isNotEmpty

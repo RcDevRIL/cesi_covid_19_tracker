@@ -1,4 +1,5 @@
 import 'package:cesi_covid_19_tracker/modules/modules.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
@@ -62,10 +63,37 @@ class CoronedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CORONED',
+      localizationsDelegates: [
+        const AppBarTooltipsText(),
+      ],
       theme: aG.AppTheme.defaultAppTheme,
       initialRoute: '/dashboard',
       onGenerateRoute: Modular.generateRoute,
       navigatorKey: Modular.navigatorKey,
     );
   }
+}
+
+/// TEMPORARY
+/// workaround to override tooltips on auto generated menu button and back button
+/// found on (https://medium.com/@caleb_52205/flutter-removing-appbar-tooltips-app-wide-from-materialapp-constructor-54781606266f)
+class AppBarTooltipsTextOverride extends DefaultMaterialLocalizations {
+  AppBarTooltipsTextOverride(Locale locale) : super();
+  @override
+  String get backButtonTooltip => null;
+  @override
+  String get openAppDrawerTooltip => null;
+}
+
+class AppBarTooltipsText extends LocalizationsDelegate<MaterialLocalizations> {
+  const AppBarTooltipsText();
+  @override
+  Future<AppBarTooltipsTextOverride> load(Locale locale) {
+    return SynchronousFuture(AppBarTooltipsTextOverride(locale));
+  }
+
+  @override
+  bool shouldReload(AppBarTooltipsText old) => false;
+  @override
+  bool isSupported(Locale locale) => true;
 }

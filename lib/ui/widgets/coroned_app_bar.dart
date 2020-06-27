@@ -2,68 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:cesi_covid_19_tracker/data/constants/app_globals.dart' as aG;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show AppUtils, locator;
-import 'package:responsive_builder/responsive_builder.dart'
-    show ResponsiveBuilder;
 import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
     show HoverExtensions;
 
-class CoronedAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final AppBar appBar;
+typedef void OpenDrawerCallback();
 
-  const CoronedAppBar({Key key, this.appBar}) : super(key: key);
+class CoronedAppBar extends AppBar {
+  final bool isMobile;
+  final bool isWatch;
+  final TextStyle textStyle;
 
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveBuilder(
-      builder: (_, sizes) => sizes.isMobile || sizes.isWatch
-          ? AppBar(
-              actions: [
-                GestureDetector(
-                  onTap: () => locator
-                      .get<AppUtils>()
-                      .openLink(aG.AppConstants.cesiDijonUrl),
-                  child: Image.asset(
-                    'assets/cesilogo.png',
-                    fit: BoxFit.contain,
-                    height: sizes.isWatch ? 100 : 150,
-                    width: sizes.isWatch ? 100 : 150,
-                  ),
-                ).showCursorOnHover,
-              ],
-              titleSpacing: 0.0,
-              title: Text(
-                aG.AppConstants.defaultAppTitle.split('\n')[0],
-                style: sizes.isWatch
-                    ? Theme.of(context)
-                        .textTheme
-                        .headline1
-                        .apply(fontSizeDelta: -4)
-                    : Theme.of(context).textTheme.headline1,
-                overflow: TextOverflow.visible,
+  CoronedAppBar({
+    Key key,
+    @required this.isMobile,
+    @required this.isWatch,
+    @required this.textStyle,
+  }) : super(
+          key: key,
+          titleSpacing: 0.0,
+          actions: [
+            GestureDetector(
+              onTap: () => locator
+                  .get<AppUtils>()
+                  .openLink(aG.AppConstants.cesiDijonUrl),
+              child: Image.asset(
+                'assets/cesilogo.png',
+                fit: BoxFit.contain,
+                height: isMobile ? isWatch ? 100 : 150 : null,
+                width: isMobile ? isWatch ? 100 : 150 : null,
               ),
-            )
-          : AppBar(
-              actions: [
-                GestureDetector(
-                  onTap: () => locator
-                      .get<AppUtils>()
-                      .openLink(aG.AppConstants.cesiDijonUrl),
-                  child: Image.asset(
-                    'assets/cesilogo.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ],
-              titleSpacing: 0.0,
-              title: Text(
-                aG.AppConstants.defaultAppTitle.split('\n')[0],
-                style: Theme.of(context).textTheme.headline1,
-                overflow: TextOverflow.visible,
-              ),
-            ),
-    );
-  }
-
-  @override
-  Size get preferredSize => new Size.fromHeight(appBar.preferredSize.height);
+            ).showCursorOnHover,
+          ],
+          title: Text(
+            aG.AppConstants.defaultAppTitle.split('\n')[0],
+            style: isWatch ? textStyle.apply(fontSizeDelta: -4) : textStyle,
+            overflow: TextOverflow.visible,
+          ),
+        );
 }
