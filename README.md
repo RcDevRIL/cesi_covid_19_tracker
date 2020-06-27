@@ -49,19 +49,19 @@ _// **TODO**: Put screenshots here when V2 is done_
 
 | Page  | UI    |
 | :---: | :---: |
-| Dashboard | **TODO** |
-| CountryView | **TODO** |
-| DetailsPage | **TODO** |
-| FAQ | **TODO** |
+| [Dashboard] | **TODO** |
+| [CountryView] | **TODO** |
+| [DetailsPage] | **TODO** |
+| [FAQ] | **TODO** |
 
 - Desktop:
 
 | Page  | UI    |
 | :---: | :---: |
-| Dashboard | **TODO** |
-| CountryView | **TODO** |
-| DetailsPage | **TODO** |
-| FAQ | **TODO** |
+| [Dashboard] | **TODO** |
+| [CountryView] | **TODO** |
+| [DetailsPage] | **TODO** |
+| [FAQ] | **TODO** |
 ### Changelog :clipboard:
 See [Release] section
 ### Built with :hammer_and_wrench:
