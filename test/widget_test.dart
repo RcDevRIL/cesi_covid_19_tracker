@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart'
     show ListTile, MaterialApp, MediaQuery, MediaQueryData, Widget;
 import 'package:get_it/get_it.dart' show GetIt;
-import 'package:provider/provider.dart' show ChangeNotifierProvider;
 import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
     show CountryCard;
 import 'package:cesi_covid_19_tracker/modules/pages.dart'
