@@ -196,6 +196,6 @@ Amusez-vous bien à coder !!:rocket::computer:
 [NOVELCovid]: https://corona.lmao.ninja/docs/#/
 [sources]: https://github.com/NovelCOVID/API#sources
 [CountryView]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/modules/country_module/pages/country_view.dart
-[Dashboard]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/modules/main_module/pages/dashboard.dart
-[DetailsPage]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/modules/country_module/pages/details_page.dart
-[FAQ]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/ui/modules/main_module/pages/covid_faq.dart
+[Dashboard]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/modules/main_module/pages/dashboard.dart
+[DetailsPage]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/modules/country_module/pages/details_page.dart
+[FAQ]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/modules/main_module/pages/covid_faq.dart
