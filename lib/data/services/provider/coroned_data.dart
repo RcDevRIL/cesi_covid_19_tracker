@@ -17,7 +17,7 @@ class CoronedData with ChangeNotifier {
     _countryList = [];
     String apiResponse = await locator.get<ApiService>().getCountries();
     for (var e in jsonDecode(apiResponse)) {
-      _countryList.add(Country.fromJson(e));
+      addIfAbsent(Country.fromJson(e));
     }
     _sortCountryList();
     notifyListeners();
@@ -27,7 +27,7 @@ class CoronedData with ChangeNotifier {
     bool absent = true;
     for (Country c in _countryList) {
       if (c == countryToAdd) absent = false;
-  }
+    }
     if (absent) _countryList.add(countryToAdd);
   }
 
