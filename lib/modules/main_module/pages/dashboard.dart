@@ -7,6 +7,8 @@ import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
     show CoronedAppBar, FailureCard, GlobalCard, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
+import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
+    show SizeBreakpoint;
 
 class Dashboard extends StatefulWidget {
   final String title;
@@ -33,8 +35,8 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CoronedAppBar(
-        isMobile: MediaQuery.of(context).size.width < 600.0,
-        isWatch: MediaQuery.of(context).size.width < 350.0,
+        isMobile: context.isMobile,
+        isWatch: context.isWatch,
         textStyle: Theme.of(context).textTheme.headline1,
       ),
       drawer: NavigationDrawer(),

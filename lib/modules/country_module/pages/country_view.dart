@@ -7,7 +7,7 @@ import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
     show CoronedAppBar, CoronedCard, FailureIcon, NavigationDrawer;
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
-    show HoverExtensions;
+    show HoverExtensions, SizeBreakpoint;
 
 class CountryView extends StatefulWidget {
   @override
@@ -84,8 +84,8 @@ class _CountryViewState extends State<CountryView> {
       _resetFilter = false;
       return Scaffold(
         appBar: CoronedAppBar(
-          isMobile: MediaQuery.of(context).size.width < 600.0,
-          isWatch: MediaQuery.of(context).size.width < 350.0,
+          isMobile: context.isMobile,
+          isWatch: context.isWatch,
           textStyle: Theme.of(context).textTheme.headline1,
         ),
         drawer: NavigationDrawer(),
@@ -224,17 +224,17 @@ class _CountryViewState extends State<CountryView> {
   }
 
   EdgeInsets _resolveInputTextPadding() => EdgeInsets.only(
-        left: MediaQuery.of(context).size.width <= 600
+        left: context.isMobile
             ? MediaQuery.of(context).size.width * 0.1
             : MediaQuery.of(context).size.width * 0.3,
-        right: MediaQuery.of(context).size.width <= 600
+        right: context.isMobile
             ? MediaQuery.of(context).size.width * 0.1
             : MediaQuery.of(context).size.width * 0.3,
-        top: MediaQuery.of(context).size.width <= 600 ? 8.0 : 18.0,
+        top: context.isMobile ? 8.0 : 18.0,
       );
 
   TextStyle _resolveInputTextStyle() {
-    return MediaQuery.of(context).size.width >= 300
+    return !context.isWatch
         ? _countryFilter.text.compareTo('Choisissez un pays') == 0
             ? Theme.of(context)
                 .textTheme
@@ -249,10 +249,9 @@ class _CountryViewState extends State<CountryView> {
             : Theme.of(context).textTheme.bodyText1.apply(fontSizeFactor: -4);
   }
 
-  TextStyle _resolveCountryTextStyle() =>
-      MediaQuery.of(context).size.width >= 300
-          ? Theme.of(context).textTheme.headline4
-          : Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4);
+  TextStyle _resolveCountryTextStyle() => !context.isWatch
+      ? Theme.of(context).textTheme.headline4
+      : Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4);
 
   _showOverlay(BuildContext context) {
     Overlay.of(context).insert(_scrollToTop);

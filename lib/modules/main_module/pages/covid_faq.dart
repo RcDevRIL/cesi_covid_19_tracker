@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
     show CoronedAppBar, NavigationDrawer;
 import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
+import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
+    show SizeBreakpoint;
 
 class CovidFaq extends StatefulWidget {
   @override
@@ -15,8 +17,8 @@ class _CovidFaqState extends State<CovidFaq> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CoronedAppBar(
-        isMobile: MediaQuery.of(context).size.width < 600.0,
-        isWatch: MediaQuery.of(context).size.width < 350.0,
+        isMobile: context.isMobile,
+        isWatch: context.isWatch,
         textStyle: Theme.of(context).textTheme.headline1,
       ),
       drawer: NavigationDrawer(),
