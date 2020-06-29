@@ -58,7 +58,7 @@ class AppConstants {
   static const String repositoryUrl =
       'https://www.github.com/RcDevRIL/cesi_covid_19_tracker';
   static const String applicationName = 'CORONED';
-  static const String applicationVersion = 'v1.6.0';
+  static const String applicationVersion = 'v1.6.1+1';
   static const String applicationIcon = 'assets/virus-logo.png';
   static const List<String> applicationLegalese = [
     'CORONED est à la base un projet scolaire réalisé pour répondre à un sujet de travaux pratiques dans un cours de développement web dispensé par le CESI Dijon-Quetigny.',

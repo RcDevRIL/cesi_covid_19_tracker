@@ -27,7 +27,7 @@ _Let's dive in !!_:monocle_face:
   * A text input enables instant filtering on the list
   * Clicking on one entry will open a new page with the country detailed stats
 - Country details page with **COVID-19** related statistics ([DetailsPage])
-- About page with licences used in this project (thanks Flutter team for [LicencePage] :rocket:)
+- About page with licences used in this project and a link to this page (forked from Flutter's [LicencePage] :rocket:)
 ### Data sources :nerd_face:
 This app relies on **3** data sources:
 - Static FAQ hardcoded in ```FAQDataSource``` class ([lib/shared/constants/app_globals.dart])
@@ -42,7 +42,7 @@ Since this is a repo created for studies, I will explain in this section what I'
 - JSON<->Object manipulations (made a lot easier thanks to [freezed] :rocket:)
 - Unit testing (see **[test]** folder for source code)
 - Performance optimization (Flutter for web is capricious sometimes :sweat_smile:)
-- Github project management tools (in the begining we were 4 students, and chose to go with Automated Kanban boards from Github ! Issues and PR were our way to handle the development of the website, and I continue on to better learn about all Github features :rocket:)
+- Github project management tools (in the begining we were 4 students, and chose to go with Automated Kanban boards from Github ! Issues and PR were our way to handle the development of the website, and I continue on in order to better learn about all Github features :rocket:)
 ### Screenshots: :mag:
 _// **TODO**: Put screenshots here when V2 is done_
 - Mobile:
@@ -196,7 +196,7 @@ Have fun coding !!:rocket::computer:
 [Release]: https://github.com/RcDevRIL/cesi_covid_19_tracker/releases
 [EN]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README.md
 [FR]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README-fr.md
-[lib/data/constants/app_globals.dart]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/dev-readme/lib/shared/constants/app_globals.dart#L88
+[lib/shared/constants/app_globals.dart]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/shared/constants/app_globals.dart#L88
 [LicencePage]: https://api.flutter.dev/flutter/material/LicensePage-class.html
 [restcountries.eu]: http://restcountries.eu/
 [NOVELCovid]: https://corona.lmao.ninja/docs/#/
