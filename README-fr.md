@@ -15,8 +15,8 @@
 ### A quoi sert exactement ce dépôt ? :raised_eyebrow:
 Vous trouverez ici le code source d'une petite application écrite en **[Flutter]** dont l'humble but est de fournir des **informations** sur la situation mondiale **COVID-19** ainsi qu'une courte **FAQ** sur ce virus.
 
-Cette application a d'abord été créée par un groupe de 4 étudiants en génie logiciel lors d'un cours sur le développement Web !:rocket:
-Nous avons eu 2 jours d'école pour réfléchir à un simple site web à construire...sujet et technologies au choix !! La notation portait sur la gestion de projet et non sur le codage donc... Nous pouvions nous amuser avec l'application !:+1: Nous avons choisi Flutter Web pour avoir un premier aperçu de cette technologie et nous avons choisi de faire un simple _dashboard_ **COVID-19** s'appuyant sur une API libre.
+Cette application a d'abord été créée par un groupe de 4 étudiants en ingénierie logicielle lors d'un cours sur le développement Web !:rocket:
+Nous avons eu 2 jours d'école pour réfléchir à un simple site web à construire...sujet et technologies au choix !! La notation portait sur la gestion de projet et non sur l'implémentation donc... Nous pouvions nous amuser avec l'application !:+1: Nous avons choisi Flutter Web pour avoir un premier aperçu de cette technologie et nous avons choisi de faire un simple _dashboard_ **COVID-19** s'appuyant sur une API libre.
 
 Après ce qui a été un examen réussi, j'ai choisi de poursuivre le développement à des fins de formation ! Et aussi pour voir l'état d'avancement de Flutter for Web...:thinking:
 
@@ -27,7 +27,7 @@ _Let's dive in !!_:monocle_face:
   * Une saisie de texte permet un filtrage instantané sur la liste
   * Cliquer sur une entrée ouvre une nouvelle page avec les statistiques détaillées du pays
 - Page de détails sur le pays avec les statistiques liées à **COVID-19** ([DetailsPage])
-- Page _About_ avec les licences utilisées dans ce projet (merci à l'équipe Flutter pour [LicencePage]:rocket:)
+- Page _About_ avec les licences utilisées dans ce projet et un lien vers cette page (fork de la [LicencePage] de Flutter :rocket:)
 ### Sources de données :nerd_face:
 Cette application s'appuie sur **3** sources de données:
 - FAQ statique codée en dur dans la classe ```FAQDataSource``` ([lib/shared/constants/app_globals.dart])
@@ -42,9 +42,9 @@ Comme il s'agit d'un repo créé pour les études, je vais expliquer dans cette 
 - JSON<->Manipulations d'objets (rendues beaucoup plus faciles grâce à [freezed]:rocket:)
 - Tests unitaires (voir le dossier **[test]** pour le code source)
 - Optimisation des performances (Flutter est parfois capricieux pour le web:sweat_smile:)
-- Outils de gestion de projet Github (au début, nous étions 4 étudiants, et nous avons choisi d'utiliser les planches Automated Kanban de Github ! Les problèmes et les relations publiques ont été notre façon de gérer le développement du site web, et je continue à mieux connaître toutes les fonctionnalités de Github:rocket:)
+- Outils de gestion de projet Github (au début, nous étions 4 étudiants, et nous avons choisi d'utiliser le Kanban automatique de Github ! Les Issues et les Pull Requests ont été notre façon de gérer le développement du site web, et je continue pour mieux connaître toutes les fonctionnalités de Github:rocket:)
 ### Captures d'écran :mag:
-_// **TODO** : Mettez des captures d'écran ici quand la V2 sera terminée_
+_// **TODO** : Mettre des captures d'écran ici quand la V2 sera terminée_
 - Mobile :
 
 | Page | UI |
@@ -80,7 +80,7 @@ _Dépendances de test et de développement :_
 * [flutter_driver] - La bibliothèque Flutter utilisée pour mettre en place des tests d'intégration automatisés
 * [build_runner] - L'outil Flutter utilisé pour générer du code et réduire la charge des développeurs
 # Lancement sur localhost
-Si la consultation [en ligne] (https://rcdevril.github.io/cesi_covid_19_tracker/) n'est pas votre tasse de thé, vous pouvez également essayer de lancer l'application en local. L'application est compilée à chaque lancement et vous pouvez trouver les archives des sites web et des apks sur la page [Release]. Vous pouvez également la créer vous-même en utilisant le CLI [Flutter].
+Si la consultation [en ligne](https://rcdevril.github.io/cesi_covid_19_tracker/) n'est pas votre tasse de thé, vous pouvez également essayer de lancer l'application en local. L'application est compilée à chaque lancement et vous pouvez trouver les archives des sites web et des apks sur la page [Release]. Vous pouvez également la créer vous-même en utilisant le CLI [Flutter].
 
 _/!\ Cette application a été développée sur la plateforme Web utilisant le canal `bêta` de [Flutter], donc assurez-vous d'avoir une version compatible avant d'essayer de la compiler et de l'exécuter. /!\\_
 
@@ -98,7 +98,7 @@ Si vous souhaitez lancer la version Web, vous pouvez le faire à l'aide de la co
 
 `flutter run -d [chrome|web-server]`
 
-L'option chrome ne sera disponible que si vous avez installé ce navigateur sur la machine locale. L'option serveur web lance donc un serveur web sur lequel n'importe quel navigateur peut tenter de se connecter._
+_L'option chrome ne sera disponible que si vous avez installé ce navigateur sur la machine locale. L'option serveur web lance donc un serveur web sur lequel n'importe quel navigateur peut tenter de se connecter._
 
 Pour lancer le processus de compilation, d'installation et d'exécution sur un appareil Android ou iOS, exécutez la commande suivante :
 
@@ -190,7 +190,7 @@ Amusez-vous bien à coder !!:rocket::computer:
 [Release]: https://github.com/RcDevRIL/cesi_covid_19_tracker/releases
 [EN]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README.md
 [FR]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README-fr.md
-[lib/data/constants/app_globals.dart]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/shared/constants/app_globals.dart#L88
+[lib/shared/constants/app_globals.dart]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/shared/constants/app_globals.dart#L88
 [LicencePage]: https://api.flutter.dev/flutter/material/LicensePage-class.html
 [restcountries.eu]: http://restcountries.eu/
 [NOVELCovid]: https://corona.lmao.ninja/docs/#/

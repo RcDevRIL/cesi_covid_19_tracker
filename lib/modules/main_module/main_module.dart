@@ -31,7 +31,7 @@ class CoronedMainModule extends MainModule {
           ),
           Router(
             '/about',
-            child: (context, args) => LicensePage(
+            child: (context, args) => AboutPage(
               applicationName: aG.AppConstants.applicationName,
               applicationVersion: aG.AppConstants.applicationVersion,
               applicationIcon: Image.asset(

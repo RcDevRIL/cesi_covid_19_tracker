@@ -8,6 +8,8 @@ import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
     show CoronedAppBar, CountryCard, FailureCard;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show CovidCountryInfos;
+import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
+    show SizeBreakpoint;
 import 'package:flutter_modular/flutter_modular.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -25,8 +27,8 @@ class _DetailsPageState extends State<DetailsPage> {
     final coronedData = Modular.get<CoronedData>();
     return Scaffold(
       appBar: CoronedAppBar(
-        isMobile: MediaQuery.of(context).size.width < 600.0,
-        isWatch: MediaQuery.of(context).size.width < 350.0,
+        isMobile: context.isMobile,
+        isWatch: context.isWatch,
         textStyle: Theme.of(context).textTheme.headline1,
       ),
       body: coronedData.getCountryList == null

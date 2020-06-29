@@ -55,14 +55,18 @@ class AppTheme {
 }
 
 class AppConstants {
-  static const String applicationName = 'CORONED\n';
-  static const String applicationVersion = '\nv1.6.0';
+  static const String repositoryUrl =
+      'https://www.github.com/RcDevRIL/cesi_covid_19_tracker';
+  static const String applicationName = 'CORONED';
+  static const String applicationVersion = 'v1.6.1+1';
   static const String applicationIcon = 'assets/virus-logo.png';
-  static const String applicationLegalese =
-      'CORONED est à la base un projet scolaire réalisé pour répondre à un sujet de\ntravaux pratiques dans un cours de développement web dispensé par le CESI Dijon-Quetigny.'
-      '\n\nNous avions le choix sur la technologie, alors nous avons formé un groupe pour\ntenter d\'utiliser la version web de Flutter...'
-      '\n\nAprès un examen couronné de succès,\nl\'application évolue ! 🚀 Nous acceptons avec plaisir les contributions !! 🔥'
-      '\n\nRendez-vous sur github.com/rcdevril/cesi_covid_19_tracker !\n\nVous trouverez ci-jointes les licences associées aux softwares utilisés pour la réalisation de ce projet Flutter.';
+  static const List<String> applicationLegalese = [
+    'CORONED est à la base un projet scolaire réalisé pour répondre à un sujet de travaux pratiques dans un cours de développement web dispensé par le CESI Dijon-Quetigny.',
+    'Nous avions le choix sur la technologie, alors nous avons formé un groupe pour tenter d\'utiliser la version web de Flutter...',
+    'Après un examen couronné de succès,l\'application évolue ! 🚀 Nous acceptons avec plaisir les contributions !! 🔥',
+    'Rendez-vous sur github.com/rcdevril/cesi_covid_19_tracker !',
+    'Vous trouverez ci-jointes les licences associées aux softwares utilisés pour la réalisation de ce projet Flutter.',
+  ];
   static const String defaultAppTitle = '$applicationName\nA covid-19 info app';
   static const String cesiDijonUrl = 'https://dijon.cesi.fr/';
   static const List<NavBarItemModel> navItems = [
