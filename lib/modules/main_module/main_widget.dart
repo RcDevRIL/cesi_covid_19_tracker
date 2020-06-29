@@ -9,7 +9,8 @@ class CoronedWidget extends StatelessWidget {
     return MaterialApp(
       title: 'CORONED',
       localizationsDelegates: [
-        const AppBarTooltipsText(),
+        // Custom localisation to remove automatic tooltips on Material [AppBar] buttons
+        const AppBarTooltipsTextDelegate(),
       ],
       theme: aG.AppTheme.defaultAppTheme,
       initialRoute: '/dashboard',
