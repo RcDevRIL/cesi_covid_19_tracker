@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 /// Custom breakpoints when not using responsive_builder package
 extension SizeBreakpoint on BuildContext {

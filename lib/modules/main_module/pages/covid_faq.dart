@@ -4,6 +4,7 @@ import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
 import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
 import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
     show SizeBreakpoint;
+import 'package:flutter/rendering.dart';
 
 class CovidFaq extends StatefulWidget {
   @override
@@ -30,6 +31,7 @@ class _CovidFaqState extends State<CovidFaq> {
           itemBuilder: (c, i) => Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: ListTile(
+              mouseCursor: SystemMouseCursors.basic,
               title: Text(
                 items.elementAt(i).values.elementAt(0),
                 style: Theme.of(context)
