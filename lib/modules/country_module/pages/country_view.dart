@@ -28,7 +28,7 @@ class _CountryViewState extends State<CountryView> {
     super.initState();
     _resetFilter = true;
     _isScrollToTopShown = false;
-    _maxScrollToTopDuration = 2500;
+    _maxScrollToTopDuration = 2000;
     _countryFilter = TextEditingController(text: 'Choisissez un pays');
     _scrollController = ScrollController();
     _scrollController.addListener(() {
@@ -147,6 +147,8 @@ class _CountryViewState extends State<CountryView> {
                                 onTap: () {
                                   cD.setSelectedCountry(
                                       cD.getFilteredCountries.elementAt(i - 1));
+                                  if (_isScrollToTopShown)
+                                    _hideOverlay(context);
                                   Modular.link.pushNamed(cD.getFilteredCountries
                                       .elementAt(i - 1)
                                       .alpha2Code);
