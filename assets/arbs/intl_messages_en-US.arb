@@ -1,0 +1,151 @@
+{
+    "@@x-loco-version": "1.0.24 20200529-1",
+    "@@locale": "en-US",
+    "@@last_modified": "2020-06-29T22:44:18+0200",
+    "@@author": "romain che",
+    "globalStats": "Global Statistics",
+    "@globalStats": {
+        "type": "text",
+        "source_text": "Statistiques Mondiales"
+    },
+    "contaminated": "Contaminated",
+    "@contaminated": {
+        "type": "text",
+        "source_text": "Contaminés"
+    },
+    "deaths": "Deaths",
+    "@deaths": {
+        "type": "text",
+        "source_text": "Morts"
+    },
+    "recovered": "Recovered",
+    "@recovered": {
+        "type": "text",
+        "source_text": "Guéris"
+    },
+    "about": "About",
+    "@about": {
+        "type": "text",
+        "source_text": "À propos"
+    },
+    "selectCountryDefaultText": "Select a country",
+    "@selectCountryDefaultText": {
+        "type": "text",
+        "source_text": "Choisissez un pays"
+    },
+    "FAQQuestion1": "What is a coronavirus ?",
+    "@FAQQuestion1": {
+        "type": "text",
+        "source_text": "Qu'est-ce qu'un coronavirus ?"
+    },
+    "FAQQuestion2": "What is COVID-19 ?",
+    "@FAQQuestion2": {
+        "type": "text",
+        "source_text": "Qu'est-ce que la COVID-19 ?"
+    },
+    "FAQQuestion3": "What are the symptoms of COVID-19 ?",
+    "@FAQQuestion3": {
+        "type": "text",
+        "source_text": "Quels sont les symptômes de la COVID-19 ?"
+    },
+    "FAQQuestion4": "How is COVID-19 spreading ?",
+    "@FAQQuestion4": {
+        "type": "text",
+        "source_text": "Comment la COVID-19 se répand-elle ?"
+    },
+    "FAQQuestion5": "Can the virus that causes COVID-19 be airborne ?",
+    "@FAQQuestion5": {
+        "type": "text",
+        "source_text": "Le virus qui provoque la COVID-19 peut-il être transmis par l'air ?"
+    },
+    "FAQQuestion6": "Can CoVID-19 be caught in a person who has no symptoms ?",
+    "@FAQQuestion6": {
+        "type": "text",
+        "source_text": "La CoVID-19 peut-elle être attrapée chez une personne qui ne présente aucun symptôme ?"
+    },
+    "FAQQuestion7": "Can I get COVID-19 from the stool of someone with the disease ?",
+    "@FAQQuestion7": {
+        "type": "text",
+        "source_text": "Puis-je attraper la COVID-19 à partir des selles d\\'une personne atteinte de la maladie ?"
+    },
+    "FAQQuestion9": "What types of people are at risk of developing a serious illness ?",
+    "@FAQQuestion9": {
+        "type": "text",
+        "source_text": "Quels sont les types de personnes à risques ?"
+    },
+    "FAQQuestion10": "Are antibiotics effective in preventing or treating COVID-19 ?",
+    "@FAQQuestion10": {
+        "type": "text",
+        "source_text": "Les antibiotiques sont-ils efficaces pour prévenir ou traiter la COVID-19 ?"
+    },
+    "FAQAnswer1": "Coronaviruses are a large family of viruses that can cause disease in animals or humans.  In humans, several coronaviruses are known to cause respiratory infections ranging from the common cold to more serious illnesses such as Middle East Respiratory Syndrome (MERS) and Severe Acute Respiratory Syndrome (SARS). The most recently discovered coronavirus causes COVID-19 coronaviral disease.",
+    "@FAQAnswer1": {
+        "type": "text",
+        "source_text": "Les coronavirus sont une grande famille de virus qui peuvent provoquer des maladies chez les animaux ou les humains.  Chez l\\'homme, plusieurs coronavirus sont connus pour provoquer des infections respiratoires allant du simple rhume à des maladies plus graves telles que le syndrome respiratoire du Moyen-Orient (MERS) et le syndrome respiratoire aigu sévère (SRAS). Le coronavirus le plus récemment découvert provoque la maladie coronavirale COVID-19"
+    },
+    "FAQAnswer2": "COVID-19 is the most recently discovered infectious disease caused by the coronavirus. This new virus and this new disease were unknown before the outbreak began in Wuhan, China in December 2019.",
+    "@FAQAnswer2": {
+        "type": "text",
+        "source_text": "COVID-19 est la maladie infectieuse causée par le coronavirus le plus récemment découvert. Ce nouveau virus et cette nouvelle maladie étaient inconnus avant le début de l\\'épidémie à Wuhan, en Chine, en décembre 2019"
+    },
+    "FAQAnswer3": "The most common symptoms of COVID-19 are fever, fatigue and dry cough. Some patients may experience pain, nasal congestion, runny nose, sore throat or diarrhea. These symptoms are usually mild and begin gradually. Some people are infected but do not develop any symptoms and do not feel sick. Most people (about 80%) recover from the disease without needing special treatment. About 1 in 6 people who get COVID-19 become seriously ill and develop breathing difficulties. The elderly and those with underlying medical conditions such as high blood pressure, heart problems or diabetes are more likely to develop serious illness. People with fever, cough, and difficulty breathing should seek medical attention.",
+    "@FAQAnswer3": {
+        "type": "text",
+        "source_text": "Les symptômes les plus courants de la COVID-19 sont la fièvre, la fatigue et la toux sèche. Certains patients peuvent avoir des douleurs, une congestion nasale, un écoulement nasal, un mal de gorge ou de la diarrhée. Ces symptômes sont généralement légers et commencent progressivement. Certaines personnes sont infectées mais ne développent aucun symptôme et ne se sentent pas mal. La plupart des personnes (environ 80 %) se remettent de la maladie sans avoir besoin d'un traitement spécial. Environ 1 personne sur 6 qui contracte la COVID-19 devient gravement malade et développe des difficultés respiratoires. Les personnes âgées et celles qui souffrent de problèmes médicaux sous-jacents comme l'hypertension, les problèmes cardiaques ou le diabète, sont plus susceptibles de développer une maladie grave. Les personnes qui ont de la fièvre, de la toux et des difficultés à respirer doivent consulter un médecin"
+    },
+    "FAQAnswer4": "People can get COVID-19 from other people who have the virus. The disease can be spread from person to person by small droplets from the nose or mouth that are spread when a person with COVID-19 coughs or expires. These droplets land on objects and surfaces around the person. Other people then get COVID-19 by touching these objects or surfaces and then touching their eyes, nose or mouth. People can also get COVID-19 if they breathe in the droplets from a person with COVID-19 who is coughing or breathing out the droplets. This is why it is important to stay more than one metre away from a sick person. WHO is evaluating ongoing research on the modes of spread of COVID-19 and will continue to share updated results.",
+    "@FAQAnswer4": {
+        "type": "text",
+        "source_text": "Les gens peuvent attraper la COVID-19 par d'autres personnes qui ont le virus. La maladie peut se transmettre d'une personne à l'autre par de petites gouttelettes provenant du nez ou de la bouche qui se propagent lorsqu'une personne atteinte de la COVID-19 tousse ou expire. Ces gouttelettes se posent sur les objets et les surfaces autour de la personne. D'autres personnes attrapent ensuite la COVID-19 en touchant ces objets ou surfaces, puis en se touchant les yeux, le nez ou la bouche. Les personnes peuvent également attraper la COVID-19 si elles respirent les gouttelettes d'une personne atteinte de la COVID-19 qui tousse ou expire des gouttelettes. C'est pourquoi il est important de se tenir à plus d'un mètre d'une personne malade. L'OMS évalue les recherches en cours sur les modes de propagation de la COVID-19 et continuera à partager les résultats actualisés"
+    },
+    "FAQAnswer5": "Studies to date suggest that the virus that causes COVID-19 is transmitted primarily through contact with respiratory droplets rather than through the air.",
+    "@FAQAnswer5": {
+        "type": "text",
+        "source_text": "Les études réalisées à ce jour suggèrent que le virus qui cause la COVID-19 se transmet principalement par contact avec des gouttelettes respiratoires plutôt que par l'air"
+    },
+    "FAQAnswer6": "The disease is spread mainly by respiratory droplets expelled by a coughing person. The risk of catching COVID-19 from a person with no symptoms is very low. However, many people with COVID-19 have only mild symptoms. This is especially true in the early stages of the disease. It is therefore possible to get COVID-19 from a person who, for example, has only a mild cough and does not feel sick.  WHO is evaluating ongoing research on the transmission period of COVID-19 and will continue to share updated results.",
+    "@FAQAnswer6": {
+        "type": "text",
+        "source_text": "La maladie se propage principalement par les gouttelettes respiratoires expulsées par une personne qui tousse. Le risque d'attraper la COVID-19 d'une personne ne présentant aucun symptôme est très faible. Cependant, de nombreuses personnes atteintes de la COVID-19 ne présentent que des symptômes légers. Cela est particulièrement vrai aux premiers stades de la maladie. Il est donc possible d'attraper la COVID-19 chez une personne qui ne présente, par exemple, qu'une légère toux et ne se sent pas malade.  L'OMS évalue les recherches en cours sur la période de transmission de la COVID-19 et continuera à partager les résultats actualisés."
+    },
+    "FAQAnswer7": "The risk of contracting COVID-19 from the stool of an infected person appears to be low. Although initial investigations suggest that the virus may be present in feces in some cases, spread through this route is not a major feature of the epidemic. WHO is evaluating ongoing research on the modes of spread of COVID-19 and will continue to share new findings. But because it is a risk, it is an additional reason to wash your hands regularly, after using the toilet and before eating.",
+    "@FAQAnswer7": {
+        "type": "text",
+        "source_text": "Le risque d'attraper la COVID-19 par les selles d'une personne infectée semble faible. Bien que les enquêtes initiales suggèrent que le virus peut être présent dans les matières fécales dans certains cas, la propagation par cette voie n'est pas une caractéristique principale de l'épidémie. L'OMS évalue les recherches en cours sur les modes de propagation de la COVID-19 et continuera à partager les nouvelles découvertes. Mais comme il s'agit d'un risque, c'est une raison supplémentaire de se laver les mains régulièrement, après être allé aux toilettes et avant de manger"
+    },
+    "FAQAnswer8": "While we are still learning how COVID-19 affects people, the elderly and people with pre-existing medical conditions (such as high blood pressure, heart disease, lung disease, cancer or diabetes) appear to develop serious illnesses more often than others.",
+    "@FAQAnswer8": {
+        "type": "text",
+        "source_text": "Alors que nous sommes encore en train d'apprendre comment la COVID-19 affecte les gens, les personnes âgées et les personnes souffrant de conditions médicales préexistantes (comme l'hypertension, les maladies cardiaques, les maladies pulmonaires, le cancer ou le diabète) semblent développer des maladies graves plus souvent que les autres."
+    },
+    "FAQAnswer9": "No. Antibiotics are not effective against viruses, they only work on bacterial infections. COVID-19 is caused by a virus, so antibiotics don't work. Antibiotics should not be used to prevent or treat COVID-19. They should only be used as directed by a doctor to treat a bacterial infection.",
+    "@FAQAnswer9": {
+        "type": "text",
+        "source_text": "Non. Les antibiotiques ne sont pas efficaces contre les virus, ils n'agissent que sur les infections bactériennes. La COVID-19 est causée par un virus, les antibiotiques n'agissent donc pas. Les antibiotiques ne doivent pas être utilisés comme moyen de prévention ou de traitement de la COVID-19. Ils ne doivent être utilisés que selon les instructions d'un médecin pour traiter une infection bactérienne."
+    },
+    "appDesc1": "CORONED is basically a school project carried out to answer a practical work topic in a web development course given by CESI Dijon-Quetigny.",
+    "@appDesc1": {
+        "type": "text",
+        "source_text": "CORONED est à la base un projet scolaire réalisé pour répondre à un sujet de travaux pratiques dans un cours de développement web dispensé par le CESI Dijon-Quetigny."
+    },
+    "appDesc2": "We had the choice about the technology, so we formed a group to try to use Flutter for the web...",
+    "@appDesc2": {
+        "type": "text",
+        "source_text": "Nous avions le choix sur la technologie, alors nous avons formé un groupe pour tenter d'utiliser la version web de Flutter..."
+    },
+    "appDesc3": "After a successful exam, the application evolves! 🚀 We are happy to accept contributions ! 🔥",
+    "@appDesc3": {
+        "type": "text",
+        "source_text": "Après un examen couronné de succès,l'application évolue ! 🚀 Nous acceptons avec plaisir les contributions !! 🔥"
+    },
+    "appDesc4": "Head over to github.com/rcdevril/cesi_covid_19_tracker !",
+    "@appDesc4": {
+        "type": "text",
+        "source_text": "Rendez-vous sur github.com/rcdevril/cesi_covid_19_tracker !"
+    },
+    "appDesc5": "You will find on this page the licenses associated with the software used for this Flutter project.",
+    "@appDesc5": {
+        "type": "text",
+        "source_text": "Vous trouverez ci-jointes les licences associées aux softwares utilisés pour la réalisation de ce projet Flutter."
+    }
+}

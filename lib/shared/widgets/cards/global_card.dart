@@ -1,3 +1,4 @@
+import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
@@ -59,7 +60,7 @@ class _GlobalCardState extends State<GlobalCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Statistiques Mondiales',
+                TextTranslations.of(context).globalStats,
                 style: Theme.of(context).textTheme.headline4,
               ),
               SizedBox(

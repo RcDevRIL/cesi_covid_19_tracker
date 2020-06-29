@@ -1,4 +1,6 @@
+import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:cesi_covid_19_tracker/shared/shared.dart';
 import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
@@ -8,14 +10,38 @@ class CoronedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CORONED',
-      localizationsDelegates: [
-        // Custom localisation to remove automatic tooltips on Material [AppBar] buttons
-        const AppBarTooltipsTextDelegate(),
-      ],
       theme: aG.AppTheme.defaultAppTheme,
       initialRoute: '/dashboard',
       onGenerateRoute: Modular.generateRoute,
       navigatorKey: Modular.navigatorKey,
+      supportedLocales: const <Locale>[
+        Locale('fr', 'FR'),
+        Locale('en', 'US'),
+      ],
+      localizationsDelegates: [
+        // Custom localisation to remove automatic tooltips on Material [AppBar] buttons
+        const AppBarTooltipsTextDelegate(),
+        // Custom localisation to handle text translations
+        const TextTranslationsDelegate(),
+        // Built-in delegate for the localisation of the Material widgets (e.g. tooltips).
+        GlobalMaterialLocalizations.delegate,
+        // Built-in localisation for text direction (left-to-right or right-to-left).
+        GlobalWidgetsLocalizations.delegate
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (final supportedLocale in supportedLocales) {
+          // The language of the device of the user is compared to every supported language.
+          // If the language codes match, the supported locale with that language code is chosen.
+          // This allows users using American English or British English as locales
+          // to be able to use the Belgian English localisation.
+          if (locale.languageCode == supportedLocale.languageCode) {
+            return supportedLocale;
+          }
+        }
+        // If the language of the user isn't supported, the default locale should be used.
+        return supportedLocales.first;
+        // return Locale('en', 'US');
+      },
     );
   }
 }
