@@ -1,5 +1,5 @@
-import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
@@ -50,9 +50,9 @@ class _GlobalCardState extends State<GlobalCard> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(builder: (context, sizingInfos) {
-      var statsBarWidth =
+      final double statsBarWidth =
           _resolveStatsWidth(sizingInfos.isDesktop || sizingInfos.isTablet);
-
+      final CoronedData coronedData = Modular.get<CoronedData>();
       return CoronedCard(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -60,14 +60,14 @@ class _GlobalCardState extends State<GlobalCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                TextTranslations.of(context).globalStats,
+                coronedData.appTextTranslations.globalStats,
                 style: Theme.of(context).textTheme.headline4,
               ),
               SizedBox(
                 height: 8.0,
               ),
               Text(
-                '${TextTranslations.of(context).contaminated.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
+                '${coronedData.appTextTranslations.contaminated.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
@@ -85,7 +85,7 @@ class _GlobalCardState extends State<GlobalCard> {
                 height: 8.0,
               ),
               Text(
-                '${TextTranslations.of(context).deaths.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
+                '${coronedData.appTextTranslations.deaths.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
@@ -103,7 +103,7 @@ class _GlobalCardState extends State<GlobalCard> {
                 height: 8.0,
               ),
               Text(
-                '${TextTranslations.of(context).recovered.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
+                '${coronedData.appTextTranslations.recovered.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2

@@ -26,7 +26,7 @@ class CoronedAppBar extends AppBar {
                   .get<AppUtils>()
                   .openLink(aG.AppConstants.cesiDijonUrl),
               child: Image.asset(
-                'assets/cesilogo.png',
+                'assets/img/cesilogo.png',
                 fit: BoxFit.contain,
                 height: isMobile ? isWatch ? 100 : 150 : null,
                 width: isMobile ? isWatch ? 100 : 150 : null,

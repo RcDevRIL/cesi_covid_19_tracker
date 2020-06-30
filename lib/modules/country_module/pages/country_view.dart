@@ -1,4 +1,3 @@
-import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show TextCapitalization, TextInputAction;
 import 'package:flutter/gestures.dart' show DragStartBehavior;
@@ -16,14 +15,13 @@ class CountryView extends StatefulWidget {
 }
 
 class _CountryViewState extends State<CountryView> {
-  TextEditingController _countryFilter;
   ScrollController _scrollController;
+  TextEditingController _countryFilter;
   bool _resetFilter;
   bool _isScrollToTopShown;
   int _maxScrollToTopDuration;
   int _scrollToTopThreshold = 300;
   OverlayEntry _scrollToTop;
-  String _selectCountryDefaultText;
 
   @override
   void initState() {
@@ -31,8 +29,11 @@ class _CountryViewState extends State<CountryView> {
     _resetFilter = true;
     _isScrollToTopShown = false;
     _maxScrollToTopDuration = 2000;
-    _selectCountryDefaultText = TextTranslations.of(context).selectCountryDefaultText;
-    _countryFilter = TextEditingController(text: _selectCountryDefaultText);
+    _countryFilter = TextEditingController(
+        text: Modular.get<CoronedData>()
+                .appTextTranslations
+                ?.selectCountryDefaultText ??
+            'Choisissez un pays');
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (!_isScrollToTopShown &&
@@ -77,24 +78,26 @@ class _CountryViewState extends State<CountryView> {
   void dispose() {
     print('country view disposed');
     _countryFilter?.dispose();
-    if(_isScrollToTopShown) _hideOverlay(context);
+    if (_isScrollToTopShown) _hideOverlay(context);
     _scrollController?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CoronedData>(builder: (_, cD) {
-      if (_resetFilter) cD.resetFilter();
-      _resetFilter = false;
-      return Scaffold(
-        appBar: CoronedAppBar(
-          isMobile: context.isMobile,
-          isWatch: context.isWatch,
-          textStyle: Theme.of(context).textTheme.headline1,
-        ),
-        drawer: NavigationDrawer(),
-        body: cD.getCountryList != null
+    return Scaffold(
+      appBar: CoronedAppBar(
+        isMobile: context.isMobile,
+        isWatch: context.isWatch,
+        textStyle: Theme.of(context).textTheme.headline1,
+      ),
+      drawer: NavigationDrawer(),
+      body: Consumer<CoronedData>(builder: (_, cD) {
+        if (cD.appTextTranslations == null)
+          return Center(child: CircularProgressIndicator());
+        if (_resetFilter) cD.resetFilter();
+        _resetFilter = false;
+        return cD.getCountryList != null
             ? cD.getCountryList.isNotEmpty
                 ? Scrollbar(
                     child: ListView.builder(
@@ -112,8 +115,9 @@ class _CountryViewState extends State<CountryView> {
                                   isDense: true,
                                   alignLabelWithHint: true,
                                 ),
-                                onTap: () => _countryFilter.text
-                                            .compareTo(_selectCountryDefaultText) ==
+                                onTap: () => _countryFilter.text.compareTo(cD
+                                            .appTextTranslations
+                                            .selectCountryDefaultText) ==
                                         0
                                     ? _countryFilter.text = ''
                                     : null,
@@ -126,15 +130,19 @@ class _CountryViewState extends State<CountryView> {
                                       .unfocus(); // Try to enforce TextInput unfocus
                                   if (_countryFilter.text == null ||
                                       _countryFilter.text.isEmpty)
-                                    _countryFilter.text = _selectCountryDefaultText;
+                                    _countryFilter.text = cD.appTextTranslations
+                                        .selectCountryDefaultText;
                                 },
                                 controller: _countryFilter,
                                 maxLines: 1,
                                 autocorrect: false,
                                 dragStartBehavior: DragStartBehavior.down,
-                                style: _resolveInputTextStyle(),
-                                cursorColor: (_countryFilter.text.compareTo(
-                                                _selectCountryDefaultText) ==
+                                style: _resolveInputTextStyle(cD
+                                    .appTextTranslations
+                                    .selectCountryDefaultText),
+                                cursorColor: (_countryFilter.text.compareTo(cD
+                                                .appTextTranslations
+                                                .selectCountryDefaultText) ==
                                             0 ||
                                         _countryFilter.text.isEmpty)
                                     ? Colors.grey[400]
@@ -177,7 +185,7 @@ class _CountryViewState extends State<CountryView> {
                                             fit: BoxFit.contain,
                                             errorBuilder: (_, e, stacktrace) =>
                                                 Image.asset(
-                                              'assets/missing_flag.png',
+                                              'assets/img/missing_flag.png',
                                               height: 50.0,
                                               width: 50.0,
                                               fit: BoxFit.contain,
@@ -190,7 +198,7 @@ class _CountryViewState extends State<CountryView> {
                                               }
                                               return frame == null
                                                   ? Image.asset(
-                                                      'assets/missing_flag.png',
+                                                      'assets/img/missing_flag.png',
                                                       height: 50.0,
                                                       width: 50.0,
                                                       fit: BoxFit.contain,
@@ -209,7 +217,7 @@ class _CountryViewState extends State<CountryView> {
                                           Flexible(
                                             fit: FlexFit.loose,
                                             child: Text(
-                                              '${cD.getFilteredCountries.elementAt(i - 1).translations['fr'] ?? cD.getFilteredCountries.elementAt(i - 1).name}',
+                                              '${cD.getFilteredCountries.elementAt(i - 1).translations[cD.appLanguageCode.toLowerCase()] ?? cD.getFilteredCountries.elementAt(i - 1).name}',
                                               style: _resolveCountryTextStyle(),
                                             ),
                                           ),
@@ -225,9 +233,9 @@ class _CountryViewState extends State<CountryView> {
                   )
                 : Center(child: CircularProgressIndicator())
             : FailureIcon(
-                fail: 'Oups ! Something went wrong.\nPlease, reload the app.'),
-      );
-    });
+                fail: 'Oups ! Something went wrong.\nPlease, reload the app.');
+      }),
+    );
   }
 
   EdgeInsets _resolveInputTextPadding() => EdgeInsets.only(
@@ -240,15 +248,15 @@ class _CountryViewState extends State<CountryView> {
         top: context.isMobile ? 8.0 : 18.0,
       );
 
-  TextStyle _resolveInputTextStyle() {
+  TextStyle _resolveInputTextStyle(String input) {
     return !context.isWatch
-        ? _countryFilter.text.compareTo(_selectCountryDefaultText) == 0
+        ? _countryFilter.text.compareTo(input) == 0
             ? Theme.of(context)
                 .textTheme
                 .bodyText1
                 .copyWith(color: Colors.grey[400])
             : Theme.of(context).textTheme.bodyText1
-        : _countryFilter.text.compareTo(_selectCountryDefaultText) == 0
+        : _countryFilter.text.compareTo(input) == 0
             ? Theme.of(context)
                 .textTheme
                 .bodyText1

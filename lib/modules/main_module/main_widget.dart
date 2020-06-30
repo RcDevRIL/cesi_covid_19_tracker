@@ -14,11 +14,8 @@ class CoronedWidget extends StatelessWidget {
       initialRoute: '/dashboard',
       onGenerateRoute: Modular.generateRoute,
       navigatorKey: Modular.navigatorKey,
-      supportedLocales: const <Locale>[
-        Locale('fr', 'FR'),
-        Locale('en', 'US'),
-      ],
-      locale: Locale('fr', 'FR'),
+      supportedLocales: aG.AppConstants.coronedSupportedLocales,
+      locale: aG.AppConstants.coronedSupportedLocales[0],
       localizationsDelegates: [
         // Custom localisation to remove automatic tooltips on Material [AppBar] buttons
         const AppBarTooltipsTextDelegate(),

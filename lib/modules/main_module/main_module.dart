@@ -1,6 +1,5 @@
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/modules/country_module/country_module.dart';
-import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
@@ -32,22 +31,24 @@ class CoronedMainModule extends MainModule {
           ),
           Router(
             '/about',
-            child: (context, args) => AboutPage(
-              applicationName: aG.AppConstants.applicationName,
-              applicationVersion: aG.AppConstants.applicationVersion,
-              applicationIcon: Image.asset(
-                aG.AppConstants.applicationIcon,
-                height: 50.0,
-                width: 50.0,
-                fit: BoxFit.contain,
+            child: (context, args) => Consumer<CoronedData>(
+              builder: (context, cD) => AboutPage(
+                applicationName: aG.AppConstants.applicationName,
+                applicationVersion: aG.AppConstants.applicationVersion,
+                applicationIcon: Image.asset(
+                  aG.AppConstants.applicationIcon,
+                  height: 50.0,
+                  width: 50.0,
+                  fit: BoxFit.contain,
+                ),
+                applicationLegalese: [
+                  cD.appTextTranslations.appDesc1,
+                  cD.appTextTranslations.appDesc2,
+                  cD.appTextTranslations.appDesc3,
+                  cD.appTextTranslations.appDesc4,
+                  cD.appTextTranslations.appDesc5,
+                ],
               ),
-              applicationLegalese: [
-                TextTranslations.of(context).appDesc1,
-                TextTranslations.of(context).appDesc2,
-                TextTranslations.of(context).appDesc3,
-                TextTranslations.of(context).appDesc4,
-                TextTranslations.of(context).appDesc5,
-              ],
             ),
           ),
         ],

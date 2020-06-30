@@ -55,9 +55,13 @@ class AppTheme {
 class AppConstants {
   static const String defaultAppTitle = '$applicationName\nA covid-19 info app';
   static const String applicationName = 'CORONED';
-  static const String applicationVersion = 'v1.6.3+2';
-  static const String applicationIcon = 'assets/virus-logo.png';
+  static const String applicationVersion = 'v1.6.4+1';
+  static const String applicationIcon = 'assets/img/virus-logo.png';
   static const String cesiDijonUrl = 'https://dijon.cesi.fr/';
   static const String repositoryUrl =
       'https://www.github.com/RcDevRIL/cesi_covid_19_tracker';
+  static const List<Locale> coronedSupportedLocales = <Locale>[
+    Locale('fr', 'FR'),
+    Locale('en', 'EN'),
+  ];
 }
