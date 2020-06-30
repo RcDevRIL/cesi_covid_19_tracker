@@ -3,13 +3,15 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "0ea3f4ad8310e65f26972bb47c63957a",
-"assets/assets/cesilogo.png": "062a079cc98f5100b9d49bebcc00a23c",
-"assets/assets/missing_flag.png": "6171962998cf5a1657ce5e7408ad93f3",
-"assets/assets/virus-logo.png": "4290a5bb9e8ab4ca1b60ece1feaac645",
+  "assets/AssetManifest.json": "fef47449b804162327d1ccf54747dcd2",
+"assets/assets/img/cesilogo.png": "062a079cc98f5100b9d49bebcc00a23c",
+"assets/assets/img/missing_flag.png": "6171962998cf5a1657ce5e7408ad93f3",
+"assets/assets/img/virus-logo.png": "4290a5bb9e8ab4ca1b60ece1feaac645",
+"assets/assets/l10n/flags/en.png": "a2080b2d193dbbd3cb34b32ad919da62",
+"assets/assets/l10n/flags/fr.png": "263b1555d79501643919e5a3c4559b4f",
 "assets/FontManifest.json": "580ff1a5d08679ded8fcf5c6848cece7",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
-"assets/NOTICES": "d90852077e05bec7b153933fd0f4d752",
+"assets/NOTICES": "225b74ba3324d43c56be2217ffc3d48e",
 "favicon.ico": "cd78fd2732d09d2595ba1b16b9d6a488",
 "icons/android-icon-144x144.png": "fb70f5cda7db961105feb0f09b6f2899",
 "icons/android-icon-192x192.png": "cb618464d5fe4baffb584ad6767490cd",
@@ -38,7 +40,7 @@ const RESOURCES = {
 "icons/ms-icon-70x70.png": "48f490a64da323b6fe6daa506471699b",
 "index.html": "7c005a087ba16c486930d78d526505a5",
 "/": "7c005a087ba16c486930d78d526505a5",
-"main.dart.js": "cef3197a748bccf20a94b54fca8d4204",
+"main.dart.js": "9c0018d86d6f4319666d155b83d32157",
 "manifest.json": "610bcc38a0da86239a4f9d2472cb7d67"
 };
 
