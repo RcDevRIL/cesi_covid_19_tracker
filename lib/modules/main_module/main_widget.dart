@@ -18,6 +18,7 @@ class CoronedWidget extends StatelessWidget {
         Locale('fr', 'FR'),
         Locale('en', 'US'),
       ],
+      locale: Locale('fr', 'FR'),
       localizationsDelegates: [
         // Custom localisation to remove automatic tooltips on Material [AppBar] buttons
         const AppBarTooltipsTextDelegate(),
@@ -26,7 +27,8 @@ class CoronedWidget extends StatelessWidget {
         // Built-in delegate for the localisation of the Material widgets (e.g. tooltips).
         GlobalMaterialLocalizations.delegate,
         // Built-in localisation for text direction (left-to-right or right-to-left).
-        GlobalWidgetsLocalizations.delegate
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
       localeResolutionCallback: (locale, supportedLocales) {
         for (final supportedLocale in supportedLocales) {
@@ -40,7 +42,6 @@ class CoronedWidget extends StatelessWidget {
         }
         // If the language of the user isn't supported, the default locale should be used.
         return supportedLocales.first;
-        // return Locale('en', 'US');
       },
     );
   }

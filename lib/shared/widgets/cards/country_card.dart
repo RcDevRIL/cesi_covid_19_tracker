@@ -1,3 +1,4 @@
+import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart'
     show ResponsiveBuilder;
@@ -107,7 +108,7 @@ class _CountryCardState extends State<CountryCard> {
                 height: 8.0,
               ),
               Text(
-                'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.cases)}',
+                '${TextTranslations.of(context).contaminated.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.cases)}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
@@ -125,7 +126,7 @@ class _CountryCardState extends State<CountryCard> {
                 height: 8.0,
               ),
               Text(
-                'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.deaths)}',
+                '${TextTranslations.of(context).deaths.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.deaths)}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
@@ -143,7 +144,7 @@ class _CountryCardState extends State<CountryCard> {
                 height: 8.0,
               ),
               Text(
-                'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.recovered)}',
+                '${TextTranslations.of(context).recovered.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.recovered)}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2

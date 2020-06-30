@@ -1,3 +1,4 @@
+import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show TextCapitalization, TextInputAction;
 import 'package:flutter/gestures.dart' show DragStartBehavior;
@@ -22,6 +23,7 @@ class _CountryViewState extends State<CountryView> {
   int _maxScrollToTopDuration;
   int _scrollToTopThreshold = 300;
   OverlayEntry _scrollToTop;
+  String _selectCountryDefaultText;
 
   @override
   void initState() {
@@ -29,7 +31,8 @@ class _CountryViewState extends State<CountryView> {
     _resetFilter = true;
     _isScrollToTopShown = false;
     _maxScrollToTopDuration = 2000;
-    _countryFilter = TextEditingController(text: 'Choisissez un pays');
+    _selectCountryDefaultText = TextTranslations.of(context).selectCountryDefaultText;
+    _countryFilter = TextEditingController(text: _selectCountryDefaultText);
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (!_isScrollToTopShown &&
@@ -72,7 +75,9 @@ class _CountryViewState extends State<CountryView> {
 
   @override
   void dispose() {
+    print('country view disposed');
     _countryFilter?.dispose();
+    if(_isScrollToTopShown) _hideOverlay(context);
     _scrollController?.dispose();
     super.dispose();
   }
@@ -108,7 +113,7 @@ class _CountryViewState extends State<CountryView> {
                                   alignLabelWithHint: true,
                                 ),
                                 onTap: () => _countryFilter.text
-                                            .compareTo('Choisissez un pays') ==
+                                            .compareTo(_selectCountryDefaultText) ==
                                         0
                                     ? _countryFilter.text = ''
                                     : null,
@@ -121,7 +126,7 @@ class _CountryViewState extends State<CountryView> {
                                       .unfocus(); // Try to enforce TextInput unfocus
                                   if (_countryFilter.text == null ||
                                       _countryFilter.text.isEmpty)
-                                    _countryFilter.text = 'Choisissez un pays';
+                                    _countryFilter.text = _selectCountryDefaultText;
                                 },
                                 controller: _countryFilter,
                                 maxLines: 1,
@@ -129,7 +134,7 @@ class _CountryViewState extends State<CountryView> {
                                 dragStartBehavior: DragStartBehavior.down,
                                 style: _resolveInputTextStyle(),
                                 cursorColor: (_countryFilter.text.compareTo(
-                                                'Choisissez un pays') ==
+                                                _selectCountryDefaultText) ==
                                             0 ||
                                         _countryFilter.text.isEmpty)
                                     ? Colors.grey[400]
@@ -237,13 +242,13 @@ class _CountryViewState extends State<CountryView> {
 
   TextStyle _resolveInputTextStyle() {
     return !context.isWatch
-        ? _countryFilter.text.compareTo('Choisissez un pays') == 0
+        ? _countryFilter.text.compareTo(_selectCountryDefaultText) == 0
             ? Theme.of(context)
                 .textTheme
                 .bodyText1
                 .copyWith(color: Colors.grey[400])
             : Theme.of(context).textTheme.bodyText1
-        : _countryFilter.text.compareTo('Choisissez un pays') == 0
+        : _countryFilter.text.compareTo(_selectCountryDefaultText) == 0
             ? Theme.of(context)
                 .textTheme
                 .bodyText1

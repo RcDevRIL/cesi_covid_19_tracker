@@ -1,5 +1,6 @@
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/modules/country_module/country_module.dart';
+import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
@@ -40,7 +41,13 @@ class CoronedMainModule extends MainModule {
                 width: 50.0,
                 fit: BoxFit.contain,
               ),
-              applicationLegalese: aG.AppConstants.applicationLegalese,
+              applicationLegalese: [
+                TextTranslations.of(context).appDesc1,
+                TextTranslations.of(context).appDesc2,
+                TextTranslations.of(context).appDesc3,
+                TextTranslations.of(context).appDesc4,
+                TextTranslations.of(context).appDesc5,
+              ],
             ),
           ),
         ],

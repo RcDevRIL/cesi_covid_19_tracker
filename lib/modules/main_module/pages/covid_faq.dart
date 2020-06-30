@@ -1,7 +1,7 @@
+import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
     show CoronedAppBar, NavigationDrawer;
-import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
 import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
     show SizeBreakpoint;
 import 'package:flutter/rendering.dart';
@@ -12,7 +12,50 @@ class CovidFaq extends StatefulWidget {
 }
 
 class _CovidFaqState extends State<CovidFaq> {
-  final items = aG.FAQDataSource.questionReponse;
+  List<Map<String, String>> items;
+
+  @override
+  void initState() {
+    super.initState();
+    items = [
+      {
+        'question': TextTranslations.currentTranslation.faqQuestion1,
+        'answer': TextTranslations.currentTranslation.faqAnswer1
+      },
+      {
+        'question': TextTranslations.currentTranslation.faqQuestion2,
+        'answer': TextTranslations.currentTranslation.faqAnswer2
+      },
+      {
+        'question': TextTranslations.currentTranslation.faqQuestion3,
+        'answer': TextTranslations.currentTranslation.faqAnswer3
+      },
+      {
+        'question': TextTranslations.currentTranslation.faqQuestion4,
+        'answer': TextTranslations.currentTranslation.faqAnswer4
+      },
+      {
+        'question': TextTranslations.currentTranslation.faqQuestion5,
+        'answer': TextTranslations.currentTranslation.faqAnswer5
+      },
+      {
+        'question': TextTranslations.currentTranslation.faqQuestion6,
+        'answer': TextTranslations.currentTranslation.faqAnswer6
+      },
+      {
+        'question': TextTranslations.currentTranslation.faqQuestion7,
+        'answer': TextTranslations.currentTranslation.faqAnswer7
+      },
+      {
+        'question': TextTranslations.currentTranslation.faqQuestion9,
+        'answer': TextTranslations.currentTranslation.faqAnswer8
+      },
+      {
+        'question': TextTranslations.currentTranslation.faqQuestion10,
+        'answer': TextTranslations.currentTranslation.faqAnswer9
+      }
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

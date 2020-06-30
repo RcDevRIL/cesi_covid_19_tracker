@@ -67,7 +67,7 @@ class _GlobalCardState extends State<GlobalCard> {
                 height: 8.0,
               ),
               Text(
-                'CONTAMINÉS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
+                '${TextTranslations.of(context).contaminated.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
@@ -85,7 +85,7 @@ class _GlobalCardState extends State<GlobalCard> {
                 height: 8.0,
               ),
               Text(
-                'MORTS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
+                '${TextTranslations.of(context).deaths.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
@@ -103,7 +103,7 @@ class _GlobalCardState extends State<GlobalCard> {
                 height: 8.0,
               ),
               Text(
-                'GUÉRIS : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
+                '${TextTranslations.of(context).recovered.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2

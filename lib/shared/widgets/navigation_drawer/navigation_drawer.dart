@@ -1,7 +1,8 @@
+import 'package:cesi_covid_19_tracker/data/models/models.dart';
+import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
     show NavBarItem;
-import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
 import 'package:responsive_builder/responsive_builder.dart'
     show ResponsiveBuilder;
 import 'navigation_drawer_header.dart';
@@ -35,7 +36,7 @@ class NavigationDrawer extends StatelessWidget {
                     child: Scrollbar(
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: aG.AppConstants.navItems.length,
+                        itemCount: navItems.length,
                         itemBuilder: (_, i) => sizingInformation
                                     .screenSize.width <
                                 350
@@ -55,21 +56,21 @@ class NavigationDrawer extends StatelessWidget {
                                             ? 20
                                             : 40.0,
                                 title:
-                                    aG.AppConstants.navItems.elementAt(i).title,
-                                navigationPath: aG.AppConstants.navItems
+                                    navItems.elementAt(i).title,
+                                navigationPath: navItems
                                     .elementAt(i)
                                     .navigationPath,
-                                icon: aG.AppConstants.navItems
+                                icon: navItems
                                     .elementAt(i)
                                     .iconData,
                               )
                             : NavBarItem(
                                 title:
-                                    aG.AppConstants.navItems.elementAt(i).title,
-                                navigationPath: aG.AppConstants.navItems
+                                    navItems.elementAt(i).title,
+                                navigationPath: navItems
                                     .elementAt(i)
                                     .navigationPath,
-                                icon: aG.AppConstants.navItems
+                                icon: navItems
                                     .elementAt(i)
                                     .iconData,
                               ),
@@ -90,7 +91,7 @@ class NavigationDrawer extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   NavigationDrawerHeader(),
-                  ...aG.AppConstants.navItems.map(
+                  ...navItems.map(
                     (e) => NavBarItem(
                       title: e.title,
                       navigationPath: e.navigationPath,
@@ -103,3 +104,26 @@ class NavigationDrawer extends StatelessWidget {
     );
   }
 }
+
+  List<NavBarItemModel> navItems = [
+    NavBarItemModel(
+      title: 'DASHBOARD',
+      iconData: Icons.blur_circular,
+      navigationPath: '/dashboard',
+    ),
+    NavBarItemModel(
+      title: 'COUNTRIES',
+      iconData: Icons.location_searching,
+      navigationPath: '/country',
+    ),
+    NavBarItemModel(
+      title: 'FAQ',
+      iconData: Icons.question_answer,
+      navigationPath: '/faq',
+    ),
+    NavBarItemModel(
+      title: TextTranslations.currentTranslation.about.toUpperCase(),
+      iconData: Icons.info_outline,
+      navigationPath: '/about',
+    )
+  ];

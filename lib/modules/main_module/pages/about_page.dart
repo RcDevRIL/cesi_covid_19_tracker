@@ -185,89 +185,85 @@ class _AboutPageState extends State<AboutPage> {
       ),
       // All of the licenses page text is English. We don't want localized text
       // or text direction.
-      body: Localizations.override(
-        locale: const Locale('en', 'US'),
-        context: context,
-        child: DefaultTextStyle(
-          style: Theme.of(context).textTheme.caption,
-          child: SafeArea(
-            bottom: false,
-            child: Scrollbar(
-              child: ListView(
-                physics: const BouncingScrollPhysics(),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
-                children: <Widget>[
-                  Text(name,
-                      style: Theme.of(context).textTheme.headline5,
-                      textAlign: TextAlign.center),
-                  if (icon != null)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 18.0),
-                      child: IconTheme(
-                          data: Theme.of(context).iconTheme, child: icon),
-                    ),
-                  Text(version,
-                      style: Theme.of(context).textTheme.bodyText2,
-                      textAlign: TextAlign.center),
-                  Container(height: 18.0),
-                  ...widget.applicationLegalese.map((s) {
-                    Widget text;
-                    if (s.contains('github.com')) {
-                      text = RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          text: s.substring(0, s.indexOf('g')),
-                          style: Theme.of(context).textTheme.caption,
-                          children: <InlineSpan>[
-                            TextSpan(
-                              text: s.substring(s.indexOf('g'), s.length - 2),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .caption
-                                  .copyWith(
-                                      color: const Color(0xFF1A0DAB),
-                                      decoration: TextDecoration.underline),
-                              recognizer: _linkHandler,
-                            ),
-                            TextSpan(
-                              text: s.substring(s.length - 2),
-                            ),
-                          ],
-                        ),
-                      );
-                    } else {
-                      text = Text(
-                        s,
+      body: DefaultTextStyle(
+        style: Theme.of(context).textTheme.caption,
+        child: SafeArea(
+          bottom: false,
+          child: Scrollbar(
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+              children: <Widget>[
+                Text(name,
+                    style: Theme.of(context).textTheme.headline5,
+                    textAlign: TextAlign.center),
+                if (icon != null)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 18.0),
+                    child: IconTheme(
+                        data: Theme.of(context).iconTheme, child: icon),
+                  ),
+                Text(version,
+                    style: Theme.of(context).textTheme.bodyText2,
+                    textAlign: TextAlign.center),
+                Container(height: 18.0),
+                ...widget.applicationLegalese.map((s) {
+                  Widget text;
+                  if (s.contains('github.com')) {
+                    text = RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: s.substring(0, s.indexOf('g')),
                         style: Theme.of(context).textTheme.caption,
-                        textAlign: TextAlign.center,
-                      );
-                    }
-                    return Padding(
-                      padding: EdgeInsets.fromLTRB(
-                        MediaQuery.of(context).size.width / 4,
-                        0.0,
-                        MediaQuery.of(context).size.width / 4,
-                        18.0,
+                        children: <InlineSpan>[
+                          TextSpan(
+                            text: s.substring(s.indexOf('g'), s.length - 2),
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption
+                                .copyWith(
+                                    color: const Color(0xFF1A0DAB),
+                                    decoration: TextDecoration.underline),
+                            recognizer: _linkHandler,
+                          ),
+                          TextSpan(
+                            text: s.substring(s.length - 2),
+                          ),
+                        ],
                       ),
-                      child: text,
                     );
-                  }).toList(),
-                  Container(height: 18.0),
-                  Text('Powered by Flutter',
-                      style: Theme.of(context).textTheme.bodyText2,
-                      textAlign: TextAlign.center),
-                  Container(height: 24.0),
-                  ..._licenses,
-                  if (!_loaded)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 24.0),
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
+                  } else {
+                    text = Text(
+                      s,
+                      style: Theme.of(context).textTheme.caption,
+                      textAlign: TextAlign.center,
+                    );
+                  }
+                  return Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      MediaQuery.of(context).size.width / 4,
+                      0.0,
+                      MediaQuery.of(context).size.width / 4,
+                      18.0,
                     ),
-                ],
-              ),
+                    child: text,
+                  );
+                }).toList(),
+                Container(height: 18.0),
+                Text('Powered by Flutter',
+                    style: Theme.of(context).textTheme.bodyText2,
+                    textAlign: TextAlign.center),
+                Container(height: 24.0),
+                ..._licenses,
+                if (!_loaded)
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 24.0),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+              ],
             ),
           ),
         ),
