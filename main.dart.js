@@ -29440,9 +29440,9 @@ return t==null?s==null:t===s},
 $S:44}
 S.zA.prototype={
 guk:function(){return H.a([T.a9T(new S.PU(),u.z)],u.pO)},
-gwF:function(){var t=null,s=u.z,r=Z.oo("/dashboard",new S.PW(),t,t,t,t,t,t,C.cH,s),q=new G.zC(H.a([],u.i),P.w(u.c,s))
-q.a=q.guk()
-return Z.ac0(H.a([r,Z.oo("/country",t,t,t,q,t,t,t,C.cH,s),Z.oo("/faq",new S.PX(),t,t,t,t,t,t,C.cH,s),Z.oo("/about",new S.PY(),t,t,t,t,t,t,C.cH,s)],u.po),C.mv)}}
+gwF:function(){var t=null,s="/country",r=u.z,q=Z.oo("/dashboard",new S.PW(),t,t,t,t,t,t,C.cH,r),p=new G.zC(H.a([],u.i),P.w(u.c,r))
+p.a=p.guk()
+return Z.ac0(H.a([q,Z.oo(s,t,t,t,p,s,t,t,C.cH,r),Z.oo("/faq",new S.PX(),t,t,t,t,t,t,C.cH,r),Z.oo("/about",new S.PY(),t,t,t,t,t,t,C.cH,r)],u.po),C.mv)}}
 S.PU.prototype={
 $1:function(a){var t=new L.cX(new R.ar(H.a([],u.s),u.S))
 t.mk()
@@ -29474,7 +29474,7 @@ r=T.bn("",p,"appDesc3",p,p)
 b.e.toString
 q=T.bn("",p,"appDesc4",p,p)
 b.e.toString
-return new U.kC("CORONED","v1.6.4+2",o,H.a([t,s,r,q,T.bn("",p,"appDesc5",p,p)],u.i),p)},
+return new U.kC("CORONED","1.7.0+1",o,H.a([t,s,r,q,T.bn("",p,"appDesc5",p,p)],u.i),p)},
 $S:304}
 L.zB.prototype={
 H:function(a){var t=$.aff(),s=$.a7W
