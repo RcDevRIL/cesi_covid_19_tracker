@@ -22,7 +22,9 @@ class TextTranslations {
 
   /// The getters that make translations possibles and are wired to arb files.
   /// Each time these getters are modified need to run following command:
-  ///     - flutter pub pub run intl_translation:generate_from_arb --output-dir=lib/l10n lib/shared/text_translations_delegate.dart assets/l10n/arbs/intl_messages_fr-FR.arb assets/l10n/arbs/intl_messages_en-EN.arb --no-use-deferred-loading
+  ///
+  /// flutter pub pub run intl_translation:generate_from_arb --output-dir=lib/l10n lib/shared/text_translations_delegate.dart assets/l10n/arbs/intl_messages_fr-FR.arb assets/l10n/arbs/intl_messages_en-EN.arb --no-use-deferred-loading
+  ///
   String get globalStats => Intl.message('', name: 'globalStats');
   String get contaminated => Intl.message('', name: 'contaminated');
   String get deaths => Intl.message('', name: 'deaths');
