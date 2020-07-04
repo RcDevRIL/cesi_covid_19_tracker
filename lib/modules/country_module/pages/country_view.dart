@@ -8,6 +8,7 @@ import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
     show HoverExtensions, SizeBreakpoint;
+import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
 
 class CountryView extends StatefulWidget {
   @override
@@ -18,17 +19,11 @@ class _CountryViewState extends State<CountryView> {
   ScrollController _scrollController;
   TextEditingController _countryFilter;
   bool _resetFilter;
-  bool _isScrollToTopShown;
-  int _maxScrollToTopDuration;
-  int _scrollToTopThreshold = 300;
-  OverlayEntry _scrollToTop;
 
   @override
   void initState() {
     super.initState();
     _resetFilter = true;
-    _isScrollToTopShown = false;
-    _maxScrollToTopDuration = 2000;
     _countryFilter = TextEditingController(
         text: Modular.get<CoronedData>()
                 .appTextTranslations
@@ -36,49 +31,20 @@ class _CountryViewState extends State<CountryView> {
             'Choisissez un pays');
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if (!_isScrollToTopShown &&
-          _scrollController.offset > _scrollToTopThreshold)
+      if (!Modular.get<CoronedData>().isScrollToTopShown &&
+          _scrollController.offset > aG.AppConstants.scrollToTopTreshold) {
         _showOverlay(context);
-      if (_isScrollToTopShown &&
-          _scrollController.offset < _scrollToTopThreshold)
-        _hideOverlay(context);
+      }
+      if (Modular.get<CoronedData>().isScrollToTopShown &&
+          _scrollController.offset < aG.AppConstants.scrollToTopTreshold) {
+        Modular.get<CoronedData>().removeScrollToTopButton();
+      }
     });
-    _scrollToTop = OverlayEntry(
-      builder: (context) => Positioned(
-        bottom: 24.0,
-        right: 24.0,
-        child: Material(
-          type: MaterialType.button,
-          elevation: 2.0,
-          shadowColor: Colors.grey[800],
-          color: Theme.of(context).primaryColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-          child: IconButton(
-            onPressed: () => _scrollController.animateTo(
-              0.0,
-              duration: Duration(
-                  milliseconds:
-                      _scrollController.offset / 3 > _maxScrollToTopDuration
-                          ? _maxScrollToTopDuration
-                          : (_scrollController.offset / 3).floor()),
-              curve: Curves.ease,
-            ),
-            icon: Icon(
-              Icons.keyboard_arrow_up,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   @override
   void dispose() {
-    print('country view disposed');
     _countryFilter?.dispose();
-    if (_isScrollToTopShown) _hideOverlay(context);
     _scrollController?.dispose();
     super.dispose();
   }
@@ -160,8 +126,10 @@ class _CountryViewState extends State<CountryView> {
                                 onTap: () {
                                   cD.setSelectedCountry(
                                       cD.getFilteredCountries.elementAt(i - 1));
-                                  if (_isScrollToTopShown)
-                                    _hideOverlay(context);
+                                  if (Modular.get<CoronedData>()
+                                      .isScrollToTopShown)
+                                    Modular.get<CoronedData>()
+                                        .removeScrollToTopButton();
                                   Modular.link.pushNamed(cD.getFilteredCountries
                                       .elementAt(i - 1)
                                       .alpha2Code);
@@ -269,12 +237,18 @@ class _CountryViewState extends State<CountryView> {
       : Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4);
 
   _showOverlay(BuildContext context) {
-    Overlay.of(context).insert(_scrollToTop);
-    _isScrollToTopShown = true;
-  }
-
-  _hideOverlay(BuildContext context) {
-    _scrollToTop.remove();
-    _isScrollToTopShown = false;
+    final scrollToTopButton = aG.AppConstants.buildScrollToTopButton(
+      () => _scrollController.animateTo(
+        0.0,
+        duration: Duration(
+            milliseconds: _scrollController.offset / 3 >
+                    aG.AppConstants.maxScrollToTopDuration
+                ? aG.AppConstants.maxScrollToTopDuration
+                : (_scrollController.offset / 3).floor()),
+        curve: Curves.ease,
+      ),
+    );
+    Modular.get<CoronedData>()
+        .showScrollToTopButton(context, scrollToTopButton);
   }
 }

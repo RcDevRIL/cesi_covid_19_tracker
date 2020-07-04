@@ -78,10 +78,22 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> {
   GestureRecognizer _linkHandler;
+  ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (!Modular.get<CoronedData>().isScrollToTopShown &&
+          _scrollController.offset > aG.AppConstants.scrollToTopTreshold) {
+        _showOverlay(context);
+      }
+      if (Modular.get<CoronedData>().isScrollToTopShown &&
+          _scrollController.offset < aG.AppConstants.scrollToTopTreshold) {
+        Modular.get<CoronedData>().removeScrollToTopButton();
+      }
+    });
     _linkHandler = TapGestureRecognizer()
       ..onTap =
           () => locator.get<AppUtils>().openLink(aG.AppConstants.repositoryUrl);
@@ -91,7 +103,24 @@ class _AboutPageState extends State<AboutPage> {
   @override
   void dispose() {
     _linkHandler?.dispose();
+    _scrollController?.dispose();
     super.dispose();
+  }
+
+  _showOverlay(BuildContext context) {
+    final scrollToTopButton = aG.AppConstants.buildScrollToTopButton(
+      () => _scrollController.animateTo(
+        0.0,
+        duration: Duration(
+            milliseconds: _scrollController.offset / 3 >
+                    aG.AppConstants.maxScrollToTopDuration
+                ? aG.AppConstants.maxScrollToTopDuration
+                : (_scrollController.offset / 3).floor()),
+        curve: Curves.ease,
+      ),
+    );
+    Modular.get<CoronedData>()
+        .showScrollToTopButton(context, scrollToTopButton);
   }
 
   final List<Widget> _licenses = <Widget>[];
@@ -184,8 +213,6 @@ class _AboutPageState extends State<AboutPage> {
         isWatch: context.isWatch,
         textStyle: Theme.of(context).textTheme.headline1,
       ),
-      // All of the licenses page text is English. We don't want localized text
-      // or text direction.
       body: Modular.get<CoronedData>().appTextTranslations == null
           ? Center(child: CircularProgressIndicator())
           : DefaultTextStyle(
@@ -194,6 +221,7 @@ class _AboutPageState extends State<AboutPage> {
                 bottom: false,
                 child: Scrollbar(
                   child: ListView(
+                    controller: _scrollController,
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8.0, vertical: 12.0),

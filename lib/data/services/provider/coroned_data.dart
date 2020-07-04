@@ -1,6 +1,7 @@
 import 'dart:convert' show jsonDecode;
 import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
-import 'package:flutter/material.dart' show ChangeNotifier;
+import 'package:flutter/material.dart'
+    show BuildContext, ChangeNotifier, Overlay, OverlayEntry;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, locator;
 import 'package:cesi_covid_19_tracker/data/models/country.dart' show Country;
@@ -12,12 +13,15 @@ class CoronedData with ChangeNotifier {
   Country _selectedCountry;
   String _appLanguageCode;
   TextTranslations _appTextTranslations;
+  OverlayEntry _scrollToTopButton;
+  bool _isScrollToTopShown;
 
   CoronedData() {
     init();
   }
 
   void init() async {
+    _isScrollToTopShown = false;
     _countryList = [];
     _appLanguageCode = 'FR';
     _appTextTranslations =
@@ -71,6 +75,20 @@ class CoronedData with ChangeNotifier {
 
   void resetFilter() => _filteredCountries = null;
 
+  void removeScrollToTopButton() {
+    _scrollToTopButton.remove();
+    _isScrollToTopShown = false;
+    notifyListeners();
+  }
+
+  void showScrollToTopButton(
+      BuildContext context, OverlayEntry scrollToTopButton) {
+    _scrollToTopButton = scrollToTopButton;
+    Overlay.of(context).insert(_scrollToTopButton);
+    _isScrollToTopShown = true;
+    notifyListeners();
+  }
+
   String get appLanguageCode => _appLanguageCode;
 
   void setAppLanguageCode(String countryCode) {
@@ -95,4 +113,8 @@ class CoronedData with ChangeNotifier {
     _selectedCountry = c;
     notifyListeners();
   }
+
+  OverlayEntry get scrollToTopButton => _scrollToTopButton;
+
+  bool get isScrollToTopShown => _isScrollToTopShown;
 }

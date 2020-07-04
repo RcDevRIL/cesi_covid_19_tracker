@@ -1,3 +1,4 @@
+import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart' show Provider;
@@ -23,17 +24,16 @@ class NavBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = NavBarItemModel(
+    final model = NavBarItemModel(
       title: title,
       navigationPath: navigationPath,
       iconData: icon,
     );
+    final coronedData = Modular.get<CoronedData>();
     return GestureDetector(
       onTap: () {
-        // List<OverlayEntry> entries = Overlay.of(context).widget.initialEntries;
-        // if (entries != null && entries.isNotEmpty)
-        //   entries.removeWhere(
-        //       (element) => element.builder.runtimeType == Positioned);
+        if (coronedData.isScrollToTopShown)
+          coronedData.removeScrollToTopButton();
         Modular.to.pushNamed(
           navigationPath,
         );
@@ -41,8 +41,10 @@ class NavBarItem extends StatelessWidget {
       child: Provider.value(
         value: model,
         child: Padding(
-          padding:
-              EdgeInsets.only(left: horizontalSpacing, top: verticalSpacing),
+          padding: EdgeInsets.only(
+              left: horizontalSpacing,
+              top: verticalSpacing / 2,
+              bottom: verticalSpacing / 2),
           child: Row(
             children: <Widget>[
               Icon(model.iconData),
