@@ -24,6 +24,7 @@ class CoronedMainModule extends MainModule {
           Router(
             '/country',
             module: CountryModule(),
+            modulePath: '/country',
           ),
           Router(
             '/faq',

@@ -55,7 +55,7 @@ class AppTheme {
 class AppConstants {
   static const String defaultAppTitle = '$applicationName\nA covid-19 info app';
   static const String applicationName = 'CORONED';
-  static const String applicationVersion = 'v1.6.4+2';
+  static const String applicationVersion = 'v1.6.5+1';
   static const String applicationIcon = 'assets/img/virus-logo.png';
   static const String cesiDijonUrl = 'https://dijon.cesi.fr/';
   static const String repositoryUrl =
