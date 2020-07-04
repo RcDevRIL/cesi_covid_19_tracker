@@ -273,9 +273,13 @@ class _AboutPageState extends State<AboutPage> {
                         }
                         return Padding(
                           padding: EdgeInsets.fromLTRB(
-                            MediaQuery.of(context).size.width / 4,
+                            !(context.isMobile || context.isWatch)
+                                ? MediaQuery.of(context).size.width / 4
+                                : 0,
                             0.0,
-                            MediaQuery.of(context).size.width / 4,
+                            !(context.isMobile || context.isWatch)
+                                ? MediaQuery.of(context).size.width / 4
+                                : 0,
                             18.0,
                           ),
                           child: text,

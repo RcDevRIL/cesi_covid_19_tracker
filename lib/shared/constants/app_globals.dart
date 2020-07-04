@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:cesi_covid_19_tracker/shared/shared.dart' show SizeBreakpoint;
+
 class AppTheme {
   static ThemeData defaultAppTheme = ThemeData.light().copyWith(
     primaryColor: Colors.blueGrey,
@@ -55,7 +57,7 @@ class AppTheme {
 class AppConstants {
   static const String defaultAppTitle = '$applicationName\nA covid-19 info app';
   static const String applicationName = 'CORONED';
-  static const String applicationVersion = '1.7.2+2';
+  static const String applicationVersion = '1.7.3+1';
   static const String applicationIcon = 'assets/img/virus-logo.png';
   static const String cesiDijonUrl = 'https://dijon.cesi.fr/';
   static const String repositoryUrl =
@@ -69,8 +71,9 @@ class AppConstants {
   static OverlayEntry buildScrollToTopButton(VoidCallback onPressed) =>
       OverlayEntry(
         builder: (context) => Positioned(
-          bottom: 24.0,
-          right: 24.0,
+          key: Key('scroll_to_top_button'),
+          bottom: !(context.isMobile || context.isWatch) ? 24.0 : 8.0,
+          right: !(context.isMobile || context.isWatch) ? 24.0 : 8.0,
           child: Material(
             type: MaterialType.button,
             elevation: 0.0,
