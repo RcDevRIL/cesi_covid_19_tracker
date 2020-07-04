@@ -1,6 +1,6 @@
 ([EN]|**FR**)
 # cesi_covid_19_tracker
-[![version_badge](https://img.shields.io/badge/version-1.7-informational)][Release]
+[![version_badge](https://img.shields.io/badge/version-1.7.1-informational)][Release]
 
 ||Statut
 |:---:|:---:|
