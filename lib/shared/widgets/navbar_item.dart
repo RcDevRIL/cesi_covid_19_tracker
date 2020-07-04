@@ -34,9 +34,8 @@ class NavBarItem extends StatelessWidget {
         // if (entries != null && entries.isNotEmpty)
         //   entries.removeWhere(
         //       (element) => element.builder.runtimeType == Positioned);
-        Modular.to.pushNamedAndRemoveUntil(
+        Modular.to.pushNamed(
           navigationPath,
-          ModalRoute.withName(Modular.link.modulePath),
         );
       },
       child: Provider.value(
