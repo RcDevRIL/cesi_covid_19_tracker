@@ -12,15 +12,16 @@ class AppBarTooltipsTextOverride extends DefaultMaterialLocalizations {
   String get openAppDrawerTooltip => null;
 }
 
-class AppBarTooltipsText extends LocalizationsDelegate<MaterialLocalizations> {
-  const AppBarTooltipsText();
+class AppBarTooltipsTextDelegate
+    extends LocalizationsDelegate<MaterialLocalizations> {
+  const AppBarTooltipsTextDelegate();
   @override
   Future<AppBarTooltipsTextOverride> load(Locale locale) {
     return SynchronousFuture(AppBarTooltipsTextOverride(locale));
   }
 
   @override
-  bool shouldReload(AppBarTooltipsText old) => false;
+  bool shouldReload(AppBarTooltipsTextDelegate old) => false;
   @override
   bool isSupported(Locale locale) => true;
 }

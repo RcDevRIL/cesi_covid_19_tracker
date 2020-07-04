@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart' show Provider;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show NavBarItemModel;
@@ -28,7 +29,16 @@ class NavBarItem extends StatelessWidget {
       iconData: icon,
     );
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(navigationPath),
+      onTap: () {
+        // List<OverlayEntry> entries = Overlay.of(context).widget.initialEntries;
+        // if (entries != null && entries.isNotEmpty)
+        //   entries.removeWhere(
+        //       (element) => element.builder.runtimeType == Positioned);
+        Modular.to.pushNamedAndRemoveUntil(
+          navigationPath,
+          ModalRoute.withName(Modular.link.modulePath),
+        );
+      },
       child: Provider.value(
         value: model,
         child: Padding(

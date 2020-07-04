@@ -1,13 +1,15 @@
 name: cesi_covid_19_tracker
 description: A covid-19 info app
 
-version: 1.6.1+1
-
+version: 1.7.0+1
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
+    sdk: flutter
+
+  flutter_localizations:
     sdk: flutter
 
   get_it: ^3.1.0
@@ -24,19 +26,20 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  
-  build_runner:
-  freezed: ^0.10.2
 
   flutter_driver:
     sdk: flutter
   test: any
+  
+  build_runner:
+
+  freezed: ^0.10.2
+  intl_translation: ^0.17.7
 
 flutter:
 
   uses-material-design: true
 
   assets:
-    - assets/cesilogo.png
-    - assets/missing_flag.png
-    - assets/virus-logo.png
+    - assets/img/
+    - assets/l10n/flags/

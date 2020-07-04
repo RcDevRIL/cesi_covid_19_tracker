@@ -24,6 +24,7 @@ class CoronedMainModule extends MainModule {
           Router(
             '/country',
             module: CountryModule(),
+            modulePath: '/country',
           ),
           Router(
             '/faq',
@@ -31,16 +32,24 @@ class CoronedMainModule extends MainModule {
           ),
           Router(
             '/about',
-            child: (context, args) => AboutPage(
-              applicationName: aG.AppConstants.applicationName,
-              applicationVersion: aG.AppConstants.applicationVersion,
-              applicationIcon: Image.asset(
-                aG.AppConstants.applicationIcon,
-                height: 50.0,
-                width: 50.0,
-                fit: BoxFit.contain,
+            child: (context, args) => Consumer<CoronedData>(
+              builder: (context, cD) => AboutPage(
+                applicationName: aG.AppConstants.applicationName,
+                applicationVersion: aG.AppConstants.applicationVersion,
+                applicationIcon: Image.asset(
+                  aG.AppConstants.applicationIcon,
+                  height: 50.0,
+                  width: 50.0,
+                  fit: BoxFit.contain,
+                ),
+                applicationLegalese: [
+                  cD.appTextTranslations.appDesc1,
+                  cD.appTextTranslations.appDesc2,
+                  cD.appTextTranslations.appDesc3,
+                  cD.appTextTranslations.appDesc4,
+                  cD.appTextTranslations.appDesc5,
+                ],
               ),
-              applicationLegalese: aG.AppConstants.applicationLegalese,
             ),
           ),
         ],

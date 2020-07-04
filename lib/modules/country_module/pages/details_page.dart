@@ -24,71 +24,75 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
-    final coronedData = Modular.get<CoronedData>();
     return Scaffold(
       appBar: CoronedAppBar(
         isMobile: context.isMobile,
         isWatch: context.isWatch,
         textStyle: Theme.of(context).textTheme.headline1,
       ),
-      body: coronedData.getCountryList == null
-          ? CircularProgressIndicator()
-          : Scrollbar(
-              child: ListView(
-                physics: const BouncingScrollPhysics(),
-                children: <Widget>[
-                  SizedBox(height: 24.0),
-                  FutureBuilder(
-                    future: locator
-                        .get<ApiService>()
-                        .getDataFromCountry(widget.countryCode),
-                    builder: (_, AsyncSnapshot<String> s) {
-                      if (s.hasError) {
-                        return s.error.runtimeType == CovidNotFoundException
-                            ? FailureCard(
-                                fail:
-                                    'Country not found or doesn\'t have any COVID-19 related cases.',
-                                iconAndTextColor:
-                                    Theme.of(context).primaryColor,
-                              )
-                            : FailureCard(fail: s.error);
-                      }
-                      if (s.hasData) {
-                        print('DETAILS DATA:\n${s.data}');
-                        final CovidCountryInfos covidCountryInfos =
-                            CovidCountryInfos.fromJson(jsonDecode(s.data));
-                        final String countryName = coronedData.getCountryList
-                                    .firstWhere((c) =>
-                                        c.alpha2Code ==
-                                        covidCountryInfos.countryInfo['iso2'])
-                                    .translations['fr'] !=
-                                null
-                            ? coronedData.getCountryList
-                                .firstWhere((c) =>
-                                    c.alpha2Code ==
-                                    covidCountryInfos.countryInfo['iso2'])
-                                .translations['fr']
-                            : coronedData.getCountryList
-                                .firstWhere((c) =>
-                                    c.alpha2Code ==
-                                    covidCountryInfos.countryInfo['iso2'])
-                                .name;
-                        return CountryCard(
-                          covidCountryInfos: covidCountryInfos,
-                          countryName: countryName,
-                        );
-                      }
-                      if (!s.hasData &&
-                          s.connectionState == ConnectionState.done) {
-                        return FailureCard(fail: 'No Data');
-                      } else {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                ],
-              ),
-            ),
+      body: Consumer<CoronedData>(builder: (_, cD) {
+        if (cD.appTextTranslations == null)
+          return Center(child: CircularProgressIndicator());
+        final _currentTranslationCode = cD.appLanguageCode.toLowerCase();
+        return cD.getCountryList == null
+            ? Center(child: CircularProgressIndicator())
+            : Scrollbar(
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: <Widget>[
+                    SizedBox(height: 24.0),
+                    FutureBuilder(
+                      future: locator
+                          .get<ApiService>()
+                          .getDataFromCountry(widget.countryCode),
+                      builder: (_, AsyncSnapshot<String> s) {
+                        if (s.hasError) {
+                          return s.error.runtimeType == CovidNotFoundException
+                              ? FailureCard(
+                                  fail:
+                                      'Country not found or doesn\'t have any COVID-19 related cases.',
+                                  iconAndTextColor:
+                                      Theme.of(context).primaryColor,
+                                )
+                              : FailureCard(fail: s.error);
+                        }
+                        if (s.hasData) {
+                          print('DETAILS DATA:\n${s.data}');
+                          final CovidCountryInfos covidCountryInfos =
+                              CovidCountryInfos.fromJson(jsonDecode(s.data));
+                          final String countryName = cD.getCountryList
+                                      .firstWhere((c) =>
+                                          c.alpha2Code ==
+                                          covidCountryInfos.countryInfo['iso2'])
+                                      .translations[_currentTranslationCode] !=
+                                  null
+                              ? cD.getCountryList
+                                  .firstWhere((c) =>
+                                      c.alpha2Code ==
+                                      covidCountryInfos.countryInfo['iso2'])
+                                  .translations[_currentTranslationCode]
+                              : cD.getCountryList
+                                  .firstWhere((c) =>
+                                      c.alpha2Code ==
+                                      covidCountryInfos.countryInfo['iso2'])
+                                  .name;
+                          return CountryCard(
+                            covidCountryInfos: covidCountryInfos,
+                            countryName: countryName,
+                          );
+                        }
+                        if (!s.hasData &&
+                            s.connectionState == ConnectionState.done) {
+                          return FailureCard(fail: 'No Data');
+                        } else {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              );
+      }),
     );
   }
 }
