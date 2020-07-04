@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show TextCapitalization, TextInputAction;
-import 'package:flutter/gestures.dart' show DragStartBehavior;
-import 'package:cesi_covid_19_tracker/data/services/services.dart'
-    show CoronedData;
-import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
-    show CoronedAppBar, CoronedCard, FailureIcon, NavigationDrawer;
+import 'package:flutter/services.dart';
+import 'package:flutter/gestures.dart';
+
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
-    show HoverExtensions, SizeBreakpoint;
-import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
+    show
+        AppConstants,
+        CoronedAppBar,
+        CoronedCard,
+        FailureIcon,
+        NavigationDrawer,
+        HoverExtensions,
+        SizeBreakpoint;
+import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
 
 class CountryView extends StatefulWidget {
   @override
@@ -32,11 +37,11 @@ class _CountryViewState extends State<CountryView> {
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (!Modular.get<CoronedData>().isScrollToTopShown &&
-          _scrollController.offset > aG.AppConstants.scrollToTopTreshold) {
+          _scrollController.offset > AppConstants.scrollToTopTreshold) {
         _showOverlay(context);
       }
       if (Modular.get<CoronedData>().isScrollToTopShown &&
-          _scrollController.offset < aG.AppConstants.scrollToTopTreshold) {
+          _scrollController.offset < AppConstants.scrollToTopTreshold) {
         Modular.get<CoronedData>().removeScrollToTopButton();
       }
     });
@@ -237,13 +242,13 @@ class _CountryViewState extends State<CountryView> {
       : Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4);
 
   _showOverlay(BuildContext context) {
-    final scrollToTopButton = aG.AppConstants.buildScrollToTopButton(
+    final scrollToTopButton = AppConstants.buildScrollToTopButton(
       () => _scrollController.animateTo(
         0.0,
         duration: Duration(
             milliseconds: _scrollController.offset / 3 >
-                    aG.AppConstants.maxScrollToTopDuration
-                ? aG.AppConstants.maxScrollToTopDuration
+                    AppConstants.maxScrollToTopDuration
+                ? AppConstants.maxScrollToTopDuration
                 : (_scrollController.offset / 3).floor()),
         curve: Curves.ease,
       ),

@@ -1,10 +1,11 @@
 import 'dart:convert' show jsonEncode;
-import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
-    show GlobalCard;
 import 'package:flutter/material.dart' show CircularProgressIndicator, Key;
 import 'package:flutter_test/flutter_test.dart' show Future, find;
+
 import 'package:http/http.dart' show Response;
 import 'package:http/testing.dart' show MockClient;
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart' show GlobalCard;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show Country, CovidCountryInfos, CovidInfos;
 

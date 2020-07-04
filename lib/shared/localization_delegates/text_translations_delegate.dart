@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:cesi_covid_19_tracker/l10n/messages_all.dart';
+
+import 'package:intl/intl.dart' show Intl;
+
+import 'package:cesi_covid_19_tracker/l10n/messages_all.dart'
+    show initializeMessages;
 
 class TextTranslations {
   static Future<TextTranslations> load(Locale locale) {

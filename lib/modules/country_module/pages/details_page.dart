@@ -1,16 +1,18 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'dart:convert' show jsonDecode;
+
+import 'package:flutter_modular/flutter_modular.dart' show Consumer;
+
 import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
     show CovidNotFoundException;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
-    show ApiService, CoronedData, locator;
-import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
-    show CoronedAppBar, CountryCard, FailureCard;
+    show ApiService, locator;
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
+    show CoronedAppBar, CountryCard, FailureCard, SizeBreakpoint;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show CovidCountryInfos;
-import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
-    show SizeBreakpoint;
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:cesi_covid_19_tracker/modules/main_module/main_blocs.dart'
+    show CoronedData;
 
 class DetailsPage extends StatefulWidget {
   final String countryCode;

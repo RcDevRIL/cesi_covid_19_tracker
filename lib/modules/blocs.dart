@@ -1,1 +1,1 @@
-export 'country_module/country_bloc.dart';
+export 'main_module/main_blocs.dart';

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show MouseRegion, SelectableText, Widget;
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 /// Widget extension to show different mouse pointers

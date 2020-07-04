@@ -1,9 +1,11 @@
-import 'package:cesi_covid_19_tracker/data/services/provider/coroned_data.dart';
-import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
-import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:flutter_modular/flutter_modular.dart' show Modular;
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
+    show AppConstants, TextTranslations;
+import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
 
 class NavigationDrawerHeader extends StatelessWidget {
   final height;
@@ -28,7 +30,7 @@ class NavigationDrawerHeader extends StatelessWidget {
               key: Key('Language Selection'),
               onChanged: (String countryCode) async {
                 coronedData.setAppLanguageCode(countryCode);
-                TextTranslations.load(aG.AppConstants.coronedSupportedLocales
+                TextTranslations.load(AppConstants.coronedSupportedLocales
                         .firstWhere(
                             (element) => element.countryCode == countryCode))
                     .then((newTT) => coronedData.setAppTextTranslations(newTT));
@@ -62,7 +64,7 @@ class NavigationDrawerHeader extends StatelessWidget {
   }
 
   List<DropdownMenuItem<String>> _buildFlagsDropdown() =>
-      aG.AppConstants.coronedSupportedLocales.map(
+      AppConstants.coronedSupportedLocales.map(
         (locale) {
           var test = Image.asset(
             'assets/l10n/flags/${locale.languageCode}.png',

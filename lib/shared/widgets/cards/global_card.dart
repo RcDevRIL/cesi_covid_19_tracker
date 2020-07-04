@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+
+import 'package:flutter_modular/flutter_modular.dart' show Modular;
+import 'package:responsive_builder/responsive_builder.dart'
+    show ResponsiveBuilder;
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
+    show AppTheme, CoronedCard;
 import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
-import 'package:cesi_covid_19_tracker/data/services/services.dart';
-import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
+import 'package:cesi_covid_19_tracker/data/services/services.dart'
+    show AppUtils, locator;
+import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
+
 import 'coroned_card.dart';
 
 class GlobalCard extends StatefulWidget {
@@ -77,8 +84,8 @@ class _GlobalCardState extends State<GlobalCard> {
                 height: 8.0,
                 width: numbers['weightContaminated'] * statsBarWidth,
                 decoration: BoxDecoration(
-                  color: aG.AppTheme.confirmedColorFill,
-                  border: Border.all(color: aG.AppTheme.confirmedColorBorder),
+                  color: AppTheme.confirmedColorFill,
+                  border: Border.all(color: AppTheme.confirmedColorBorder),
                 ),
               ),
               SizedBox(
@@ -95,8 +102,8 @@ class _GlobalCardState extends State<GlobalCard> {
                 height: 8.0,
                 width: numbers['weightDeath'] * statsBarWidth,
                 decoration: BoxDecoration(
-                  color: aG.AppTheme.deathsColorFill,
-                  border: Border.all(color: aG.AppTheme.deathsColorBorder),
+                  color: AppTheme.deathsColorFill,
+                  border: Border.all(color: AppTheme.deathsColorBorder),
                 ),
               ),
               SizedBox(
@@ -113,8 +120,8 @@ class _GlobalCardState extends State<GlobalCard> {
                 height: 8.0,
                 width: numbers['weightRecovered'] * statsBarWidth,
                 decoration: BoxDecoration(
-                  color: aG.AppTheme.recoveredColorFill,
-                  border: Border.all(color: aG.AppTheme.recoveredColorBorder),
+                  color: AppTheme.recoveredColorFill,
+                  border: Border.all(color: AppTheme.recoveredColorBorder),
                 ),
               ),
               SizedBox(

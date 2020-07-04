@@ -1,11 +1,12 @@
-import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:flutter_modular/flutter_modular.dart' show Modular;
 import 'package:provider/provider.dart' show Provider;
+
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show NavBarItemModel;
-import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
-    show HoverExtensions;
+import 'package:cesi_covid_19_tracker/shared/shared.dart' show HoverExtensions;
+import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
 
 class NavBarItem extends StatelessWidget {
   final String title;

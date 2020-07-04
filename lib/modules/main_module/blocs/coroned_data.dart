@@ -1,11 +1,11 @@
-import 'dart:convert' show jsonDecode;
-import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
-import 'package:flutter/material.dart'
-    show BuildContext, ChangeNotifier, Overlay, OverlayEntry;
+import 'dart:convert';
+import 'package:flutter/material.dart';
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
+    show AppConstants, TextTranslations;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, locator;
-import 'package:cesi_covid_19_tracker/data/models/country.dart' show Country;
-import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
+import 'package:cesi_covid_19_tracker/data/models/models.dart' show Country;
 
 class CoronedData with ChangeNotifier {
   List<Country> _filteredCountries;
@@ -25,7 +25,7 @@ class CoronedData with ChangeNotifier {
     _countryList = [];
     _appLanguageCode = 'FR';
     _appTextTranslations =
-        await TextTranslations.load(aG.AppConstants.coronedSupportedLocales[0]);
+        await TextTranslations.load(AppConstants.coronedSupportedLocales[0]);
     String apiResponse = await locator.get<ApiService>().getCountries();
     for (var e in jsonDecode(apiResponse)) {
       addIfAbsent(Country.fromJson(e));

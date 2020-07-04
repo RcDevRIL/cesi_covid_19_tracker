@@ -1,11 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'country_bloc.dart';
 import 'country_pages.dart';
 
 class CountryModule extends ChildModule {
   @override
-  List<Bind> get binds => [Bind((_) => CountryBloc())];
+  List<Bind> get binds => [];
 
   @override
   List<Router> get routers => Router.group(

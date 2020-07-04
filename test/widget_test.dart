@@ -1,16 +1,19 @@
-import 'package:cesi_covid_19_tracker/modules/country_module/country_module.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_modular/flutter_modular_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart'
     show ListTile, MaterialApp, MediaQuery, MediaQueryData, Widget;
+
+import 'package:flutter_modular/flutter_modular.dart' show Bind, Modular;
+import 'package:flutter_modular/flutter_modular_test.dart' show initModule;
 import 'package:get_it/get_it.dart' show GetIt;
-import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
-    show CountryCard;
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart' show CountryCard;
+import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
+import 'package:cesi_covid_19_tracker/modules/modules.dart' show CountryModule;
 import 'package:cesi_covid_19_tracker/modules/pages.dart'
-    show CountryView, CovidFaq, Dashboard, DetailsPage;
+    show AboutPage, CountryView, CovidFaq, Dashboard, DetailsPage;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
-    show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl, CoronedData;
+    show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl;
+
 import 'mockers/mockers.dart' show HttpClientMock;
 import 'unit_tests_constants.dart'
     show

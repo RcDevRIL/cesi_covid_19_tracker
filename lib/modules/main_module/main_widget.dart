@@ -1,21 +1,26 @@
-import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:cesi_covid_19_tracker/shared/shared.dart';
-import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
+
+import 'package:flutter_modular/flutter_modular.dart' show Modular;
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
+    show
+        AppBarTooltipsTextDelegate,
+        AppConstants,
+        AppTheme,
+        TextTranslationsDelegate;
 
 class CoronedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CORONED',
-      theme: aG.AppTheme.defaultAppTheme,
+      theme: AppTheme.defaultAppTheme,
       initialRoute: '/dashboard',
       onGenerateRoute: Modular.generateRoute,
       navigatorKey: Modular.navigatorKey,
-      supportedLocales: aG.AppConstants.coronedSupportedLocales,
-      locale: aG.AppConstants.coronedSupportedLocales[0],
+      supportedLocales: AppConstants.coronedSupportedLocales,
+      locale: AppConstants.coronedSupportedLocales[0],
       localizationsDelegates: [
         // Custom localisation to remove automatic tooltips on Material [AppBar] buttons
         const AppBarTooltipsTextDelegate(),

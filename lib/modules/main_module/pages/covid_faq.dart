@@ -1,11 +1,12 @@
-import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:flutter/material.dart';
-import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
-    show CoronedAppBar, NavigationDrawer;
-import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
-    show SizeBreakpoint;
 import 'package:flutter/rendering.dart';
+
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
+    show SizeBreakpoint, CoronedAppBar, NavigationDrawer;
+import 'package:cesi_covid_19_tracker/modules/main_module/main_blocs.dart'
+    show CoronedData;
 
 class CovidFaq extends StatefulWidget {
   @override

@@ -1,8 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl;
 import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
     show CovidNotFoundException;
+
 import 'mockers/mockers.dart' show HttpClientMock;
 import 'unit_tests_constants.dart' show koClient, notFoundClient, slowOkClient;
 
