@@ -30,7 +30,7 @@ class CoronedData with ChangeNotifier {
     for (var e in jsonDecode(apiResponse)) {
       addIfAbsent(Country.fromJson(e));
     }
-    _sortCountryList();
+    _sortCountryList(_countryList);
     notifyListeners();
   }
 
@@ -42,8 +42,8 @@ class CoronedData with ChangeNotifier {
     if (absent) _countryList.add(countryToAdd);
   }
 
-  void _sortCountryList() {
-    _countryList.sort((c1, c2) => (c1
+  void _sortCountryList(List<Country> countryList) {
+    countryList.sort((c1, c2) => (c1
                     .translations[_appLanguageCode.toLowerCase()] !=
                 null &&
             c2.translations[_appLanguageCode.toLowerCase()] != null)
@@ -62,14 +62,7 @@ class CoronedData with ChangeNotifier {
             : e.name.toLowerCase().contains(filter
                 .toLowerCase())) // Fallback filter, hopefully API will always have a name for an entry
         .toList();
-    _filteredCountries.sort((c1, c2) => (c1
-                    .translations[_appLanguageCode.toLowerCase()] !=
-                null &&
-            c2.translations[_appLanguageCode.toLowerCase()] != null)
-        ? c1.translations[_appLanguageCode.toLowerCase()]
-            .compareTo(c2.translations[_appLanguageCode.toLowerCase()])
-        : c1.name.compareTo(c2
-            .name)); // Fallback comparator, hopefully API will always have a name for an entry
+    _sortCountryList(_filteredCountries);
     notifyListeners();
   }
 
@@ -100,6 +93,7 @@ class CoronedData with ChangeNotifier {
 
   void setAppTextTranslations(TextTranslations textTranslations) {
     _appTextTranslations = textTranslations;
+    _sortCountryList(_countryList);
     notifyListeners();
   }
 

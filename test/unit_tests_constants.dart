@@ -30,12 +30,13 @@ final slowOkClient = MockClient((request) async {
   return Response('', 200);
 });
 final testCountry = Country({'fr': 'test'}, 'test', 'test', 'FR', 1);
+final testCountry2 = Country({'fr': 'test1'}, 'test1', 'test1', 'FR', 1);
 final okCountryClient = MockClient((request) async {
   return Response('[${jsonEncode(testCountry)}]', 200);
 });
 String _buildTestCountriesJsonString() {
-  List<Country> testCountries = [testCountry];
-  for (int i = 1; i < 11; i++) {
+  List<Country> testCountries = [testCountry, testCountry2];
+  for (int i = 2; i < 11; i++) {
     testCountries.add(Country({'fr': 'test$i'}, 'test$i', 'test$i', 'FR', 1));
   }
   String result = '[';

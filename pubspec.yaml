@@ -1,7 +1,7 @@
 name: cesi_covid_19_tracker
 description: A covid-19 info app
 
-version: 1.7.3+1
+version: 1.7.3+2
 environment:
   sdk: ">=2.7.0 <3.0.0"
 

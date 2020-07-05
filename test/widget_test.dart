@@ -153,10 +153,10 @@ void main() {
       final shownImages = imageFinder.evaluate();
       // First should be our app icon (assets/img/virus-logo.png)
       final Image firstImage = shownImages.first.widget;
-      assert(firstImage.image == AssetImage('assets/img/virus-logo.png'));
+      expect(firstImage.image, equals(AssetImage('assets/img/virus-logo.png')));
       // Then the CESI logo in CoronedAppBar (assets/img/cesilogo.png)
       final Image secondImage = shownImages.last.widget;
-      assert(secondImage.image == AssetImage('assets/img/cesilogo.png'));
+      expect(secondImage.image, equals(AssetImage('assets/img/cesilogo.png')));
     });
   });
 }
