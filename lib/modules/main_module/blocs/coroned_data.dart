@@ -25,7 +25,7 @@ class CoronedData with ChangeNotifier {
     _countryList = [];
     _appLanguageCode = 'FR';
     _appTextTranslations =
-        await TextTranslations.load(AppConstants.coronedSupportedLocales[0]);
+        await TextTranslations.load(AppConstants.coronedSupportedLocales.first);
     String apiResponse = await locator.get<ApiService>().getCountries();
     for (var e in jsonDecode(apiResponse)) {
       addIfAbsent(Country.fromJson(e));

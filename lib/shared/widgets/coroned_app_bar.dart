@@ -31,7 +31,7 @@ class CoronedAppBar extends AppBar {
             ).showCursorOnHover,
           ],
           title: Text(
-            AppConstants.defaultAppTitle.split('\n')[0],
+            AppConstants.defaultAppTitle.split('\n').first,
             style: isWatch ? textStyle.apply(fontSizeDelta: -4) : textStyle,
             overflow: TextOverflow.visible,
           ),

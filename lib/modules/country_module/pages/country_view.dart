@@ -71,9 +71,7 @@ class _CountryViewState extends State<CountryView> {
         // If user is not filtering countries, we want to reset input textfield value
         if (cD.getFilteredCountries == cD.getCountryList)
           _countryFilter = TextEditingController(
-              text: Modular.get<CoronedData>()
-                      .appTextTranslations
-                      ?.selectCountryDefaultText ??
+              text: cD.appTextTranslations?.selectCountryDefaultText ??
                   'Choisissez un pays');
         _resetFilter = false;
         return cD.getCountryList != null
@@ -140,10 +138,8 @@ class _CountryViewState extends State<CountryView> {
                                 onTap: () {
                                   cD.setSelectedCountry(
                                       cD.getFilteredCountries.elementAt(i - 1));
-                                  if (Modular.get<CoronedData>()
-                                      .isScrollToTopShown)
-                                    Modular.get<CoronedData>()
-                                        .removeScrollToTopButton();
+                                  if (cD.isScrollToTopShown)
+                                    cD.removeScrollToTopButton();
                                   Modular.link.pushNamed(cD.getFilteredCountries
                                       .elementAt(i - 1)
                                       .alpha2Code);
