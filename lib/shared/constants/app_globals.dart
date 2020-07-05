@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:cesi_covid_19_tracker/shared/shared.dart' show SizeBreakpoint;
 
 class AppTheme {
@@ -16,33 +18,41 @@ class AppTheme {
     splashColor: Colors.transparent,
     focusColor: Colors.transparent,
     highlightColor: Colors.transparent,
-    textTheme: TextTheme(
-      headline1: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w800,
-        color: Colors.white70,
-      ),
-      headline4: TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-        color: Colors.black,
-      ),
-      headline5: TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-        color: Colors.black,
-      ),
-      bodyText1: TextStyle(
-        color: Colors.black,
-        fontSize: 18.0,
-      ),
-      bodyText2: TextStyle(
-        color: Colors.black,
-      ),
-      caption: TextStyle(
-        color: Colors.black,
-        fontSize: 14,
-        fontWeight: FontWeight.w300,
+    textTheme: GoogleFonts.poppinsTextTheme(
+      TextTheme(
+        headline1: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 18,
+          fontWeight: FontWeight.w800,
+          color: Colors.white70,
+        ),
+        headline4: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 24,
+          fontWeight: FontWeight.w600,
+          color: Colors.black,
+        ),
+        headline5: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 24,
+          fontWeight: FontWeight.w600,
+          color: Colors.black,
+        ),
+        bodyText1: TextStyle(
+          fontFamily: 'Poppins',
+          color: Colors.black,
+          fontSize: 18.0,
+        ),
+        bodyText2: TextStyle(
+          fontFamily: 'Poppins',
+          color: Colors.black,
+        ),
+        caption: TextStyle(
+          fontFamily: 'Poppins',
+          color: Colors.black,
+          fontSize: 14,
+          fontWeight: FontWeight.w300,
+        ),
       ),
     ),
   );
@@ -57,7 +67,7 @@ class AppTheme {
 class AppConstants {
   static const String defaultAppTitle = '$applicationName\nA covid-19 info app';
   static const String applicationName = 'CORONED';
-  static const String applicationVersion = '1.8.0+2';
+  static const String applicationVersion = '1.8.0+3';
   static const String applicationIcon = 'assets/img/virus-logo.png';
   static const String cesiDijonUrl = 'https://dijon.cesi.fr/';
   static const String repositoryUrl =
