@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
@@ -24,16 +25,16 @@ class _CountryViewState extends State<CountryView> {
   ScrollController _scrollController;
   TextEditingController _countryFilter;
   bool _resetFilter;
+  FocusNode _filterTextInputFocus;
 
   @override
   void initState() {
     super.initState();
     _resetFilter = true;
-    _countryFilter = TextEditingController(
-        text: Modular.get<CoronedData>()
-                .appTextTranslations
-                ?.selectCountryDefaultText ??
-            'Choisissez un pays');
+    _filterTextInputFocus = FocusNode(
+      onKey: _unfocusOnEscapeWebKey,
+      debugLabel: 'filter_text_inpu_focus_node',
+    );
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (!Modular.get<CoronedData>().isScrollToTopShown &&
@@ -67,6 +68,13 @@ class _CountryViewState extends State<CountryView> {
         if (cD.appTextTranslations == null)
           return Center(child: CircularProgressIndicator());
         if (_resetFilter) cD.resetFilter();
+        // If user is not filtering countries, we want to reset input textfield value
+        if (cD.getFilteredCountries == cD.getCountryList)
+          _countryFilter = TextEditingController(
+              text: Modular.get<CoronedData>()
+                      .appTextTranslations
+                      ?.selectCountryDefaultText ??
+                  'Choisissez un pays');
         _resetFilter = false;
         return cD.getCountryList != null
             ? cD.getCountryList.isNotEmpty
@@ -80,6 +88,7 @@ class _CountryViewState extends State<CountryView> {
                               padding: _resolveInputTextPadding(),
                               child: TextField(
                                 key: Key('select_country_text_field'),
+                                focusNode: _filterTextInputFocus,
                                 decoration: InputDecoration(
                                   fillColor: Colors.black,
                                   icon: Icon(Icons.search),
@@ -97,7 +106,7 @@ class _CountryViewState extends State<CountryView> {
                                 },
                                 onEditingComplete: () {
                                   cD.filter(_countryFilter.text);
-                                  FocusScope.of(context)
+                                  _filterTextInputFocus
                                       .unfocus(); // Try to enforce TextInput unfocus
                                   if (_countryFilter.text == null ||
                                       _countryFilter.text.isEmpty)
@@ -255,5 +264,22 @@ class _CountryViewState extends State<CountryView> {
     );
     Modular.get<CoronedData>()
         .showScrollToTopButton(context, scrollToTopButton);
+  }
+
+  /// Method to ask unfocus when user press ESC key down
+  /// (only supports web for now, otherwise do nothing)
+  ///
+  ///TODO Possible to add support for other platforms
+  bool _unfocusOnEscapeWebKey(_, keyEvent) {
+    final String askUnfocusKeyLabel = kIsWeb ? keyEvent.data.keyLabel : '';
+    if (askUnfocusKeyLabel.trim().compareTo('Escape') == 0) {
+      _filterTextInputFocus.unfocus();
+      if (_countryFilter.text == null || _countryFilter.text.isEmpty)
+        _countryFilter.text = Modular.get<CoronedData>()
+            .appTextTranslations
+            .selectCountryDefaultText;
+      return false;
+    }
+    return true;
   }
 }

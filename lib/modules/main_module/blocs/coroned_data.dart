@@ -94,6 +94,7 @@ class CoronedData with ChangeNotifier {
   void setAppTextTranslations(TextTranslations textTranslations) {
     _appTextTranslations = textTranslations;
     _sortCountryList(_countryList);
+    if (_filteredCountries != null) _sortCountryList(_filteredCountries);
     notifyListeners();
   }
 
