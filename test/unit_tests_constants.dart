@@ -1,13 +1,17 @@
 import 'dart:convert' show jsonEncode;
-import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
-    show GlobalCard;
-import 'package:flutter/material.dart' show CircularProgressIndicator, Key;
+import 'package:flutter/material.dart'
+    show CircularProgressIndicator, Image, Key;
 import 'package:flutter_test/flutter_test.dart' show Future, find;
+
 import 'package:http/http.dart' show Response;
 import 'package:http/testing.dart' show MockClient;
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart' show GlobalCard;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show Country, CovidCountryInfos, CovidInfos;
 
+final imageFinder = find.byType(Image);
+final scrollToTopButtonFinder = find.byKey(Key('scroll_to_top_button'));
 final searchBarWidgetFinder = find.byKey(Key('select_country_text_field'));
 final countryFlagWidgetFinder = find.bySemanticsLabel('Unknown flag');
 final globalCardWidgetFinder = find.byType(GlobalCard);
@@ -26,16 +30,26 @@ final slowOkClient = MockClient((request) async {
   return Response('', 200);
 });
 final testCountry = Country({'fr': 'test'}, 'test', 'test', 'FR', 1);
+final testCountry2 = Country({'fr': 'test1'}, 'test1', 'test1', 'FR', 1);
 final okCountryClient = MockClient((request) async {
   return Response('[${jsonEncode(testCountry)}]', 200);
 });
-final testCountries = [
-  testCountry,
-  Country({'fr': 'test2'}, 'test2', 'test2', 'FR', 1),
-];
+String _buildTestCountriesJsonString() {
+  List<Country> testCountries = [testCountry, testCountry2];
+  for (int i = 2; i < 11; i++) {
+    testCountries.add(Country({'fr': 'test$i'}, 'test$i', 'test$i', 'FR', 1));
+  }
+  String result = '[';
+  for (Country c in testCountries) {
+    testCountries.indexOf(c) != testCountries.length - 1
+        ? result += '${jsonEncode(c)},'
+        : result += jsonEncode(c);
+  }
+  return result += ']';
+}
+
 final okCountriesClient = MockClient((request) async {
-  return Response(
-      '[${jsonEncode(testCountries[0])},${jsonEncode(testCountries[1])}]', 200);
+  return Response(_buildTestCountriesJsonString(), 200);
 });
 final testGlobalStats = CovidInfos(1591205254910, 6513890, 72608, 384642, 2783,
     3100971, 3028277, 54283, 836, 49.3, 88791112, 11453.22, 215);

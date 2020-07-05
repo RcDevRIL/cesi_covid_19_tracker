@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
     show CoronedCard, FailureIcon;
+
 import 'coroned_card.dart';
 
 class FailureCard extends StatelessWidget {

@@ -1,5 +1,6 @@
-import 'http_client.dart';
 import 'package:http/http.dart' show Client, Response;
+
+import 'http_client.dart';
 
 class HttpClientImpl implements HttpClient {
   final int timeOut = 10;

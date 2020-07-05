@@ -1,10 +1,11 @@
-import 'dart:convert' show jsonDecode;
-import 'package:cesi_covid_19_tracker/shared/text_translations_delegate.dart';
-import 'package:flutter/material.dart' show ChangeNotifier;
+import 'dart:convert';
+import 'package:flutter/material.dart';
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
+    show AppConstants, TextTranslations;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, locator;
-import 'package:cesi_covid_19_tracker/data/models/country.dart' show Country;
-import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
+import 'package:cesi_covid_19_tracker/data/models/models.dart' show Country;
 
 class CoronedData with ChangeNotifier {
   List<Country> _filteredCountries;
@@ -12,21 +13,24 @@ class CoronedData with ChangeNotifier {
   Country _selectedCountry;
   String _appLanguageCode;
   TextTranslations _appTextTranslations;
+  OverlayEntry _scrollToTopButton;
+  bool _isScrollToTopShown;
 
   CoronedData() {
     init();
   }
 
   void init() async {
+    _isScrollToTopShown = false;
     _countryList = [];
     _appLanguageCode = 'FR';
     _appTextTranslations =
-        await TextTranslations.load(aG.AppConstants.coronedSupportedLocales[0]);
+        await TextTranslations.load(AppConstants.coronedSupportedLocales.first);
     String apiResponse = await locator.get<ApiService>().getCountries();
     for (var e in jsonDecode(apiResponse)) {
       addIfAbsent(Country.fromJson(e));
     }
-    _sortCountryList();
+    _sortCountryList(_countryList);
     notifyListeners();
   }
 
@@ -38,8 +42,8 @@ class CoronedData with ChangeNotifier {
     if (absent) _countryList.add(countryToAdd);
   }
 
-  void _sortCountryList() {
-    _countryList.sort((c1, c2) => (c1
+  void _sortCountryList(List<Country> countryList) {
+    countryList.sort((c1, c2) => (c1
                     .translations[_appLanguageCode.toLowerCase()] !=
                 null &&
             c2.translations[_appLanguageCode.toLowerCase()] != null)
@@ -58,18 +62,25 @@ class CoronedData with ChangeNotifier {
             : e.name.toLowerCase().contains(filter
                 .toLowerCase())) // Fallback filter, hopefully API will always have a name for an entry
         .toList();
-    _filteredCountries.sort((c1, c2) => (c1
-                    .translations[_appLanguageCode.toLowerCase()] !=
-                null &&
-            c2.translations[_appLanguageCode.toLowerCase()] != null)
-        ? c1.translations[_appLanguageCode.toLowerCase()]
-            .compareTo(c2.translations[_appLanguageCode.toLowerCase()])
-        : c1.name.compareTo(c2
-            .name)); // Fallback comparator, hopefully API will always have a name for an entry
+    _sortCountryList(_filteredCountries);
     notifyListeners();
   }
 
   void resetFilter() => _filteredCountries = null;
+
+  void removeScrollToTopButton() {
+    _scrollToTopButton.remove();
+    _isScrollToTopShown = false;
+    notifyListeners();
+  }
+
+  void showScrollToTopButton(
+      BuildContext context, OverlayEntry scrollToTopButton) {
+    _scrollToTopButton = scrollToTopButton;
+    Overlay.of(context).insert(_scrollToTopButton);
+    _isScrollToTopShown = true;
+    notifyListeners();
+  }
 
   String get appLanguageCode => _appLanguageCode;
 
@@ -82,6 +93,8 @@ class CoronedData with ChangeNotifier {
 
   void setAppTextTranslations(TextTranslations textTranslations) {
     _appTextTranslations = textTranslations;
+    _sortCountryList(_countryList);
+    if (_filteredCountries != null) _sortCountryList(_filteredCountries);
     notifyListeners();
   }
 
@@ -95,4 +108,8 @@ class CoronedData with ChangeNotifier {
     _selectedCountry = c;
     notifyListeners();
   }
+
+  OverlayEntry get scrollToTopButton => _scrollToTopButton;
+
+  bool get isScrollToTopShown => _isScrollToTopShown;
 }

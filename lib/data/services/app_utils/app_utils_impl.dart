@@ -1,7 +1,8 @@
-import 'app_utils.dart';
 import 'dart:collection' show HashMap;
 import 'package:intl/intl.dart' show NumberFormat;
 import 'package:url_launcher/url_launcher.dart' show canLaunch, launch;
+
+import 'app_utils.dart';
 
 class AppUtilsImpl implements AppUtils {
   @override

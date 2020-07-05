@@ -1,11 +1,14 @@
-import 'package:cesi_covid_19_tracker/data/models/models.dart';
-import 'package:cesi_covid_19_tracker/data/services/provider/coroned_data.dart';
 import 'package:flutter/material.dart';
-import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
-    show NavBarItem;
-import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:flutter_modular/flutter_modular.dart' show Consumer;
 import 'package:responsive_builder/responsive_builder.dart'
     show ResponsiveBuilder;
+
+import 'package:cesi_covid_19_tracker/data/models/models.dart'
+    show NavBarItemModel;
+import 'package:cesi_covid_19_tracker/shared/shared.dart' show NavBarItem;
+import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
+
 import 'navigation_drawer_header.dart';
 
 class NavigationDrawer extends StatelessWidget {

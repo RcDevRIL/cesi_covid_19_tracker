@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:flutter_modular/flutter_modular.dart' show Modular;
 import 'package:provider/provider.dart' show Provider;
+
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show NavBarItemModel;
-import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
-    show HoverExtensions;
+import 'package:cesi_covid_19_tracker/shared/shared.dart' show HoverExtensions;
+import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
 
 class NavBarItem extends StatelessWidget {
   final String title;
@@ -23,27 +25,27 @@ class NavBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var model = NavBarItemModel(
+    final model = NavBarItemModel(
       title: title,
       navigationPath: navigationPath,
       iconData: icon,
     );
+    final coronedData = Modular.get<CoronedData>();
     return GestureDetector(
       onTap: () {
-        // List<OverlayEntry> entries = Overlay.of(context).widget.initialEntries;
-        // if (entries != null && entries.isNotEmpty)
-        //   entries.removeWhere(
-        //       (element) => element.builder.runtimeType == Positioned);
-        Modular.to.pushNamedAndRemoveUntil(
+        if (coronedData.isScrollToTopShown)
+          coronedData.removeScrollToTopButton();
+        Modular.to.pushNamed(
           navigationPath,
-          ModalRoute.withName(Modular.link.modulePath),
         );
       },
       child: Provider.value(
         value: model,
         child: Padding(
-          padding:
-              EdgeInsets.only(left: horizontalSpacing, top: verticalSpacing),
+          padding: EdgeInsets.only(
+              left: horizontalSpacing,
+              top: verticalSpacing / 2,
+              bottom: verticalSpacing / 2),
           child: Row(
             children: <Widget>[
               Icon(model.iconData),

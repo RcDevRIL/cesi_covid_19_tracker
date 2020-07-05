@@ -1,5 +1,5 @@
-import 'package:flutter_driver/flutter_driver.dart';
-import 'package:test/test.dart';
+import 'package:flutter_driver/flutter_driver.dart' show FlutterDriver, find;
+import 'package:test/test.dart' show group, setUpAll, tearDownAll, test;
 
 void main() {
   group('Coroned App', () {

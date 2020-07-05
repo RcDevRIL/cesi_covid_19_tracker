@@ -4,13 +4,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import 'package:flutter_modular/flutter_modular.dart' show Modular;
+
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
-import 'package:cesi_covid_19_tracker/shared/widgets/navigation_drawer/navigation_drawer.dart';
-import 'package:cesi_covid_19_tracker/shared/widgets/coroned_app_bar.dart';
-import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
-    show SizeBreakpoint;
-import 'package:cesi_covid_19_tracker/shared/constants/app_globals.dart' as aG;
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
+    show AppConstants, CoronedAppBar, NavigationDrawer, SizeBreakpoint;
+import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
 
 /// RcDevRIL: FORKED FROM FLUTTER FRAMEWORK (channel: beta , release: 1.19.0-4.2.pre)
 /// ---------------------------------------
@@ -78,20 +77,49 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> {
   GestureRecognizer _linkHandler;
+  ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (!Modular.get<CoronedData>().isScrollToTopShown &&
+          _scrollController.offset > AppConstants.scrollToTopTreshold) {
+        _showOverlay(context);
+      }
+      if (Modular.get<CoronedData>().isScrollToTopShown &&
+          _scrollController.offset < AppConstants.scrollToTopTreshold) {
+        Modular.get<CoronedData>().removeScrollToTopButton();
+      }
+    });
     _linkHandler = TapGestureRecognizer()
       ..onTap =
-          () => locator.get<AppUtils>().openLink(aG.AppConstants.repositoryUrl);
+          () => locator.get<AppUtils>().openLink(AppConstants.repositoryUrl);
     _initLicenses();
   }
 
   @override
   void dispose() {
     _linkHandler?.dispose();
+    _scrollController?.dispose();
     super.dispose();
+  }
+
+  _showOverlay(BuildContext context) {
+    final scrollToTopButton = AppConstants.buildScrollToTopButton(
+      () => _scrollController.animateTo(
+        0.0,
+        duration: Duration(
+            milliseconds: _scrollController.offset / 3 >
+                    AppConstants.maxScrollToTopDuration
+                ? AppConstants.maxScrollToTopDuration
+                : (_scrollController.offset / 3).floor()),
+        curve: Curves.ease,
+      ),
+    );
+    Modular.get<CoronedData>()
+        .showScrollToTopButton(context, scrollToTopButton);
   }
 
   final List<Widget> _licenses = <Widget>[];
@@ -184,8 +212,6 @@ class _AboutPageState extends State<AboutPage> {
         isWatch: context.isWatch,
         textStyle: Theme.of(context).textTheme.headline1,
       ),
-      // All of the licenses page text is English. We don't want localized text
-      // or text direction.
       body: Modular.get<CoronedData>().appTextTranslations == null
           ? Center(child: CircularProgressIndicator())
           : DefaultTextStyle(
@@ -194,6 +220,7 @@ class _AboutPageState extends State<AboutPage> {
                 bottom: false,
                 child: Scrollbar(
                   child: ListView(
+                    controller: _scrollController,
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8.0, vertical: 12.0),
@@ -246,9 +273,13 @@ class _AboutPageState extends State<AboutPage> {
                         }
                         return Padding(
                           padding: EdgeInsets.fromLTRB(
-                            MediaQuery.of(context).size.width / 4,
+                            !(context.isMobile || context.isWatch)
+                                ? MediaQuery.of(context).size.width / 4
+                                : 0,
                             0.0,
-                            MediaQuery.of(context).size.width / 4,
+                            !(context.isMobile || context.isWatch)
+                                ? MediaQuery.of(context).size.width / 4
+                                : 0,
                             18.0,
                           ),
                           child: text,

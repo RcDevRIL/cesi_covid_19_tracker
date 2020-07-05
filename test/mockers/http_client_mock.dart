@@ -1,5 +1,6 @@
 import 'package:http/http.dart' show Client, Response;
-import 'package:http/testing.dart';
+import 'package:http/testing.dart' show MockClient;
+
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show HttpClient;
 

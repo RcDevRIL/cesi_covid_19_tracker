@@ -1,4 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart'
+    show DeepCollectionEquality, JsonKey, JsonSerializable, freezed;
 
 part 'country.freezed.dart';
 part 'country.g.dart';

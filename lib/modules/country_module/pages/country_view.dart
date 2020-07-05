@@ -1,13 +1,20 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show TextCapitalization, TextInputAction;
-import 'package:flutter/gestures.dart' show DragStartBehavior;
-import 'package:cesi_covid_19_tracker/data/services/services.dart'
-    show CoronedData;
-import 'package:cesi_covid_19_tracker/shared/widgets/widgets.dart'
-    show CoronedAppBar, CoronedCard, FailureIcon, NavigationDrawer;
+import 'package:flutter/services.dart';
+import 'package:flutter/gestures.dart';
+
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:cesi_covid_19_tracker/shared/extensions/extensions.dart'
-    show HoverExtensions, SizeBreakpoint;
+
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
+    show
+        AppConstants,
+        CoronedAppBar,
+        CoronedCard,
+        FailureIcon,
+        NavigationDrawer,
+        HoverExtensions,
+        SizeBreakpoint;
+import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
 
 class CountryView extends StatefulWidget {
   @override
@@ -18,67 +25,32 @@ class _CountryViewState extends State<CountryView> {
   ScrollController _scrollController;
   TextEditingController _countryFilter;
   bool _resetFilter;
-  bool _isScrollToTopShown;
-  int _maxScrollToTopDuration;
-  int _scrollToTopThreshold = 300;
-  OverlayEntry _scrollToTop;
+  FocusNode _filterTextInputFocus;
 
   @override
   void initState() {
     super.initState();
     _resetFilter = true;
-    _isScrollToTopShown = false;
-    _maxScrollToTopDuration = 2000;
-    _countryFilter = TextEditingController(
-        text: Modular.get<CoronedData>()
-                .appTextTranslations
-                ?.selectCountryDefaultText ??
-            'Choisissez un pays');
+    _filterTextInputFocus = FocusNode(
+      onKey: _unfocusOnEscapeWebKey,
+      debugLabel: 'filter_text_inpu_focus_node',
+    );
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if (!_isScrollToTopShown &&
-          _scrollController.offset > _scrollToTopThreshold)
+      if (!Modular.get<CoronedData>().isScrollToTopShown &&
+          _scrollController.offset > AppConstants.scrollToTopTreshold) {
         _showOverlay(context);
-      if (_isScrollToTopShown &&
-          _scrollController.offset < _scrollToTopThreshold)
-        _hideOverlay(context);
+      }
+      if (Modular.get<CoronedData>().isScrollToTopShown &&
+          _scrollController.offset < AppConstants.scrollToTopTreshold) {
+        Modular.get<CoronedData>().removeScrollToTopButton();
+      }
     });
-    _scrollToTop = OverlayEntry(
-      builder: (context) => Positioned(
-        bottom: 24.0,
-        right: 24.0,
-        child: Material(
-          type: MaterialType.button,
-          elevation: 2.0,
-          shadowColor: Colors.grey[800],
-          color: Theme.of(context).primaryColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-          child: IconButton(
-            onPressed: () => _scrollController.animateTo(
-              0.0,
-              duration: Duration(
-                  milliseconds:
-                      _scrollController.offset / 3 > _maxScrollToTopDuration
-                          ? _maxScrollToTopDuration
-                          : (_scrollController.offset / 3).floor()),
-              curve: Curves.ease,
-            ),
-            icon: Icon(
-              Icons.keyboard_arrow_up,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   @override
   void dispose() {
-    print('country view disposed');
     _countryFilter?.dispose();
-    if (_isScrollToTopShown) _hideOverlay(context);
     _scrollController?.dispose();
     super.dispose();
   }
@@ -96,6 +68,11 @@ class _CountryViewState extends State<CountryView> {
         if (cD.appTextTranslations == null)
           return Center(child: CircularProgressIndicator());
         if (_resetFilter) cD.resetFilter();
+        // If user is not filtering countries, we want to reset input textfield value
+        if (cD.getFilteredCountries == cD.getCountryList)
+          _countryFilter = TextEditingController(
+              text: cD.appTextTranslations?.selectCountryDefaultText ??
+                  'Choisissez un pays');
         _resetFilter = false;
         return cD.getCountryList != null
             ? cD.getCountryList.isNotEmpty
@@ -109,6 +86,7 @@ class _CountryViewState extends State<CountryView> {
                               padding: _resolveInputTextPadding(),
                               child: TextField(
                                 key: Key('select_country_text_field'),
+                                focusNode: _filterTextInputFocus,
                                 decoration: InputDecoration(
                                   fillColor: Colors.black,
                                   icon: Icon(Icons.search),
@@ -126,7 +104,7 @@ class _CountryViewState extends State<CountryView> {
                                 },
                                 onEditingComplete: () {
                                   cD.filter(_countryFilter.text);
-                                  FocusScope.of(context)
+                                  _filterTextInputFocus
                                       .unfocus(); // Try to enforce TextInput unfocus
                                   if (_countryFilter.text == null ||
                                       _countryFilter.text.isEmpty)
@@ -160,8 +138,8 @@ class _CountryViewState extends State<CountryView> {
                                 onTap: () {
                                   cD.setSelectedCountry(
                                       cD.getFilteredCountries.elementAt(i - 1));
-                                  if (_isScrollToTopShown)
-                                    _hideOverlay(context);
+                                  if (cD.isScrollToTopShown)
+                                    cD.removeScrollToTopButton();
                                   Modular.link.pushNamed(cD.getFilteredCountries
                                       .elementAt(i - 1)
                                       .alpha2Code);
@@ -269,12 +247,35 @@ class _CountryViewState extends State<CountryView> {
       : Theme.of(context).textTheme.headline4.apply(fontSizeDelta: -4);
 
   _showOverlay(BuildContext context) {
-    Overlay.of(context).insert(_scrollToTop);
-    _isScrollToTopShown = true;
+    final scrollToTopButton = AppConstants.buildScrollToTopButton(
+      () => _scrollController.animateTo(
+        0.0,
+        duration: Duration(
+            milliseconds: _scrollController.offset / 3 >
+                    AppConstants.maxScrollToTopDuration
+                ? AppConstants.maxScrollToTopDuration
+                : (_scrollController.offset / 3).floor()),
+        curve: Curves.ease,
+      ),
+    );
+    Modular.get<CoronedData>()
+        .showScrollToTopButton(context, scrollToTopButton);
   }
 
-  _hideOverlay(BuildContext context) {
-    _scrollToTop.remove();
-    _isScrollToTopShown = false;
+  /// Method to ask unfocus when user press ESC key down
+  /// (only supports web for now, otherwise do nothing)
+  ///
+  ///TODO Possible to add support for other platforms
+  bool _unfocusOnEscapeWebKey(_, keyEvent) {
+    final String askUnfocusKeyLabel = kIsWeb ? keyEvent.data.keyLabel : '';
+    if (askUnfocusKeyLabel.trim().compareTo('Escape') == 0) {
+      _filterTextInputFocus.unfocus();
+      if (_countryFilter.text == null || _countryFilter.text.isEmpty)
+        _countryFilter.text = Modular.get<CoronedData>()
+            .appTextTranslations
+            .selectCountryDefaultText;
+      return false;
+    }
+    return true;
   }
 }

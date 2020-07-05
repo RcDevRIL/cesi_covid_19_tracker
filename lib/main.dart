@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+
+import 'package:flutter_modular/flutter_modular.dart' show ModularApp;
+
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show setupLocator;
 
