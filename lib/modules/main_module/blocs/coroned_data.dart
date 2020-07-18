@@ -18,8 +18,8 @@ class CoronedData with ChangeNotifier {
   OverlayEntry _scrollToTopButton;
   bool _isScrollToTopShown;
   bool _isLoaded;
-  Error _apiErrorCountries;
-  Error _apiErrorGlobal;
+  Exception _apiErrorCountries;
+  Exception _apiErrorGlobal;
 
   CoronedData()
       : _isLoaded = false,
@@ -145,9 +145,9 @@ class CoronedData with ChangeNotifier {
 
   bool get isScrollToTopShown => _isScrollToTopShown;
 
-  Error get apiErrorCountries => _apiErrorCountries;
+  Exception get apiErrorCountries => _apiErrorCountries;
 
-  Error get apiErrorGlobal => _apiErrorGlobal;
+  Exception get apiErrorGlobal => _apiErrorGlobal;
 
   bool get isLoaded => _isLoaded;
 }

@@ -5,6 +5,8 @@ import 'package:flutter/gestures.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
+    show APIException, APIUnreachedException;
 import 'package:cesi_covid_19_tracker/shared/shared.dart'
     show
         AppConstants,
@@ -69,8 +71,36 @@ class _CountryViewState extends State<CountryView> {
         if (!cD.isLoaded) {
           return Center(child: CircularProgressIndicator());
         } else {
-          if (cD.apiErrorCountries != null)
-            return FailureCard(fail: '${cD.apiErrorCountries}');
+          if (cD.apiErrorCountries != null) {
+            switch (cD.apiErrorCountries.runtimeType) {
+              case APIUnreachedException:
+                return Padding(
+                  padding: const EdgeInsets.only(top: 24.0),
+                  child: FailureCard(
+                    fail:
+                        'Data source is not available. Please try again later.',
+                    iconAndTextColor: Theme.of(context).primaryColor,
+                  ),
+                );
+                break;
+              case APIException:
+                return Padding(
+                  padding: const EdgeInsets.only(top: 24.0),
+                  child: FailureCard(
+                    fail:
+                        'Cannot retrieve data. Please check your internet connection.',
+                    iconAndTextColor: Theme.of(context).primaryColor,
+                  ),
+                );
+                break;
+              default:
+                return Padding(
+                  padding: const EdgeInsets.only(top: 24.0),
+                  child: FailureCard(fail: '${cD.apiErrorCountries}'),
+                );
+                break;
+            }
+          }
           if (_resetFilter) cD.resetFilter();
           // If user is not filtering countries, we want to reset input textfield value
           if (cD.getFilteredCountries == cD.getCountryList)

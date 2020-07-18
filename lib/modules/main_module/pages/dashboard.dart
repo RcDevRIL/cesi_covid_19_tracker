@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_modular/flutter_modular.dart' show Consumer;
 
+import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
+    show APIException, APIUnreachedException;
 import 'package:cesi_covid_19_tracker/shared/shared.dart'
     show
         AppConstants,
@@ -34,23 +36,52 @@ class Dashboard extends StatelessWidget {
           if (!cD.isLoaded) {
             return Center(child: CircularProgressIndicator());
           } else {
-            return cD.apiErrorGlobal != null
-                ? FailureCard(fail: '${cD.apiErrorGlobal}')
-                : Scrollbar(
-                    child: ListView(
-                      physics: const BouncingScrollPhysics(),
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 24.0,
-                          ),
-                          child: GlobalCard(
-                            covidInfos: cD.getGlobalInfos,
-                          ),
-                        ),
-                      ],
+            if (cD.apiErrorGlobal != null) {
+              switch (cD.apiErrorGlobal.runtimeType) {
+                case APIUnreachedException:
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: FailureCard(
+                      fail:
+                          'Data source is not available. Please try again later.',
+                      iconAndTextColor: Theme.of(context).primaryColor,
                     ),
                   );
+                  break;
+                case APIException:
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: FailureCard(
+                      fail:
+                          'Cannot retrieve data. Please check your internet connection.',
+                      iconAndTextColor: Theme.of(context).primaryColor,
+                    ),
+                  );
+                  break;
+                default:
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: FailureCard(fail: '${cD.apiErrorGlobal}'),
+                  );
+                  break;
+              }
+            } else {
+              return Scrollbar(
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 24.0,
+                      ),
+                      child: GlobalCard(
+                        covidInfos: cD.getGlobalInfos,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
           }
         },
       ),

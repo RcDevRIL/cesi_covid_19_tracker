@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl;
 import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
-    show CovidNotFoundException;
+    show CovidNotFoundException, APIUnreachedException;
 import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
 
 import 'mockers/mockers.dart' show HttpClientMock;
@@ -42,23 +42,13 @@ void main() {
           http: baseMock
             ..http = slowOkClient
             ..timeOut = newTimeOut);
-      // Expect that the service will hit timeout and throws an error with msg 'Error when executing GET request:\n${e.toString()}'
-      expect(
-          apiService.getWorldLatestSituation(),
-          throwsA(
-              'Error when executing GET request:\nTimeoutException after 0:00:0$newTimeOut.000000: Future not completed'));
-      expect(
-          apiService.getDataFromCountry('FR'),
-          throwsA(
-              'Error when executing GET request:\nTimeoutException after 0:00:0$newTimeOut.000000: Future not completed'));
-      expect(
-          apiService.getCountries(),
-          throwsA(
-              'Error when executing GET request:\nTimeoutException after 0:00:0$newTimeOut.000000: Future not completed'));
-      //TODO change handling of timeout case (basically change error message displayed)
-      // Expect that the service will throw a APIUnreachedException
-      /* expect(apiService.getCountries(),
-          throwsA(isInstanceOf<APIUnreachedException>())); */
+      // Expect that the service will hit timeout and throws an APIUnreachedException
+      expect(apiService.getWorldLatestSituation(),
+          throwsA(isInstanceOf<APIUnreachedException>()));
+      expect(apiService.getDataFromCountry('FR'),
+          throwsA(isInstanceOf<APIUnreachedException>()));
+      expect(apiService.getCountries(),
+          throwsA(isInstanceOf<APIUnreachedException>()));
     });
     test('404 test', () async {
       // Replace the http MockClient with one that return a 404 Not Found http error code

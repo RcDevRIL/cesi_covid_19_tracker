@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart' show Consumer;
 
 import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
-    show CovidNotFoundException;
+    show APIException, APIUnreachedException, CovidNotFoundException;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, locator;
 import 'package:cesi_covid_19_tracker/shared/shared.dart'
@@ -48,13 +48,32 @@ class _DetailsPageState extends State<DetailsPage> {
                       .getDataFromCountry(widget.countryCode),
                   builder: (_, AsyncSnapshot<String> s) {
                     if (s.hasError) {
-                      return s.error.runtimeType == CovidNotFoundException
-                          ? FailureCard(
-                              fail:
-                                  'Country not found or doesn\'t have any COVID-19 related cases.',
-                              iconAndTextColor: Theme.of(context).primaryColor,
-                            )
-                          : FailureCard(fail: s.error);
+                      switch (s.error.runtimeType) {
+                        case CovidNotFoundException:
+                          return FailureCard(
+                            fail:
+                                'Country not found or doesn\'t have any COVID-19 related cases.',
+                            iconAndTextColor: Theme.of(context).primaryColor,
+                          );
+                          break;
+                        case APIUnreachedException:
+                          return FailureCard(
+                            fail:
+                                'Data source is not available. Please try again later.',
+                            iconAndTextColor: Theme.of(context).primaryColor,
+                          );
+                          break;
+                        case APIException:
+                          return FailureCard(
+                            fail:
+                                'Cannot retrieve data. Please check your internet connection.',
+                            iconAndTextColor: Theme.of(context).primaryColor,
+                          );
+                          break;
+                        default:
+                          return FailureCard(fail: s.error);
+                          break;
+                      }
                     }
                     if (s.hasData) {
                       final CovidCountryInfos covidCountryInfos =

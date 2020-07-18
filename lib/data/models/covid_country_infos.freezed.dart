@@ -30,12 +30,12 @@ class _$CovidCountryInfosTearOff {
       @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
       @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
       @JsonKey(name: 'tests') int tests,
-      @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
+      @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
       @JsonKey(name: 'population') int population,
       @JsonKey(name: 'continent') String continent,
-      @JsonKey(name: 'activePerOneMillion') int activePerOneMillion,
-      @JsonKey(name: 'recoveredPerOneMillion') int recoveredPerOneMillion,
-      @JsonKey(name: 'criticalPerOneMillion') int criticalPerOneMillion) {
+      @JsonKey(name: 'activePerOneMillion') double activePerOneMillion,
+      @JsonKey(name: 'recoveredPerOneMillion') double recoveredPerOneMillion,
+      @JsonKey(name: 'criticalPerOneMillion') double criticalPerOneMillion) {
     return _CovidCountryInfos(
       country,
       countryInfo,
@@ -94,17 +94,17 @@ mixin _$CovidCountryInfos {
   @JsonKey(name: 'tests')
   int get tests;
   @JsonKey(name: 'testsPerOneMillion')
-  int get testsPerOneMillion;
+  double get testsPerOneMillion;
   @JsonKey(name: 'population')
   int get population;
   @JsonKey(name: 'continent')
   String get continent;
   @JsonKey(name: 'activePerOneMillion')
-  int get activePerOneMillion;
+  double get activePerOneMillion;
   @JsonKey(name: 'recoveredPerOneMillion')
-  int get recoveredPerOneMillion;
+  double get recoveredPerOneMillion;
   @JsonKey(name: 'criticalPerOneMillion')
-  int get criticalPerOneMillion;
+  double get criticalPerOneMillion;
 
   Map<String, dynamic> toJson();
   $CovidCountryInfosCopyWith<CovidCountryInfos> get copyWith;
@@ -129,12 +129,12 @@ abstract class $CovidCountryInfosCopyWith<$Res> {
       @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
       @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
       @JsonKey(name: 'tests') int tests,
-      @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
+      @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
       @JsonKey(name: 'population') int population,
       @JsonKey(name: 'continent') String continent,
-      @JsonKey(name: 'activePerOneMillion') int activePerOneMillion,
-      @JsonKey(name: 'recoveredPerOneMillion') int recoveredPerOneMillion,
-      @JsonKey(name: 'criticalPerOneMillion') int criticalPerOneMillion});
+      @JsonKey(name: 'activePerOneMillion') double activePerOneMillion,
+      @JsonKey(name: 'recoveredPerOneMillion') double recoveredPerOneMillion,
+      @JsonKey(name: 'criticalPerOneMillion') double criticalPerOneMillion});
 }
 
 class _$CovidCountryInfosCopyWithImpl<$Res>
@@ -194,18 +194,18 @@ class _$CovidCountryInfosCopyWithImpl<$Res>
       tests: tests == freezed ? _value.tests : tests as int,
       testsPerOneMillion: testsPerOneMillion == freezed
           ? _value.testsPerOneMillion
-          : testsPerOneMillion as int,
+          : testsPerOneMillion as double,
       population: population == freezed ? _value.population : population as int,
       continent: continent == freezed ? _value.continent : continent as String,
       activePerOneMillion: activePerOneMillion == freezed
           ? _value.activePerOneMillion
-          : activePerOneMillion as int,
+          : activePerOneMillion as double,
       recoveredPerOneMillion: recoveredPerOneMillion == freezed
           ? _value.recoveredPerOneMillion
-          : recoveredPerOneMillion as int,
+          : recoveredPerOneMillion as double,
       criticalPerOneMillion: criticalPerOneMillion == freezed
           ? _value.criticalPerOneMillion
-          : criticalPerOneMillion as int,
+          : criticalPerOneMillion as double,
     ));
   }
 }
@@ -231,12 +231,12 @@ abstract class _$CovidCountryInfosCopyWith<$Res>
       @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
       @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
       @JsonKey(name: 'tests') int tests,
-      @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
+      @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
       @JsonKey(name: 'population') int population,
       @JsonKey(name: 'continent') String continent,
-      @JsonKey(name: 'activePerOneMillion') int activePerOneMillion,
-      @JsonKey(name: 'recoveredPerOneMillion') int recoveredPerOneMillion,
-      @JsonKey(name: 'criticalPerOneMillion') int criticalPerOneMillion});
+      @JsonKey(name: 'activePerOneMillion') double activePerOneMillion,
+      @JsonKey(name: 'recoveredPerOneMillion') double recoveredPerOneMillion,
+      @JsonKey(name: 'criticalPerOneMillion') double criticalPerOneMillion});
 }
 
 class __$CovidCountryInfosCopyWithImpl<$Res>
@@ -295,18 +295,18 @@ class __$CovidCountryInfosCopyWithImpl<$Res>
       tests == freezed ? _value.tests : tests as int,
       testsPerOneMillion == freezed
           ? _value.testsPerOneMillion
-          : testsPerOneMillion as int,
+          : testsPerOneMillion as double,
       population == freezed ? _value.population : population as int,
       continent == freezed ? _value.continent : continent as String,
       activePerOneMillion == freezed
           ? _value.activePerOneMillion
-          : activePerOneMillion as int,
+          : activePerOneMillion as double,
       recoveredPerOneMillion == freezed
           ? _value.recoveredPerOneMillion
-          : recoveredPerOneMillion as int,
+          : recoveredPerOneMillion as double,
       criticalPerOneMillion == freezed
           ? _value.criticalPerOneMillion
-          : criticalPerOneMillion as int,
+          : criticalPerOneMillion as double,
     ));
   }
 }
@@ -402,7 +402,7 @@ class _$_CovidCountryInfos implements _CovidCountryInfos {
   final int tests;
   @override
   @JsonKey(name: 'testsPerOneMillion')
-  final int testsPerOneMillion;
+  final double testsPerOneMillion;
   @override
   @JsonKey(name: 'population')
   final int population;
@@ -411,13 +411,13 @@ class _$_CovidCountryInfos implements _CovidCountryInfos {
   final String continent;
   @override
   @JsonKey(name: 'activePerOneMillion')
-  final int activePerOneMillion;
+  final double activePerOneMillion;
   @override
   @JsonKey(name: 'recoveredPerOneMillion')
-  final int recoveredPerOneMillion;
+  final double recoveredPerOneMillion;
   @override
   @JsonKey(name: 'criticalPerOneMillion')
-  final int criticalPerOneMillion;
+  final double criticalPerOneMillion;
 
   @override
   String toString() {
@@ -521,27 +521,46 @@ class _$_CovidCountryInfos implements _CovidCountryInfos {
 
 abstract class _CovidCountryInfos implements CovidCountryInfos {
   const factory _CovidCountryInfos(
-          @JsonKey(name: 'country') String country,
-          @JsonKey(name: 'countryInfo') Map<String, dynamic> countryInfo,
-          @JsonKey(name: 'updated') int update,
-          @JsonKey(name: 'cases') int cases,
-          @JsonKey(name: 'todayCases') int todayCases,
-          @JsonKey(name: 'deaths') int deaths,
-          @JsonKey(name: 'todayDeaths') int todayDeaths,
-          @JsonKey(name: 'recovered') int recovered,
-          @JsonKey(name: 'todayRecovered') int todayRecovered,
-          @JsonKey(name: 'active') int active,
-          @JsonKey(name: 'critical') int critical,
-          @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
-          @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
-          @JsonKey(name: 'tests') int tests,
-          @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
-          @JsonKey(name: 'population') int population,
-          @JsonKey(name: 'continent') String continent,
-          @JsonKey(name: 'activePerOneMillion') int activePerOneMillion,
-          @JsonKey(name: 'recoveredPerOneMillion') int recoveredPerOneMillion,
-          @JsonKey(name: 'criticalPerOneMillion') int criticalPerOneMillion) =
-      _$_CovidCountryInfos;
+      @JsonKey(name: 'country')
+          String country,
+      @JsonKey(name: 'countryInfo')
+          Map<String, dynamic> countryInfo,
+      @JsonKey(name: 'updated')
+          int update,
+      @JsonKey(name: 'cases')
+          int cases,
+      @JsonKey(name: 'todayCases')
+          int todayCases,
+      @JsonKey(name: 'deaths')
+          int deaths,
+      @JsonKey(name: 'todayDeaths')
+          int todayDeaths,
+      @JsonKey(name: 'recovered')
+          int recovered,
+      @JsonKey(name: 'todayRecovered')
+          int todayRecovered,
+      @JsonKey(name: 'active')
+          int active,
+      @JsonKey(name: 'critical')
+          int critical,
+      @JsonKey(name: 'casesPerOneMillion')
+          double casesPerOneMillion,
+      @JsonKey(name: 'deathsPerOneMillion')
+          double deathsPerOneMillion,
+      @JsonKey(name: 'tests')
+          int tests,
+      @JsonKey(name: 'testsPerOneMillion')
+          double testsPerOneMillion,
+      @JsonKey(name: 'population')
+          int population,
+      @JsonKey(name: 'continent')
+          String continent,
+      @JsonKey(name: 'activePerOneMillion')
+          double activePerOneMillion,
+      @JsonKey(name: 'recoveredPerOneMillion')
+          double recoveredPerOneMillion,
+      @JsonKey(name: 'criticalPerOneMillion')
+          double criticalPerOneMillion) = _$_CovidCountryInfos;
 
   factory _CovidCountryInfos.fromJson(Map<String, dynamic> json) =
       _$_CovidCountryInfos.fromJson;
@@ -590,7 +609,7 @@ abstract class _CovidCountryInfos implements CovidCountryInfos {
   int get tests;
   @override
   @JsonKey(name: 'testsPerOneMillion')
-  int get testsPerOneMillion;
+  double get testsPerOneMillion;
   @override
   @JsonKey(name: 'population')
   int get population;
@@ -599,13 +618,13 @@ abstract class _CovidCountryInfos implements CovidCountryInfos {
   String get continent;
   @override
   @JsonKey(name: 'activePerOneMillion')
-  int get activePerOneMillion;
+  double get activePerOneMillion;
   @override
   @JsonKey(name: 'recoveredPerOneMillion')
-  int get recoveredPerOneMillion;
+  double get recoveredPerOneMillion;
   @override
   @JsonKey(name: 'criticalPerOneMillion')
-  int get criticalPerOneMillion;
+  double get criticalPerOneMillion;
   @override
   _$CovidCountryInfosCopyWith<_CovidCountryInfos> get copyWith;
 }

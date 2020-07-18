@@ -62,7 +62,19 @@ String _buildTestCountriesJsonString() {
 }
 
 final okCountriesClient = MockClient((request) async {
-  return Response(_buildTestCountriesJsonString(), 200);
+  switch (request.url.host) {
+    case 'restcountries.eu':
+      return Response(_buildTestCountriesJsonString(), 200);
+      break;
+    case 'disease.sh':
+      print(request.url.pathSegments.last);
+      return request.url.pathSegments.last.compareTo('all') == 0
+          ? Response(jsonEncode(testGlobalStats.toJson()), 200)
+          : Response(jsonEncode(testCountryStats.toJson()), 200);
+      break;
+    default:
+      return Response('well..nope!', 400);
+  }
 });
 final testGlobalStats = CovidInfos(
   1591205254910,
