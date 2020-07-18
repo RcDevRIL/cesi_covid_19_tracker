@@ -6,14 +6,15 @@ import 'package:flutter_test/flutter_test.dart' show Future, find;
 import 'package:http/http.dart' show Response;
 import 'package:http/testing.dart' show MockClient;
 
-import 'package:cesi_covid_19_tracker/shared/shared.dart' show GlobalCard;
+import 'package:cesi_covid_19_tracker/shared/shared.dart'
+    show CoronedCard, GlobalCard;
 import 'package:cesi_covid_19_tracker/data/models/models.dart'
     show Country, CovidCountryInfos, CovidInfos;
 
 final imageFinder = find.byType(Image);
 final scrollToTopButtonFinder = find.byKey(Key('scroll_to_top_button'));
 final searchBarWidgetFinder = find.byKey(Key('select_country_text_field'));
-final countryFlagWidgetFinder = find.bySemanticsLabel('Unknown flag');
+final countryCardWidgetFinder = find.byType(CoronedCard);
 final globalCardWidgetFinder = find.byType(GlobalCard);
 final circularProgressWidgetFinder = find.byType(CircularProgressIndicator);
 final koClient = MockClient((request) async {
@@ -31,12 +32,24 @@ final slowOkClient = MockClient((request) async {
 });
 final testCountry = Country({'fr': 'test'}, 'test', 'test', 'FR', 1);
 final testCountry2 = Country({'fr': 'test1'}, 'test1', 'test1', 'FR', 1);
-final okCountryClient = MockClient((request) async {
-  return Response('[${jsonEncode(testCountry)}]', 200);
+final baseMockClient = MockClient((request) async {
+  switch (request.url.host) {
+    case 'restcountries.eu':
+      return Response('[${jsonEncode(testCountry)}]', 200);
+      break;
+    case 'disease.sh':
+      print(request.url.pathSegments.last);
+      return request.url.pathSegments.last.compareTo('all') == 0
+          ? Response(jsonEncode(testGlobalStats.toJson()), 200)
+          : Response(jsonEncode(testCountryStats.toJson()), 200);
+      break;
+    default:
+      return Response('well..nope!', 400);
+  }
 });
 String _buildTestCountriesJsonString() {
-  List<Country> testCountries = [testCountry, testCountry2];
-  for (int i = 2; i < 11; i++) {
+  List<Country> testCountries = [testCountry];
+  for (int i = 1; i < 11; i++) {
     testCountries.add(Country({'fr': 'test$i'}, 'test$i', 'test$i', 'FR', 1));
   }
   String result = '[';
@@ -51,11 +64,26 @@ String _buildTestCountriesJsonString() {
 final okCountriesClient = MockClient((request) async {
   return Response(_buildTestCountriesJsonString(), 200);
 });
-final testGlobalStats = CovidInfos(1591205254910, 6513890, 72608, 384642, 2783,
-    3100971, 3028277, 54283, 836, 49.3, 88791112, 11453.22, 215);
-final okGlobalStatsClient = MockClient((request) async {
-  return Response(jsonEncode(testGlobalStats.toJson()), 200);
-});
+final testGlobalStats = CovidInfos(
+  1591205254910,
+  6513890,
+  72608,
+  384642,
+  2783,
+  3100971,
+  3028277,
+  54283,
+  836,
+  49.3,
+  48.0,
+  88791112,
+  11453.22,
+  215000,
+  6.2,
+  2.2,
+  645.8,
+  152,
+);
 final testCountryStats = CovidCountryInfos(
   'France',
   {
@@ -78,7 +106,18 @@ final testCountryStats = CovidCountryInfos(
   445,
   1384633,
   21216,
+  65,
+  6565,
+  "Europe",
+  32,
+  32,
+  32,
 );
 final okCountryStatsClient = MockClient((request) async {
+  print(request.url.host);
+  print(request.url.path);
+  print(request.url.queryParameters);
+  print(request.url.pathSegments);
+  print(request.url.pathSegments.last);
   return Response(jsonEncode(testCountryStats.toJson()), 200);
 });

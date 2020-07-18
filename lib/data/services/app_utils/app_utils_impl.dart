@@ -11,13 +11,18 @@ class AppUtilsImpl implements AppUtils {
       : number.toString();
 
   @override
-  Map<String, num> computeWeights(int c, int d, int r) {
-    if (c < 0 || d < 0 || r < 0) throw 'Invalid value';
+  Map<String, num> computeWeights(
+    int cases,
+    int deaths,
+    int recovered,
+    int active,
+  ) {
+    if (cases < 0 || deaths < 0 || recovered < 0) throw 'Invalid value';
     HashMap<String, num> result = HashMap<String, num>();
-    result.putIfAbsent('total', () => c + r + d);
-    result.putIfAbsent('weightContaminated', () => c / result['total']);
-    result.putIfAbsent('weightDeath', () => d / result['total']);
-    result.putIfAbsent('weightRecovered', () => r / result['total']);
+    result.putIfAbsent('total', () => cases + deaths + recovered);
+    result.putIfAbsent('weightContaminated', () => cases / result['total']);
+    result.putIfAbsent('weightDeath', () => deaths / result['total']);
+    result.putIfAbsent('weightRecovered', () => recovered / result['total']);
     return result;
   }
 

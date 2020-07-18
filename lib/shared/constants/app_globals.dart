@@ -67,7 +67,7 @@ class AppTheme {
 class AppConstants {
   static const String defaultAppTitle = '$applicationName\nA covid-19 info app';
   static const String applicationName = 'CORONED';
-  static const String applicationVersion = '1.8.0+3';
+  static const String applicationVersion = '1.8.0+5';
   static const String applicationIcon = 'assets/img/virus-logo.png';
   static const String cesiDijonUrl = 'https://dijon.cesi.fr/';
   static const String repositoryUrl =
@@ -88,14 +88,17 @@ class AppConstants {
             type: MaterialType.button,
             elevation: 0.0,
             shadowColor: Colors.grey[800],
-            color: Theme.of(context).primaryColor,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+            color: Theme.of(context).primaryColor.withOpacity(0.75),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40),
+                side: BorderSide(
+                  color: Colors.black87,
+                )),
             child: IconButton(
               onPressed: onPressed,
               icon: Icon(
                 Icons.keyboard_arrow_up,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
           ),

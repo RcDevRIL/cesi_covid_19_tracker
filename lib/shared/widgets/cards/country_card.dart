@@ -37,6 +37,7 @@ class _CountryCardState extends State<CountryCard> {
           widget.covidCountryInfos.cases ?? 0,
           widget.covidCountryInfos.deaths ?? 0,
           widget.covidCountryInfos.recovered ?? 0,
+          0,
         );
   }
 
@@ -47,6 +48,7 @@ class _CountryCardState extends State<CountryCard> {
             widget.covidCountryInfos.cases ?? 0,
             widget.covidCountryInfos.deaths ?? 0,
             widget.covidCountryInfos.recovered ?? 0,
+            0,
           );
     }
     super.didUpdateWidget(oldWidget);

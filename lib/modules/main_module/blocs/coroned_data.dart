@@ -5,9 +5,11 @@ import 'package:cesi_covid_19_tracker/shared/shared.dart'
     show AppConstants, TextTranslations;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, locator;
-import 'package:cesi_covid_19_tracker/data/models/models.dart' show Country;
+import 'package:cesi_covid_19_tracker/data/models/models.dart'
+    show Country, CovidInfos;
 
 class CoronedData with ChangeNotifier {
+  CovidInfos _globalInfos;
   List<Country> _filteredCountries;
   List<Country> _countryList;
   Country _selectedCountry;
@@ -15,23 +17,49 @@ class CoronedData with ChangeNotifier {
   TextTranslations _appTextTranslations;
   OverlayEntry _scrollToTopButton;
   bool _isScrollToTopShown;
+  bool _isLoaded;
+  Error _apiErrorCountries;
+  Error _apiErrorGlobal;
 
-  CoronedData() {
+  CoronedData()
+      : _isLoaded = false,
+        _isScrollToTopShown = false,
+        _countryList = [],
+        _appLanguageCode = 'FR' {
     init();
   }
 
-  void init() async {
-    _isScrollToTopShown = false;
-    _countryList = [];
-    _appLanguageCode = 'FR';
+  Future<void> init() async {
     _appTextTranslations =
         await TextTranslations.load(AppConstants.coronedSupportedLocales.first);
+    _apiErrorCountries = null;
+    try {
+      await _initCountryList();
+    } catch (e) {
+      _apiErrorCountries = e;
+    }
+    _apiErrorGlobal = null;
+    try {
+      await _initGlobalInfos();
+    } catch (e) {
+      _apiErrorGlobal = e;
+    }
+    _isLoaded = true;
+    notifyListeners();
+  }
+
+  Future<void> _initCountryList() async {
     String apiResponse = await locator.get<ApiService>().getCountries();
     for (var e in jsonDecode(apiResponse)) {
       addIfAbsent(Country.fromJson(e));
+      _sortCountryList(_countryList);
     }
-    _sortCountryList(_countryList);
-    notifyListeners();
+  }
+
+  Future<void> _initGlobalInfos() async {
+    String apiResponse =
+        await locator.get<ApiService>().getWorldLatestSituation();
+    _globalInfos = CovidInfos.fromJson(jsonDecode(apiResponse));
   }
 
   void addIfAbsent(Country countryToAdd) {
@@ -39,7 +67,9 @@ class CoronedData with ChangeNotifier {
     for (Country c in _countryList) {
       if (c == countryToAdd) absent = false;
     }
-    if (absent) _countryList.add(countryToAdd);
+    absent
+        ? _countryList.add(countryToAdd)
+        : debugPrint('duplicate country, aborting.');
   }
 
   void _sortCountryList(List<Country> countryList) {
@@ -98,6 +128,8 @@ class CoronedData with ChangeNotifier {
     notifyListeners();
   }
 
+  CovidInfos get getGlobalInfos => _globalInfos;
+
   List<Country> get getFilteredCountries => _filteredCountries ?? _countryList;
 
   List<Country> get getCountryList => _countryList;
@@ -112,4 +144,10 @@ class CoronedData with ChangeNotifier {
   OverlayEntry get scrollToTopButton => _scrollToTopButton;
 
   bool get isScrollToTopShown => _isScrollToTopShown;
+
+  Error get apiErrorCountries => _apiErrorCountries;
+
+  Error get apiErrorGlobal => _apiErrorGlobal;
+
+  bool get isLoaded => _isLoaded;
 }

@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:flutter_modular/flutter_modular.dart' show Modular;
+import 'package:flutter_modular/flutter_modular.dart' show Consumer, Modular;
 
 import 'package:cesi_covid_19_tracker/data/services/services.dart';
 import 'package:cesi_covid_19_tracker/shared/shared.dart'
@@ -212,97 +212,107 @@ class _AboutPageState extends State<AboutPage> {
         isWatch: context.isWatch,
         textStyle: Theme.of(context).textTheme.headline1,
       ),
-      body: Modular.get<CoronedData>().appTextTranslations == null
-          ? Center(child: CircularProgressIndicator())
-          : DefaultTextStyle(
-              style: Theme.of(context).textTheme.caption,
-              child: SafeArea(
-                bottom: false,
-                child: Scrollbar(
-                  child: ListView(
-                    controller: _scrollController,
-                    physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 12.0),
-                    children: <Widget>[
-                      Text(name,
-                          style: Theme.of(context).textTheme.headline5,
-                          textAlign: TextAlign.center),
-                      if (icon != null)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 18.0),
-                          child: IconTheme(
-                              data: Theme.of(context).iconTheme, child: icon),
-                        ),
-                      Text(version,
-                          style: Theme.of(context).textTheme.bodyText2,
-                          textAlign: TextAlign.center),
-                      Container(height: 18.0),
-                      ...widget.applicationLegalese.map((s) {
-                        Widget text;
-                        if (s.contains('github.com')) {
-                          text = RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              text: s.substring(0, s.indexOf('g')),
-                              style: Theme.of(context).textTheme.caption,
-                              children: <InlineSpan>[
-                                TextSpan(
-                                  text:
-                                      s.substring(s.indexOf('g'), s.length - 2),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .caption
-                                      .copyWith(
-                                          color: const Color(0xFF1A0DAB),
-                                          decoration: TextDecoration.underline),
-                                  recognizer: _linkHandler,
-                                ),
-                                TextSpan(
-                                  text: s.substring(s.length - 2),
-                                ),
-                              ],
-                            ),
-                          );
-                        } else {
-                          text = Text(
-                            s,
+      body: Consumer<CoronedData>(builder: (_, cD) {
+        if (!cD.isLoaded) {
+          return Center(child: CircularProgressIndicator());
+        } else {
+          var applicationLegalese = [
+            cD.appTextTranslations?.appDesc1,
+            cD.appTextTranslations?.appDesc2,
+            cD.appTextTranslations?.appDesc3,
+            cD.appTextTranslations?.appDesc4,
+            cD.appTextTranslations?.appDesc5,
+          ];
+          return DefaultTextStyle(
+            style: Theme.of(context).textTheme.caption,
+            child: SafeArea(
+              bottom: false,
+              child: Scrollbar(
+                child: ListView(
+                  controller: _scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 12.0),
+                  children: <Widget>[
+                    Text(name,
+                        style: Theme.of(context).textTheme.headline5,
+                        textAlign: TextAlign.center),
+                    if (icon != null)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 18.0),
+                        child: IconTheme(
+                            data: Theme.of(context).iconTheme, child: icon),
+                      ),
+                    Text(version,
+                        style: Theme.of(context).textTheme.bodyText2,
+                        textAlign: TextAlign.center),
+                    Container(height: 18.0),
+                    ...applicationLegalese.map((s) {
+                      Widget text;
+                      if (s.contains('github.com')) {
+                        text = RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text: s.substring(0, s.indexOf('g')),
                             style: Theme.of(context).textTheme.caption,
-                            textAlign: TextAlign.center,
-                          );
-                        }
-                        return Padding(
-                          padding: EdgeInsets.fromLTRB(
-                            !(context.isMobile || context.isWatch)
-                                ? MediaQuery.of(context).size.width / 4
-                                : 0,
-                            0.0,
-                            !(context.isMobile || context.isWatch)
-                                ? MediaQuery.of(context).size.width / 4
-                                : 0,
-                            18.0,
+                            children: <InlineSpan>[
+                              TextSpan(
+                                text: s.substring(s.indexOf('g'), s.length - 2),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .caption
+                                    .copyWith(
+                                        color: const Color(0xFF1A0DAB),
+                                        decoration: TextDecoration.underline),
+                                recognizer: _linkHandler,
+                              ),
+                              TextSpan(
+                                text: s.substring(s.length - 2),
+                              ),
+                            ],
                           ),
-                          child: text,
                         );
-                      }).toList(),
-                      Container(height: 18.0),
-                      Text('Powered by Flutter',
-                          style: Theme.of(context).textTheme.bodyText2,
-                          textAlign: TextAlign.center),
-                      Container(height: 24.0),
-                      ..._licenses,
-                      if (!_loaded)
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 24.0),
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
+                      } else {
+                        text = Text(
+                          s,
+                          style: Theme.of(context).textTheme.caption,
+                          textAlign: TextAlign.center,
+                        );
+                      }
+                      return Padding(
+                        padding: EdgeInsets.fromLTRB(
+                          !(context.isMobile || context.isWatch)
+                              ? MediaQuery.of(context).size.width / 4
+                              : 0,
+                          0.0,
+                          !(context.isMobile || context.isWatch)
+                              ? MediaQuery.of(context).size.width / 4
+                              : 0,
+                          18.0,
                         ),
-                    ],
-                  ),
+                        child: text,
+                      );
+                    }).toList(),
+                    Container(height: 18.0),
+                    Text('Powered by Flutter',
+                        style: Theme.of(context).textTheme.bodyText2,
+                        textAlign: TextAlign.center),
+                    Container(height: 24.0),
+                    ..._licenses,
+                    if (!_loaded)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 24.0),
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ),
+          );
+        }
+      }),
     );
   }
 }

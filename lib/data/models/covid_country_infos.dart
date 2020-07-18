@@ -16,12 +16,18 @@ abstract class CovidCountryInfos with _$CovidCountryInfos {
     @JsonKey(name: 'deaths') int deaths,
     @JsonKey(name: 'todayDeaths') int todayDeaths,
     @JsonKey(name: 'recovered') int recovered,
+    @JsonKey(name: 'todayRecovered') int todayRecovered,
     @JsonKey(name: 'active') int active,
     @JsonKey(name: 'critical') int critical,
     @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
     @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
     @JsonKey(name: 'tests') int tests,
     @JsonKey(name: 'testsPerOneMillion') int testsPerOneMillion,
+    @JsonKey(name: 'population') int population,
+    @JsonKey(name: 'continent') String continent,
+    @JsonKey(name: 'activePerOneMillion') int activePerOneMillion,
+    @JsonKey(name: 'recoveredPerOneMillion') int recoveredPerOneMillion,
+    @JsonKey(name: 'criticalPerOneMillion') int criticalPerOneMillion,
   ) = _CovidCountryInfos;
 
   factory CovidCountryInfos.fromJson(Map<String, dynamic> json) =>

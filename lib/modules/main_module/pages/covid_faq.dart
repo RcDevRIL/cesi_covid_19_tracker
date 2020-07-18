@@ -31,8 +31,7 @@ class _CovidFaqState extends State<CovidFaq> {
       ),
       drawer: NavigationDrawer(),
       body: Consumer<CoronedData>(builder: (context, cD) {
-        if (cD.appTextTranslations == null)
-          return Center(child: CircularProgressIndicator());
+        if (!cD.isLoaded) return Center(child: CircularProgressIndicator());
         items = _buildItems(cD);
         return Scrollbar(
           child: ListView.builder(

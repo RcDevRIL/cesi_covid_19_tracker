@@ -27,52 +27,53 @@ import 'mockers/mockers.dart' show HttpClientMock;
 import 'unit_tests_constants.dart'
     show
         circularProgressWidgetFinder,
-        countryFlagWidgetFinder,
+        countryCardWidgetFinder,
         globalCardWidgetFinder,
         imageFinder,
         okCountriesClient,
-        okCountryClient,
-        okCountryStatsClient,
-        okGlobalStatsClient,
+        baseMockClient,
         scrollToTopButtonFinder,
         searchBarWidgetFinder;
 
 /// [GetIt] instance, declared as global variable so we can use it in other methods than main
 GetIt locator;
 void main() {
-  CoronedData coronedData;
-  setUpAll(() {
-    locator = GetIt.instance;
-    setupLocator();
-    // Create an instance of CoronedData
-    coronedData = CoronedData();
-    initModules([
-      CoronedMainModule(),
-      CountryModule(),
-    ], changeBinds: [
-      Bind((_) => coronedData, singleton: false)
-    ]);
-  });
   group('Widgets unit tests:', () {
+    setUp(() {
+      locator = GetIt.instance;
+      setupLocator();
+      // CoronedData coronedData = CoronedData();
+      initModules([
+        CoronedMainModule(),
+        CountryModule(),
+      ], changeBinds: [
+        Bind(
+          (_) => CoronedData(),
+        )
+      ]);
+    });
     testWidgets('CountryView test', (tester) async {
       // Build a CountryView with previously initiated CoronedData Provider class
       final testWidget = buildTestableApp(CountryView());
       await tester.pumpWidget(testWidget);
+      // Expect a CircularProgressIndicator to be displayed
+      expect(circularProgressWidgetFinder, findsOneWidget);
+      await tester.pumpAndSettle();
       // Expect no error and find the following two widgets
       expect(searchBarWidgetFinder, findsOneWidget);
-      expect(countryFlagWidgetFinder, findsOneWidget);
+      expect(countryCardWidgetFinder, findsOneWidget);
       // Replace HttpClientMock instance with one that
       //   gives a list of 2 countries
       locator.registerLazySingleton<ApiService>(() =>
           ApiServiceImpl(http: HttpClientMock()..http = okCountriesClient));
       // Trigger a call to the mock http client
-      coronedData.init();
+      await Modular.get<CoronedData>().init();
       // expect provider magic to happen !
       //     --> only trigger a frame and you have now some of the countries displayed as cards
       await tester.pump();
-      expect(countryFlagWidgetFinder, findsWidgets);
+      expect(countryCardWidgetFinder, findsWidgets);
       // Scroll to some value > AppConstants.scrollToTopTreshold
-      await tester.drag(countryFlagWidgetFinder.last, Offset(0, -350));
+      await tester.drag(countryCardWidgetFinder.last, Offset(0, -350));
       await tester.pump();
       // The Scroll To Top button should have been added to Overlay.of(context)
       expect(scrollToTopButtonFinder, findsOneWidget);
@@ -87,20 +88,14 @@ void main() {
       // provider's magic
       await tester.pump();
       // expect that CoronedData.filteredCountries.length == 1 now so only 1 card displayed
-      expect(countryFlagWidgetFinder, findsOneWidget);
+      expect(countryCardWidgetFinder, findsOneWidget);
     });
     testWidgets('DashBoard test', (tester) async {
-      // Replace HttpClientMock instance with one that gives mocked world stats
-      locator.registerLazySingleton<ApiService>(() =>
-          ApiServiceImpl(http: HttpClientMock()..http = okGlobalStatsClient));
+      // Trigger a call to the mock http client
+      Modular.get<CoronedData>().init();
       // Build a DashBoard
       final testWidget = buildTestableApp(Dashboard());
       await tester.pumpWidget(testWidget);
-      // Expect the UI to show a CircularProgressIndicator and the card yet
-      expect(globalCardWidgetFinder, findsNothing);
-      expect(circularProgressWidgetFinder, findsOneWidget);
-      // Trigger a frame so mocked infos are loaded
-      await tester.pump();
       // Expect that there is now a GlobalCard displayed
       expect(globalCardWidgetFinder, findsOneWidget);
     });
@@ -111,11 +106,10 @@ void main() {
       // Expect to find several ListTiles displaying questions and associated answers about COVID-19
       expect(find.byType(ListTile), findsWidgets);
     });
-
     testWidgets('Details test', (tester) async {
-      // Replace HttpClientMock instance with one that gives mocked country stats
-      locator.registerLazySingleton<ApiService>(() =>
-          ApiServiceImpl(http: HttpClientMock()..http = okCountryStatsClient));
+      // // Replace HttpClientMock instance with one that gives mocked country stats
+      // locator.registerLazySingleton<ApiService>(() =>
+      //     ApiServiceImpl(http: HttpClientMock()..http = okCountryStatsClient));
       // Build a DetailsPage
       final testWidget = buildTestableApp(DetailsPage(countryCode: 'FR'));
       await tester.pumpWidget(testWidget);
@@ -123,7 +117,7 @@ void main() {
       expect(find.byType(CountryCard), findsNothing);
       expect(circularProgressWidgetFinder, findsOneWidget);
       // Trigger a frame so mocked infos are loaded
-      await tester.pump();
+      await tester.pumpAndSettle();
       // Expect that there is now a CountryCard displayed
       expect(find.byType(CountryCard), findsOneWidget);
     });
@@ -138,13 +132,6 @@ void main() {
           width: 50.0,
           fit: BoxFit.contain,
         ),
-        applicationLegalese: [
-          coronedData.appTextTranslations?.appDesc1,
-          coronedData.appTextTranslations?.appDesc2,
-          coronedData.appTextTranslations?.appDesc3,
-          coronedData.appTextTranslations?.appDesc4,
-          coronedData.appTextTranslations?.appDesc5,
-        ],
       ));
       await tester.pumpWidget(testWidget);
       // Expect to find two Images which should be our app icon and the CESI logo on AppBar
@@ -179,6 +166,6 @@ Widget buildTestableApp(Widget widget) {
 void setupLocator() {
   locator.registerLazySingleton<AppUtils>(() => AppUtilsImpl());
   locator.registerLazySingleton<ApiService>(
-      () => ApiServiceImpl(http: HttpClientMock()..http = okCountryClient));
+      () => ApiServiceImpl(http: HttpClientMock()..http = baseMockClient));
   locator.allowReassignment = true;
 }

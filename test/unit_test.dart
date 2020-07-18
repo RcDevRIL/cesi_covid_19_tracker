@@ -1,11 +1,12 @@
-import 'package:cesi_covid_19_tracker/modules/blocs.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'package:get_it/get_it.dart';
 
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show ApiService, ApiServiceImpl, AppUtils, AppUtilsImpl;
 import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
     show CovidNotFoundException;
-import 'package:get_it/get_it.dart';
+import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
 
 import 'mockers/mockers.dart' show HttpClientMock;
 import 'unit_tests_constants.dart'
@@ -13,7 +14,7 @@ import 'unit_tests_constants.dart'
         koClient,
         notFoundClient,
         okCountriesClient,
-        okCountryClient,
+        baseMockClient,
         slowOkClient,
         testCountry,
         testCountry2;
@@ -86,28 +87,28 @@ void main() {
     });
     test('formatLargeNumber test', () async {
       // Expect that the method return something different than plain ${number.toString()} if number >= 1000
-      expect(appUtils.formatLargeNumber(1000), isNot(1000.toString()));
+      assert(appUtils.formatLargeNumber(1000) != 1000.toString());
       // Expect that the method return plain ${number.toString()} otherwise
-      expect(appUtils.formatLargeNumber(900), equals(900.toString()));
-      expect(appUtils.formatLargeNumber(-1000), equals((-1000).toString()));
+      assert(appUtils.formatLargeNumber(900) == 900.toString());
+      assert(appUtils.formatLargeNumber(-1000) == (-1000).toString());
     });
     test('computeWeights test', () async {
-      var testCandidate = appUtils.computeWeights(1, 1, 1);
+      var testCandidate = appUtils.computeWeights(1, 1, 1, 0);
       // Expect that the method return an object of length 4
-      expectSync(testCandidate, hasLength(4));
+      assert(testCandidate.length == 4);
       // Expect that the method return an object with field 'total' equal to 3
-      expect(testCandidate['total'], equals(3));
+      assert(testCandidate['total'] == 3);
       // Expect that the method return an object with field 'weightContaminated' equal to 1/3
-      expect(testCandidate['weightContaminated'], equals(1 / 3));
+      assert(testCandidate['weightContaminated'] == 1 / 3);
       // Expect that the method return an object with field 'weightDeaths' equal to 1/3
-      expect(testCandidate['weightDeath'], equals(1 / 3));
+      assert(testCandidate['weightDeath'] == 1 / 3);
       // Expect that the method return an object with field 'weightRecovered' equal to 1/3
-      expect(testCandidate['weightRecovered'], equals(1 / 3));
+      assert(testCandidate['weightRecovered'] == 1 / 3);
       // Expect that the method will throw if one of int args is negative
       try {
-        appUtils.computeWeights(-1, 0, 3);
+        appUtils.computeWeights(-1, 0, 3, 0);
       } catch (e) {
-        expect(e, equals('Invalid value'));
+        assert(e == 'Invalid value');
       }
     });
   });
@@ -119,19 +120,21 @@ void main() {
       locator = GetIt.instance;
       locator.registerLazySingleton<AppUtils>(() => AppUtilsImpl());
       locator.registerLazySingleton<ApiService>(
-          () => ApiServiceImpl(http: HttpClientMock()..http = okCountryClient));
+          () => ApiServiceImpl(http: HttpClientMock()..http = baseMockClient));
       locator.allowReassignment = true;
     });
     test('init test', () async {
       // Init coronedData
       coronedData = CoronedData();
-      // Initialization is async so countrylist is first empty
-      expect(coronedData.getCountryList, hasLength(0));
+      // Initialization is async so countrylist is first empty and global infos is null
+      assert(coronedData.getCountryList.length == 0);
+      assert(coronedData.getGlobalInfos == null);
       // Wait for init method to finish
       await Future.delayed(Duration(seconds: 1));
-      // CoronedData.countryList and CoronedData.appTextTranslations sould be filled now
-      expect(coronedData.getCountryList, hasLength(1));
-      expect(coronedData.appTextTranslations, isNotNull);
+      // CoronedData.globalInfos, CoronedData.countryList and CoronedData.appTextTranslations sould be filled now
+      assert(coronedData.getCountryList.length == 1);
+      assert(coronedData.appTextTranslations != null);
+      assert(coronedData.getGlobalInfos != null);
     });
     test('addIfAbsent test', () async {
       // Init coronedData
@@ -143,11 +146,11 @@ void main() {
       assert(coronedData.getCountryList.length == 1);
       coronedData.addIfAbsent(notAbsentCountry);
       // Length should not have changed
-      expect(coronedData.getCountryList, hasLength(1));
+      assert(coronedData.getCountryList.length == 1);
       final absentCountry = testCountry2;
       coronedData.addIfAbsent(absentCountry);
       // absentCountry should have been added to CoronedData.countryList
-      expect(coronedData.getCountryList, hasLength(2));
+      assert(coronedData.getCountryList.length == 2);
     });
     test('filter test', () async {
       locator.registerLazySingleton<ApiService>(() =>
@@ -156,25 +159,24 @@ void main() {
       coronedData = CoronedData();
       // Wait for init method to finish
       await Future.delayed(Duration(seconds: 1));
-      expect(coronedData.getCountryList, hasLength(11));
+      assert(coronedData.getCountryList.length == 11);
       // Filter with input = 'test'
       coronedData.filter('test');
       // All countries names begin with 'test' so filterCountries.length == countryList.length
-      expect(coronedData.getFilteredCountries,
-          hasLength(coronedData.getCountryList.length));
+      assert(coronedData.getFilteredCountries.length ==
+          coronedData.getCountryList.length);
       // Filter with input = 'test2'
       coronedData.filter('test2');
       // Only one country should remain in CoronedData.filteredCountries
-      expect(coronedData.getFilteredCountries, hasLength(1));
+      assert(coronedData.getFilteredCountries.length == 1);
       // Filter with input = 'test2'
       coronedData.filter('test1');
       // Two countries should remain in CoronedData.filteredCountries (test10 and test1)
-      expect(coronedData.getFilteredCountries, hasLength(2));
+      assert(coronedData.getFilteredCountries.length == 2);
       // Reset coronedData.filteredCountries
       coronedData.resetFilter();
       // CoronedData.filteredCountries should be equal to CoronedData.countryList
-      expect(
-          coronedData.getFilteredCountries, equals(coronedData.getCountryList));
+      assert(coronedData.getFilteredCountries == coronedData.getCountryList);
     });
   });
 }

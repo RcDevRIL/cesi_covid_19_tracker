@@ -35,6 +35,7 @@ class _GlobalCardState extends State<GlobalCard> {
           widget.covidInfos.cases ?? 0,
           widget.covidInfos.deaths ?? 0,
           widget.covidInfos.recovered ?? 0,
+          0,
         );
   }
 
@@ -45,6 +46,7 @@ class _GlobalCardState extends State<GlobalCard> {
             widget.covidInfos.cases ?? 0,
             widget.covidInfos.deaths ?? 0,
             widget.covidInfos.recovered ?? 0,
+            0,
           );
     }
     super.didUpdateWidget(oldWidget);
