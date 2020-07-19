@@ -83,17 +83,22 @@ void main() {
       assert(appUtils.formatLargeNumber(-1000) == (-1000).toString());
     });
     test('computeWeights test', () async {
-      var testCandidate = appUtils.computeWeights(1, 1, 1, 0);
+      int testTotal = 10;
+      int testActive = 5;
+      int testDeaths = 3;
+      int testRecovered = 2;
+      var testCandidate = appUtils.computeWeights(
+          testTotal, testDeaths, testRecovered, testActive);
       // Expect that the method return an object of length 4
       assert(testCandidate.length == 4);
-      // Expect that the method return an object with field 'total' equal to 3
-      assert(testCandidate['total'] == 3);
-      // Expect that the method return an object with field 'weightContaminated' equal to 1/3
-      assert(testCandidate['weightContaminated'] == 1 / 3);
-      // Expect that the method return an object with field 'weightDeaths' equal to 1/3
-      assert(testCandidate['weightDeath'] == 1 / 3);
-      // Expect that the method return an object with field 'weightRecovered' equal to 1/3
-      assert(testCandidate['weightRecovered'] == 1 / 3);
+      // Expect that the method return an object with field 'total' equal to 10
+      assert(testCandidate['total'] == testTotal);
+      // Expect that the method return an object with field 'weightContaminated' equal to 5/10
+      assert(testCandidate['weightContaminated'] == testActive / testTotal);
+      // Expect that the method return an object with field 'weightDeaths' equal to 3/10
+      assert(testCandidate['weightDeath'] == testDeaths / testTotal);
+      // Expect that the method return an object with field 'weightRecovered' equal to 2/10
+      assert(testCandidate['weightRecovered'] == testRecovered / testTotal);
       // Expect that the method will throw if one of int args is negative
       try {
         appUtils.computeWeights(-1, 0, 3, 0);

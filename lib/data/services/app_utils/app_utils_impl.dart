@@ -19,8 +19,8 @@ class AppUtilsImpl implements AppUtils {
   ) {
     if (cases < 0 || deaths < 0 || recovered < 0) throw 'Invalid value';
     HashMap<String, num> result = HashMap<String, num>();
-    result.putIfAbsent('total', () => cases + deaths + recovered);
-    result.putIfAbsent('weightContaminated', () => cases / result['total']);
+    result.putIfAbsent('total', () => cases);
+    result.putIfAbsent('weightContaminated', () => active / result['total']);
     result.putIfAbsent('weightDeath', () => deaths / result['total']);
     result.putIfAbsent('weightRecovered', () => recovered / result['total']);
     return result;
