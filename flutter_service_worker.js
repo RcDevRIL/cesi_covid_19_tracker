@@ -11,7 +11,7 @@ const RESOURCES = {
 "assets/assets/l10n/flags/fr.png": "263b1555d79501643919e5a3c4559b4f",
 "assets/FontManifest.json": "580ff1a5d08679ded8fcf5c6848cece7",
 "assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
-"assets/NOTICES": "225b74ba3324d43c56be2217ffc3d48e",
+"assets/NOTICES": "3f3d6e789585cac4a368a8a130af32f3",
 "favicon.ico": "cd78fd2732d09d2595ba1b16b9d6a488",
 "icons/android-icon-144x144.png": "fb70f5cda7db961105feb0f09b6f2899",
 "icons/android-icon-192x192.png": "cb618464d5fe4baffb584ad6767490cd",
@@ -40,7 +40,7 @@ const RESOURCES = {
 "icons/ms-icon-70x70.png": "48f490a64da323b6fe6daa506471699b",
 "index.html": "7c005a087ba16c486930d78d526505a5",
 "/": "7c005a087ba16c486930d78d526505a5",
-"main.dart.js": "a5963f9f01f31c5e281d411e3723aaa0",
+"main.dart.js": "1de5fd70d5ff5713fdd017e3473b89a8",
 "manifest.json": "610bcc38a0da86239a4f9d2472cb7d67"
 };
 
