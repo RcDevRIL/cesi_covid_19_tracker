@@ -70,7 +70,12 @@ class _GlobalCardState extends State<GlobalCard> {
             children: <Widget>[
               Text(
                 coronedData.appTextTranslations.globalStats,
-                style: Theme.of(context).textTheme.headline4,
+                style: sizingInfos.isMobile || sizingInfos.isWatch
+                    ? Theme.of(context)
+                        .textTheme
+                        .headline4
+                        .apply(fontSizeDelta: -8)
+                    : Theme.of(context).textTheme.headline4,
               ),
               Row(
                 children: [
@@ -104,7 +109,7 @@ class _GlobalCardState extends State<GlobalCard> {
               SizedBox(
                 height: 8.0,
               ),
-              Row(
+              Wrap(
                 children: [
                   Text(
                     '${coronedData.appTextTranslations.contaminated.toUpperCase()} : '
@@ -146,7 +151,7 @@ class _GlobalCardState extends State<GlobalCard> {
               SizedBox(
                 height: 8.0,
               ),
-              Row(
+              Wrap(
                 children: [
                   Text(
                     '${coronedData.appTextTranslations.deaths.toUpperCase()} : '
@@ -188,7 +193,7 @@ class _GlobalCardState extends State<GlobalCard> {
               SizedBox(
                 height: 8.0,
               ),
-              Row(
+              Wrap(
                 children: [
                   Text(
                     '${coronedData.appTextTranslations.recovered.toUpperCase()} : '

@@ -25,8 +25,8 @@ class CoronedAppBar extends AppBar {
               child: Image.asset(
                 'assets/img/cesilogo.png',
                 fit: BoxFit.contain,
-                height: isMobile ? isWatch ? 100 : 150 : null,
-                width: isMobile ? isWatch ? 100 : 150 : null,
+                height: isMobile ? 150 : isWatch ? 100 : null,
+                width: isMobile ? 150 : isWatch ? 100 : null,
               ),
             ).showCursorOnHover,
           ],
