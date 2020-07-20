@@ -8,7 +8,7 @@ import 'package:cesi_covid_19_tracker/data/services/http_client/http_client.dart
 import 'api_service.dart';
 
 class ApiServiceImpl implements ApiService {
-  final String covidBaseUrl = 'https://disease.sh/v2/';
+  final String covidBaseUrl = 'https://disease.sh/v3/covid-19/';
   final HttpClient http;
 
   ApiServiceImpl({this.http});

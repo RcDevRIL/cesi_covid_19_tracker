@@ -77,7 +77,7 @@ class _GlobalCardState extends State<GlobalCard> {
                         .apply(fontSizeDelta: -8)
                     : Theme.of(context).textTheme.headline4,
               ),
-              Row(
+              Wrap(
                 children: [
                   Icon(
                     Icons.people,

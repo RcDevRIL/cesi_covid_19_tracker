@@ -70,7 +70,9 @@ class _CountryCardState extends State<CountryCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                runAlignment: WrapAlignment.center,
                 children: <Widget>[
                   Image.network(
                     '${widget.covidCountryInfos.countryInfo['flag']}',
@@ -107,19 +109,77 @@ class _CountryCardState extends State<CountryCard> {
                   ),
                   Text(
                     '${widget.countryName ?? widget.covidCountryInfos.country}',
-                    style: Theme.of(context).textTheme.headline4,
+                    style: sizingInfos.isMobile || sizingInfos.isWatch
+                        ? Theme.of(context)
+                            .textTheme
+                            .headline4
+                            .apply(fontSizeDelta: -8)
+                        : Theme.of(context).textTheme.headline4,
+                  ),
+                ],
+              ),
+              Wrap(
+                children: [
+                  Icon(
+                    Icons.people,
+                    size: 18.0,
+                  ),
+                  SizedBox(
+                    width: 4.0,
+                  ),
+                  Text(
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.population)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .apply(color: Colors.black),
                   ),
                 ],
               ),
               SizedBox(
-                height: 8.0,
+                height: 18.0,
               ),
               Text(
-                '${coronedData.appTextTranslations.contaminated.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.cases)}',
+                'TOTAL : '
+                '${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.cases)}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
                     .apply(color: Colors.black),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Wrap(
+                children: <Widget>[
+                  Text(
+                    '${coronedData.appTextTranslations.contaminated.toUpperCase()} : '
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.active)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .apply(color: Colors.black),
+                  ),
+                  Text(
+                    ' (',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                  Icon(
+                    Icons.arrow_drop_up,
+                    size: 18.0,
+                    color: AppTheme.deathsColorBorder,
+                  ),
+                  Text(
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.todayCases)} )',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                ],
               ),
               Container(
                 height: 8.0,
@@ -132,12 +192,36 @@ class _CountryCardState extends State<CountryCard> {
               SizedBox(
                 height: 8.0,
               ),
-              Text(
-                '${coronedData.appTextTranslations.deaths.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.deaths)}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .apply(color: Colors.black),
+              Wrap(
+                children: <Widget>[
+                  Text(
+                    '${coronedData.appTextTranslations.deaths.toUpperCase()} : '
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.deaths)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .apply(color: Colors.black),
+                  ),
+                  Text(
+                    ' (',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                  Icon(
+                    Icons.arrow_drop_up,
+                    size: 18.0,
+                    color: AppTheme.deathsColorBorder,
+                  ),
+                  Text(
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.todayDeaths)} )',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                ],
               ),
               Container(
                 height: 8.0,
@@ -150,12 +234,36 @@ class _CountryCardState extends State<CountryCard> {
               SizedBox(
                 height: 8.0,
               ),
-              Text(
-                '${coronedData.appTextTranslations.recovered.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.recovered)}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .apply(color: Colors.black),
+              Wrap(
+                children: <Widget>[
+                  Text(
+                    '${coronedData.appTextTranslations.recovered.toUpperCase()} : '
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.recovered)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .apply(color: Colors.black),
+                  ),
+                  Text(
+                    ' (',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                  Icon(
+                    Icons.arrow_drop_up,
+                    size: 18.0,
+                    color: AppTheme.recoveredColorBorder,
+                  ),
+                  Text(
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidCountryInfos.todayRecovered)} )',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                ],
               ),
               Container(
                 height: 8.0,
