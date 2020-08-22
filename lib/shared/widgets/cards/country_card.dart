@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_modular/flutter_modular.dart' show Consumer, Modular;
+import 'package:flutter_modular/flutter_modular.dart' show Modular;
 import 'package:responsive_builder/responsive_builder.dart'
     show ResponsiveBuilder;
 

@@ -1,6 +1,6 @@
 (**EN**|[FR])
 # cesi_covid_19_tracker
-[![version_badge](https://img.shields.io/badge/version-1.8-informational)][Release]
+[![version_badge](https://img.shields.io/badge/version-1.8.1-informational)][Release]
 
 ||status|
 |:---:|:---:|
@@ -30,7 +30,7 @@ _Let's dive in !!_:monocle_face:
 - About page with licences used in this project and a link to this page (forked from Flutter's [LicencePage] :rocket:)
 ### Data sources :nerd_face:
 This app relies on **3** data sources:
-- Static FAQ hardcoded in ```FAQDataSource``` class ([lib/shared/constants/app_globals.dart])
+- Dynamic FAQ text stored in internationalization files ([lib/l10n/])
 - List of countries and their infos via [restcountries.eu] API
 - **COVID-19** stats by country and for the world via [NOVELCovid] API which in turns rely on these [sources]
 
@@ -42,6 +42,7 @@ Since this is a repo created for studies, I will explain in this section what I'
 - JSON<->Object manipulations (made a lot easier thanks to [freezed] :rocket:)
 - Unit testing (see **[test]** folder for source code)
 - Performance optimization (Flutter for web is capricious sometimes :sweat_smile:)
+- Multi language app (English / French) using [intl] package and [Loco](https://localise.biz/) web app
 - Github project management tools (in the begining we were 4 students, and chose to go with Automated Kanban boards from Github ! Issues and PR were our way to handle the development of the website, and I continue on in order to better learn about all Github features :rocket:)
 ### Screenshots: :mag:
 _// **TODO**: Put screenshots here when V2 is done_
@@ -73,8 +74,10 @@ _Direct dependencies:_
 * [provider] - The package used to facilitate "State Management" on the application
 * [responsive_builder] - The package used to facilitate building of screen responsive UIs
 * [freezed] - The package used to generate objects used as DTOs for instance
-* [intl] - The package used in this project to format large numbers. It can be used for a lot of other interestings things...
+* [intl] - The package used in this project to format large numbers and to handle available languages in the app
 * [flutter_modular] - The package to help structure a flutter project and that gives awesome features such as dynamic route linking (deep linking) :rocket:
+* [url_launcher] - The package used to simplify URL parsing and launching
+* [google_fonts] - The package used to download google fonts in an efficient way (caching system, ...)
 
 _Test & Dev Dependencies:_
 * [flutter_test] - The Flutter library used to implement unit tests
@@ -179,6 +182,8 @@ Have fun coding !!:rocket::computer:
 [responsive_builder]: https://pub.dev/packages/responsive_builder
 [freezed]: https://pub.dev/packages/freezed
 [intl]: https://pub.dev/packages/intl
+[url_launcher]: https://pub.dev/packages/url_launcher
+[google_fonts]: https://pub.dev/packages/google_fonts
 [flutter_modular]: https://pub.dev/packages/flutter_modular
 [flutter_test]: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
 [build_runner]: https://pub.dev/packages/build_runner
@@ -196,7 +201,7 @@ Have fun coding !!:rocket::computer:
 [Release]: https://github.com/RcDevRIL/cesi_covid_19_tracker/releases
 [EN]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README.md
 [FR]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README-fr.md
-[lib/shared/constants/app_globals.dart]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/shared/constants/app_globals.dart#L88
+[lib/l10n/]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/l10n/
 [LicencePage]: https://api.flutter.dev/flutter/material/LicensePage-class.html
 [restcountries.eu]: http://restcountries.eu/
 [NOVELCovid]: https://corona.lmao.ninja/docs/#/
