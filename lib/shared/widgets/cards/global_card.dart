@@ -35,6 +35,7 @@ class _GlobalCardState extends State<GlobalCard> {
           widget.covidInfos.cases ?? 0,
           widget.covidInfos.deaths ?? 0,
           widget.covidInfos.recovered ?? 0,
+          widget.covidInfos.active,
         );
   }
 
@@ -45,6 +46,7 @@ class _GlobalCardState extends State<GlobalCard> {
             widget.covidInfos.cases ?? 0,
             widget.covidInfos.deaths ?? 0,
             widget.covidInfos.recovered ?? 0,
+            widget.covidInfos.active,
           );
     }
     super.didUpdateWidget(oldWidget);
@@ -68,17 +70,75 @@ class _GlobalCardState extends State<GlobalCard> {
             children: <Widget>[
               Text(
                 coronedData.appTextTranslations.globalStats,
-                style: Theme.of(context).textTheme.headline4,
+                style: sizingInfos.isMobile || sizingInfos.isWatch
+                    ? Theme.of(context)
+                        .textTheme
+                        .headline4
+                        .apply(fontSizeDelta: -8)
+                    : Theme.of(context).textTheme.headline4,
+              ),
+              Wrap(
+                children: [
+                  Icon(
+                    Icons.people,
+                    size: 18.0,
+                  ),
+                  SizedBox(
+                    width: 4.0,
+                  ),
+                  Text(
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.population)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .apply(color: Colors.black),
+                  ),
+                ],
               ),
               SizedBox(
-                height: 8.0,
+                height: 18.0,
               ),
               Text(
-                '${coronedData.appTextTranslations.contaminated.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
+                'TOTAL : '
+                '${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.cases)}',
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
                     .apply(color: Colors.black),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Wrap(
+                children: [
+                  Text(
+                    '${coronedData.appTextTranslations.contaminated.toUpperCase()} : '
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.active)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .apply(color: Colors.black),
+                  ),
+                  Text(
+                    ' (',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                  Icon(
+                    Icons.arrow_drop_up,
+                    size: 18.0,
+                    color: AppTheme.deathsColorBorder,
+                  ),
+                  Text(
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.todayCases)} )',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                ],
               ),
               Container(
                 height: 8.0,
@@ -91,12 +151,36 @@ class _GlobalCardState extends State<GlobalCard> {
               SizedBox(
                 height: 8.0,
               ),
-              Text(
-                '${coronedData.appTextTranslations.deaths.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .apply(color: Colors.black),
+              Wrap(
+                children: [
+                  Text(
+                    '${coronedData.appTextTranslations.deaths.toUpperCase()} : '
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.deaths)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .apply(color: Colors.black),
+                  ),
+                  Text(
+                    ' (',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                  Icon(
+                    Icons.arrow_drop_up,
+                    size: 18.0,
+                    color: AppTheme.deathsColorBorder,
+                  ),
+                  Text(
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.todayDeaths)} )',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                ],
               ),
               Container(
                 height: 8.0,
@@ -109,12 +193,36 @@ class _GlobalCardState extends State<GlobalCard> {
               SizedBox(
                 height: 8.0,
               ),
-              Text(
-                '${coronedData.appTextTranslations.recovered.toUpperCase()} : ${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .apply(color: Colors.black),
+              Wrap(
+                children: [
+                  Text(
+                    '${coronedData.appTextTranslations.recovered.toUpperCase()} : '
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.recovered)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .apply(color: Colors.black),
+                  ),
+                  Text(
+                    ' (',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                  Icon(
+                    Icons.arrow_drop_up,
+                    size: 18.0,
+                    color: AppTheme.recoveredColorBorder,
+                  ),
+                  Text(
+                    '${locator.get<AppUtils>().formatLargeNumber(widget.covidInfos.todayRecovered)} )',
+                    style: Theme.of(context).textTheme.bodyText2.apply(
+                          color: Colors.black,
+                          fontSizeDelta: -4,
+                        ),
+                  ),
+                ],
               ),
               Container(
                 height: 8.0,

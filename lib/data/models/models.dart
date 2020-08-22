@@ -9,6 +9,9 @@ export 'country.dart';
 * /!\ si on le génère à nouveau. Ce commentaire fait en sorte d'ignorer /!\
 * /!\ une certaine règle qui fait planter l'analyse statique du code /!\
 * /!\ et par la même occasion fait arreter nos builds sur l'outil CI/CD /!\ 
+* 
+* Commande pour générer les fichiers:
+*   flutter pub run build_runner build run --delete-conflicting-outputs
 */
 
 // ignore_for_file: non_constant_identifier_names

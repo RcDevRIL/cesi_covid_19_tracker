@@ -22,12 +22,17 @@ class _$CovidInfosTearOff {
       @JsonKey(name: 'deaths') int deaths,
       @JsonKey(name: 'todayDeaths') int todayDeaths,
       @JsonKey(name: 'recovered') int recovered,
+      @JsonKey(name: 'todayRecovered') int todayRecovered,
       @JsonKey(name: 'active') int active,
       @JsonKey(name: 'critical') int critical,
       @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
       @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
       @JsonKey(name: 'tests') int tests,
       @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
+      @JsonKey(name: 'population') int population,
+      @JsonKey(name: 'activePerOneMillion') double activePerOneMillion,
+      @JsonKey(name: 'recoveredPerOneMillion') double recoveredPerOneMillion,
+      @JsonKey(name: 'criticalPerOneMillion') double criticalPerOneMillion,
       @JsonKey(name: 'affectedCountries') int affectedCountries) {
     return _CovidInfos(
       update,
@@ -36,12 +41,17 @@ class _$CovidInfosTearOff {
       deaths,
       todayDeaths,
       recovered,
+      todayRecovered,
       active,
       critical,
       casesPerOneMillion,
       deathsPerOneMillion,
       tests,
       testsPerOneMillion,
+      population,
+      activePerOneMillion,
+      recoveredPerOneMillion,
+      criticalPerOneMillion,
       affectedCountries,
     );
   }
@@ -63,6 +73,8 @@ mixin _$CovidInfos {
   int get todayDeaths;
   @JsonKey(name: 'recovered')
   int get recovered;
+  @JsonKey(name: 'todayRecovered')
+  int get todayRecovered;
   @JsonKey(name: 'active')
   int get active;
   @JsonKey(name: 'critical')
@@ -75,6 +87,14 @@ mixin _$CovidInfos {
   int get tests;
   @JsonKey(name: 'testsPerOneMillion')
   double get testsPerOneMillion;
+  @JsonKey(name: 'population')
+  int get population;
+  @JsonKey(name: 'activePerOneMillion')
+  double get activePerOneMillion;
+  @JsonKey(name: 'recoveredPerOneMillion')
+  double get recoveredPerOneMillion;
+  @JsonKey(name: 'criticalPerOneMillion')
+  double get criticalPerOneMillion;
   @JsonKey(name: 'affectedCountries')
   int get affectedCountries;
 
@@ -93,12 +113,17 @@ abstract class $CovidInfosCopyWith<$Res> {
       @JsonKey(name: 'deaths') int deaths,
       @JsonKey(name: 'todayDeaths') int todayDeaths,
       @JsonKey(name: 'recovered') int recovered,
+      @JsonKey(name: 'todayRecovered') int todayRecovered,
       @JsonKey(name: 'active') int active,
       @JsonKey(name: 'critical') int critical,
       @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
       @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
       @JsonKey(name: 'tests') int tests,
       @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
+      @JsonKey(name: 'population') int population,
+      @JsonKey(name: 'activePerOneMillion') double activePerOneMillion,
+      @JsonKey(name: 'recoveredPerOneMillion') double recoveredPerOneMillion,
+      @JsonKey(name: 'criticalPerOneMillion') double criticalPerOneMillion,
       @JsonKey(name: 'affectedCountries') int affectedCountries});
 }
 
@@ -117,12 +142,17 @@ class _$CovidInfosCopyWithImpl<$Res> implements $CovidInfosCopyWith<$Res> {
     Object deaths = freezed,
     Object todayDeaths = freezed,
     Object recovered = freezed,
+    Object todayRecovered = freezed,
     Object active = freezed,
     Object critical = freezed,
     Object casesPerOneMillion = freezed,
     Object deathsPerOneMillion = freezed,
     Object tests = freezed,
     Object testsPerOneMillion = freezed,
+    Object population = freezed,
+    Object activePerOneMillion = freezed,
+    Object recoveredPerOneMillion = freezed,
+    Object criticalPerOneMillion = freezed,
     Object affectedCountries = freezed,
   }) {
     return _then(_value.copyWith(
@@ -133,6 +163,9 @@ class _$CovidInfosCopyWithImpl<$Res> implements $CovidInfosCopyWith<$Res> {
       todayDeaths:
           todayDeaths == freezed ? _value.todayDeaths : todayDeaths as int,
       recovered: recovered == freezed ? _value.recovered : recovered as int,
+      todayRecovered: todayRecovered == freezed
+          ? _value.todayRecovered
+          : todayRecovered as int,
       active: active == freezed ? _value.active : active as int,
       critical: critical == freezed ? _value.critical : critical as int,
       casesPerOneMillion: casesPerOneMillion == freezed
@@ -145,6 +178,16 @@ class _$CovidInfosCopyWithImpl<$Res> implements $CovidInfosCopyWith<$Res> {
       testsPerOneMillion: testsPerOneMillion == freezed
           ? _value.testsPerOneMillion
           : testsPerOneMillion as double,
+      population: population == freezed ? _value.population : population as int,
+      activePerOneMillion: activePerOneMillion == freezed
+          ? _value.activePerOneMillion
+          : activePerOneMillion as double,
+      recoveredPerOneMillion: recoveredPerOneMillion == freezed
+          ? _value.recoveredPerOneMillion
+          : recoveredPerOneMillion as double,
+      criticalPerOneMillion: criticalPerOneMillion == freezed
+          ? _value.criticalPerOneMillion
+          : criticalPerOneMillion as double,
       affectedCountries: affectedCountries == freezed
           ? _value.affectedCountries
           : affectedCountries as int,
@@ -164,12 +207,17 @@ abstract class _$CovidInfosCopyWith<$Res> implements $CovidInfosCopyWith<$Res> {
       @JsonKey(name: 'deaths') int deaths,
       @JsonKey(name: 'todayDeaths') int todayDeaths,
       @JsonKey(name: 'recovered') int recovered,
+      @JsonKey(name: 'todayRecovered') int todayRecovered,
       @JsonKey(name: 'active') int active,
       @JsonKey(name: 'critical') int critical,
       @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
       @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
       @JsonKey(name: 'tests') int tests,
       @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
+      @JsonKey(name: 'population') int population,
+      @JsonKey(name: 'activePerOneMillion') double activePerOneMillion,
+      @JsonKey(name: 'recoveredPerOneMillion') double recoveredPerOneMillion,
+      @JsonKey(name: 'criticalPerOneMillion') double criticalPerOneMillion,
       @JsonKey(name: 'affectedCountries') int affectedCountries});
 }
 
@@ -190,12 +238,17 @@ class __$CovidInfosCopyWithImpl<$Res> extends _$CovidInfosCopyWithImpl<$Res>
     Object deaths = freezed,
     Object todayDeaths = freezed,
     Object recovered = freezed,
+    Object todayRecovered = freezed,
     Object active = freezed,
     Object critical = freezed,
     Object casesPerOneMillion = freezed,
     Object deathsPerOneMillion = freezed,
     Object tests = freezed,
     Object testsPerOneMillion = freezed,
+    Object population = freezed,
+    Object activePerOneMillion = freezed,
+    Object recoveredPerOneMillion = freezed,
+    Object criticalPerOneMillion = freezed,
     Object affectedCountries = freezed,
   }) {
     return _then(_CovidInfos(
@@ -205,6 +258,7 @@ class __$CovidInfosCopyWithImpl<$Res> extends _$CovidInfosCopyWithImpl<$Res>
       deaths == freezed ? _value.deaths : deaths as int,
       todayDeaths == freezed ? _value.todayDeaths : todayDeaths as int,
       recovered == freezed ? _value.recovered : recovered as int,
+      todayRecovered == freezed ? _value.todayRecovered : todayRecovered as int,
       active == freezed ? _value.active : active as int,
       critical == freezed ? _value.critical : critical as int,
       casesPerOneMillion == freezed
@@ -217,6 +271,16 @@ class __$CovidInfosCopyWithImpl<$Res> extends _$CovidInfosCopyWithImpl<$Res>
       testsPerOneMillion == freezed
           ? _value.testsPerOneMillion
           : testsPerOneMillion as double,
+      population == freezed ? _value.population : population as int,
+      activePerOneMillion == freezed
+          ? _value.activePerOneMillion
+          : activePerOneMillion as double,
+      recoveredPerOneMillion == freezed
+          ? _value.recoveredPerOneMillion
+          : recoveredPerOneMillion as double,
+      criticalPerOneMillion == freezed
+          ? _value.criticalPerOneMillion
+          : criticalPerOneMillion as double,
       affectedCountries == freezed
           ? _value.affectedCountries
           : affectedCountries as int,
@@ -233,12 +297,17 @@ class _$_CovidInfos implements _CovidInfos {
       @JsonKey(name: 'deaths') this.deaths,
       @JsonKey(name: 'todayDeaths') this.todayDeaths,
       @JsonKey(name: 'recovered') this.recovered,
+      @JsonKey(name: 'todayRecovered') this.todayRecovered,
       @JsonKey(name: 'active') this.active,
       @JsonKey(name: 'critical') this.critical,
       @JsonKey(name: 'casesPerOneMillion') this.casesPerOneMillion,
       @JsonKey(name: 'deathsPerOneMillion') this.deathsPerOneMillion,
       @JsonKey(name: 'tests') this.tests,
       @JsonKey(name: 'testsPerOneMillion') this.testsPerOneMillion,
+      @JsonKey(name: 'population') this.population,
+      @JsonKey(name: 'activePerOneMillion') this.activePerOneMillion,
+      @JsonKey(name: 'recoveredPerOneMillion') this.recoveredPerOneMillion,
+      @JsonKey(name: 'criticalPerOneMillion') this.criticalPerOneMillion,
       @JsonKey(name: 'affectedCountries') this.affectedCountries)
       : assert(update != null),
         assert(cases != null),
@@ -246,12 +315,17 @@ class _$_CovidInfos implements _CovidInfos {
         assert(deaths != null),
         assert(todayDeaths != null),
         assert(recovered != null),
+        assert(todayRecovered != null),
         assert(active != null),
         assert(critical != null),
         assert(casesPerOneMillion != null),
         assert(deathsPerOneMillion != null),
         assert(tests != null),
         assert(testsPerOneMillion != null),
+        assert(population != null),
+        assert(activePerOneMillion != null),
+        assert(recoveredPerOneMillion != null),
+        assert(criticalPerOneMillion != null),
         assert(affectedCountries != null);
 
   factory _$_CovidInfos.fromJson(Map<String, dynamic> json) =>
@@ -276,6 +350,9 @@ class _$_CovidInfos implements _CovidInfos {
   @JsonKey(name: 'recovered')
   final int recovered;
   @override
+  @JsonKey(name: 'todayRecovered')
+  final int todayRecovered;
+  @override
   @JsonKey(name: 'active')
   final int active;
   @override
@@ -294,12 +371,24 @@ class _$_CovidInfos implements _CovidInfos {
   @JsonKey(name: 'testsPerOneMillion')
   final double testsPerOneMillion;
   @override
+  @JsonKey(name: 'population')
+  final int population;
+  @override
+  @JsonKey(name: 'activePerOneMillion')
+  final double activePerOneMillion;
+  @override
+  @JsonKey(name: 'recoveredPerOneMillion')
+  final double recoveredPerOneMillion;
+  @override
+  @JsonKey(name: 'criticalPerOneMillion')
+  final double criticalPerOneMillion;
+  @override
   @JsonKey(name: 'affectedCountries')
   final int affectedCountries;
 
   @override
   String toString() {
-    return 'CovidInfos(update: $update, cases: $cases, todayCases: $todayCases, deaths: $deaths, todayDeaths: $todayDeaths, recovered: $recovered, active: $active, critical: $critical, casesPerOneMillion: $casesPerOneMillion, deathsPerOneMillion: $deathsPerOneMillion, tests: $tests, testsPerOneMillion: $testsPerOneMillion, affectedCountries: $affectedCountries)';
+    return 'CovidInfos(update: $update, cases: $cases, todayCases: $todayCases, deaths: $deaths, todayDeaths: $todayDeaths, recovered: $recovered, todayRecovered: $todayRecovered, active: $active, critical: $critical, casesPerOneMillion: $casesPerOneMillion, deathsPerOneMillion: $deathsPerOneMillion, tests: $tests, testsPerOneMillion: $testsPerOneMillion, population: $population, activePerOneMillion: $activePerOneMillion, recoveredPerOneMillion: $recoveredPerOneMillion, criticalPerOneMillion: $criticalPerOneMillion, affectedCountries: $affectedCountries)';
   }
 
   @override
@@ -321,6 +410,9 @@ class _$_CovidInfos implements _CovidInfos {
             (identical(other.recovered, recovered) ||
                 const DeepCollectionEquality()
                     .equals(other.recovered, recovered)) &&
+            (identical(other.todayRecovered, todayRecovered) ||
+                const DeepCollectionEquality()
+                    .equals(other.todayRecovered, todayRecovered)) &&
             (identical(other.active, active) ||
                 const DeepCollectionEquality().equals(other.active, active)) &&
             (identical(other.critical, critical) ||
@@ -337,6 +429,18 @@ class _$_CovidInfos implements _CovidInfos {
             (identical(other.testsPerOneMillion, testsPerOneMillion) ||
                 const DeepCollectionEquality()
                     .equals(other.testsPerOneMillion, testsPerOneMillion)) &&
+            (identical(other.population, population) ||
+                const DeepCollectionEquality()
+                    .equals(other.population, population)) &&
+            (identical(other.activePerOneMillion, activePerOneMillion) ||
+                const DeepCollectionEquality()
+                    .equals(other.activePerOneMillion, activePerOneMillion)) &&
+            (identical(other.recoveredPerOneMillion, recoveredPerOneMillion) ||
+                const DeepCollectionEquality().equals(
+                    other.recoveredPerOneMillion, recoveredPerOneMillion)) &&
+            (identical(other.criticalPerOneMillion, criticalPerOneMillion) ||
+                const DeepCollectionEquality().equals(
+                    other.criticalPerOneMillion, criticalPerOneMillion)) &&
             (identical(other.affectedCountries, affectedCountries) ||
                 const DeepCollectionEquality()
                     .equals(other.affectedCountries, affectedCountries)));
@@ -351,12 +455,17 @@ class _$_CovidInfos implements _CovidInfos {
       const DeepCollectionEquality().hash(deaths) ^
       const DeepCollectionEquality().hash(todayDeaths) ^
       const DeepCollectionEquality().hash(recovered) ^
+      const DeepCollectionEquality().hash(todayRecovered) ^
       const DeepCollectionEquality().hash(active) ^
       const DeepCollectionEquality().hash(critical) ^
       const DeepCollectionEquality().hash(casesPerOneMillion) ^
       const DeepCollectionEquality().hash(deathsPerOneMillion) ^
       const DeepCollectionEquality().hash(tests) ^
       const DeepCollectionEquality().hash(testsPerOneMillion) ^
+      const DeepCollectionEquality().hash(population) ^
+      const DeepCollectionEquality().hash(activePerOneMillion) ^
+      const DeepCollectionEquality().hash(recoveredPerOneMillion) ^
+      const DeepCollectionEquality().hash(criticalPerOneMillion) ^
       const DeepCollectionEquality().hash(affectedCountries);
 
   @override
@@ -371,20 +480,42 @@ class _$_CovidInfos implements _CovidInfos {
 
 abstract class _CovidInfos implements CovidInfos {
   const factory _CovidInfos(
-          @JsonKey(name: 'updated') int update,
-          @JsonKey(name: 'cases') int cases,
-          @JsonKey(name: 'todayCases') int todayCases,
-          @JsonKey(name: 'deaths') int deaths,
-          @JsonKey(name: 'todayDeaths') int todayDeaths,
-          @JsonKey(name: 'recovered') int recovered,
-          @JsonKey(name: 'active') int active,
-          @JsonKey(name: 'critical') int critical,
-          @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
-          @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
-          @JsonKey(name: 'tests') int tests,
-          @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
-          @JsonKey(name: 'affectedCountries') int affectedCountries) =
-      _$_CovidInfos;
+      @JsonKey(name: 'updated')
+          int update,
+      @JsonKey(name: 'cases')
+          int cases,
+      @JsonKey(name: 'todayCases')
+          int todayCases,
+      @JsonKey(name: 'deaths')
+          int deaths,
+      @JsonKey(name: 'todayDeaths')
+          int todayDeaths,
+      @JsonKey(name: 'recovered')
+          int recovered,
+      @JsonKey(name: 'todayRecovered')
+          int todayRecovered,
+      @JsonKey(name: 'active')
+          int active,
+      @JsonKey(name: 'critical')
+          int critical,
+      @JsonKey(name: 'casesPerOneMillion')
+          double casesPerOneMillion,
+      @JsonKey(name: 'deathsPerOneMillion')
+          double deathsPerOneMillion,
+      @JsonKey(name: 'tests')
+          int tests,
+      @JsonKey(name: 'testsPerOneMillion')
+          double testsPerOneMillion,
+      @JsonKey(name: 'population')
+          int population,
+      @JsonKey(name: 'activePerOneMillion')
+          double activePerOneMillion,
+      @JsonKey(name: 'recoveredPerOneMillion')
+          double recoveredPerOneMillion,
+      @JsonKey(name: 'criticalPerOneMillion')
+          double criticalPerOneMillion,
+      @JsonKey(name: 'affectedCountries')
+          int affectedCountries) = _$_CovidInfos;
 
   factory _CovidInfos.fromJson(Map<String, dynamic> json) =
       _$_CovidInfos.fromJson;
@@ -408,6 +539,9 @@ abstract class _CovidInfos implements CovidInfos {
   @JsonKey(name: 'recovered')
   int get recovered;
   @override
+  @JsonKey(name: 'todayRecovered')
+  int get todayRecovered;
+  @override
   @JsonKey(name: 'active')
   int get active;
   @override
@@ -425,6 +559,18 @@ abstract class _CovidInfos implements CovidInfos {
   @override
   @JsonKey(name: 'testsPerOneMillion')
   double get testsPerOneMillion;
+  @override
+  @JsonKey(name: 'population')
+  int get population;
+  @override
+  @JsonKey(name: 'activePerOneMillion')
+  double get activePerOneMillion;
+  @override
+  @JsonKey(name: 'recoveredPerOneMillion')
+  double get recoveredPerOneMillion;
+  @override
+  @JsonKey(name: 'criticalPerOneMillion')
+  double get criticalPerOneMillion;
   @override
   @JsonKey(name: 'affectedCountries')
   int get affectedCountries;

@@ -14,12 +14,17 @@ abstract class CovidInfos with _$CovidInfos {
     @JsonKey(name: 'deaths') int deaths,
     @JsonKey(name: 'todayDeaths') int todayDeaths,
     @JsonKey(name: 'recovered') int recovered,
+    @JsonKey(name: 'todayRecovered') int todayRecovered,
     @JsonKey(name: 'active') int active,
     @JsonKey(name: 'critical') int critical,
     @JsonKey(name: 'casesPerOneMillion') double casesPerOneMillion,
     @JsonKey(name: 'deathsPerOneMillion') double deathsPerOneMillion,
     @JsonKey(name: 'tests') int tests,
     @JsonKey(name: 'testsPerOneMillion') double testsPerOneMillion,
+    @JsonKey(name: 'population') int population,
+    @JsonKey(name: 'activePerOneMillion') double activePerOneMillion,
+    @JsonKey(name: 'recoveredPerOneMillion') double recoveredPerOneMillion,
+    @JsonKey(name: 'criticalPerOneMillion') double criticalPerOneMillion,
     @JsonKey(name: 'affectedCountries') int affectedCountries,
   ) = _CovidInfos;
 

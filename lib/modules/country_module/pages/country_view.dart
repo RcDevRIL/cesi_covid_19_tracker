@@ -5,14 +5,17 @@ import 'package:flutter/gestures.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
+    show APIException, APIUnreachedException;
 import 'package:cesi_covid_19_tracker/shared/shared.dart'
     show
         AppConstants,
         CoronedAppBar,
         CoronedCard,
+        FailureCard,
         FailureIcon,
-        NavigationDrawer,
         HoverExtensions,
+        NavigationDrawer,
         SizeBreakpoint;
 import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
 
@@ -65,153 +68,182 @@ class _CountryViewState extends State<CountryView> {
       ),
       drawer: NavigationDrawer(),
       body: Consumer<CoronedData>(builder: (_, cD) {
-        if (cD.appTextTranslations == null)
+        if (!cD.isLoaded) {
           return Center(child: CircularProgressIndicator());
-        if (_resetFilter) cD.resetFilter();
-        // If user is not filtering countries, we want to reset input textfield value
-        if (cD.getFilteredCountries == cD.getCountryList)
-          _countryFilter = TextEditingController(
-              text: cD.appTextTranslations?.selectCountryDefaultText ??
-                  'Choisissez un pays');
-        _resetFilter = false;
-        return cD.getCountryList != null
-            ? cD.getCountryList.isNotEmpty
-                ? Scrollbar(
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: cD.getFilteredCountries.length + 1,
-                      itemBuilder: (_, i) => i == 0
-                          ? Padding(
-                              padding: _resolveInputTextPadding(),
-                              child: TextField(
-                                key: Key('select_country_text_field'),
-                                focusNode: _filterTextInputFocus,
-                                decoration: InputDecoration(
-                                  fillColor: Colors.black,
-                                  icon: Icon(Icons.search),
-                                  isDense: true,
-                                  alignLabelWithHint: true,
-                                ),
-                                onTap: () => _countryFilter.text.compareTo(cD
-                                            .appTextTranslations
-                                            .selectCountryDefaultText) ==
-                                        0
-                                    ? _countryFilter.text = ''
-                                    : null,
-                                onChanged: (value) {
-                                  cD.filter(_countryFilter.text);
-                                },
-                                onEditingComplete: () {
-                                  cD.filter(_countryFilter.text);
-                                  _filterTextInputFocus
-                                      .unfocus(); // Try to enforce TextInput unfocus
-                                  if (_countryFilter.text == null ||
-                                      _countryFilter.text.isEmpty)
-                                    _countryFilter.text = cD.appTextTranslations
-                                        .selectCountryDefaultText;
-                                },
-                                controller: _countryFilter,
-                                maxLines: 1,
-                                autocorrect: false,
-                                dragStartBehavior: DragStartBehavior.down,
-                                style: _resolveInputTextStyle(cD
-                                    .appTextTranslations
-                                    .selectCountryDefaultText),
-                                cursorColor: (_countryFilter.text.compareTo(cD
-                                                .appTextTranslations
-                                                .selectCountryDefaultText) ==
-                                            0 ||
-                                        _countryFilter.text.isEmpty)
-                                    ? Colors.grey[400]
-                                    : Colors.blueGrey,
-                                textAlignVertical: TextAlignVertical.bottom,
-                                textInputAction: TextInputAction.search,
-                                textCapitalization:
-                                    TextCapitalization.sentences,
-                                textDirection: Directionality.of(context),
+        } else {
+          if (cD.apiErrorCountries != null) {
+            switch (cD.apiErrorCountries.runtimeType) {
+              case APIUnreachedException:
+                return Padding(
+                  padding: const EdgeInsets.only(top: 24.0),
+                  child: FailureCard(
+                    fail:
+                        'Data source is not available. Please try again later.',
+                    iconAndTextColor: Theme.of(context).primaryColor,
+                  ),
+                );
+                break;
+              case APIException:
+                return Padding(
+                  padding: const EdgeInsets.only(top: 24.0),
+                  child: FailureCard(
+                    fail:
+                        'Cannot retrieve data. Please check your internet connection.',
+                    iconAndTextColor: Theme.of(context).primaryColor,
+                  ),
+                );
+                break;
+              default:
+                return Padding(
+                  padding: const EdgeInsets.only(top: 24.0),
+                  child: FailureCard(fail: '${cD.apiErrorCountries}'),
+                );
+                break;
+            }
+          }
+          if (_resetFilter) cD.resetFilter();
+          // If user is not filtering countries, we want to reset input textfield value
+          if (cD.getFilteredCountries == cD.getCountryList)
+            _countryFilter = TextEditingController(
+                text: cD.appTextTranslations?.selectCountryDefaultText ??
+                    'Choisissez un pays');
+          _resetFilter = false;
+          return cD.getCountryList.isNotEmpty
+              ? Scrollbar(
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: cD.getFilteredCountries.length + 1,
+                    itemBuilder: (_, i) => i == 0
+                        ? Padding(
+                            padding: _resolveInputTextPadding(),
+                            child: TextField(
+                              key: Key('select_country_text_field'),
+                              focusNode: _filterTextInputFocus,
+                              decoration: InputDecoration(
+                                fillColor: Colors.black,
+                                icon: Icon(Icons.search),
+                                isDense: true,
+                                alignLabelWithHint: true,
                               ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: CoronedCard(
-                                onTap: () {
-                                  cD.setSelectedCountry(
-                                      cD.getFilteredCountries.elementAt(i - 1));
-                                  if (cD.isScrollToTopShown)
-                                    cD.removeScrollToTopButton();
-                                  Modular.link.pushNamed(cD.getFilteredCountries
-                                      .elementAt(i - 1)
-                                      .alpha2Code);
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: <Widget>[
-                                          Image.network(
-                                            '${cD.getFilteredCountries.elementAt(i - 1).flag}',
+                              onTap: () => _countryFilter.text.compareTo(cD
+                                          .appTextTranslations
+                                          .selectCountryDefaultText) ==
+                                      0
+                                  ? _countryFilter.text = ''
+                                  : null,
+                              onChanged: (value) {
+                                cD.filter(_countryFilter.text);
+                              },
+                              onEditingComplete: () {
+                                cD.filter(_countryFilter.text);
+                                _filterTextInputFocus
+                                    .unfocus(); // Try to enforce TextInput unfocus
+                                if (_countryFilter.text == null ||
+                                    _countryFilter.text.isEmpty)
+                                  _countryFilter.text = cD.appTextTranslations
+                                      .selectCountryDefaultText;
+                              },
+                              controller: _countryFilter,
+                              maxLines: 1,
+                              autocorrect: false,
+                              dragStartBehavior: DragStartBehavior.down,
+                              style: _resolveInputTextStyle(cD
+                                  .appTextTranslations
+                                  .selectCountryDefaultText),
+                              cursorColor: (_countryFilter.text.compareTo(cD
+                                              .appTextTranslations
+                                              .selectCountryDefaultText) ==
+                                          0 ||
+                                      _countryFilter.text.isEmpty)
+                                  ? Colors.grey[400]
+                                  : Colors.blueGrey,
+                              textAlignVertical: TextAlignVertical.bottom,
+                              textInputAction: TextInputAction.search,
+                              textCapitalization: TextCapitalization.sentences,
+                              textDirection: Directionality.of(context),
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: CoronedCard(
+                              onTap: () {
+                                cD.setSelectedCountry(
+                                    cD.getFilteredCountries.elementAt(i - 1));
+                                if (cD.isScrollToTopShown)
+                                  cD.removeScrollToTopButton();
+                                Modular.link.pushNamed(cD.getFilteredCountries
+                                    .elementAt(i - 1)
+                                    .alpha2Code);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Image.network(
+                                          '${cD.getFilteredCountries.elementAt(i - 1).flag}',
+                                          height: 50.0,
+                                          width: 50.0,
+                                          scale: 1.0,
+                                          repeat: ImageRepeat.noRepeat,
+                                          fit: BoxFit.contain,
+                                          errorBuilder: (_, e, stacktrace) =>
+                                              Image.asset(
+                                            'assets/img/missing_flag.png',
                                             height: 50.0,
                                             width: 50.0,
-                                            scale: 1.0,
-                                            repeat: ImageRepeat.noRepeat,
                                             fit: BoxFit.contain,
-                                            errorBuilder: (_, e, stacktrace) =>
-                                                Image.asset(
-                                              'assets/img/missing_flag.png',
-                                              height: 50.0,
-                                              width: 50.0,
-                                              fit: BoxFit.contain,
-                                              semanticLabel: 'Unknown flag',
-                                            ),
-                                            frameBuilder: (context, child,
-                                                frame, wasLoaded) {
-                                              if (wasLoaded) {
-                                                return child;
-                                              }
-                                              return frame == null
-                                                  ? Image.asset(
-                                                      'assets/img/missing_flag.png',
-                                                      height: 50.0,
-                                                      width: 50.0,
-                                                      fit: BoxFit.contain,
-                                                      semanticLabel:
-                                                          'Unknown flag',
-                                                    )
-                                                  : child;
-                                            },
-                                            filterQuality: FilterQuality.low,
-                                            semanticLabel:
-                                                '${cD.getFilteredCountries.elementAt(i - 1).name} flag',
+                                            semanticLabel: 'Unknown flag',
                                           ),
-                                          SizedBox(
-                                            width: 8.0,
+                                          frameBuilder: (context, child, frame,
+                                              wasLoaded) {
+                                            if (wasLoaded) {
+                                              return child;
+                                            }
+                                            return frame == null
+                                                ? Image.asset(
+                                                    'assets/img/missing_flag.png',
+                                                    height: 50.0,
+                                                    width: 50.0,
+                                                    fit: BoxFit.contain,
+                                                    semanticLabel:
+                                                        'Unknown flag',
+                                                  )
+                                                : child;
+                                          },
+                                          filterQuality: FilterQuality.low,
+                                          semanticLabel:
+                                              '${cD.getFilteredCountries.elementAt(i - 1).name} flag',
+                                        ),
+                                        SizedBox(
+                                          width: 8.0,
+                                        ),
+                                        Flexible(
+                                          fit: FlexFit.loose,
+                                          child: Text(
+                                            '${cD.getFilteredCountries.elementAt(i - 1).translations[cD.appLanguageCode.toLowerCase()] ?? cD.getFilteredCountries.elementAt(i - 1).name}',
+                                            style: _resolveCountryTextStyle(),
                                           ),
-                                          Flexible(
-                                            fit: FlexFit.loose,
-                                            child: Text(
-                                              '${cD.getFilteredCountries.elementAt(i - 1).translations[cD.appLanguageCode.toLowerCase()] ?? cD.getFilteredCountries.elementAt(i - 1).name}',
-                                              style: _resolveCountryTextStyle(),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ).showCursorOnHover,
-                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ).showCursorOnHover,
                             ),
-                      cacheExtent: 150.0,
-                    ),
-                  )
-                : Center(child: CircularProgressIndicator())
-            : FailureIcon(
-                fail: 'Oups ! Something went wrong.\nPlease, reload the app.');
+                          ),
+                    cacheExtent: 150.0,
+                  ),
+                )
+              : FailureIcon(
+                  fail:
+                      'Oups ! Something went wrong.\nPlease, reload the app.');
+        }
       }),
     );
   }

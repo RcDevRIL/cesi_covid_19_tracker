@@ -1,9 +1,9 @@
-import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_modular/flutter_modular.dart' show Consumer;
 
+import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
+    show APIException, APIUnreachedException;
 import 'package:cesi_covid_19_tracker/shared/shared.dart'
     show
         AppConstants,
@@ -12,31 +12,15 @@ import 'package:cesi_covid_19_tracker/shared/shared.dart'
         GlobalCard,
         NavigationDrawer,
         SizeBreakpoint;
-import 'package:cesi_covid_19_tracker/data/services/services.dart'
-    show ApiService, locator;
-import 'package:cesi_covid_19_tracker/data/models/models.dart' show CovidInfos;
 import 'package:cesi_covid_19_tracker/modules/blocs.dart' show CoronedData;
 
-class Dashboard extends StatefulWidget {
+class Dashboard extends StatelessWidget {
   final String title;
 
   Dashboard({
     Key key,
     this.title = AppConstants.defaultAppTitle,
   }) : super(key: key);
-  @override
-  _DashboardState createState() => _DashboardState();
-}
-
-class _DashboardState extends State<Dashboard> {
-  StreamController _apiResponseController;
-
-  @override
-  void initState() {
-    super.initState();
-    _apiResponseController = StreamController();
-    callApi();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,53 +33,58 @@ class _DashboardState extends State<Dashboard> {
       drawer: NavigationDrawer(),
       body: Consumer<CoronedData>(
         builder: (_, cD) {
-          if (cD.appTextTranslations == null)
+          if (!cD.isLoaded) {
             return Center(child: CircularProgressIndicator());
-          return StreamBuilder(
-            stream: _apiResponseController.stream,
-            builder: (_, s) {
-              if (s.hasData) {
-                return Scrollbar(
-                  child: ListView(
-                    physics: const BouncingScrollPhysics(),
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 24.0,
-                        ),
-                        child: GlobalCard(
-                          covidInfos: CovidInfos.fromJson(
-                            jsonDecode(s.data),
-                          ),
-                        ),
+          } else {
+            if (cD.apiErrorGlobal != null) {
+              switch (cD.apiErrorGlobal.runtimeType) {
+                case APIUnreachedException:
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: FailureCard(
+                      fail:
+                          'Data source is not available. Please try again later.',
+                      iconAndTextColor: Theme.of(context).primaryColor,
+                    ),
+                  );
+                  break;
+                case APIException:
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: FailureCard(
+                      fail:
+                          'Cannot retrieve data. Please check your internet connection.',
+                      iconAndTextColor: Theme.of(context).primaryColor,
+                    ),
+                  );
+                  break;
+                default:
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: FailureCard(fail: '${cD.apiErrorGlobal}'),
+                  );
+                  break;
+              }
+            } else {
+              return Scrollbar(
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 24.0,
                       ),
-                    ],
-                  ),
-                );
-              }
-              if (s.hasError) {
-                return FailureCard(fail: s.error);
-              }
-              if (s.connectionState != ConnectionState.done) {
-                return Center(child: CircularProgressIndicator());
-              }
-              if (!s.hasData && s.connectionState == ConnectionState.done) {
-                return FailureCard(fail: 'No Data');
-              } else {
-                return Center(child: CircularProgressIndicator());
-              }
-            },
-          );
+                      child: GlobalCard(
+                        covidInfos: cD.getGlobalInfos,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+          }
         },
       ),
     );
-  }
-
-  void callApi() {
-    locator
-        .get<ApiService>()
-        .getWorldLatestSituation()
-        .then((value) => _apiResponseController.add(value))
-        .catchError((e) => _apiResponseController.addError(e));
   }
 }

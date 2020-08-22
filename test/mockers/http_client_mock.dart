@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:http/http.dart' show Client, Response;
 import 'package:http/testing.dart' show MockClient;
 
+import 'package:cesi_covid_19_tracker/data/services/exceptions/exceptions.dart'
+    show APIUnreachedException;
 import 'package:cesi_covid_19_tracker/data/services/services.dart'
     show HttpClient;
 
@@ -21,7 +25,11 @@ class HttpClientMock implements HttpClient {
           )
           .timeout(Duration(seconds: timeOut));
     } catch (e) {
-      throw 'Error when executing GET request:\n${e.toString()}';
+      if (e.runtimeType == TimeoutException)
+        throw APIUnreachedException(
+            'Data source is not available. Please try again later.');
+      else
+        throw 'Error when executing GET request:\n${e.toString()}';
     }
     return response;
   }

@@ -5,7 +5,6 @@ part of 'covid_country_infos.dart';
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
-
 // ignore_for_file: non_constant_identifier_names
 _$_CovidCountryInfos _$_$_CovidCountryInfosFromJson(Map json) {
   return _$_CovidCountryInfos(
@@ -19,12 +18,18 @@ _$_CovidCountryInfos _$_$_CovidCountryInfosFromJson(Map json) {
     json['deaths'] as int,
     json['todayDeaths'] as int,
     json['recovered'] as int,
+    json['todayRecovered'] as int,
     json['active'] as int,
     json['critical'] as int,
     (json['casesPerOneMillion'] as num)?.toDouble(),
     (json['deathsPerOneMillion'] as num)?.toDouble(),
     json['tests'] as int,
-    json['testsPerOneMillion'] as int,
+    (json['testsPerOneMillion'] as num)?.toDouble(),
+    json['population'] as int,
+    json['continent'] as String,
+    (json['activePerOneMillion'] as num)?.toDouble(),
+    (json['recoveredPerOneMillion'] as num)?.toDouble(),
+    (json['criticalPerOneMillion'] as num)?.toDouble(),
   );
 }
 
@@ -39,10 +44,16 @@ Map<String, dynamic> _$_$_CovidCountryInfosToJson(
       'deaths': instance.deaths,
       'todayDeaths': instance.todayDeaths,
       'recovered': instance.recovered,
+      'todayRecovered': instance.todayRecovered,
       'active': instance.active,
       'critical': instance.critical,
       'casesPerOneMillion': instance.casesPerOneMillion,
       'deathsPerOneMillion': instance.deathsPerOneMillion,
       'tests': instance.tests,
       'testsPerOneMillion': instance.testsPerOneMillion,
+      'population': instance.population,
+      'continent': instance.continent,
+      'activePerOneMillion': instance.activePerOneMillion,
+      'recoveredPerOneMillion': instance.recoveredPerOneMillion,
+      'criticalPerOneMillion': instance.criticalPerOneMillion,
     };

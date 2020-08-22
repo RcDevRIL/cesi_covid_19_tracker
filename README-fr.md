@@ -1,6 +1,6 @@
 ([EN]|**FR**)
 # cesi_covid_19_tracker
-[![version_badge](https://img.shields.io/badge/version-1.8-informational)][Release]
+[![version_badge](https://img.shields.io/badge/version-1.8.1-informational)][Release]
 
 ||Statut
 |:---:|:---:|
@@ -30,7 +30,7 @@ _Let's dive in !!_:monocle_face:
 - Page _About_ avec les licences utilisées dans ce projet et un lien vers cette page (fork de la [LicencePage] de Flutter :rocket:)
 ### Sources de données :nerd_face:
 Cette application s'appuie sur **3** sources de données:
-- FAQ statique codée en dur dans la classe ```FAQDataSource``` ([lib/shared/constants/app_globals.dart])
+- FAQ dynamique grâce aux fichiers [l10n][lib/l10n/])
 - Liste des pays et leurs informations via l'API [restcountries.eu].
 - Statistiques **COVID-19** par pays et pour le monde entier via l'API [NOVELCovid] qui s'appuie à son tour sur ces [sources].
 
@@ -42,6 +42,7 @@ Comme il s'agit d'un repo créé pour les études, je vais expliquer dans cette 
 - JSON<->Manipulations d'objets (rendues beaucoup plus faciles grâce à [freezed]:rocket:)
 - Tests unitaires (voir le dossier **[test]** pour le code source)
 - Optimisation des performances (Flutter est parfois capricieux pour le web:sweat_smile:)
+- App Multilingue (Anglais, Français) grâce au package [intl] et la web app [Loco](https://localise.biz/)
 - Outils de gestion de projet Github (au début, nous étions 4 étudiants, et nous avons choisi d'utiliser le Kanban automatique de Github ! Les Issues et les Pull Requests ont été notre façon de gérer le développement du site web, et je continue pour mieux connaître toutes les fonctionnalités de Github:rocket:)
 ### Captures d'écran :mag:
 _// **TODO** : Mettre des captures d'écran ici quand la V2 sera terminée_
@@ -66,14 +67,16 @@ Voir la section [Release].
 ### _Built with_ :hammer_and_wrench:
 _Dépendances directes :_
 * [Flutter] - Le framework Google basé sur Dart utilisé pour construire cette application
-* [http] - Le paquet utilisé pour faire des requêtes HTTP
-* [get_it] - Le paquet utilisé par exemple pour enregistrer des singletons (comme les classes permettant l'appel à l'API covid-19)
-* [json_serializable] - Le paquet utilisé pour faciliter la (dé)sérialisation de _payload_ JSON
-* [provider] - Le paquet utilisé pour faciliter le "_state management_" sur l'application
-* [responsive_builder] - Le paquet utilisé pour faciliter le développement d'interfaces utilisateur sensibles à la taille de l'écran
-* [freezed] - Le paquet utilisé pour générer des objets utilisés comme DTO par exemple
-* [intl] - Le paquet utilisé dans ce projet pour formater les grands nombres. Il peut être utilisé pour beaucoup d'autres choses intéressantes...
-* [flutter_modular] - Le paquet utilisé pour aider à structurer un projet flutter et donnant accès aux routes dynamiques (deep linking) :rocket:
+* [http] - La librairie utilisée pour faire des requêtes HTTP
+* [get_it] - La librairie utilisée par exemple pour enregistrer des singletons (comme les classes permettant l'appel à l'API covid-19)
+* [json_serializable] - La librairie utilisée pour faciliter la (dé)sérialisation de _payload_ JSON
+* [provider] - La librairie utilisée pour faciliter le "_state management_" sur l'application
+* [responsive_builder] - La librairie utilisée pour faciliter le développement d'interfaces utilisateur sensibles à la taille de l'écran
+* [freezed] - La librairie utilisée pour générer des objets utilisés comme DTO par exemple
+* [intl] - La librairie utilisé dans ce projet pour formater les grands nombres ainsi que pour gérer les différentes langues disponibles
+* [flutter_modular] - La librairie utilisée pour aider à structurer un projet flutter et donnant accès aux routes dynamiques (deep linking) :rocket:
+* [url_launcher] - La librairie utilisée pour simplifier la gestion des URL
+* [google_fonts] - La librairie utilisée pour appliquer les polices de caractères Google de manière optimisée (système de cache, ...)
 
 _Dépendances de test et de développement :_
 * [flutter_test] - La bibliothèque Flutter utilisée pour implémenter les tests unitaires
@@ -173,6 +176,8 @@ Amusez-vous bien à coder !!:rocket::computer:
 [responsive_builder]: https://pub.dev/packages/responsive_builder
 [freezed]: https://pub.dev/packages/freezed
 [intl]: https://pub.dev/packages/intl
+[url_launcher]: https://pub.dev/packages/url_launcher
+[google_fonts]: https://pub.dev/packages/google_fonts
 [flutter_modular]: https://pub.dev/packages/flutter_modular
 [flutter_test]: https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html
 [build_runner]: https://pub.dev/packages/build_runner
@@ -190,7 +195,7 @@ Amusez-vous bien à coder !!:rocket::computer:
 [Release]: https://github.com/RcDevRIL/cesi_covid_19_tracker/releases
 [EN]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README.md
 [FR]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/README-fr.md
-[lib/shared/constants/app_globals.dart]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/shared/constants/app_globals.dart#L88
+[lib/l10n/]: https://github.com/RcDevRIL/cesi_covid_19_tracker/blob/master/lib/l10n/
 [LicencePage]: https://api.flutter.dev/flutter/material/LicensePage-class.html
 [restcountries.eu]: http://restcountries.eu/
 [NOVELCovid]: https://corona.lmao.ninja/docs/#/
