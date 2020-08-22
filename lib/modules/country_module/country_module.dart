@@ -7,14 +7,14 @@ class CountryModule extends ChildModule {
   List<Bind> get binds => [];
 
   @override
-  List<Router> get routers => Router.group(
+  List<ModularRouter> get routers => ModularRouter.group(
         transition: TransitionType.noTransition,
         routes: [
-          Router(
+          ModularRouter(
             Modular.initialRoute,
             child: (context, args) => CountryView(),
           ),
-          Router(
+          ModularRouter(
             '/:countryCode',
             child: (context, args) => DetailsPage(
               countryCode: args.params['countryCode'],

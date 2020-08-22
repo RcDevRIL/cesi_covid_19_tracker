@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_modular/flutter_modular.dart'
-    show Bind, Inject, MainModule, Router, TransitionType;
+    show Bind, Inject, MainModule, ModularRouter, TransitionType;
 
 import 'package:cesi_covid_19_tracker/shared/shared.dart' show AppConstants;
 import 'package:cesi_covid_19_tracker/modules/modules.dart' show CountryModule;
@@ -17,23 +17,23 @@ class CoronedMainModule extends MainModule {
       ];
 
   @override
-  List<Router> get routers => Router.group(
+  List<ModularRouter> get routers => ModularRouter.group(
         transition: TransitionType.noTransition,
         routes: [
-          Router(
+          ModularRouter(
             '/dashboard',
             child: (context, args) => Dashboard(),
           ),
-          Router(
+          ModularRouter(
             '/country',
             module: CountryModule(),
             modulePath: '/country',
           ),
-          Router(
+          ModularRouter(
             '/faq',
             child: (context, args) => CovidFaq(),
           ),
-          Router(
+          ModularRouter(
             '/about',
             child: (context, args) => AboutPage(
               applicationName: AppConstants.applicationName,
